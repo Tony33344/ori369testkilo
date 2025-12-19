@@ -69,7 +69,7 @@ export default function Hero() {
       
       {/* Large "369" Brand Element */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -right-20 md:-right-32 top-1/2 -translate-y-1/2 text-[20rem] md:text-[30rem] font-bold text-[#00B5AD] opacity-[0.03] leading-none select-none">
+        <div className="absolute -right-10 md:-right-32 top-1/2 -translate-y-1/2 text-[10rem] md:text-[30rem] font-bold text-[#00B5AD] opacity-[0.03] leading-none select-none">
           369
         </div>
       </div>
@@ -94,15 +94,15 @@ export default function Hero() {
               <span className="text-sm font-medium text-[#00B5AD] tracking-wide">{t('hero.tagline')}</span>
             </div>
 
-            <h1 className="text-5xl md:text-7xl font-bold text-black leading-tight tracking-wider">
+            <h1 className="text-4xl md:text-7xl font-bold text-black leading-tight tracking-wider">
               ORI 369
             </h1>
             
-            <div className="text-xl md:text-2xl font-medium text-[#00B5AD] tracking-[0.15em] uppercase">
+            <div className="text-lg md:text-2xl font-medium text-[#00B5AD] tracking-[0.15em] uppercase">
               {t('hero.slogan')}
             </div>
 
-            <p className="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto">
+            <p className="text-lg md:text-2xl text-gray-700 max-w-2xl mx-auto">
               {t('hero.subtitle')}
             </p>
 

@@ -24,19 +24,19 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden bg-gray-50">
+      <section className="relative py-12 md:py-20 overflow-hidden bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-12">
-            <div className="lg:w-1/2">
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight">
+          <div className="flex flex-col lg:flex-row items-center gap-8 md:gap-12">
+            <div className="lg:w-1/2 text-center lg:text-left">
+              <h1 className="text-3xl md:text-5xl lg:text-6xl font-bold text-black mb-4 md:mb-6 leading-tight">
                 O nas – <span className="text-[#00B5AD]">ORI 369</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed">
                 V ORI 369 združujemo napredne tehnologije, celostno razumevanje človeka in strokovne manualne tehnike. 
                 Naš način dela bistveno preseže klasične terapije, saj omogoča hitrejše, globlje in trajnejše rezultate.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+              <div className="flex flex-wrap justify-center lg:justify-start gap-3 md:gap-4">
+                <div className="flex items-center gap-2 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm border border-gray-100">
                   <Zap className="text-[#00B5AD]" size={20} />
                   <span className="font-medium">Napredna tehnologija</span>
                 </div>
@@ -46,9 +46,9 @@ export default function AboutPage() {
                 </div>
               </div>
             </div>
-            <div className="lg:w-1/2 relative">
+            <div className="lg:w-1/2 relative w-full">
               <div
-                className="relative h-[400px] md:h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl cursor-pointer group"
+                className="relative h-[300px] md:h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl cursor-pointer group"
                 onClick={() => setSelectedImage({ src: OFFICE_IMAGE, alt: "ORI 369 Pisarna" })}
               >
                 <Image
@@ -74,10 +74,10 @@ export default function AboutPage() {
       </section>
 
       {/* Why ORI 369 Works - The Comparison */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">Zakaj ORI 369 deluje?</h2>
+          <div className="max-w-4xl mx-auto text-center mb-10 md:mb-16">
+            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4 md:mb-6">Zakaj ORI 369 deluje?</h2>
             <p className="text-lg text-gray-600">
               Najbolj preprosta primerjava: <span className="font-bold text-black">Lopata ali bager?</span>
             </p>
@@ -109,10 +109,10 @@ export default function AboutPage() {
       </section>
 
       {/* Technologies Grid */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Tehnologije ORI 369</h2>
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4">Tehnologije ORI 369</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Vse obravnave vključujejo uporabo vrhunskih naprav in metod, ki skupaj delujejo kot integriran sistem regeneracije.
             </p>
@@ -141,7 +141,7 @@ export default function AboutPage() {
                 icon: <Users className="text-[#00B5AD]" />
               }
             ].map((cat, i) => (
-              <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div key={i} className="bg-white p-6 md:p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
                 <div className="mb-4">{cat.icon}</div>
                 <h3 className="text-lg font-bold mb-4">{cat.title}</h3>
                 <ul className="space-y-2">
@@ -159,14 +159,14 @@ export default function AboutPage() {
       </section>
 
       {/* Holistic Approach */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
-            <div className="lg:w-1/2 grid grid-cols-2 gap-4">
+          <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-16">
+            <div className="lg:w-1/2 grid grid-cols-2 gap-3 md:gap-4">
               {THERAPY_IMAGES.slice(0, 4).map((img, i) => (
                 <div
                   key={i}
-                  className={`relative h-48 md:h-64 rounded-xl overflow-hidden shadow-lg cursor-pointer group ${i % 2 === 1 ? 'mt-8' : ''}`}
+                  className={`relative h-40 md:h-64 rounded-xl overflow-hidden shadow-lg cursor-pointer group ${i % 2 === 1 ? 'md:mt-8' : ''}`}
                   onClick={() => setSelectedImage({ src: img, alt: `Terapija ${i + 1}` })}
                 >
                   <Image
@@ -184,11 +184,11 @@ export default function AboutPage() {
               ))}
             </div>
             <div className="lg:w-1/2">
-              <h2 className="text-3xl md:text-4xl font-bold text-black mb-8">Celostni pristop</h2>
-              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+              <h2 className="text-2xl md:text-4xl font-bold text-black mb-6 md:mb-8">Celostni pristop</h2>
+              <p className="text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
                 Terapevtski proces pri nas nikoli ne zajema samo bolečine ali simptoma. Obravnavo pogledamo širše:
               </p>
-              <div className="grid sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 {[
                   "Kako se človek giblje",
                   "Drža in poravnava",
@@ -214,12 +214,12 @@ export default function AboutPage() {
       </section>
 
       {/* Gallery / More Images */}
-      <section className="py-20 bg-gray-50">
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold">Utrinki iz našega centra</h2>
+          <div className="text-center mb-8 md:mb-12">
+            <h2 className="text-2xl md:text-3xl font-bold">Utrinki iz našega centra</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6">
             {THERAPY_IMAGES.slice(4, 7).map((img, i) => (
               <div
                 key={i}
@@ -244,16 +244,16 @@ export default function AboutPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4 text-center">
-          <div className="max-w-3xl mx-auto bg-black text-white p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+          <div className="max-w-3xl mx-auto bg-black text-white p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#00B5AD] opacity-20 blur-3xl rounded-full -mr-16 -mt-16"></div>
             <div className="relative z-10">
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">Ste pripravljeni na spremembo?</h2>
-              <p className="text-gray-400 mb-10 text-lg">
+              <h2 className="text-2xl md:text-4xl font-bold mb-4 md:mb-6">Ste pripravljeni na spremembo?</h2>
+              <p className="text-gray-400 mb-8 md:mb-10 text-base md:text-lg">
                 Pridružite se številnim, ki so že občutili razliko z našim naprednim pristopom.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center">
                 <a
                   href="/rezervacija"
                   className="px-8 py-4 bg-[#00B5AD] text-white font-bold rounded-xl hover:bg-[#009891] transition-all transform hover:scale-105"

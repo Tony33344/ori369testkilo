@@ -92,9 +92,9 @@ export default function Packages({ packages }: { packages: Package[] }) {
   };
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
           {packages.map((pkg, index) => (
             <motion.div
               key={pkg.id}
@@ -104,8 +104,8 @@ export default function Packages({ packages }: { packages: Package[] }) {
               transition={{ duration: 0.6, delay: index * 0.1 }}
               className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:scale-105 border border-[#00B5AD]/20"
             >
-              <div className="p-8">
-                <h3 className="text-2xl font-bold text-black mb-3">{pkg.name}</h3>
+              <div className="p-6 md:p-8">
+                <h3 className="text-xl md:text-2xl font-bold text-black mb-3">{pkg.name}</h3>
                 <p className="text-gray-600 mb-6">{pkg.description}</p>
 
                 <div className="mb-6">

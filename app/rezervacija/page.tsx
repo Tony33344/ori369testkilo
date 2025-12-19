@@ -233,7 +233,7 @@ function BookingForm() {
             </p>
           </div>
 
-          <div className="bg-white rounded-2xl shadow-xl p-8">
+          <div className="bg-white rounded-2xl shadow-xl p-4 md:p-8">
             {!user && (
               <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
                 <p className="text-blue-800">
@@ -348,14 +348,14 @@ function BookingForm() {
                   </div>
 
                   {allSlots.length > 0 ? (
-                    <div className="grid grid-cols-4 sm:grid-cols-6 gap-2">
+                    <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
                       {allSlots.map(slot => {
                         const isBooked = bookedSlots.includes(slot);
                         const isBusy = busySlots.includes(slot);
                         const isAvailable = availableSlots.includes(slot);
                         const isSelected = selectedTime === slot;
                         
-                        let className = 'px-3 py-2 border-2 rounded-lg font-medium transition-all text-sm ';
+                        let className = 'px-2 py-2 md:px-3 md:py-2 border-2 rounded-lg font-medium transition-all text-xs md:text-sm ';
                         
                         if (isSelected) {
                           className += 'bg-blue-600 text-white border-blue-600 ring-2 ring-blue-300';

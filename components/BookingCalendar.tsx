@@ -28,6 +28,21 @@ export default function BookingCalendar({
   const [availableSlots, setAvailableSlots] = useState<any[]>([]);
   const [googleBusyEvents, setGoogleBusyEvents] = useState<any[]>([]);
   const [bookedEvents, setBookedEvents] = useState<any[]>([]);
+  const [calendarView, setCalendarView] = useState('timeGridWeek');
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 768) {
+        setCalendarView('timeGridDay');
+      } else {
+        setCalendarView('timeGridWeek');
+      }
+    };
+
+    handleResize();
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   useEffect(() => {
     if (serviceId) {
@@ -161,10 +176,27 @@ export default function BookingCalendar({
         .booking-calendar .fc-toolbar {
           padding: 12px 16px;
           background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+          flex-direction: column;
+          gap: 12px;
+        }
+        @media (min-width: 768px) {
+          .booking-calendar .fc-toolbar {
+            flex-direction: row;
+          }
         }
         .booking-calendar .fc-toolbar-title {
           color: white !important;
           font-weight: 600;
+          font-size: 1.25rem !important;
+        }
+        @media (max-width: 768px) {
+          .booking-calendar .fc-toolbar-title {
+            font-size: 1.1rem !important;
+          }
+          .booking-calendar .fc-button {
+            padding: 6px 10px !important;
+            font-size: 0.85rem !important;
+          }
         }
         .booking-calendar .fc-button {
           background-color: rgba(255,255,255,0.2) !important;
@@ -187,6 +219,7 @@ export default function BookingCalendar({
         }
         .booking-calendar .fc-daygrid-day {
           transition: all 0.2s ease;
+          min-height: 40px !important;
         }
         .booking-calendar .fc-daygrid-day:hover {
           background-color: #f0f9ff;
@@ -209,7 +242,15 @@ export default function BookingCalendar({
           opacity: 0.9;
         }
         .booking-calendar .fc-timegrid-slot {
-          height: 40px !important;
+          height: 50px !important;
+        }
+        @media (max-width: 768px) {
+          .booking-calendar .fc-timegrid-slot {
+            height: 60px !important;
+          }
+          .booking-calendar .fc-timegrid-axis-frame {
+            font-size: 10px !important;
+          }
         }
         .booking-calendar .fc-timegrid-event {
           border-radius: 6px;
@@ -222,7 +263,8 @@ export default function BookingCalendar({
       
       <FullCalendar
         plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="timeGridWeek"
+        initialView={calendarView}
+        key={calendarView} // Force re-render when view changes
         headerToolbar={{
           left: 'prev,next today',
           center: 'title',

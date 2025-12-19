@@ -35,18 +35,18 @@ export default function MotioScanPage() {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-2xl">
-            <h1 className="text-5xl md:text-7xl font-bold mb-4 tracking-tight">MotioScan</h1>
-            <p className="text-2xl md:text-3xl font-semibold mb-6 text-[#00B5AD]">3D Analiza Telesne Drže</p>
-            <p className="text-xl md:text-2xl mb-8 font-bold tracking-widest">
+          <div className="max-w-2xl text-center md:text-left">
+            <h1 className="text-4xl md:text-7xl font-bold mb-2 md:mb-4 tracking-tight">MotioScan</h1>
+            <p className="text-xl md:text-3xl font-semibold mb-4 md:mb-6 text-[#00B5AD]">3D Analiza Telesne Drže</p>
+            <p className="text-lg md:text-2xl mb-6 md:mb-8 font-bold tracking-widest">
               NE UGIBAJ. IZMERI.
             </p>
-            <p className="text-lg mb-10 opacity-90 leading-relaxed">
+            <p className="text-base md:text-lg mb-8 md:mb-10 opacity-90 leading-relaxed">
               Odkrij natančno stanje svojega telesa z inovativno 3D tehnologijo, ki v nekaj sekundah razkrije tvoje skrite asimetrije, obremenitve in neravnovesja.
             </p>
             <Link
               href="/rezervacija?package=motioscan"
-              className="inline-block px-10 py-4 bg-[#00B5AD] text-white font-bold rounded-xl hover:bg-[#009891] transition-all transform hover:scale-105 shadow-2xl"
+              className="inline-block px-8 py-3 md:px-10 md:py-4 bg-[#00B5AD] text-white font-bold rounded-xl hover:bg-[#009891] transition-all transform hover:scale-105 shadow-2xl"
             >
               Naroči svoj termin
             </Link>
@@ -55,11 +55,11 @@ export default function MotioScanPage() {
       </section>
 
       {/* What is MotioScan */}
-      <section className="py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
-          <div className="flex flex-col lg:flex-row items-center gap-16">
+          <div className="flex flex-col lg:flex-row items-center gap-10 md:gap-16">
             <div className="lg:w-1/2">
-              <h2 className="text-4xl font-bold mb-8 text-gray-900">Kaj je MotioScan?</h2>
+              <h2 className="text-3xl md:text-4xl font-bold mb-6 md:mb-8 text-gray-900">Kaj je MotioScan?</h2>
               <p className="text-lg text-gray-700 mb-8 leading-relaxed">
                 MotioScan (Moti Physio) je napredna 3D naprava za natančno oceno telesne drže, ki s pomočjo vizualnih markerjev in računalniške analitike zajame:
               </p>
@@ -78,16 +78,16 @@ export default function MotioScanPage() {
                   </div>
                 ))}
               </div>
-              <div className="p-6 bg-[#00B5AD]/5 rounded-2xl border-2 border-[#00B5AD]/20">
-                <p className="text-lg font-bold text-gray-900 flex items-center gap-3">
+              <div className="p-5 md:p-6 bg-[#00B5AD]/5 rounded-2xl border-2 border-[#00B5AD]/20">
+                <p className="text-base md:text-lg font-bold text-gray-900 flex items-center gap-3">
                   <ShieldCheck className="text-[#00B5AD]" />
                   Brez sevanja. Brez bolečin. Brez ugibanja.
                 </p>
               </div>
             </div>
-            <div className="lg:w-1/2 relative">
+            <div className="lg:w-1/2 relative w-full">
               <div
-                className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white cursor-pointer group"
+                className="relative h-[300px] md:h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white cursor-pointer group"
                 onClick={() => setSelectedImage({ src: MOTIOSCAN_SOFT[0], alt: "MotioScan Software Analysis" })}
               >
                 <Image
@@ -124,18 +124,18 @@ export default function MotioScanPage() {
       </section>
 
       {/* Software Showcase */}
-      <section className="py-24 bg-gray-50">
+      <section className="py-16 md:py-24 bg-gray-50">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl font-bold mb-4">Natančna vizualizacija</h2>
+          <div className="text-center mb-10 md:mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold mb-4">Natančna vizualizacija</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
               Naša programska oprema omogoča vpogled v vsako podrobnost vaše telesne drže in mišičnega ravnovesja.
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             <div
-              className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl cursor-pointer group"
+              className="relative h-[250px] md:h-[350px] rounded-2xl overflow-hidden shadow-xl cursor-pointer group"
               onClick={() => setSelectedImage({ src: MOTIOSCAN_SOFT[2], alt: "MotioScan Detailed Report" })}
             >
               <Image
@@ -177,10 +177,10 @@ export default function MotioScanPage() {
       </section>
 
       {/* Why MotioScan */}
-      <section className="py-24 bg-white">
+      <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16 text-gray-900">Zakaj je MotioScan tako učinkovit?</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-gray-900">Zakaj je MotioScan tako učinkovit?</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[
               {
                 icon: <Zap className="text-[#00B5AD]" size={32} />,
@@ -214,10 +214,10 @@ export default function MotioScanPage() {
       </section>
 
       {/* Process */}
-      <section className="py-24 bg-gray-900 text-white">
+      <section className="py-16 md:py-24 bg-gray-900 text-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-16">Kako poteka analiza?</h2>
-          <div className="max-w-4xl mx-auto grid md:grid-cols-5 gap-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16">Kako poteka analiza?</h2>
+          <div className="max-w-4xl mx-auto grid grid-cols-2 md:grid-cols-5 gap-6 md:gap-4">
             {[
               { step: 1, title: "Scan", desc: "30–60s snemanje" },
               { step: 2, title: "3D Model", desc: "Digitalni izris" },
@@ -239,17 +239,17 @@ export default function MotioScanPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-24 bg-white text-center">
+      <section className="py-16 md:py-24 bg-white text-center">
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#00B5AD] to-[#009891] p-16 rounded-[3rem] shadow-2xl text-white relative overflow-hidden">
+          <div className="max-w-4xl mx-auto bg-gradient-to-br from-[#00B5AD] to-[#009891] p-8 md:p-16 rounded-[2rem] md:rounded-[3rem] shadow-2xl text-white relative overflow-hidden">
             <div className="relative z-10">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">NE UGIBAJ. IZMERI.</h2>
-              <p className="text-xl mb-10 opacity-90 max-w-2xl mx-auto">
+              <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6">NE UGIBAJ. IZMERI.</h2>
+              <p className="text-lg md:text-xl mb-8 md:mb-10 opacity-90 max-w-2xl mx-auto">
                 MotioScan ti pokaže realno stanje tvojega telesa. Mi pa poskrbimo za pot nazaj v ravnovesje.
               </p>
               <Link
                 href="/rezervacija?package=motioscan"
-                className="inline-block px-12 py-5 bg-white text-[#00B5AD] font-bold text-xl rounded-2xl hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl"
+                className="inline-block px-10 py-4 md:px-12 md:py-5 bg-white text-[#00B5AD] font-bold text-lg md:text-xl rounded-2xl hover:bg-gray-100 transition-all transform hover:scale-105 shadow-xl"
               >
                 Naroči svoj termin zdaj
               </Link>

@@ -32,7 +32,7 @@ export default function RootLayout({
             <Toaster position="top-right" />
             <Header />
             <CartDrawer />
-            <main className="pt-16">{children}</main>
+            <main className="pt-28 md:pt-36">{children}</main>
             <Footer />
           </CartProvider>
         </LanguageProvider>

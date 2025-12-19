@@ -1,145 +1,249 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { useLanguage } from "@/lib/i18n";
-import Hero from "@/components/sections/Hero";
-import Services from "@/components/sections/Services";
-import Packages from "@/components/sections/Packages";
-import Testimonials from "@/components/sections/Testimonials";
-import TransformationJourney from "@/components/sections/TransformationJourney";
-import ServicesPreview from "@/components/sections/ServicesPreview";
-import PackagesPreview from "@/components/sections/PackagesPreview";
+import { CheckCircle2, Zap, Heart, Shield, Users, Globe } from "lucide-react";
 
-const FALLBACK_ABOUT_HTML = `
-  <h1>O nas</h1>
-  <p>Spoznajte ORI 369 - Vaš most med znanostjo in energijo</p>
-  <p>V ORI 369 združujemo vrhunske terapevtske pristope, najnovejše tehnologije in globoko razumevanje frekvenc 3-6-9, da vam pomagamo doseči ravnovesje telesa, uma in duha. Naš cilj je izboljšati kakovost vašega življenja skozi celostni pristop k zdravljenju.</p>
-  <h2>Naša misija</h2>
-  <p>Pomagati vam doseči optimalno zdravje in dobro počutje z uporabo najnovejših tehnologij in holistične terapevtske pristope.</p>
-  <h2>Naša vizija</h2>
-  <p>Postati vodilni center za celostno zdravje in wellness v regiji, kjer znanost sreča duhovno rast.</p>
-  <h2>Naše vrednote</h2>
-  <p>Sočutje, strokovnost, integriteta in predanost vašemu osebnem razvoju in zdravju.</p>
-  <h2>Naša ekipa</h2>
-  <p>Tim certificiranih terapevtov z bogatimi izkušnjami na področju fizioterapije, manualnih tehnik in celostnega pristopa.</p>
-  <h2>Frekvence 3-6-9</h2>
-  <p>Naše delo temelji na razumevanju univerzalnih frekvenc 3-6-9, ki jih je raziskoval Nikola Tesla. Te frekvence predstavljajo ključ do razumevanja vesolja in naše lastne energije. V naših terapijah jih uporabljamo za harmonizacijo telesa in uma.</p>
-`;
-
-function plainTextLen(v: unknown) {
-  if (typeof v !== "string") return 0;
-  return v.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().length;
-}
-
-function cmsHasMeaningfulRichText(data: any) {
-  const sections = Array.isArray(data?.sections) ? data.sections : [];
-  const blocks = Array.isArray(data?.blocks) ? data.blocks : [];
-  const visibleSectionIds = new Set(sections.filter((s: any) => s?.visible).map((s: any) => s.id));
-
-  for (const b of blocks) {
-    if (!b) continue;
-    if (b.section_id && visibleSectionIds.size > 0 && !visibleSectionIds.has(b.section_id)) continue;
-
-    const translations = (b as any).block_translations || [];
-    const candidates = [b?.content, ...translations.map((t: any) => t?.content)].filter(Boolean);
-    for (const c of candidates) {
-      const htmlLen = plainTextLen((c as any)?.html);
-      const textLen = plainTextLen((c as any)?.text);
-      if (htmlLen >= 80 || textLen >= 80) return true;
-    }
-  }
-
-  return false;
-}
-
-function SectionRenderer({ section, blocks, lang }: any) {
-  const bySection = (blocks || []).filter((b: any) => b?.section_id === section.id);
-  const tFor = (block: any) => {
-    if (!block) return {} as any;
-    const translations = (block as any).block_translations || [];
-    const tr =
-      translations.find((x: any) => x?.lang === lang) ||
-      translations.find((x: any) => x?.lang === "sl");
-    return (tr && tr.content) || block.content || {};
-  };
-
-  switch (section.type) {
-    case "hero":
-      return <Hero {...(section.settings || {})} {...tFor(bySection[0])} />;
-    case "transformationJourney":
-      return <TransformationJourney />;
-    case "services":
-      return <Services services={(tFor(bySection[0]) as any)?.services || []} />;
-    case "servicesPreview":
-      return <ServicesPreview services={(tFor(bySection[0]) as any)?.services || []} />;
-    case "packages":
-      return <Packages packages={(tFor(bySection[0]) as any)?.packages || []} />;
-    case "packagesPreview":
-      return <PackagesPreview packages={(tFor(bySection[0]) as any)?.packages || []} />;
-    case "testimonials":
-      return <Testimonials testimonials={(tFor(bySection[0]) as any)?.items || []} />;
-    case "richText":
-      return (
-        <div className="container mx-auto px-4 py-12">
-          <div className="prose prose-lg max-w-none">
-            {(bySection || []).map((b: any) => (
-              <div
-                key={b.id}
-                dangerouslySetInnerHTML={{
-                  __html: (tFor(b) as any).html || (tFor(b) as any).text || "",
-                }}
-              />
-            ))}
-          </div>
-        </div>
-      );
-    default:
-      return null;
-  }
-}
+const OFFICE_IMAGE = "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/pisarna/pisarna1.webp";
+const THERAPY_IMAGES = [
+  "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/terapije/terapija1.webp",
+  "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/terapije/terapija2.webp",
+  "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/terapije/terapija3.webp",
+  "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/terapije/terapija4.webp",
+  "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/terapije/terapija5.webp",
+  "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/terapije/terapija6.webp",
+  "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/terapije/terapija7.webp",
+];
 
 export default function AboutPage() {
-  const { language } = useLanguage();
-  const [data, setData] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetch("/api/cms/pages?slug=o-nas")
-      .then((r) => r.json())
-      .then((d) => {
-        setData(d);
-        setLoading(false);
-      })
-      .catch(() => setLoading(false));
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-      </div>
-    );
-  }
-
-  const hasCms = !!data?.page && Array.isArray(data?.sections) && data.sections.length > 0;
-  const useFallback = !hasCms || !cmsHasMeaningfulRichText(data);
-  const sections = useFallback ? [{ id: 'fallback', type: 'richText', visible: true, settings: {} }] : data.sections;
-  const blocks = useFallback
-    ? [{ id: 'fallback-block', section_id: 'fallback', block_translations: [{ lang: 'sl', content: { html: FALLBACK_ABOUT_HTML } }] }]
-    : data.blocks;
+  const { t } = useLanguage();
 
   return (
     <div className="min-h-screen bg-white">
-      {(sections || [])
-        .filter((s: any) => s.visible)
-        .map((section: any) => (
-          <SectionRenderer
-            key={section.id}
-            section={section}
-            blocks={blocks || []}
-            lang={language}
-          />
-        ))}
+      {/* Hero Section */}
+      <section className="relative py-20 overflow-hidden bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-12">
+            <div className="lg:w-1/2">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6 leading-tight">
+                O nas – <span className="text-[#00B5AD]">ORI 369</span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                V ORI 369 združujemo napredne tehnologije, celostno razumevanje človeka in strokovne manualne tehnike. 
+                Naš način dela bistveno preseže klasične terapije, saj omogoča hitrejše, globlje in trajnejše rezultate.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+                  <Zap className="text-[#00B5AD]" size={20} />
+                  <span className="font-medium">Napredna tehnologija</span>
+                </div>
+                <div className="flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-gray-100">
+                  <Heart className="text-[#00B5AD]" size={20} />
+                  <span className="font-medium">Celostni pristop</span>
+                </div>
+              </div>
+            </div>
+            <div className="lg:w-1/2 relative">
+              <div className="relative h-[400px] md:h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src={OFFICE_IMAGE}
+                  alt="ORI 369 Pisarna"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+              <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl hidden md:block border border-gray-100">
+                <p className="text-3xl font-bold text-[#00B5AD]">3-6-9</p>
+                <p className="text-sm text-gray-500 font-medium uppercase tracking-wider">Frekvence ravnovesja</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Why ORI 369 Works - The Comparison */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="max-w-4xl mx-auto text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-black mb-6">Zakaj ORI 369 deluje?</h2>
+            <p className="text-lg text-gray-600">
+              Najbolj preprosta primerjava: <span className="font-bold text-black">Lopata ali bager?</span>
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100">
+              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mb-6">
+                <span className="text-2xl">🚜</span>
+              </div>
+              <h3 className="text-xl font-bold mb-4">Brez tehnologije (Lopata)</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Z lopato lahko kopljemo jamo za bazen – počasi, z veliko truda in omejenim učinkom. 
+                Pri klasičnih terapijah je napredek pogosto počasen, saj se zanašamo le na osnovne metode.
+              </p>
+            </div>
+            <div className="bg-[#00B5AD]/5 p-8 rounded-2xl border border-[#00B5AD]/20">
+              <div className="w-12 h-12 bg-[#00B5AD] rounded-full flex items-center justify-center mb-6">
+                <Zap className="text-white" size={24} />
+              </div>
+              <h3 className="text-xl font-bold mb-4 text-black">Z ORI 369 tehnologijo (Bager)</h3>
+              <p className="text-gray-600 leading-relaxed">
+                Bager isto jamo naredi v enem dnevu. Z naprednimi napravami v ORI 369 vaše telo v eni obravnavi 
+                lahko naredi več kot sicer v tednu dni. Uporabljamo opremo, ki ustvarja resnično razliko.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Technologies Grid */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">Tehnologije ORI 369</h2>
+            <p className="text-gray-600 max-w-2xl mx-auto">
+              Vse obravnave vključujejo uporabo vrhunskih naprav in metod, ki skupaj delujejo kot integriran sistem regeneracije.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                title: "Regeneracija",
+                items: ["Tecar terapija", "Magnetna indukcija (MIS)", "Elektrostimulacija (EMS)", "Laser terapija", "Ultrazvok"],
+                icon: <Zap className="text-[#00B5AD]" />
+              },
+              {
+                title: "Podpora strukturi",
+                items: ["Trakcija hrbtenice", "Manualna terapija", "Holos manual treatment", "Akupunktura"],
+                icon: <Shield className="text-[#00B5AD]" />
+              },
+              {
+                title: "Energijska harmonizacija",
+                items: ["Frequency therapy", "Skalarni valovi", "IteraCare", "AO Scan (biorezonanca)"],
+                icon: <Globe className="text-[#00B5AD]" />
+              },
+              {
+                title: "Nevroreset",
+                items: ["Light & Sound Therapy", "Meditape", "Somatika", "Vodeno dihanje", "Ledene terapije"],
+                icon: <Users className="text-[#00B5AD]" />
+              }
+            ].map((cat, i) => (
+              <div key={i} className="bg-white p-8 rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+                <div className="mb-4">{cat.icon}</div>
+                <h3 className="text-lg font-bold mb-4">{cat.title}</h3>
+                <ul className="space-y-2">
+                  {cat.items.map((item, j) => (
+                    <li key={j} className="flex items-center gap-2 text-gray-600 text-sm">
+                      <CheckCircle2 size={14} className="text-[#00B5AD] shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Holistic Approach */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="flex flex-col lg:flex-row items-center gap-16">
+            <div className="lg:w-1/2 grid grid-cols-2 gap-4">
+              {THERAPY_IMAGES.slice(0, 4).map((img, i) => (
+                <div key={i} className={`relative h-48 md:h-64 rounded-xl overflow-hidden shadow-lg ${i % 2 === 1 ? 'mt-8' : ''}`}>
+                  <Image
+                    src={img}
+                    alt={`Terapija ${i + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl md:text-4xl font-bold text-black mb-8">Celostni pristop</h2>
+              <p className="text-lg text-gray-600 mb-8 leading-relaxed">
+                Terapevtski proces pri nas nikoli ne zajema samo bolečine ali simptoma. Obravnavo pogledamo širše:
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  "Kako se človek giblje",
+                  "Drža in poravnava",
+                  "Način dihanja",
+                  "Prehrana in hidracija",
+                  "Način razmišljanja",
+                  "Odnos do sebe in drugih",
+                  "Odnos do narave",
+                  "Energijsko ravnovesje"
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
+                    <CheckCircle2 className="text-[#00B5AD]" size={18} />
+                    <span className="text-gray-700 font-medium">{item}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-10 text-lg font-medium text-black italic">
+                "Ko se vse te komponente uskladijo, telo preide v stanje regeneracije, um v jasnost, energija pa v ravnovesje."
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Gallery / More Images */}
+      <section className="py-20 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold">Utrinki iz našega centra</h2>
+          </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {THERAPY_IMAGES.slice(4, 7).map((img, i) => (
+              <div key={i} className="relative h-72 rounded-2xl overflow-hidden shadow-xl group">
+                <Image
+                  src={img}
+                  alt={`Center ORI 369 ${i + 5}`}
+                  fill
+                  className="object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 bg-white">
+        <div className="container mx-auto px-4 text-center">
+          <div className="max-w-3xl mx-auto bg-black text-white p-12 rounded-3xl shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-[#00B5AD] opacity-20 blur-3xl rounded-full -mr-16 -mt-16"></div>
+            <div className="relative z-10">
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">Ste pripravljeni na spremembo?</h2>
+              <p className="text-gray-400 mb-10 text-lg">
+                Pridružite se številnim, ki so že občutili razliko z našim naprednim pristopom.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <a
+                  href="/rezervacija"
+                  className="px-8 py-4 bg-[#00B5AD] text-white font-bold rounded-xl hover:bg-[#009891] transition-all transform hover:scale-105"
+                >
+                  Rezerviraj termin
+                </a>
+                <a
+                  href="/kontakt"
+                  className="px-8 py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-100 transition-all"
+                >
+                  Kontaktirajte nas
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

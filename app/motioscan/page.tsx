@@ -1,8 +1,10 @@
 "use client";
 
+import { useState } from "react";
 import { CheckCircle, Zap, TrendingUp, Users, Monitor, Activity, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import ImageModal from "@/components/ImageModal";
 
 const MOTIOSCAN_MAIN = "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/motioscan/motioscan1.png";
 const MOTIOSCAN_SOFT = [
@@ -12,20 +14,24 @@ const MOTIOSCAN_SOFT = [
 ];
 
 export default function MotioScanPage() {
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
 
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden bg-gray-900 text-white">
-        <div className="absolute inset-0 z-0 opacity-40">
+      <section className="relative py-32 md:py-56 overflow-hidden bg-gray-900 text-white">
+        <div
+          className="absolute inset-0 z-0 opacity-50 cursor-pointer group"
+          onClick={() => setSelectedImage({ src: MOTIOSCAN_MAIN, alt: "MotioScan Hero" })}
+        >
           <Image
             src={MOTIOSCAN_MAIN}
             alt="MotioScan Hero"
             fill
-            className="object-cover"
+            className="object-cover transition-transform duration-700 group-hover:scale-105"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-black via-black/60 to-transparent group-hover:via-black/40 transition-colors"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
@@ -80,21 +86,37 @@ export default function MotioScanPage() {
               </div>
             </div>
             <div className="lg:w-1/2 relative">
-              <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white">
+              <div
+                className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white cursor-pointer group"
+                onClick={() => setSelectedImage({ src: MOTIOSCAN_SOFT[0], alt: "MotioScan Software Analysis" })}
+              >
                 <Image
                   src={MOTIOSCAN_SOFT[0]}
                   alt="MotioScan Software Analysis"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Zap className="text-white" size={24} />
+                  </div>
+                </div>
               </div>
-              <div className="absolute -bottom-8 -right-8 w-64 h-48 rounded-xl overflow-hidden shadow-2xl border-4 border-white hidden md:block">
+              <div
+                className="absolute -bottom-8 -right-8 w-64 h-48 rounded-xl overflow-hidden shadow-2xl border-4 border-white hidden md:block cursor-pointer group"
+                onClick={() => setSelectedImage({ src: MOTIOSCAN_SOFT[1], alt: "MotioScan 3D Model" })}
+              >
                 <Image
                   src={MOTIOSCAN_SOFT[1]}
                   alt="MotioScan 3D Model"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <div className="bg-white/20 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Zap className="text-white" size={20} />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -112,13 +134,21 @@ export default function MotioScanPage() {
           </div>
           
           <div className="grid md:grid-cols-2 gap-8">
-            <div className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl">
+            <div
+              className="relative h-[350px] rounded-2xl overflow-hidden shadow-xl cursor-pointer group"
+              onClick={() => setSelectedImage({ src: MOTIOSCAN_SOFT[2], alt: "MotioScan Detailed Report" })}
+            >
               <Image
                 src={MOTIOSCAN_SOFT[2]}
                 alt="MotioScan Detailed Report"
                 fill
-                className="object-cover"
+                className="object-cover transition-transform duration-500 group-hover:scale-105"
               />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                  <Zap className="text-white" size={24} />
+                </div>
+              </div>
             </div>
             <div className="flex flex-col justify-center">
               <div className="space-y-8">
@@ -227,6 +257,12 @@ export default function MotioScanPage() {
           </div>
         </div>
       </section>
+      <ImageModal
+        isOpen={!!selectedImage}
+        onClose={() => setSelectedImage(null)}
+        src={selectedImage?.src || ""}
+        alt={selectedImage?.alt || ""}
+      />
     </div>
   );
 }

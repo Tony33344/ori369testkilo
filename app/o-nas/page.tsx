@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/lib/i18n";
 import { CheckCircle2, Zap, Heart, Shield, Users, Globe } from "lucide-react";
+import ImageModal from "@/components/ImageModal";
 
 const OFFICE_IMAGE = "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/pisarna/pisarna1.webp";
 const THERAPY_IMAGES = [
@@ -18,6 +19,7 @@ const THERAPY_IMAGES = [
 
 export default function AboutPage() {
   const { t } = useLanguage();
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
 
   return (
     <div className="min-h-screen bg-white">
@@ -45,14 +47,22 @@ export default function AboutPage() {
               </div>
             </div>
             <div className="lg:w-1/2 relative">
-              <div className="relative h-[400px] md:h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl">
+              <div
+                className="relative h-[400px] md:h-[500px] w-full rounded-2xl overflow-hidden shadow-2xl cursor-pointer group"
+                onClick={() => setSelectedImage({ src: OFFICE_IMAGE, alt: "ORI 369 Pisarna" })}
+              >
                 <Image
                   src={OFFICE_IMAGE}
                   alt="ORI 369 Pisarna"
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
                   priority
                 />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Zap className="text-white" size={24} />
+                  </div>
+                </div>
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl hidden md:block border border-gray-100">
                 <p className="text-3xl font-bold text-[#00B5AD]">3-6-9</p>
@@ -154,13 +164,22 @@ export default function AboutPage() {
           <div className="flex flex-col lg:flex-row items-center gap-16">
             <div className="lg:w-1/2 grid grid-cols-2 gap-4">
               {THERAPY_IMAGES.slice(0, 4).map((img, i) => (
-                <div key={i} className={`relative h-48 md:h-64 rounded-xl overflow-hidden shadow-lg ${i % 2 === 1 ? 'mt-8' : ''}`}>
+                <div
+                  key={i}
+                  className={`relative h-48 md:h-64 rounded-xl overflow-hidden shadow-lg cursor-pointer group ${i % 2 === 1 ? 'mt-8' : ''}`}
+                  onClick={() => setSelectedImage({ src: img, alt: `Terapija ${i + 1}` })}
+                >
                   <Image
                     src={img}
                     alt={`Terapija ${i + 1}`}
                     fill
-                    className="object-cover"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors flex items-center justify-center">
+                    <div className="bg-white/20 backdrop-blur-sm p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                      <Zap className="text-white" size={20} />
+                    </div>
+                  </div>
                 </div>
               ))}
             </div>
@@ -202,14 +221,22 @@ export default function AboutPage() {
           </div>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {THERAPY_IMAGES.slice(4, 7).map((img, i) => (
-              <div key={i} className="relative h-72 rounded-2xl overflow-hidden shadow-xl group">
+              <div
+                key={i}
+                className="relative h-72 rounded-2xl overflow-hidden shadow-xl group cursor-pointer"
+                onClick={() => setSelectedImage({ src: img, alt: `Center ORI 369 ${i + 5}` })}
+              >
                 <Image
                   src={img}
                   alt={`Center ORI 369 ${i + 5}`}
                   fill
                   className="object-cover transition-transform duration-500 group-hover:scale-110"
                 />
-                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/0 transition-colors"></div>
+                <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                  <div className="bg-white/20 backdrop-blur-sm p-3 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Zap className="text-white" size={24} />
+                  </div>
+                </div>
               </div>
             ))}
           </div>
@@ -244,6 +271,13 @@ export default function AboutPage() {
           </div>
         </div>
       </section>
+
+      <ImageModal
+        isOpen={!!selectedImage}
+        onClose={() => setSelectedImage(null)}
+        src={selectedImage?.src || ""}
+        alt={selectedImage?.alt || ""}
+      />
     </div>
   );
 }

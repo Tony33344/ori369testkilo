@@ -347,9 +347,9 @@ function BookingForm() {
                     </div>
                   </div>
 
-                  {allSlots.length > 0 ? (
+                  {(availableSlots.length > 0 || bookedSlots.length > 0 || busySlots.length > 0) ? (
                     <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-2">
-                      {allSlots.map(slot => {
+                      {[...availableSlots, ...bookedSlots, ...busySlots].sort().map(slot => {
                         const isBooked = bookedSlots.includes(slot);
                         const isBusy = busySlots.includes(slot);
                         const isAvailable = availableSlots.includes(slot);

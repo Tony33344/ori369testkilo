@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles } from 'lucide-react';
+import { Sparkles, Zap, Heart, Brain, Activity, Shield, Waves } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import { useLanguage } from '@/lib/i18n';
@@ -124,6 +124,43 @@ export default function Hero() {
               >
                 {t('hero.exploreCta')}
               </Link>
+            </motion.div>
+
+            {/* Service Highlights */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+            >
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto">
+                  <Zap className="text-[#00B5AD]" size={20} />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 text-center">TECAR</h3>
+                <p className="text-xs text-gray-500 text-center mt-1">{t('categories.methods.tecar')}</p>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto">
+                  <Activity className="text-[#00B5AD]" size={20} />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 text-center">Laser</h3>
+                <p className="text-xs text-gray-500 text-center mt-1">{t('categories.methods.laser')}</p>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto">
+                  <Shield className="text-[#00B5AD]" size={20} />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 text-center">{t('categories.methods.magnetic')}</h3>
+                <p className="text-xs text-gray-500 text-center mt-1">{t('categories.methods.traction')}</p>
+              </div>
+              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
+                <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto">
+                  <Waves className="text-[#00B5AD]" size={20} />
+                </div>
+                <h3 className="text-sm font-semibold text-gray-900 text-center">{t('categories.methods.frequency')}</h3>
+                <p className="text-xs text-gray-500 text-center mt-1">{t('categories.methods.sound')}</p>
+              </div>
             </motion.div>
           </motion.div>
         </div>

@@ -334,15 +334,15 @@ function BookingForm() {
                     <div className="flex flex-wrap items-center gap-4 text-xs">
                       <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded bg-green-100 border-2 border-green-500"></div>
-                        <span className="text-gray-600">Na voljo</span>
+                        <span className="text-gray-600">{t('booking.available')}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded bg-red-100 border-2 border-red-400"></div>
-                        <span className="text-gray-600">Zasedeno (rezervacija)</span>
+                        <span className="text-gray-600">{t('booking.bookedReservation')}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <div className="w-3 h-3 rounded bg-orange-100 border-2 border-orange-400"></div>
-                        <span className="text-gray-600">Zasedeno (koledar)</span>
+                        <span className="text-gray-600">{t('booking.bookedCalendar')}</span>
                       </div>
                     </div>
                   </div>
@@ -374,7 +374,7 @@ function BookingForm() {
                             onClick={() => isAvailable && setSelectedTime(slot)}
                             disabled={!isAvailable}
                             className={className}
-                            title={isBooked ? 'Zasedeno - rezervacija' : isBusy ? 'Zasedeno - koledar' : 'Na voljo'}
+                            title={isBooked ? t('booking.bookedReservation') : isBusy ? t('booking.bookedCalendar') : t('booking.available')}
                           >
                             <span className="flex items-center justify-center gap-1">
                               {isBooked && <span>🔒</span>}

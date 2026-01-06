@@ -29,15 +29,21 @@ function getServiceAccountCredentials() {
   if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY) {
     try {
       const decoded = Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf8');
-      return JSON.parse(decoded);
+      const parsed = JSON.parse(decoded);
+      console.log('[Google Calendar] Loaded credentials from GOOGLE_SERVICE_ACCOUNT_KEY (base64)');
+      return parsed;
     } catch (e) {
       // Try parsing as plain JSON
       try {
-        return JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
-      } catch {
-        console.error('Failed to parse GOOGLE_SERVICE_ACCOUNT_KEY');
+        const parsed = JSON.parse(process.env.GOOGLE_SERVICE_ACCOUNT_KEY);
+        console.log('[Google Calendar] Loaded credentials from GOOGLE_SERVICE_ACCOUNT_KEY (plain JSON)');
+        return parsed;
+      } catch (err) {
+        console.error('[Google Calendar] Failed to parse GOOGLE_SERVICE_ACCOUNT_KEY:', err instanceof Error ? err.message : err);
       }
     }
+  } else {
+    console.log('[Google Calendar] GOOGLE_SERVICE_ACCOUNT_KEY environment variable not set');
   }
 
   // Then try file

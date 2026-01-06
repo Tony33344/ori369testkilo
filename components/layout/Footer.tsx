@@ -54,7 +54,7 @@ export default function Footer() {
             {/* Logo & About */}
             <div>
               <Image 
-                src="/logo.png" 
+                src="https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/logobase/logo.png" 
                 alt="ORI 369" 
                 width={220}
                 height={90}

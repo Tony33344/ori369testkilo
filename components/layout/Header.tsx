@@ -114,7 +114,7 @@ export default function Header() {
           {/* Logo - ORI 369 Brand Style */}
           <Link href="/" className="flex items-center gap-2 group">
             <Image 
-              src="/logo.png" 
+              src="https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/logobase/logo.png" 
               alt="ORI 369" 
               width={240}
               height={100}

@@ -1,14 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
+import { useEffect, useMemo, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n';
 import { toast } from 'react-hot-toast';
-import { Calendar, Clock, AlertCircle } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface BookingCalendarProps {
   serviceId: string;
@@ -24,95 +20,30 @@ export default function BookingCalendar({
   selectedTime
 }: BookingCalendarProps) {
   const { t } = useLanguage();
-  const [events, setEvents] = useState<any[]>([]);
   const [availableSlots, setAvailableSlots] = useState<any[]>([]);
-  const [googleBusyEvents, setGoogleBusyEvents] = useState<any[]>([]);
-  const [bookedEvents, setBookedEvents] = useState<any[]>([]);
-  const [calendarView, setCalendarView] = useState('timeGridWeek');
+  const [loading, setLoading] = useState(true);
+  const [currentMonth, setCurrentMonth] = useState(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    d.setDate(1);
+    return d;
+  });
 
   useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth < 768) {
-        setCalendarView('timeGridDay');
-      } else {
-        setCalendarView('timeGridWeek');
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+    // Keep current month aligned with selectedDate (if parent sets it)
+    if (!selectedDate) return;
+    const d = new Date(selectedDate);
+    if (Number.isNaN(d.getTime())) return;
+    d.setHours(0, 0, 0, 0);
+    d.setDate(1);
+    setCurrentMonth(d);
+  }, [selectedDate]);
 
   useEffect(() => {
     if (serviceId) {
-      loadBookings();
       loadAvailability();
     }
   }, [serviceId]);
-
-  useEffect(() => {
-    // Combine all events with proper display
-    setEvents([...googleBusyEvents, ...bookedEvents]);
-  }, [googleBusyEvents, bookedEvents]);
-
-  const loadBookings = async () => {
-    const { data: bookings, error } = await supabase
-      .from('bookings')
-      .select('date, time_slot, status, services(duration)')
-      .in('status', ['pending', 'confirmed']);
-
-    if (error) {
-      console.error('Error loading bookings:', error);
-      return;
-    }
-
-    if (bookings) {
-      const events = bookings.map((booking: any) => {
-        const duration = booking.services?.duration || 60;
-        const startTime = new Date(`${booking.date}T${booking.time_slot}`);
-        const endTime = new Date(startTime.getTime() + duration * 60000);
-        
-        return {
-          title: '🔒 Zasedeno',
-          start: startTime.toISOString(),
-          end: endTime.toISOString(),
-          backgroundColor: '#ef4444',
-          borderColor: '#dc2626',
-          textColor: '#ffffff',
-          classNames: ['booked-event'],
-        };
-      });
-      setBookedEvents(events);
-    }
-  };
-
-  const loadGoogleBusy = async (timeMin: string, timeMax: string) => {
-    try {
-      const res = await fetch(`/api/google-calendar/busy?timeMin=${encodeURIComponent(timeMin)}&timeMax=${encodeURIComponent(timeMax)}`);
-      if (!res.ok) return;
-      const json = await res.json();
-
-      const busy = (json?.busy || []).map((e: any) => {
-        const start = e?.start?.dateTime || e?.start?.date;
-        const end = e?.end?.dateTime || e?.end?.date;
-        return {
-          id: e.id,
-          title: '📅 ' + (e.summary || 'Zasedeno'),
-          start,
-          end,
-          backgroundColor: '#f97316',
-          borderColor: '#ea580c',
-          textColor: '#ffffff',
-          classNames: ['google-busy-event'],
-        };
-      });
-
-      setGoogleBusyEvents(busy);
-    } catch (e) {
-      console.error('Failed to load Google Calendar busy events:', e);
-    }
-  };
 
   const loadAvailability = async () => {
     const { data: slots, error } = await supabase
@@ -122,188 +53,157 @@ export default function BookingCalendar({
 
     if (error) {
       console.error('Error loading availability:', error);
+      setLoading(false);
       return;
     }
 
     if (slots) {
       setAvailableSlots(slots);
     }
+    setLoading(false);
   };
 
-  const handleDateClick = (arg: any) => {
-    const clickedDate = arg.dateStr;
-    const dayOfWeek = new Date(clickedDate).getDay();
-    
-    // Check if there's availability for this day
-    const daySlots = availableSlots.filter(slot => slot.day_of_week === dayOfWeek);
-    
-    if (daySlots.length === 0) {
+  const today = useMemo(() => {
+    const d = new Date();
+    d.setHours(0, 0, 0, 0);
+    return d;
+  }, []);
+
+  const monthLabel = useMemo(() => {
+    const locale = t('common.locale');
+    return currentMonth.toLocaleDateString(locale, { month: 'long', year: 'numeric' });
+  }, [currentMonth, t]);
+
+  const dayNames = useMemo(() => {
+    const locale = t('common.locale');
+    // Force Monday-first display (common for SI). We'll render Mo..Su.
+    const base = new Date('2024-01-01T00:00:00'); // Monday
+    return Array.from({ length: 7 }, (_, i) => {
+      const d = new Date(base);
+      d.setDate(base.getDate() + i);
+      return d.toLocaleDateString(locale, { weekday: 'short' });
+    });
+  }, [t]);
+
+  const days = useMemo(() => {
+    const year = currentMonth.getFullYear();
+    const month = currentMonth.getMonth();
+    const first = new Date(year, month, 1);
+    const last = new Date(year, month + 1, 0);
+
+    // Monday-first grid offset
+    const jsDay = first.getDay(); // 0 Sun..6 Sat
+    const mondayFirst = (jsDay + 6) % 7; // 0 Mon..6 Sun
+    const cells: Array<Date | null> = [];
+    for (let i = 0; i < mondayFirst; i++) cells.push(null);
+    for (let d = 1; d <= last.getDate(); d++) cells.push(new Date(year, month, d));
+    return cells;
+  }, [currentMonth]);
+
+  const prevMonth = () => {
+    setCurrentMonth((m) => new Date(m.getFullYear(), m.getMonth() - 1, 1));
+  };
+
+  const nextMonth = () => {
+    setCurrentMonth((m) => new Date(m.getFullYear(), m.getMonth() + 1, 1));
+  };
+
+  const isDaySelectable = (date: Date) => {
+    const isPast = date < today;
+    if (isPast) return false;
+    const dayOfWeek = date.getDay();
+    return availableSlots.some((s) => s.day_of_week === dayOfWeek);
+  };
+
+  const handleDateClick = (date: Date) => {
+    const dateStr = date.toISOString().split('T')[0];
+    if (!isDaySelectable(date)) {
       toast.error(t('booking.noSlotsAvailable'));
       return;
     }
-
-    // For now, just select the date - time selection will be in a separate UI
-    onDateSelect(clickedDate, '');
+    onDateSelect(dateStr, '');
   };
 
   return (
-    <div className="booking-calendar">
-      {/* Legend */}
-      <div className="mb-4 p-3 bg-gray-50 rounded-lg">
-        <div className="flex flex-wrap items-center gap-4 text-sm">
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-red-500"></div>
-            <span className="text-gray-700">Zasedeno (rezervacija)</span>
+    <div className="space-y-3">
+      {loading ? (
+        <div className="flex items-center justify-center py-8">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+        </div>
+      ) : (
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 bg-gradient-to-r from-indigo-500 to-purple-500">
+            <button
+              type="button"
+              onClick={prevMonth}
+              className="p-1.5 rounded-lg hover:bg-white/20 transition-colors text-white"
+            >
+              <ChevronLeft size={18} />
+            </button>
+            <h2 className="text-base font-semibold text-white capitalize">{monthLabel}</h2>
+            <button
+              type="button"
+              onClick={nextMonth}
+              className="p-1.5 rounded-lg hover:bg-white/20 transition-colors text-white"
+            >
+              <ChevronRight size={18} />
+            </button>
           </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-orange-500"></div>
-            <span className="text-gray-700">Zasedeno (koledar)</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <div className="w-4 h-4 rounded bg-blue-100 border border-blue-300"></div>
-            <span className="text-gray-700">Danes</span>
+
+          <div className="p-3">
+            <div className="grid grid-cols-7 gap-1 mb-1">
+              {dayNames.map((d) => (
+                <div key={d} className="text-center text-xs font-medium text-gray-500 py-1">
+                  {d}
+                </div>
+              ))}
+            </div>
+
+            <div className="grid grid-cols-7 gap-1">
+              {days.map((date, index) => {
+                if (!date) return <div key={index} className="aspect-square" />;
+
+                const dateStr = date.toISOString().split('T')[0];
+                const isSelected = selectedDate === dateStr;
+                const isToday = date.getTime() === today.getTime();
+                const selectable = isDaySelectable(date);
+
+                return (
+                  <button
+                    key={dateStr}
+                    type="button"
+                    onClick={() => selectable && handleDateClick(date)}
+                    disabled={!selectable}
+                    className={`
+                      aspect-square rounded-md flex items-center justify-center text-sm font-medium transition-all
+                      ${selectable ? 'hover:bg-indigo-50 cursor-pointer text-gray-700' : 'text-gray-300 cursor-not-allowed'}
+                      ${isToday && selectable ? 'bg-indigo-100 text-indigo-700 ring-1 ring-indigo-400' : ''}
+                      ${isSelected ? 'bg-indigo-600 text-white hover:bg-indigo-700' : ''}
+                    `}
+                  >
+                    {date.getDate()}
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      <style jsx global>{`
-        .booking-calendar .fc {
-          font-family: inherit;
-          border-radius: 12px;
-          overflow: hidden;
-          box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .booking-calendar .fc-toolbar {
-          padding: 12px 16px;
-          background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-          flex-direction: column;
-          gap: 12px;
-        }
-        @media (min-width: 768px) {
-          .booking-calendar .fc-toolbar {
-            flex-direction: row;
-          }
-        }
-        .booking-calendar .fc-toolbar-title {
-          color: white !important;
-          font-weight: 600;
-          font-size: 1.25rem !important;
-        }
-        @media (max-width: 768px) {
-          .booking-calendar .fc-toolbar-title {
-            font-size: 1.1rem !important;
-          }
-          .booking-calendar .fc-button {
-            padding: 6px 10px !important;
-            font-size: 0.85rem !important;
-          }
-        }
-        .booking-calendar .fc-button {
-          background-color: rgba(255,255,255,0.2) !important;
-          border-color: rgba(255,255,255,0.3) !important;
-          text-transform: capitalize;
-          font-weight: 500;
-          padding: 8px 16px !important;
-          border-radius: 8px !important;
-        }
-        .booking-calendar .fc-button:hover {
-          background-color: rgba(255,255,255,0.3) !important;
-          border-color: rgba(255,255,255,0.4) !important;
-        }
-        .booking-calendar .fc-button-active {
-          background-color: rgba(255,255,255,0.4) !important;
-          border-color: rgba(255,255,255,0.5) !important;
-        }
-        .booking-calendar .fc-day-today {
-          background-color: #dbeafe !important;
-        }
-        .booking-calendar .fc-daygrid-day {
-          transition: all 0.2s ease;
-          min-height: 40px !important;
-        }
-        .booking-calendar .fc-daygrid-day:hover {
-          background-color: #f0f9ff;
-          cursor: pointer;
-          transform: scale(1.02);
-        }
-        .booking-calendar .fc-daygrid-day.fc-day-selected {
-          background-color: #bfdbfe !important;
-        }
-        .booking-calendar .fc-event {
-          border-radius: 4px;
-          font-size: 11px;
-          font-weight: 500;
-          padding: 2px 4px;
-        }
-        .booking-calendar .booked-event {
-          animation: pulse 2s infinite;
-        }
-        .booking-calendar .google-busy-event {
-          opacity: 0.9;
-        }
-        .booking-calendar .fc-timegrid-slot {
-          height: 50px !important;
-        }
-        @media (max-width: 768px) {
-          .booking-calendar .fc-timegrid-slot {
-            height: 60px !important;
-          }
-          .booking-calendar .fc-timegrid-axis-frame {
-            font-size: 10px !important;
-          }
-        }
-        .booking-calendar .fc-timegrid-event {
-          border-radius: 6px;
-        }
-        @keyframes pulse {
-          0%, 100% { opacity: 1; }
-          50% { opacity: 0.8; }
-        }
-      `}</style>
-      
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView={calendarView}
-        key={calendarView} // Force re-render when view changes
-        headerToolbar={{
-          left: 'prev,next today',
-          center: 'title',
-          right: 'dayGridMonth,timeGridWeek,timeGridDay'
-        }}
-        events={events}
-        datesSet={(arg: any) => {
-          const timeMin = arg.start?.toISOString?.() || new Date(arg.start).toISOString();
-          const timeMax = arg.end?.toISOString?.() || new Date(arg.end).toISOString();
-          loadGoogleBusy(timeMin, timeMax);
-          loadBookings();
-        }}
-        dateClick={handleDateClick}
-        selectable={true}
-        selectMirror={true}
-        dayMaxEvents={true}
-        weekends={true}
-        height="auto"
-        slotMinTime="08:00:00"
-        slotMaxTime="20:00:00"
-        allDaySlot={false}
-        nowIndicator={true}
-        locale={t('common.locale')}
-        buttonText={{
-          today: t('booking.today'),
-          month: t('booking.month'),
-          week: t('booking.week'),
-          day: t('booking.day')
-        }}
-        validRange={{
-          start: new Date().toISOString().split('T')[0],
-          end: new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0]
-        }}
-        eventContent={(arg) => (
-          <div className="flex items-center gap-1 px-1 py-0.5 overflow-hidden">
-            <span className="truncate">{arg.event.title}</span>
-          </div>
-        )}
-      />
+      <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500">
+        <div className="flex items-center gap-1.5">
+          <div className="w-3 h-3 rounded bg-indigo-600" />
+          <span>{t('booking.selected')}</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-3 h-3 rounded bg-indigo-100 ring-1 ring-indigo-400" />
+          <span>{t('booking.today')}</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-3 h-3 rounded bg-gray-200" />
+          <span>{t('booking.unavailable')}</span>
+        </div>
+      </div>
     </div>
   );
 }

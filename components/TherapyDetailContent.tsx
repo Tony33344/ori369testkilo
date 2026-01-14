@@ -1,11 +1,10 @@
 'use client';
 
-import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Clock, Calendar, CheckCircle, AlertCircle, Zap, Euro, ChevronDown, ChevronUp } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Clock, Calendar, CheckCircle, AlertCircle, Zap, Euro } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
-import { ServiceDetail } from '@/lib/servicesData';
+import { ServiceDetail, servicesData } from '@/lib/servicesData';
 
 interface TherapyDetailContentProps {
   richContent: ServiceDetail;
@@ -14,7 +13,12 @@ interface TherapyDetailContentProps {
 
 export default function TherapyDetailContent({ richContent, therapyImage }: TherapyDetailContentProps) {
   const { t } = useLanguage();
-  const [isExpanded, setIsExpanded] = useState(false);
+
+  // Find the next therapy for navigation
+  const allSlugs = Object.keys(servicesData);
+  const currentIndex = allSlugs.indexOf(richContent.slug);
+  const nextSlug = allSlugs[(currentIndex + 1) % allSlugs.length];
+  const nextTherapyName = servicesData[nextSlug].name;
 
   return (
     <div className="min-h-screen bg-white">
@@ -33,13 +37,23 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
         </div>
 
         <div className="container mx-auto px-4 relative z-10">
-          <Link 
-            href="/terapije"
-            className="inline-flex items-center text-[#00B5AD] hover:text-[#009891] mb-6 transition-colors"
-          >
-            <ArrowLeft size={20} className="mr-2" />
-            {t('therapyDetail.backToTherapies')}
-          </Link>
+          <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
+            <Link 
+              href="/terapije"
+              className="inline-flex items-center text-[#00B5AD] hover:text-[#009891] transition-colors font-medium"
+            >
+              <ArrowLeft size={20} className="mr-2" />
+              {t('therapyDetail.backToTherapies')}
+            </Link>
+
+            <Link 
+              href={`/terapije/${nextSlug}`}
+              className="inline-flex items-center text-[#00B5AD] hover:text-[#009891] transition-colors font-medium"
+            >
+              <span className="mr-2">Naslednja: {nextTherapyName}</span>
+              <ArrowRight size={20} />
+            </Link>
+          </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
             {richContent.name}
@@ -66,100 +80,79 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="max-w-4xl mx-auto">
           {/* Main Description */}
-          <div className="mb-8">
+          <div className="mb-12">
             <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
-              {isExpanded ? richContent.longDescription : richContent.longDescription.split('\n')[0]}
+              {richContent.longDescription}
             </p>
           </div>
 
-          {!isExpanded && (
-            <button
-              onClick={() => setIsExpanded(true)}
-              className="mb-12 flex items-center gap-2 text-[#00B5AD] hover:text-[#009891] font-bold text-lg transition-colors border-2 border-[#00B5AD] px-6 py-3 rounded-xl"
-            >
-              <ChevronDown size={24} />
-              {t('team.readMore')}
-            </button>
-          )}
+          <div className="space-y-12">
+            {/* How It Works */}
+            {richContent.howItWorks && (
+              <div className="border-l-4 border-[#00B5AD] pl-6 py-2 bg-gray-50/50 rounded-r-2xl">
+                <h2 className="text-2xl md:text-3xl font-bold text-black mb-4 flex items-center gap-2">
+                  <Zap className="text-[#00B5AD]" size={28} />
+                  {t('therapyDetail.howItWorks')}
+                </h2>
+                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  {richContent.howItWorks}
+                </p>
+              </div>
+            )}
 
-          {/* Expandable Rich Content */}
-          {isExpanded && (
-            <div className="space-y-12 animate-in fade-in slide-in-from-top-4 duration-500">
-              {/* How It Works */}
-              {richContent.howItWorks && (
-                <div className="border-l-4 border-[#00B5AD] pl-6 py-2 bg-gray-50/50 rounded-r-2xl">
-                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-4 flex items-center gap-2">
-                    <Zap className="text-[#00B5AD]" size={28} />
-                    {t('therapyDetail.howItWorks')}
-                  </h2>
-                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">
-                    {richContent.howItWorks}
-                  </p>
+            {/* Benefits */}
+            {richContent.benefits && richContent.benefits.length > 0 && (
+              <div className="bg-green-50 rounded-2xl p-8 shadow-sm">
+                <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 flex items-center gap-2">
+                  <CheckCircle className="text-green-600" size={28} />
+                  {t('therapyDetail.benefits')}
+                </h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  {richContent.benefits.map((benefit, index) => (
+                    <div key={index} className="flex items-start gap-3">
+                      <CheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                      <span className="text-gray-700">{benefit}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* Benefits */}
-              {richContent.benefits && richContent.benefits.length > 0 && (
-                <div className="bg-green-50 rounded-2xl p-8 shadow-sm">
-                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 flex items-center gap-2">
-                    <CheckCircle className="text-green-600" size={28} />
-                    {t('therapyDetail.benefits')}
-                  </h2>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {richContent.benefits.map((benefit, index) => (
-                      <div key={index} className="flex items-start gap-3">
-                        <CheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
-                        <span className="text-gray-700">{benefit}</span>
-                      </div>
-                    ))}
-                  </div>
+            {/* Indications */}
+            {richContent.indications && richContent.indications.length > 0 && (
+              <div className="bg-blue-50 rounded-2xl p-8 shadow-sm">
+                <h2 className="text-2xl md:text-3xl font-bold text-black mb-6">
+                  {t('therapyDetail.indications')}
+                </h2>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {richContent.indications.map((indication, index) => (
+                    <div key={index} className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm border border-blue-100">
+                      <div className="w-2 h-2 bg-[#00B5AD] rounded-full"></div>
+                      <span className="text-gray-700">{indication}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
+              </div>
+            )}
 
-              {/* Indications */}
-              {richContent.indications && richContent.indications.length > 0 && (
-                <div className="bg-blue-50 rounded-2xl p-8 shadow-sm">
-                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-6">
-                    {t('therapyDetail.indications')}
-                  </h2>
-                  <div className="grid md:grid-cols-2 gap-3">
-                    {richContent.indications.map((indication, index) => (
-                      <div key={index} className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm border border-blue-100">
-                        <div className="w-2 h-2 bg-[#00B5AD] rounded-full"></div>
-                        <span className="text-gray-700">{indication}</span>
-                      </div>
-                    ))}
-                  </div>
+            {/* Contraindications */}
+            {richContent.contraindications && richContent.contraindications.length > 0 && (
+              <div className="bg-red-50 rounded-2xl p-8 shadow-sm">
+                <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 flex items-center gap-2">
+                  <AlertCircle className="text-red-600" size={28} />
+                  {t('therapyDetail.contraindications')}
+                </h2>
+                <div className="grid md:grid-cols-2 gap-3">
+                  {richContent.contraindications.map((contraindication, index) => (
+                    <div key={index} className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm border border-red-100">
+                      <AlertCircle className="text-red-500 flex-shrink-0" size={18} />
+                      <span className="text-gray-700">{contraindication}</span>
+                    </div>
+                  ))}
                 </div>
-              )}
-
-              {/* Contraindications */}
-              {richContent.contraindications && richContent.contraindications.length > 0 && (
-                <div className="bg-red-50 rounded-2xl p-8 shadow-sm">
-                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 flex items-center gap-2">
-                    <AlertCircle className="text-red-600" size={28} />
-                    {t('therapyDetail.contraindications')}
-                  </h2>
-                  <div className="grid md:grid-cols-2 gap-3">
-                    {richContent.contraindications.map((contraindication, index) => (
-                      <div key={index} className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm border border-red-100">
-                        <AlertCircle className="text-red-500 flex-shrink-0" size={18} />
-                        <span className="text-gray-700">{contraindication}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              )}
-
-              <button
-                onClick={() => setIsExpanded(false)}
-                className="flex items-center gap-2 text-gray-500 hover:text-black font-medium transition-colors mx-auto py-4"
-              >
-                <ChevronUp size={20} />
-                {t('team.hideDetails')}
-              </button>
-            </div>
-          )}
+              </div>
+            )}
+          </div>
 
           {/* Price & Duration Info (Always visible at bottom) */}
           <div className="mt-12 bg-gray-50 rounded-2xl p-8 border border-gray-100">

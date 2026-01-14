@@ -35,18 +35,44 @@ export interface TherapyPackage {
   includedServices: string[];
   benefits: string[];
 }
-
 export const servicesData: Record<string, ServiceDetail> = {
   'tecar-terapija': {
     slug: 'tecar-terapija',
     name: 'TECAR Terapija',
     shortDescription: 'Napredna terapija s pomočjo radiofrekvenčne energije za regeneracijo tkiv.',
-    longDescription: `TECAR terapija je podporna metoda zdravljenja, ki z ustvarjanjem elektromagnetne (toplotne) energije ustvarja protivnetne, regenerativne in protibolečinske učinke. Je diatermična terapija, ki deluje na podlagi prenosa visoko-frekvenčne (frekvenca: 448 kHZ) elektromagnetne energije skozi telo do ciljnega tkiva.
+    longDescription: `TECAR terapija je podporna metoda zdravljenja, ki z ustvarjanjem elektromagnetne (toplotne) energije ustvarja protivnetne, regenerativne in protibolečinske učinke. Naprava v tkivu sproži proces samoceljenja in centralizacijo simptomov.
 
-Glavni cilj terapije je stimulacija telesu lastnih fizioloških procesov celjenja. TECAR terapija skrajša čas zdravljenja ter pozitivno vpliva na krepitev notranjih obnovitvenih sposobnosti tkiv.`,
-    howItWorks: `TECAR terapija temelji na proizvajanju toplotne energije. Gre za neinvazivno visokofrekvenčno energijo, ki spodbuja biološke procese samoregeneracije v celicah. TECAR aparatura vključuje premično elektrodo, fiksno elektrodo in kontaktno kremo. Deluje v kapacitivnem in rezistivnem načinu.`,
-    benefits: ['Pospeševanje celjenja in regeneracije tkiva', 'Zmanjšanje mišičnih krčev', 'Vazodilatacija z večjim lokalnim pretokom krvi', 'Pospeševanje resorpcije hematomov', 'Aktivacija presnovnih reakcij', 'Povečanje zmogljivosti'],
-    indications: ['Tendinitisi', 'Adhezivni kapsulitisi', 'Teniški in golfski komolci', 'Burzitisi', 'Artroze kolka in kolena', 'Pubalgije', 'Zlomi in zvini', 'Plantarni fasciitis', 'Bolečine v križu in vratu', 'Brazgotine'],
+S termičnim delovanjem omogoča boljšo cirkulacijo krvi, ki je ključnega pomena za celjenje v akutni fazi poškodbe. Pospešuje dovod kisika v celice, kar omogoča hitrejšo regeneracijo.`,
+    howItWorks: `TECAR terapija temelji na prenosu visoko-frekvenčne (448 kHZ) elektromagnetne energije. Deluje v kapacitivnem in rezistivnem načinu, kar omogoča ciljanje različnih globin tkiva. S termičnim učinkom spodbuja naravne procese regeneracije.`,
+    benefits: [
+      'Zmanjšanje bolečine za 20-25% že po prvi terapiji',
+      'Pospeševanje celjenja in regeneracije tkiva',
+      'Sproščanje hipertoničnih mišic',
+      'Povečanje obsega gibljivosti',
+      'Izboljšanje krvnega obtoka',
+      'Zmanjševanje edema'
+    ],
+    indications: [
+      'Bolečine v hrbtu (specifične in nespecifične)',
+      'Artroza kolka in kolena',
+      'Sklepni artritis',
+      'Sindrom zamrznjene rame',
+      'Skakalno koleno in teniški komolec',
+      'Sindrom karpalnega kanala',
+      'Vnetje sklepov in ovojnic',
+      'Poškodbe ligamentov (npr. ACL)',
+      'Mišične bolečine in vnetja živcev'
+    ],
+    contraindications: [
+      'Nosečnost (v predelu trebuha)',
+      'Motnje senzibilitete',
+      'Vnetne spremembe na koži in odprte rane',
+      'Krvavitve',
+      'Maligna stanja',
+      'Vročinska stanja in infekcije',
+      'Aktivne implantirane medicinske naprave (npr. pacemaker)',
+      'Previdnost pri rastnih conah otrok'
+    ],
     price: 40,
     duration: 30
   },
@@ -56,11 +82,34 @@ Glavni cilj terapije je stimulacija telesu lastnih fizioloških procesov celjenj
     shortDescription: 'Fizikalna terapija z električnimi impulzi za zmanjšanje bolečin in krepitev mišic.',
     longDescription: `Elektrostimulacijska terapija je vrsta fizikalne terapije, ki s pomočjo električnega toka in električnih impulzov zmanjšuje bolečine, pospešuje celični metabolizem in hitrejše celjenje. Električni impulzi preko elektrod na koži prehajajo globlje v tkivo.
 
-Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za zdravljenje oslabljenih mišic).`,
-    howItWorks: `TENS z nizkofrekvenčnimi električnimi tokovi stimulira senzorična živčna vlakna in zmanjšuje bolečino. FES s pomočjo električnih impulzov draži živčno-mišična vlakna in izvablja mišične kontrakcije za krepitev mišic.`,
-    benefits: ['Takojšnje zmanjšanje bolečine', 'Mišične kontrakcije za krepitev', 'Pospešen celični metabolizem', 'Pospešena celična rast', 'Sproščanje endorfinov', 'Splošna sprostitev telesa'],
-    indications: ['Mišične in sklepne bolečine', 'Atrofirane mišice', 'Mišične lezije', 'Zmanjšan obseg gibljivosti', 'Sindrom težkih nog', 'Mišični krči', 'Patelofemoralni sindrom', 'Nestabilnost sklepov', 'Postoperativna stanja'],
-    contraindications: ['Organske okvare srca', 'Srčni spodbujevalnik', 'Nosečnost', 'Kovinski implanti'],
+Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za zdravljenje oslabljenih mišic). TENS stimulira senzorična živčna vlakna in zmanjšuje bolečino, medtem ko FES draži živčno-mišična vlakna in izvablja mišične kontrakcije za krepitev mišic.`,
+    howItWorks: `TENS (Transkutana električna živčna stimulacija) uporablja nizkofrekvenčne električne tokove, ki stimulirajo senzorična živčna vlakna. To zmanjšuje prevajanje bolečinskih dražljajev po živčevju in spodbuja sproščanje endorfinov. FES (Funkcionalna električna stimulacija) pa draži živčno-mišična vlakna in povzroči krčenje mišic, kar je ključno za krepitev atrofiranih mišic.`,
+    benefits: [
+      'Takojšnje zmanjšanje bolečine',
+      'Mišične kontrakcije za krepitev mišic',
+      'Pospešen celični metabolizem in regeneracija',
+      'Sproščanje endorfinov (naravnih zaviralcev bolečine)',
+      'Splošna sprostitev telesa',
+      'Izboljšana prekrvavitev tkiv'
+    ],
+    indications: [
+      'Mišične in sklepne bolečine',
+      'Atrofirane mišice (po operacijah ali poškodbah)',
+      'Mišične lezije in krči',
+      'Zmanjšan obseg gibljivosti',
+      'Sindrom težkih nog',
+      'Patelofemoralni sindrom',
+      'Nestabilnost sklepov',
+      'Postoperativna rehabilitacijska stanja'
+    ],
+    contraindications: [
+      'Organske okvare srca',
+      'Srčni spodbujevalnik (pacemaker)',
+      'Nosečnost',
+      'Kovinski implanti v predelu aplikacije',
+      'Maligna obolenja',
+      'Akutna vnetja in infekcije'
+    ],
     price: 20,
     duration: 20
   },
@@ -68,10 +117,34 @@ Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za
     slug: 'magnetna-terapija',
     name: 'Magnetna Terapija',
     shortDescription: 'Neinvazivna terapija z magnetnimi polji za regeneracijo in lajšanje bolečin.',
-    longDescription: `Magnetna terapija je neinvazivna metoda zdravljenja, ki z uporabo pulzirajočih elektromagnetnih polj deluje protibolečinsko, protivnetno in regeneracijsko. Magnetna polja povečujejo količino kisika v celicah in pospešujejo regeneracijo.`,
-    howItWorks: `Magnetna polja spodbudijo celično regeneracijo in aktivirajo tvorbo novih krvnih žil. Povečujejo mikrocirkulacijo krvi in limfe ter pozitivno vplivajo na imunski sistem.`,
-    benefits: ['Zmanjšanje bolečine', 'Protivnetno delovanje', 'Izboljšana cirkulacija krvi', 'Povečana oksigenacija celic', 'Pospešena regeneracija tkiv', 'Krepitev imunskega sistema'],
-    indications: ['Kronične bolečine', 'Poškodbe mišic in sklepov', 'Artritis', 'Osteoporoza', 'Postoperativna stanja', 'Športne poškodbe'],
+    longDescription: `Magnetna terapija je neinvazivna metoda zdravljenja, ki z uporabo pulzirajočih elektromagnetnih polj deluje protibolečinsko, protivnetno in regeneracijsko. Magnetna polja povečujejo količino kisika v celicah in pospešujejo celično regeneracijo.
+
+Srednje-frekvenčna magnetna polja prehajajo skozi celotno telo in vplivajo na vse celice, kar izboljšuje metabolizem in prekrvavitev.`,
+    howItWorks: `Magnetna polja nizkih in srednjih frekvenc prodirajo skozi telo in delujejo na celične membrane. Povečujejo prepustnost celic, kar omogoča boljši vnos kisika in hranil ter hitrejše odstranjevanje toksinov. To aktivira naravne procese regeneracije tkiv.`,
+    benefits: [
+      'Zmanjšanje bolečine in vnetij',
+      'Izboljšana mikrocirkulacija krvi in limfe',
+      'Povečana oksigenacija celic',
+      'Pospešena regeneracija mehkih tkiv in kosti',
+      'Krepitev imunskega sistema',
+      'Izboljšan metabolizem'
+    ],
+    indications: [
+      'Kronične bolečine v hrbtenici in sklepih',
+      'Poškodbe mišic, tetiv in ligamentov',
+      'Artritis in revmatizem',
+      'Osteoporoza (pospešuje mineralizacijo kosti)',
+      'Postoperativna stanja in zvini',
+      'Nevralgije in migrene'
+    ],
+    contraindications: [
+      'Srčni spodbujevalnik (pacemaker)',
+      'Nosečnost',
+      'Krvavitve',
+      'Hipotenzija (nizek krvni tlak)',
+      'Maligna obolenja',
+      'Tuberkuloza'
+    ],
     price: 30,
     duration: 20
   },
@@ -79,32 +152,68 @@ Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za
     slug: 'laserska-terapija',
     name: 'Laserska Terapija',
     shortDescription: 'Neinvazivna metoda z laserskimi žarki za pospešitev celjenja.',
-    longDescription: `Laserska terapija je neinvazivna metoda zdravljenja, ki s pomočjo laserskih svetlobnih žarkov stimulira človeško tkivo za pospešitev celjenja, zmanjševanje bolečine ter pospeševanje regeneracije. Popolnoma neboleča metoda.`,
-    howItWorks: `Laserski žarki v celicah spodbudijo tvorbo adenozin trifosfata (ATP), ki je osnovni vir energije za celice. Poveča se celična presnova in aktivirajo procesi regeneracije.`,
-    benefits: ['Zmanjšanje bolečine', 'Zmanjšanje vnetja', 'Pospešeno celjenje ran', 'Regeneracija tkiv', 'Zmanjšanje oteklin', 'Izboljšana prekrvavitev'],
-    indications: ['Akutne in kronične bolečine', 'Športne poškodbe', 'Vnetja tetiv', 'Artritis', 'Celjenje ran', 'Brazgotine'],
+    longDescription: `Laserska terapija je neinvazivna metoda zdravljenja, ki s pomočjo laserskih svetlobnih žarkov stimulira človeško tkivo za pospešitev celjenja, zmanjševanje bolečine ter pospeševanje regeneracije. Metoda je popolnoma neboleča in varna.
+
+Laserska svetloba prodre globoko v tkivo in sproži biokemične reakcije na celični ravni.`,
+    howItWorks: `Laserski žarki v celicah (v mitohondrijih) spodbudijo tvorbo adenozin trifosfata (ATP), ki je glavni vir energije za celice. Ta energija se porabi za hitrejšo delitev celic in regeneracijo tkiva, zmanjšanje vnetnih procesov in hitrejše celjenje ran.`,
+    benefits: [
+      'Hitro zmanjšanje bolečine in vnetja',
+      'Pospešeno celjenje ran in brazgotin',
+      'Regeneracija mehkih tkiv (mišice, ligamenti)',
+      'Zmanjšanje oteklin in edemov',
+      'Izboljšana mikrocirkulacija',
+      'Spodbujanje delovanja imunskega sistema'
+    ],
+    indications: [
+      'Akutne in kronične bolečine',
+      'Športne poškodbe (zvini, raztrganine)',
+      'Vnetja tetiv (tendinitis)',
+      'Artritis in revmatična obolenja',
+      'Razjede na koži in rane',
+      'Postoperativne brazgotine'
+    ],
+    contraindications: [
+      'Oči (direktno obsevanje)',
+      'Maligna obolenja',
+      'Področje ščitnice',
+      'Nosečnost (predel trebuha)',
+      'Epilepsija'
+    ],
     price: 10,
     duration: 10
-  },
-  'manualna-terapija': {
-    slug: 'manualna-terapija',
-    name: 'Manualna Terapija',
-    shortDescription: 'Strokovne ročne tehnike za sproščanje napetosti in izboljšanje gibljivosti.',
-    longDescription: `Manualna terapija je strokovna tehnika, pri kateri terapevt z rokami obvladuje, sprošča in mobilizira mišice, sklepe in mehka tkiva. Primerna za vse vrste mišično-skeletnih težav. V ORI 369 jo kombiniramo z naprednimi tehnologijami.`,
-    howItWorks: `Manualna terapija deluje na več ravneh: mehanski učinek na mišice in sklepe, nevrološki učinek na živčni sistem ter biokemični učinek na presnovne procese.`,
-    benefits: ['Sproščanje mišičnih napetosti', 'Izboljšanje gibljivosti sklepov', 'Zmanjšanje bolečine', 'Odprava blokad', 'Izboljšana drža', 'Boljša cirkulacija'],
-    indications: ['Bolečine v hrbtenici', 'Mišične napetosti', 'Omejeno gibanje sklepov', 'Glavoboli', 'Športne poškodbe', 'Postoperativna rehabilitacija'],
-    price: 30,
-    duration: 20
   },
   'mis': {
     slug: 'mis',
     name: 'MIS - Magnetna Indukcijska Stimulacija',
     shortDescription: 'Revolucionarna terapija z magnetnim poljem visoke intenzivnosti.',
-    longDescription: `Magnetna indukcijska stimulacija (MIS) je revolucionarna terapija, ki z inovativnim pristopom zagotavlja izjemne rezultate. Nezdrave celice napolni in stimulira z izboljšano oksigenacijo in cirkulacijo ter jim povrne normalno delovanje.`,
-    howItWorks: `MIS uporablja pulzirajoče magnetno polje visoke intenzivnosti, ki ustvarja električne tokove v nevronih in omogoča mišično stimulacijo ter sproži akcijski potencial za učinkovito terapijo.`,
-    benefits: ['Hiter zdravilni učinek', 'Neboleč postopek', 'Neinvazivna terapija', 'Dolgotrajni rezultati', 'Zmanjšanje vnetij in bolečin', 'Skrajšan čas okrevanja'],
-    indications: ['Kronična bolečinska stanja', 'Plantarna fasciitis', 'Tendonitis', 'Kronične tendinopatije', 'Rehabilitacija', 'Mišična regeneracija'],
+    longDescription: `Magnetna indukcijska stimulacija (MIS) je revolucionarna terapija, ki z inovativnim pristopom zagotavlja izjemne rezultate. Nezdrave celice napolni in stimulira z izboljšano oksigenacijo in cirkulacijo ter jim povrne normalno delovanje.
+
+S svojim edinstvenim ekscitativnim učinkom se MIS bistveno razlikuje od tradicionalnih terapij, saj uporablja pulzirajoče magnetno polje visoke intenzivnosti.`,
+    howItWorks: `Jakosti magnetnega polja ustvarjajo električne tokove v nevronih, kar omogoča globoko mišično stimulacijo. Ko elektromagnetni tok doseže določeno vrednost, se sproži akcijski potencial, ki povzroči krčenje mišic in spodbuja regeneracijo na nivoju, ki ga klasične metode ne dosežejo.`,
+    benefits: [
+      'Hiter in dolgotrajen zdravilni učinek',
+      'Neboleč in neinvaziven postopek',
+      'Globoka mišična stimulacija',
+      'Izboljšana oksigenacija in cirkulacija',
+      'Zmanjšanje toksinov in vnetij',
+      'Funkcionalna optimizacija telesa'
+    ],
+    indications: [
+      'Kronična bolečinska stanja',
+      'Plantarna fasciitis',
+      'Tendonitis in tendinopatije',
+      'Športne poškodbe',
+      'Mišična regeneracija in atrofija',
+      'Bolečine v hrbtu in sklepih'
+    ],
+    contraindications: [
+      'Srčni spodbujevalnik (pacemaker)',
+      'Kovinski implanti v predelu aplikacije',
+      'Nosečnost',
+      'Maligna obolenja',
+      'Krvavitve',
+      'Aktivne medicinske implantirane naprave'
+    ],
     price: 30,
     duration: 20
   },
@@ -112,10 +221,58 @@ Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za
     slug: 'cupping',
     name: 'Cupping - Terapija z Ventuzami',
     shortDescription: 'Manualna tehnika z ventuzami za pospešitev regeneracije.',
-    longDescription: `Terapija z ventuzami (cupping) je manualna tehnika, ki s pomočjo majhnih skodelic pospešuje celjenje, regeneracijo in lajša bolečine. Vakuum dvigne kožo in podkožno tkivo ter poveča pretok krvi.`,
-    howItWorks: `Ventuze ustvarijo negativni pritisk na koži, kar povzroči lokalno vazodilatacijo in povečan pretok krvi. To spodbuja regeneracijo tkiv in sproščanje mišičnih vozlov.`,
-    benefits: ['Sproščanje mišičnih napetosti', 'Izboljšana cirkulacija', 'Lajšanje bolečin', 'Pospeševanje regeneracije', 'Detoksikacija', 'Zmanjšanje vnetij'],
-    indications: ['Mišične napetosti', 'Bolečine v hrbtu', 'Kronična utrujenost', 'Športne poškodbe', 'Celulitis'],
+    longDescription: `Terapija z ventuzami (cupping), je manualna tehnika, ki s pomočjo majhnih skodelic (ventuz) pospešuje celjenje, regeneracijo in lajša simptome bolečih stanj. Ventuze terapevt namesti na kožo tako, da jo ta posesa vase, ustvari vakuum in poveča cirkulacijo. V terapijji se za cupping uporabljajo silikonske, plastične ali steklene ventuze, skozi katere je moč videti kožno tkivo. Terapija z ventuzami se najpogosteje uporablja za lajšanje simptomov kroničnih bolečin, fibromialgije, bolečin v križu in vratu ter nevralgičnih bolečin.
+
+Terapija z ventuzami je najstarejša tradicionalna kitajska medicinska metoda. Njena uporaba se omenja že v času egipčanskih civilizacij. Danes je to zelo priljubljena metoda v različnih vejah medicine. Alternativno ime cupping-a je Hijama, kar v arabščini pomeni sesati.`,
+    howItWorks: `Terapija z vantuzami lahko pospešuje izmenjavo snovi potrebnih za regeneracijo, ter odvod odpadnih snovi in toksinov iz človekovega telesa. Terapija z ventuzami lahko deluje na dva načina:
+
+• Mokra tehnika: Z majhnim prerezom na koži omogočimo takojšnjo odstranitev toksinov skupaj z odpadno krvjo. Na mesto lahko pride sveža kri obogatena s kisikom in hranljivimi sestavinami za tkivo. Prav tako se na ta račun zmanjša oteklina, bolečina in mišična napetost.
+• Periferni živčni sistem: Ventuze, ki jih apliciramo na kožo, vzdražijo periferne živce, ti pa pošljejo signale v možgane. Možgani naj bi v tem primeru reagirali po principu t. i. »teorije vrat« zmanjševanja in blokiranja bolečinskih dražljajev in na ta način regulirali bolečino.`,
+    benefits: [
+      'Zmanjšan občutek bolečine',
+      'Zmanjšano vnetje',
+      'Izboljšana cirkulacija',
+      'Hitrejša regeneracija tkiva',
+      'Hitrejše celjenje poškodovanega tkiva',
+      'Izboljšano delovanje imunskega sistema',
+      'Sprostitev celega telesa',
+      'Boljše delovanje organov',
+      'Odprava škodljivih snovi iz telesa',
+      'Izboljšuje metabolizem kože in delovanje žlez',
+      'Spodbuja limfno drenažo'
+    ],
+    indications: [
+      'Kronične bolečine',
+      'Bolečine v vratu in križu',
+      'Hernija diska',
+      'Glavoboli in migrene',
+      'Različni utesnitveni sindromi (karpalni kanal, utesnitev rame...)',
+      'Vnetna stanja',
+      'Otekline',
+      'Boleče mišice',
+      'Triger točke',
+      'Mišični spazmi in mišična zakrčenost',
+      'Artritis in spondilitis',
+      'Oslabljena gibljivosti sklepov',
+      'Športne poškodbe',
+      'Hipertenzija',
+      'Oslabljena limfa in krvni obtok',
+      'Stres in napetost',
+      'Astma in bronhitis',
+      'Težave s prebavo'
+    ],
+    contraindications: [
+      'Posamezniki s hemofilijo ali anemijo',
+      'Posamezniki s srčnim spodbujevalnikom (pacemaker)',
+      'Starejše osebe in otroci',
+      'Nosečnice in ženske v času menstruacije',
+      'Področje zelo suhe, razpokane kože ali opeklin',
+      'Področje kožnih ran',
+      'Posamezniki s srčno-žilnimi boleznimi',
+      'Limfedemi in hematomi nepojasnjenega vzroka',
+      'Področje zlomljene kosti ali izpahnjenega sklepa',
+      'Mišična distrofija'
+    ],
     price: 30,
     duration: 30
   },
@@ -123,11 +280,34 @@ Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za
     slug: 'dryneedeling',
     name: 'Dry Needling',
     shortDescription: 'Fizioterapevtska metoda s tankimi iglami za sproščanje prožilnih točk.',
-    longDescription: `Dry needling je invazivna fizioterapevtska metoda, ki s penetracijo tankih igel stimulira tkivo in sproža proces celjenja. Igla se vstavi neposredno v prožilno točko za sproščanje napetosti.`,
-    howItWorks: `Igla prodre v mišično tkivo in stimulira prožilno točko. To povzroči refleksno sprostitev mišice, povečan lokalni pretok krvi in sproščanje endorfinov.`,
-    benefits: ['Sproščanje prožilnih točk', 'Takojšnje zmanjšanje bolečine', 'Povečana gibljivost', 'Izboljšana funkcija mišic', 'Dolgotrajna učinkovitost'],
-    indications: ['Kronične mišične bolečine', 'Miofascialni sindrom', 'Napetostni glavoboli', 'Bolečine v vratu in hrbtu', 'Športne poškodbe'],
-    contraindications: ['Motnje strjevanja krvi', 'Jemanje antikoagulantov', 'Lokalna okužba', 'Nosečnost (določena področja)'],
+    longDescription: `Dry needling je invazivna fizioterapevtska metoda, ki s penetracijo tankih igel stimulira tkivo in sproža proces celjenja. Igla se vstavi neposredno v prožilno točko (mišični vozel) za sproščanje kronične napetosti.
+
+V ORI 369 to metodo izvajamo strokovno in varno, z uporabo sterilnih igel za enkratno uporabo.`,
+    howItWorks: `Igla prodre v mišično tkivo in stimulira prožilno točko. To povzroči refleksno sprostitev mišice (lokalni odziv), povečan lokalni pretok krvi in sproščanje endorfinov. Metoda deluje neposredno na izvor bolečine v mišici.`,
+    benefits: [
+      'Sproščanje kroničnih mišičnih vozlov (prožilnih točk)',
+      'Takojšnje zmanjšanje bolečine',
+      'Povečana gibljivost in fleksibilnost',
+      'Izboljšana funkcija mišic',
+      'Zmanjšanje vnetnih procesov',
+      'Dolgotrajna učinkovitost pri kroničnih stanjih'
+    ],
+    indications: [
+      'Kronične mišične bolečine',
+      'Miofascialni bolečinski sindrom',
+      'Napetostni glavoboli',
+      'Bolečine v vratu, ramenih in hrbtu',
+      'Športne poškodbe',
+      'Triger točke'
+    ],
+    contraindications: [
+      'Motnje strjevanja krvi',
+      'Jemanje antikoagulantov (zdravil proti strjevanju krvi)',
+      'Lokalna okužba kože',
+      'Nosečnost (določena področja)',
+      'Strah pred iglami',
+      'Maligna obolenja'
+    ],
     price: 30,
     duration: 30
   },
@@ -135,10 +315,35 @@ Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za
     slug: 'media-taping',
     name: 'Medi Taping',
     shortDescription: 'Elastični trakovi za podporo mišicam in zmanjšanje bolečin.',
-    longDescription: `Medi taping je metoda zdravljenja z aplikacijo samolepilnih elastičnih trakov na kožo za odpravljanje bolečin, oteklin in podporo mišicam. Trakovi posnemajo elastičnost kože in omogočajo normalno gibanje.`,
-    howItWorks: `Elastični trakovi dvignejo kožo in ustvarijo prostor med kožo in mišičnim tkivom. To izboljša cirkulacijo krvi in limfe ter zmanjšuje pritisk na bolečinske receptorje.`,
-    benefits: ['Zmanjšanje bolečine', 'Zmanjšanje oteklin', 'Podpora mišicam', 'Izboljšana cirkulacija', 'Omogoča normalno gibanje', 'Podpora rehabilitaciji'],
-    indications: ['Športne poškodbe', 'Mišične napetosti', 'Otekline', 'Limfedem', 'Bolečine v sklepih', 'Preventiva poškodb'],
+    longDescription: `Medi taping je metoda zdravljenja z aplikacijo samolepilnih elastičnih trakov na kožo za odpravljanje bolečin, oteklin in podporo mišicam. Trakovi posnemajo elastičnost kože in omogočajo normalno gibanje, hkrati pa nudijo terapevtski učinek 24 ur na dan.
+
+Fizični učinek dosežemo s kompresijo ali dekompresijo, kar vpliva na fascijo in limfni sistem.`,
+    howItWorks: `Elastični trakovi rahlo dvignejo kožo in ustvarijo prostor med kožo in mišičnim tkivom. To izboljša cirkulacijo krvi in limfe, kar pospešuje odvajanje odpadnih snovi in zmanjšuje pritisk na bolečinske receptorje.`,
+    benefits: [
+      'Zmanjšanje bolečine in oteklin',
+      'Podpora mišicam, sklepom in ligamentom',
+      'Izboljšana koordinacija in stabilnost',
+      'Nudi preventivo pred poškodbami',
+      'Zmanjšuje menstrualne bolečine',
+      'Omogoča normalno gibanje med rehabilitacijo'
+    ],
+    indications: [
+      'Športne poškodbe (zvini, raztrganine)',
+      'Mišične napetosti in bolečine',
+      'Otekline in limfedemi',
+      'Bolečine v sklepih (npr. artroza kolena)',
+      'Vnetja tetiv (ahilova tetiva, teniški komolec)',
+      'Glavoboli',
+      'Preventiva pri športnih aktivnostih'
+    ],
+    contraindications: [
+      'Alergija na lepilo traku',
+      'Odprte rane ali krastasta koža',
+      'Globoka venska tromboza',
+      'Maligna obolenja na mestu aplikacije',
+      'Zelo občutljiva ali vneta koža',
+      'Diabetes (previdnost)'
+    ],
     price: 10,
     duration: 15
   },
@@ -146,10 +351,34 @@ Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za
     slug: 'iteracare',
     name: 'iTeraCare',
     shortDescription: 'Teraherčna terapija za globinsko regeneracijo in harmonizacijo.',
-    longDescription: `iTeraCare prinaša terapevtsko revolucijo z teraherčnimi valovi, ki lahko bistveno izboljšajo zdravje in kakovost življenja. S pomočjo terahertz valov, svetlobne vibracije in delovanjem globoko v telo vnese novo vibracijo.`,
-    howItWorks: `Teraherz elektromagnetni val deluje v frekvenčnem pasu normalne celice. Svetloba vstopa direktno v visceralni predel, doseže kostni mozeg ter globinsko odstranjuje hlad in vlago iz telesa.`,
-    benefits: ['Protibolečinsko delovanje', 'Protivnetno delovanje', 'Izboljšana mikrocirkulacija', 'Celična regeneracija', 'Podpora imunskemu sistemu', 'Zmanjševanje stresa'],
-    indications: ['Kronične bolečine', 'Vnetna stanja', 'Kronične bolezni', 'Alergije', 'Stres', 'Splošno počutje'],
+    longDescription: `iTeraCare prinaša terapevtsko revolucijo s teraherčnimi valovi, ki lahko bistveno izboljšajo zdravje in kakovost življenja. S pomočjo terahertz valov, svetlobne vibracije in delovanjem globoko v telo vnese novo frekvenco, ki spodbuja celično regeneracijo.
+
+Teraherčni valovi prodrejo globoko v tkiva (do 20-30 cm), kjer spodbujajo pretok energije in odstranjujejo hlad ter vlago iz telesa.`,
+    howItWorks: `Teraherz elektromagnetni val deluje v frekvenčnem pasu normalnih, zdravih celic. Ko valovi prodrejo v telo, resonirajo z našimi celicami in jih aktivirajo. Hkrati svetloba vstopa direktno v visceralni predel, doseže kostni mozeg in globinsko odstranjuje energetske blokade.`,
+    benefits: [
+      'Protibolečinsko in protivnetno delovanje',
+      'Izboljšana mikrocirkulacija',
+      'Globinska celična regeneracija',
+      'Odstranjevanje toksinov in odvečne vlage',
+      'Podpora imunskemu sistemu',
+      'Zmanjševanje stresa in energetska harmonizacija'
+    ],
+    indications: [
+      'Kronične bolečine in vnetna stanja',
+      'Kronične bolezni in oslabljen imunski sistem',
+      'Alergije in kožne težave',
+      'Stres, utrujenost in energetske blokade',
+      'Splošno slabo počutje',
+      'Poškodbe tkiv'
+    ],
+    contraindications: [
+      'Kovinski implanti (direktna aplikacija čez njih)',
+      'Srčni spodbujevalnik (pacemaker)',
+      'Nosečnost',
+      'Krvavitve',
+      'Akutne infekcije',
+      'Maligna obolenja'
+    ],
     price: 20,
     duration: 20
   },
@@ -157,10 +386,24 @@ Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za
     slug: 'ao-scan',
     name: 'AO Scan',
     shortDescription: 'Biorezonančna analiza za merjenje in optimizacijo frekvenc.',
-    longDescription: `AO Scan je celovito orodje za merjenje in optimizacijo frekvenc. Komunicira s telesom prek subtilnih biofrekvenc in elektromagnetnih signalov, da prepozna področja, ki so morda v neravnovesju.`,
-    howItWorks: `Tehnologija AO Scan komunicira s telesom prek subtilnih biofrekvenc in elektromagnetnih signalov. Z opredelitvijo področij v neravnovesju lahko naredite ustrezne spremembe življenjskega sloga.`,
-    benefits: ['Celostna analiza stanja', 'Prepoznavanje neravnovesij', 'Personalizirane priporočila', 'Neinvazivna metoda', 'Hitra analiza'],
-    indications: ['Preventivna diagnostika', 'Kronična utrujenost', 'Nepojasnjena stanja', 'Optimizacija zdravja'],
+    longDescription: `AO Scan je celovito orodje za merjenje in optimizacijo frekvenc vašega telesa. Vse je energija in frekvenca; ko se frekvence spremenijo iz optimalnega stanja, se lahko pojavijo težave. AO Scan pomaga prepoznati ta neravnovesja.
+
+Program AO Scan Technology komunicira s telesom prek subtilnih biofrekvenc in elektromagnetnih signalov, da prepozna področja, ki so morda v neravnovesju.`,
+    howItWorks: `Tehnologija temelji na principu biorezonance. Naprava skenira frekvence vaših organov, tkiv in sistemov ter jih primerja z optimalnimi vrednostmi. Z opredelitvijo področij, ki potrebujejo pomoč, nato s povratnimi frekvencami optimizira vaše stanje in pomaga doseči harmonijo.`,
+    benefits: [
+      'Celostna in hitra analiza stanja telesa',
+      'Prepoznavanje frekvenčnih neravnovesij',
+      'Personalizirana poročila in priporočila',
+      'Popolnoma neinvazivna metoda',
+      'Podpora pri optimizaciji zdravja in življenjskega sloga'
+    ],
+    indications: [
+      'Preventivna diagnostika',
+      'Kronična utrujenost in pomanjkanje energije',
+      'Nepojasnjena zdravstvena stanja',
+      'Želja po celostnem razumevanju delovanja lastnega telesa',
+      'Optimizacija športnih dosežkov'
+    ],
     price: 50,
     duration: 30
   },
@@ -168,10 +411,25 @@ Poznamo dve vrsti elektrostimulacije: TENS (za zdravljenje bolečine) in FES (za
     slug: 'skalarni-valovi',
     name: 'Skalarni Valovi',
     shortDescription: 'Uravnovešanje čaker z zemeljskim elementom in skalarnimi valovi.',
-    longDescription: `Scalar Wave Cosmic Communicator Earth Element Edition izkorišča zdravilno energijo zemeljskega elementa z uporabo skalarnih valov. Naprava oddaja frekvenčni pas, ki odmeva z zemeljskim elementom in spodbuja ozemljitev, stabilnost in ravnovesje.`,
-    howItWorks: `Naprava z dvema Rodinovim navitjema oddaja močno energetsko polje skalarnih valov, ki so skrbno umerjeni za zagotavljanje čiste in močne energije zemeljskega elementa.`,
-    benefits: ['Ozemljitev', 'Stabilnost', 'Ravnovesje', 'Zmanjševanje stresa', 'Duhovna rast', 'Harmonizacija energije'],
-    indications: ['Stres', 'Anksioznost', 'Energijsko neravnovesje', 'Duhovna rast', 'Meditacija'],
+    longDescription: `Scalar Wave Cosmic Communicator Earth Element Edition izkorišča zdravilno energijo zemeljskega elementa z uporabo skalarnih valov. Ta napredna tehnologija spodbuja globoko izkušnjo ravnovesja in harmonije v telesu, umu in duhu.
+
+Skalarni valovi so skrbno umerjeni, da zagotovijo čist in močan vir energije, ki spodbuja občutek ozemljitve, stabilnosti in varnosti.`,
+    howItWorks: `Naprava z dvema močnima Rodinovim navitjema oddaja močno energetsko polje skalarnih valov. Ti valovi prodrejo globoko v tkiva, kjer spodbujajo celično regeneracijo in izboljšujejo pretok energije skozi čakre in energetske kanale, kar vodi do globoke sprostitve in harmonije.`,
+    benefits: [
+      'Globoka ozemljitev in stabilnost',
+      'Energijsko uravnoteženje čaker',
+      'Zmanjševanje stresa in anksioznosti',
+      'Spodbujanje duhovne rasti in jasnosti',
+      'Harmonizacija telesa, uma in duha',
+      'Izboljšano splošno počutje'
+    ],
+    indications: [
+      'Stres, anksioznost in nemir',
+      'Energijsko neravnovesje',
+      'Potreba po ozemljitvi in stabilnosti',
+      'Podpora pri meditaciji in duhovni rasti',
+      'Čustvena nihanja'
+    ],
     price: 35,
     duration: 30
   }

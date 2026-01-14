@@ -35,6 +35,7 @@ export interface TherapyPackage {
   includedServices: string[];
   benefits: string[];
 }
+
 export const servicesData: Record<string, ServiceDetail> = {
   'tecar-terapija': {
     slug: 'tecar-terapija',
@@ -44,8 +45,12 @@ export const servicesData: Record<string, ServiceDetail> = {
 
 S termičnim delovanjem omogoča boljšo cirkulacijo krvi, ki je ključnega pomena za celjenje v akutni fazi poškodbe. S svojim mehanizmom prav tako pospešuje dovod kisika v celicah, kar omogoča hitrejšo regeneracijo. Deluje tudi blagodejno in zmanjšuje bolečino.
 
-Čas trajanje zdravljenja s TECAR terapijo je odvisen od vrste poškodbe in bolečine. Sama terapija traja med 15 in 30 min in se pogosto kombinira z manualno terapijo in aktivnim gibanjem. Po prvi TECAR terapiji se pričakuje zmanjšanje bolečine za 20-25 % v primerjavi z začetno bolečino.`,
-    howItWorks: `TECAR terapija temelji na prenosu visoko-frekvenčne (448 kHZ) elektromagnetne energije. Deluje v kapacitivnem in rezistivnem načinu, kar omogoča ciljanje različnih globin tkiva. S termičnim učinkom spodbuja naravne procese regeneracije. S termičnim delovanjem omogoča boljšo cirkulacijo krvi, ki je ključnega pomena za celjenje v akutni fazi poškodbe.`,
+Čas trajanje zdravljenja s TECAR terapijo je odvisen od vrste poškodbe in bolečine. Sama terapija traja med 15 in 30 min in se pogosto kombinira z manualno terapijo in aktivnim gibanjem. Po prvi TECAR terapiji se pričakuje zmanjšanje bolečine za 20-25 % v primerjavi z začetno bolečino.
+
+Glavni cilj terapije je stimulacija telesu lastnih fizioloških procesov celjenja. TECAR terapija skrajša čas zdravljenja ter pozitivno vpliva na krepitev notranjih obnovitvenih sposobnosti tkiv. S termičnim delovanjem omogoča boljšo cirkulacijo krvi, ki je ključnega pomena za celjenje v akutni fazi poškodbe.`,
+    howItWorks: `TECAR terapija temelji na prenosu visoko-frekvenčne (448 kHZ) elektromagnetne energije. Deluje v kapacitivnem in rezistivnem načinu, kar omogoča ciljanje različnih globin tkiva. S termičnim učinkom spodbuja naravne procese regeneracije.
+
+Gre za neinvazivno visokofrekvenčno energijo, ki spodbuja biološke procese samoregeneracije v celicah. TECAR aparatura vključuje premično elektrodo, fiksno elektrodo in kontaktno kremo. S termičnim delovanjem omogoča boljšo cirkulacijo krvi, ki je ključnega pomena za celjenje v akutni fazi poškodbe.`,
     benefits: [
       'Zmanjšanje bolečine za 20-25% že po prvi terapiji',
       'Pospeševanje celjenja in regeneracije tkiva',
@@ -54,7 +59,11 @@ S termičnim delovanjem omogoča boljšo cirkulacijo krvi, ki je ključnega pome
       'Izboljšanje krvnega obtoka',
       'Zmanjševanje edema',
       'Podpora vnetnim procesom',
-      'Trajno blokiranje živčnih impulzov'
+      'Trajno blokiranje živčnih impulzov',
+      'Vazodilatacija z večjim lokalnim pretokom krvi',
+      'Pospeševanje resorpcije hematomov',
+      'Aktivacija presnovnih reakcij',
+      'Povečanje zmogljivosti'
     ],
     indications: [
       'Bolečine v hrbtu (specifične in nespecifične)',
@@ -68,7 +77,15 @@ S termičnim delovanjem omogoča boljšo cirkulacijo krvi, ki je ključnega pome
       'Poškodbe ligamentov (npr. SLAP lezija)',
       'Poškodba upogibovalk kolena',
       'Mišične bolečine in vnetja živcev',
-      'Poškodba zadnjih stegenskih strun'
+      'Poškodba zadnjih stegenskih strun',
+      'Tendinitisi',
+      'Adhezivni kapsulitisi',
+      'Teniški in golfski komolci',
+      'Burzitisi',
+      'Pubalgije',
+      'Zlomi in zvini',
+      'Plantarni fasciitis',
+      'Brazgotine'
     ],
     contraindications: [
       'Nosečnost (previdnost okoli trebuha)',
@@ -78,9 +95,48 @@ S termičnim delovanjem omogoča boljšo cirkulacijo krvi, ki je ključnega pome
       'Maligna stanja',
       'Vročinska stanja in infekcije',
       'Kovinski predmeti na koži in aktivne implantirane medicinske naprave',
-      'Previdnost pri rastnih conah otrok'
+      'Previdnost pri rastnih conah otrok',
+      'Srčni spodbujevalnik (pacemaker)'
     ],
     price: 40,
+    duration: 30
+  },
+  'moti-physio': {
+    slug: 'moti-physio',
+    name: 'Moti Physio - Analiza drže',
+    shortDescription: 'Natančna 3D digitalna analiza telesne drže in gibalnih vzorcev.',
+    longDescription: `Zakaj je ocena drže pomembna? Slaba telesna drža lahko povzroči ali poslabša nevromišično-skeletne simptome, kot sta bolečina v križu in vratu, ter moti našo kinetično verigo. Naprava Moti Physio omogoča natančno odkrivanje in odpravljanje neravnovesij.
+
+Mnogi športniki imajo mišični disbalans, ki jim preprečuje rezultatsko napredovanje. Naprava Moti Physio omogoča odkrivanje teh neravnovesij ter preventivno oziroma zgodnje ukrepanje. Naprava uporablja vrhunsko 3D slikovno tehnologijo za natančno merjenje in analizo drže.
+
+S stalnim spremljanjem drže otrok lahko naprava beleži spremembe skozi čas. To omogoča zgodnje ukrepanje, če pride do poslabšanja stanja, in prilagoditev terapij glede na razvoj skolioze ali drugih asimetrij. Naprava je neinvazivna, kar pomeni, da ni izpostavljenosti sevanju. To omogoča varno in pogosto spremljanje otrokove drže brez tveganja za zdravje.`,
+    howItWorks: `Naprava Moti Physio uporablja vrhunsko 3D slikovno tehnologijo za natančno merjenje in analizo drže z virtualno rekonstrukcijo (PAViR) podjetja MGsolutions. Naprava meri nevromišično-skeletne disfunkcije po 10 znanstvenih merilih, 24 telesnih orientacijskih točkah in 87 vrst asimetričnih mišičnih stanj ter jih prikaže v 3D skeletnem modelu.
+
+Na voljo sta statična in dinamična analiza (počep z rokami nad glavo, test ravnotežja na eni nogi) za natančno oceno pacientove drže in nevromišično-skeletne funkcije. Zagotavlja jasne in lahko razumljive rezultate v uporabniku prijaznem formatu.`,
+    benefits: [
+      'Zgodnje odkrivanje skolioze in asimetrij',
+      'Prepoznavanje 87 vrst asimetričnih mišičnih stanj',
+      'Natančna 3D digitalna analiza brez sevanja',
+      'Personaliziran program vadbe na podlagi rezultatov',
+      'Spremljanje napredka skozi čas',
+      'Preventiva pred poškodbami kinetične verige',
+      'Varno za otroke in odrasle',
+      'Objektivna in natančna meritev po 10 znanstvenih merilih'
+    ],
+    indications: [
+      'Bolečine v križu in vratu',
+      'Sum na skoliozo ali kifozo',
+      'Mišična neravnovesja pri športnikih',
+      'Preventivni pregledi za otroke v razvoju',
+      'Slabša telesna drža',
+      'Poškodbe kinetične verige',
+      'Asimetrija ramen ali medenice',
+      'Statične in dinamične disfunkcije'
+    ],
+    contraindications: [
+      'Ni znanih kontraindikacij (naprava je neinvazivna)'
+    ],
+    price: 120,
     duration: 30
   },
   'elektrostimulacija': {
@@ -152,6 +208,7 @@ Srednje-frekvenčna magnetna polja prehajajo skozi celotno telo in vplivajo na v
       'Aktivacija tvorbe novih krvnih žil'
     ],
     indications: [
+      'Kronične bolečine in vnetna stanja',
       'Kronične bolečine v hrbtenici in sklepih',
       'Poškodbe mišic, tetiv in ligamentov',
       'Artritis in revmatizem',
@@ -435,67 +492,44 @@ Fizični učinek dosežemo s kompresijo ali dekompresijo, kar vpliva na fascijo 
     price: 10,
     duration: 15
   },
-  'iteracare': {
-    slug: 'iteracare',
-    name: 'iTeraCare',
-    shortDescription: 'Teraherčna terapija za globinsko regeneracijo in harmonizacijo.',
-    longDescription: `iTeraCare prinaša terapevtsko revolucijo s teraherčnimi valovi, ki lahko bistveno izboljšajo zdravje in kakovost življenja. S pomočjo terahertz valov, svetlobne vibracije in delovanjem globoko v telo vnese novo frekvenco, ki spodbuja celično regeneracijo.
-
-Teraherčni valovi prodrejo globoko v tkiva (do 20-30 cm), kjer spodbujajo pretok energije, izboljšajo prekrvavitev in pospešijo celjenje. Naprava cilja na specifična področja telesa in prinaša ciljno terapijo neposredno v globoka tkiva.`,
-    howItWorks: `Teraherz elektromagnetni val deluje v frekvenčnem pasu normalnih, zdravih celic. Ko valovi prodrejo v telo, resonirajo z našimi celicami in jih aktivirajo. Hkrati svetloba vstopa direktno v visceralni predel, doseže kostni mozeg in globinsko odstranjuje energetske blokade ter hlad in vlago iz telesa.`,
-    benefits: [
-      'Protibolečinsko in protivnetno delovanje',
-      'Izboljšana mikrocirkulacija',
-      'Globinska celična regeneracija',
-      'Odstranjevanje toksinov in odvečne vlage',
-      'Podpora imunskemu sistemu',
-      'Zmanjševanje stresa in energetska harmonizacija',
-      'Aktivacija spečih matičnih celic'
-    ],
-    indications: [
-      'Kronične bolečine in vnetna stanja',
-      'Kronične bolezni in oslabljen imunski sistem',
-      'Alergije in kožne težave',
-      'Stres, utrujenost in energetske blokade',
-      'Splošno slabo počutje',
-      'Poškodbe tkiv',
-      'Težave s cirkulacijo'
-    ],
-    contraindications: [
-      'Kovinski implanti (direktna aplikacija čez njih)',
-      'Srčni spodbujevalnik (pacemaker)',
-      'Nosečnost',
-      'Krvavitve',
-      'Akutne infekcije',
-      'Maligna obolenja',
-      'Visoka vročina'
-    ],
-    price: 20,
-    duration: 20
-  },
   'ao-scan': {
     slug: 'ao-scan',
     name: 'AO Scan',
     shortDescription: 'Biorezonančna analiza za merjenje in optimizacijo frekvenc.',
     longDescription: `AO Scan je celovito orodje za merjenje in optimizacijo frekvenc vašega telesa. Vse je energija in frekvenca; ko se frekvence spremenijo iz optimalnega stanja, se lahko pojavijo težave. AO Scan pomaga prepoznati ta neravnovesja.
 
-Program AO Scan Technology komunicira s telesom prek subtilnih biofrekvenc in elektromagnetnih signalov, da prepozna področja, ki so morda v neravnovesju. To je izobraževalno orodje, ki vam pomaga spoznati delovanje vašega telesa.`,
-    howItWorks: `Tehnologija temelji na principu biorezonance. Naprava skenira frekvence vaših organov, tkiv in sistemov ter jih primerja z optimalnimi vrednostmi. Z opredelitvijo področij, ki potrebujejo pomoč, nato s povratnimi frekvencami optimizira vaše stanje in pomaga doseči harmonijo.`,
+Program AO Scan Technology komunicira s telesom prek subtilnih biofrekvenc in elektromagnetnih signalov, da prepozna področja, ki so morda v neravnovesju. To je izobraževalno orodje, ki vam pomaga spoznati delovanje vašega telesa. Naprava deluje na principu kvantne fizike in biorezonance, kjer vsaka celica, organ in sistem v telesu oddaja svojo edinstveno frekvenco. Ko so te frekvence v neravnovesju, AO Scan to zazna in ponudi rešitve za ponovno vzpostavitev harmonije.
+
+Naprava meri čustvena stanja, črevesno floro, hormone, toksine, težke kovine, viruse, bakterije in še veliko več. Rezultati so predstavljeni v podrobnih poročilih z barvnimi grafikoni, ki omogočajo enostavno razumevanje trenutnega stanja telesa.`,
+    howItWorks: `Tehnologija temelji na principu biorezonance. Naprava skenira frekvence vaših organov, tkiv in sistemov ter jih primerja z optimalnimi vrednostmi iz obsežne baze podatkov.
+
+Z opredelitvijo področij, ki potrebujejo pomoč, nato s povratnimi frekvencami (frekvenčno optimizacijo) pomaga telesu, da se vrne v svoje naravno stanje ravnovesja. Celoten postopek je popolnoma neinvaziven in varen, saj uporablja le subtilne elektromagnetne signale. Skeniranje se izvaja preko posebnih slušalk ali biosenzorjev.`,
     benefits: [
-      'Celostna in hitra analiza stanja telesa',
-      'Prepoznavanje frekvenčnih neravnovesij',
-      'Personalizirana poročila in priporočila',
-      'Popolnoma neinvazivna metoda',
+      'Celostna in hitra analiza stanja telesa (več kot 120.000 frekvenc)',
+      'Prepoznavanje frekvenčnih neravnovesij v realnem času',
+      'Personalizirana poročila in priporočila za optimizacijo',
+      'Popolnoma neinvazivna metoda brez sevanja',
       'Podpora pri optimizaciji zdravja in življenjskega sloga',
-      'Optimizacija čaker in meridianov'
+      'Optimizacija čaker in meridianov',
+      'Zaznavanje čustvenih stanj in blokad',
+      'Spremljanje učinkovitosti prehranskih dopolnil',
+      'Analiza prisotnosti parazitov, virusov in bakterij',
+      'Preverjanje vitaminsko-mineralnega statusa'
     ],
     indications: [
-      'Preventivna diagnostika',
+      'Preventivna diagnostika in spremljanje zdravja',
       'Kronična utrujenost in pomanjkanje energije',
-      'Nepojasnjena zdravstvena stanja',
+      'Nepojasnjena zdravstvena stanja in nelagodje',
       'Želja po celostnem razumevanju delovanja lastnega telesa',
-      'Optimizacija športnih dosežkov',
-      'Čustveno ravnovesje'
+      'Optimizacija športnih dosežkov in regeneracije',
+      'Čustveno neravnovesje in stres',
+      'Preverjanje kompatibilnosti živil in dopolnil',
+      'Alergije in intolerance'
+    ],
+    contraindications: [
+      'Srčni spodbujevalnik (pacemaker)',
+      'Nosečnost (prvo trimesečje - preventivno)',
+      'Epilepsija (posvet s terapevtom)'
     ],
     price: 50,
     duration: 30
@@ -506,27 +540,88 @@ Program AO Scan Technology komunicira s telesom prek subtilnih biofrekvenc in el
     shortDescription: 'Uravnovešanje čaker z zemeljskim elementom in skalarnimi valovi.',
     longDescription: `Scalar Wave Cosmic Communicator Earth Element Edition izkorišča zdravilno energijo zemeljskega elementa z uporabo skalarnih valov. Ta napredna tehnologija spodbuja globoko izkušnjo ravnovesja in harmonije v telesu, umu in duhu.
 
-Naprava oddaja frekvence, ki odmeva z zemeljskim elementom, kar spodbuja občutek ozemljitve, stabilnosti in varnosti. Skalarni valovi so skrbno umerjeni, da zagotovijo čist in močan vir energije.`,
-    howItWorks: `Naprava z dvema močnima Rodinovim navitjema oddaja močno energetsko polje skalarnih valov. Rodinovi oddajniki povečajo frekvenco skalarnih valov in okrepijo njihove učinke. Ti valovi prodrejo globoko v tkiva, kjer spodbujajo celično regeneracijo in izboljšujejo pretok energije skozi čakre in energetske kanale.`,
+Naprava oddaja frekvence, ki odmeva z zemeljskim elementom, kar spodbuja občutek ozemljitve, stabilnosti in varnosti. Skalarni valovi so skrbno umerjeni, da zagotovijo čist in močan vir energije, ki deluje onkraj tridimenzionalnega prostora in časa.
+
+Ta terapija je še posebej učinkovita za tiste, ki se počutijo razpršene, pod stresom ali nepovezane s svojim telesom. Skalarni valovi pomagajo pri restrukturiranju celične vode in izboljšanju medcelične komunikacije. Pomagajo pri odstranjevanju energijskih blokad in povečujejo splošno vitalnost telesa.`,
+    howItWorks: `Naprava z dvema močnima Rodinovim navitjema oddaja močno energetsko polje skalarnih valov. Rodinovi oddajniki povečajo frekvenco skalarnih valov in okrepijo njihove učinke, saj ustvarjajo torzijsko polje.
+
+Ti valovi prodrejo globoko v tkiva, kjer spodbujajo celično regeneracijo in izboljšujejo pretok energije skozi čakre in energetske kanale. Za razliko od navadnih elektromagnetnih valov, skalarni valovi ne izgubljajo moči z razdaljo in lahko prodrejo skozi kateri koli material. Skalarni valovi so informacijski valovi, ki delujejo neposredno na nivoju DNK.`,
     benefits: [
       'Globoka ozemljitev in stabilnost',
-      'Energijsko uravnoteženje čaker',
-      'Zmanjševanje stresa in anksioznosti',
-      'Spodbujanje duhovne rasti in jasnosti',
+      'Energijsko uravnoteženje čaker in aure',
+      'Zmanjševanje kroničnega stresa in anksioznosti',
+      'Spodbujanje duhovne rasti in intuitivne jasnosti',
       'Harmonizacija telesa, uma in duha',
-      'Izboljšano splošno počutje',
-      'Povečana vitalnost'
+      'Izboljšano splošno počutje in vitalnost',
+      'Povečana odpornost na elektromagnetni smog (EMF)',
+      'Izboljšana kvaliteta spanca',
+      'Restrukturiranje celične vode',
+      'Pospešena celična regeneracija'
     ],
     indications: [
-      'Stres, anksioznost in nemir',
-      'Energijsko neravnovesje',
-      'Potreba po ozemljitvi in stabilnosti',
-      'Podpora pri meditaciji in duhovni rasti',
-      'Čustvena nihanja',
-      'Slaba regeneracija'
+      'Stres, anksioznost in mentalni nemir',
+      'Energijsko neravnovesje in blokade',
+      'Potreba po ozemljitvi in notranji stabilnosti',
+      'Podpora pri meditaciji in duhovni praksi',
+      'Čustvena nihanja in izgorelost',
+      'Slaba regeneracija po bolezni',
+      'Občutljivost na okoljske frekvence',
+      'Kronična utrujenost'
+    ],
+    contraindications: [
+      'Srčni spodbujevalnik (pacemaker)',
+      'Akutne psihoze',
+      'Epilepsija'
     ],
     price: 35,
     duration: 30
+  },
+  'iteracare': {
+    slug: 'iteracare',
+    name: 'iTeraCare',
+    shortDescription: 'Teraherčna terapija za globinsko regeneracijo in harmonizacijo.',
+    longDescription: `iTeraCare prinaša terapevtsko revolucijo s teraherčnimi valovi, ki lahko bistveno izboljšajo zdravje in kakovost življenja. S pomočjo terahertz valov, svetlobne vibracije in delovanjem globoko v telo vnese novo frekvenco, ki spodbuja celično regeneracijo.
+
+Teraherčni valovi prodrejo globoko v tkiva (do 20-30 cm), kjer spodbujajo pretok energije, izboljšajo prekrvavitev in pospešijo celjenje. Naprava cilja na specifična področja telesa in prinaša ciljno terapijo neposredno v globoka tkiva, kar spodbuja samoobnovo telesa. To stimulira proizvodnjo novih, zdravih matičnih celic v kostnem mozgu.
+
+Posebnost iTeraCare je tudi možnost energitiziranja vode. Redno pitje vode TeraHertz pomaga povečati aktivnost celic, zmanjšati viskoznost krvi, uničuje proste radikale in pomaga pri razstrupljanju telesa. Voda postane "živa", mehka in lažje prehaja skozi celične membrane.`,
+    howItWorks: `Teraherz elektromagnetni val deluje v frekvenčnem pasu normalnih, zdravih celic (med infrardečo in mikrovalovno svetlobo). Ko valovi prodrejo v telo, resonirajo z našimi celicami in jih aktivirajo na nivoju jedra.
+
+Hkrati svetloba vstopa direktno v visceralni predel, doseže kostni mozeg in globinsko odstranjuje energetske blokade ter hlad in vlago iz telesa. To stimulira proizvodnjo novih, zdravih matičnih celic in pospešuje mikrocirkulacijo. Naprava uporablja tudi optični kvarc za filtriranje in krepitev valov.`,
+    benefits: [
+      'Protibolečinsko in protivnetno delovanje',
+      'Izboljšana mikrocirkulacija in limfni pretok',
+      'Globinska celična regeneracija in reparacija',
+      'Odstranjevanje toksinov in odvečne vlage (hladu)',
+      'Podpora imunskemu sistemu na celičnem nivoju',
+      'Zmanjševanje stresa in energetska harmonizacija',
+      'Aktivacija spečih matičnih celic v kostnem mozgu',
+      'Uravnavanje delovanja endokrinih žlez',
+      'Energiziranje vode za boljšo hidracijo in zdravje',
+      'Zmanjšanje viskoznosti krvi'
+    ],
+    indications: [
+      'Kronične bolečine (hrbet, kolena, sklepi)',
+      'Kronična vnetna stanja in revmatizem',
+      'Oslabljen imunski sistem in utrujenost',
+      'Alergije in različne kožne težave',
+      'Stres, mentalna izčrpanost in blokade',
+      'Splošno slabo počutje in nizka vitalnost',
+      'Poškodbe mehkih tkiv in počasno celjenje',
+      'Problemi s cirkulacijo',
+      'Potreba po razstrupljanju'
+    ],
+    contraindications: [
+      'Kovinski implanti (direktna aplikacija čez njih)',
+      'Srčni spodbujevalnik (pacemaker)',
+      'Nosečnost',
+      'Aktivne krvavitve',
+      'Akutne infekcije z visoko vročino',
+      'Maligna obolenja',
+      'Posamezniki s prirojenimi srčnimi napakami'
+    ],
+    price: 20,
+    duration: 20
   }
 };
 
@@ -535,25 +630,49 @@ export const teamData: TeamMember[] = [
     name: 'Jernej Babij',
     title: 'Ustanovitelj in terapevt',
     role: 'founder',
-    bio: 'Ustanovitelj centra ORI 369, strokovnjak za celostne terapevtske pristope.',
-    longBio: `Jernej je ustanovitelj centra ORI 369 in vodilni terapevt z bogatimi izkušnjami na področju celostnega zdravljenja. Združuje znanje naprednih terapevtskih tehnologij z globokim razumevanjem človekovega telesa in duha.
+    bio: 'Ustanovitelj Inštituta ŠNUK (Šport, Narava, Umetnost, Kultura) in centra ORI 369.',
+    longBio: `Pozdravljeni, moje ime je Jernej Babij, ustanovitelj Inštituta ŠNUK (Šport, Narava, Umetnost, Kultura), kjer podjetnikom, vodstvenemu kadru in širši javnosti ponujam usmerjanje, izobraževanje in usposabljanje o brezplačnih orodjih za izboljšanje splošnega počutja, psihičnega in fizičnega zdravja. Preko inštituta organiziram različne dogodke, kot so ledene kopeli, dihalne vaje, gibanje, zvočne terapije ter večdnevne odmike v naravi (www.wolfpack.si). Moje poslanstvo je, da ljudem ponudim praktične metode in doživetja, ki jih ponovno povežejo z njihovo pravo naravo in naravnim okoljem.
 
-V ORI 369 vodi ekipo strokovnjakov in skrbi za nenehno izboljševanje terapevtskih pristopov ter uvajanje najnovejših tehnologij za doseganje optimalnih rezultatov.`,
-    qualifications: ['Fizioterapevt', 'Certificiran TECAR terapevt', 'Specialist za manualno terapijo', 'Vodja centra ORI 369'],
-    specializations: ['TECAR terapija', 'Manualna terapija', 'Celostni pristop k zdravljenju', 'Športna rehabilitacija'],
-    phone: '+386 51 302 206'
+Pred približno desetimi leti sem se soočil z resno poškodbo, ki je nastala zaradi prekomernega forsiranja in neposlusanja svojega telesa. Ne samo fizično tudi mentalno sem večkrat zaznal, da um ki prosto skače in se vrti ne služi ampak lahko močno blokira telo in duha. To obdobje je postalo moja pomembna življenjska prelomnica, saj sem bil prisiljen raziskati, kako ponovno vzpostaviti ravnovesje v telesu. Začel sem preizkušati številne tehnike samoregulacije, da bi pomiril živčni sistem in prekinil nenehen odziv boja, bega ali zamrznitve, ki povečuje bolečino in zmanjšuje gibljivost.
+
+Moje raziskovanje me je vodilo skozi številne projekte, in vmes sem odprl tudi trgovino s športnimi dodatki, saj sem ves čas iskal, kako telo in um lahko delujeta bolj optimalno. Na tej poti pa sem doumel, da je ključno najprej obvladati osnove – dih, dotik, gibanje, pitje čiste informirane vode, način, kako in kaj jemo, predvsem lokalno in nepredelano hrano – saj so to temelji našega dobrega počutja in zdravja. Šele ko so osnove obvladane, imajo dodatki smisel, saj takrat telesu resnično lahko služijo kot podpora in ne kot nadomestek.
+
+Med drugim sem začel izvajati tudi ekspedicije v naravo in dogodke ledenih potopov. Ti dogodki niso namenjeni zgolj potapljanju v mrzlo vodo; gre za vzpostavitev globljega stika z lastnim telesom in odstranjevanje omejujočih prepričanj, ki jih ustvarja um. Ledene kopeli namreč omogočajo, da stopimo iz cone udobja, presežemo mentalne blokade in odkrijemo nove razsežnosti notranje moči in prisotnosti.
+
+V procesu raziskovanja sem vse bolj spoznaval, kako naravni pristopi in skrb za miselno ter fizično higieno omogočajo večjo umirjenost ter prisotnost v trenutku. Moje raziskovanje me je vodilo v naravo, kjer sem doživel, kako močno narava s svojimi frekvencami pomirja in vrača v ravnovesje. Ugotovil sem, da je potrebno ne le skrbeti za telesno higieno, temveč tudi za mentalno: odstranjevati miselno in fizično navlako, ki smo jo skozi leta nabrali, saj ta navlaka ovira delovanje našega uma in telesa. To je kot računalnik z odprtimi zavihki – četudi naloge ne izvajamo aktivno, še vedno trošijo procesorsko moč in omejujejo našo učinkovitost.
+
+Moja pot me je vodila tudi k ustanovitvi JB fit d.o.o., kjer se ukvarjam z oddajanjem nepremičnin, svetovanjem in usposabljanjem. V zadnjem času pa sem vso svojo energijo in strokovnost usmeril v razvoj in izvajanje sistema REVIVE, ki je namenjen celostnemu zdravju in dobremu počutju.
+
+Verjamem, da je raziskovanje teh naravnih pristopov, učenje ter prenos tega znanja na druge pomembno, saj živimo v dobi, kjer smo preplavljeni z informacijami in včasih nimamo prostora za predah. Zaradi tega postaja naše živčevje preobremenjeno, mi pa vse bolj nevrotični. Tu nastopi vloga centra ORI 369, kjer lahko posamezniki sredi urbanega okolja najdejo prostor, ki jih znova poveže z naravo, omogoči notranji mir in vrnitev k sebi.
+
+Vizija centra ORI 369:
+
+Moj najnovejši cilj v centru ORI 369 je ljudem ponuditi trenutek oddiha, priložnost za vrnitev k sebi in vzpostavitev globoke povezanosti s samim seboj. S tem namenom želim ustvariti prostor, kjer bodo ljudje ob medsebojnem razumevanju in podpori našli stik s svojim notranjim jazom. Moje poslanstvo je izboljševanje splošnega počutja in kakovosti življenja, ki ga dosežem s pomočjo gibanja, dihanja, mrzle vode, narave, simbolov, frekvenc ter moderne tehnologije, ki ljudem omogoča, da se ponovno povežejo s sabo.`,
+    qualifications: ['Ustanovitelj Inštituta ŠNUK', 'Izkušnje z ekspedicijami v naravo', 'Specialist za ledene kopeli', 'Dihalne tehnike', 'Energijske terapije', 'Vodja ekspedicij', 'Certificiran terapevt'],
+    specializations: ['Celostni pristop k zdravljenju', 'Ledene terapije', 'Dihalne vaje', 'Gibanje v naravi', 'Zvočne terapije', 'Sistem REVIVE'],
+    phone: '00386 51 302 206'
   },
   {
     name: 'Evgen Valek M.D.(M.A.)',
     title: 'Alternativni zdravnik in šaman',
     role: 'therapist',
     bio: 'Alternativni zdravnik z diplomo M.D.(M.A.) in Ifa Babalav (šaman).',
-    longBio: `Evgen Valek je alternativni zdravnik z bogato mednarodno izobrazbo in izkušnjami. Opravil je tečaj za maserja, postal Reiki mojster in Karuna Gautama mojster. Po študiju za alternativno medicino na Šri Lanki je pridobil diplomo M.D.(M.A.).
+    longBio: `Živel sem mladostniško življenje, ki ni bilo glih posuto z rožicami. Bil sem vagabund in z svojim malim kolesom dosegel marsikatero destinacijo vsa oklica me je poznala. Dokaj hitro sem se seznanil z cigareti, alkoholom, lahko drogo. Prihajam iz turističnega kraja – Podčetrtek, kjer sem tudi začel s svojo bogato kariero, ki se je začela zelo zgodaj. Že pri 15 letih sem pričel delati kot natakar in animator. Tri leta kasneje, pa sem se tudi preizkusil kot reševalec iz vode.
 
-Leta 2006 je končal študij IFA v Južni Ameriki in postal Ifa Babalav (šaman). Potoval je po svetu - od indijanskih rezervatov v Ameriki, do kulture Majev, Maurov na Novi Zelandiji in Aboriginov v Avstraliji. Vsa ta znanja in izkušnje zdaj deli v ORI 369.`,
-    qualifications: ['M.D.(M.A.) - Alternativna medicina', 'Ifa Babalav (šaman)', 'Reiki mojster', 'Karuna Gautama mojster', 'Certificiran maser', 'Hamam terapevt'],
-    specializations: ['Alternativna medicina', 'Šamanske tehnike', 'Energijsko zdravljenje', 'Celostna terapija', 'Meditacija in dihalne tehnike'],
-    phone: '+386 41 458 931'
+V tem času sem ugotovil, da imam sposobnost pomagati ljudem. To me je vodilo k temu, da sem opravil tečaj za maserja, Reiki mojstra, Karuna gautama mojstra itd. A zavedal sem se, da je potrebno še veliko več za učinkovito pomoč. Zato sem po napornem iskanju in temeljitem pogovoru z samim sabo našel študij za alternativne medicinde na Šri Lanki. Z mojo novo pridobljeno diplomo (M.D.M.A), sem lahko bolj suvereno stopil na svojo samostojno pot, ki sem jo nekaj let nadaljeval kot direktor svojega s.p.-ja. V termah Olimia sem odprl svojo prvo poslovno enoto in pričel z izvajanjem terapij, predavanji. Vozil sem goste na energetske točke in ustvarjal delavnice z lokalnimi zeliščarji. Tedanje vodstvo term Olimia me je povabilo k sodelovanju v Wellness centru, kjer sem ustvaril svoj lasten alternativni kotiček z različnimi terapijami. Odprli smo tudi prvi Hamam v Sloveniji in seveda sem bil prvi Hamam terapevt. Bil sem tudi asistent pri hoji po žerjavici, ki jo je izvajal Ladislav Medvešček pri njem sem se tudi seznanil z različnimi oblikami alternativnih tehnik zdravljenja. Tako me je pot popeljala v Južno Ameriko, kjer sem, kot najmlajši član prve Slovenske ekipe odšel na študij IFA. In leta 2006 končal, ter postal Ifa Babalav (Šaman).
+
+Kot že vsi vemo, se je potrebno ves čas izpopolnjevati in ker se sem na terapevtskem področju dokaj dobro izuril, sem želel svoje izkušnje in potenciale uporabiti tudi na področju vodenja wellness centra. Da sem lahko uspešen tudi na tem področju, sem uspel dokazati, z zaposlitvijo v wellnessih v Sloveniji in zunaj(Harmonija, Costa Pacifica, Grand hotel Donat). ravno v takšnem obdobju, ko je bilo potrebno narediti neke razvojne premike. V veselje mi je bilo delati na takšnem delovnem mestu, saj je moja organiziranost, discipliniranost, razsodnost, samoiniciativnost, ambicioznost…, lahko prišla do izraza. Tako sem vsakem izmed omenjenih Wellnessov dodal nekaj koristnih novih vidikov, kateri so jim dvignili kakovost. Leta 2009 sem sodeloval v tekmovanju naj wellnes Slovenija, kjer sem z svojo ekipo dosegel 2 mesto. Leta 2009 so me povabili, k sodelovanju z boksarsko zvezo Slovenije in sem se istega leta udeležil svetovnega prvenstva, kot zdravnik M.D.(M.A.) v Milanu. Nemirni duh in želja po iskanju nečesa, znanja, moči, dokazovanja me je vodila naprej 2010 sem odšel v Ameriko, kjer sem obiskal indijanske rezervate in se pri šamanih izobraževal v različnih ritualih. 2013 sem odšel delat na luksuzno ladjo Costa Pacifica. Od tam me je pot zanesla v Južno Ameriko, kjer sem se med drugim seznanil z Kulturo Majev. Nato v Novo Zelandijo, kjer sem delal v kliniki za kiropraktiko in se izobraževal o kulturi Maurov in se spoznaval z njihovo bogato kulturo, ritualih. Ustavil sem se še v Avstraliji obiskal tamkajšnje staroselce Aboridžine in se tudi od njih kaj naučil. Po miru, ki sem ga začutil v sebi in spoznanju, da vse, kar iščem je v meni in že vse imam, sem se odpravil v Maribor, ker sem deloval v Fizioterapiji Reha.
+
+Prišel je čas, da si izpolnim novo željo, pridobim izkušnjo, zato sem pričel z delom varnostnika pri BBR-ju. Delal sem v lokalih, objektih. Ker me je zanimalo delo varnostnika z orožjem sem se zaposlil v Aktiva varovanju. Tedanje vodstvo je v meni videlo velik potencijal in mi omogočilo napredovanje. Zelo hitro sem postal vodja, ter varnostni menedžer na področju intervencije. Postal sem tudi glavni inštuktor za strokovno usposabljanje varnostnega osebja za nošenje orožja in predavatelj v programu nacionalne poklicne kvalifikacije za varnostnike. Ker sem potreboval nove izzive sem se zaposlil v Perutnini Ptuj, kot specialist za fizično varovanje.
+
+Sedaj pa sem tukaj, ponovno med vami. Notranji mir mi ne, da miru. Zato sem se odločil, da bom svoje znanje in izkušnje delil z vami. V eni izmed mojih inicijacij sem dobil poslanstvo, da moram odpreti oči tistim, ki ne vidijo, dvignit tiste, ki so padli, da se zavedo svojega bistva, svojega telesa, svoje okolice in sprejmejo sebe kot popolno kreacijo univerzuma.
+
+Veselim se srečanja z vami, po svojih najboljših močeh vam bom pomagal poiskati odgovore, da boste bolje razumeli svoje zdravstveno stanje in dobili napotke, kako lahko bolj zdravo, suvereno, samozavestno, usmerjeno stopate po poti vašega življenja.
+
+Samo vi ste kreator vaših mislih in samo vi lahko igrate glavno vlogo v vašem filmu in samo od vas je odvisno kakšen bo zaključek vaše kreativnosti.`,
+    qualifications: ['M.D.(M.A.) - Alternativna medicina', 'Ifa Babalav (šaman)', 'Reiki mojster', 'Karuna Gautama mojster', 'Certificiran maser', 'Hamam terapevt', 'Reševalec iz vode'],
+    specializations: ['Alternativna medicina', 'Šamanske tehnike', 'Energijsko zdravljenje', 'Celostna terapija', 'Meditacija in dihalne tehnike', 'Wellnes vodenje'],
+    phone: '00386 41 458 931'
   }
 ];
 

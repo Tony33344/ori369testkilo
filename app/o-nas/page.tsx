@@ -300,16 +300,11 @@ export default function AboutPage() {
                     {t('team.qualifications')}
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {(expandedMember === index ? member.qualifications : member.qualifications.slice(0, 4)).map((qual, i) => (
+                    {member.qualifications.map((qual, i) => (
                       <span key={i} className="bg-white px-3 py-1 rounded-full text-sm text-gray-700 border border-gray-200">
                         {qual}
                       </span>
                     ))}
-                    {expandedMember !== index && member.qualifications.length > 4 && (
-                      <span className="bg-[#00B5AD]/10 px-3 py-1 rounded-full text-sm text-[#00B5AD] font-medium">
-                        +{member.qualifications.length - 4} {t('team.more')}
-                      </span>
-                    )}
                   </div>
                 </div>
                 

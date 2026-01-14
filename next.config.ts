@@ -10,6 +10,18 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/rezervacija',
+        destination: '/kontakt',
+      },
+      {
+        source: '/rezervacija/:path*',
+        destination: '/kontakt',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

@@ -34,8 +34,6 @@ function SectionRenderer({ section, blocks, lang }: any) {
       return <Packages packages={(tFor(bySection[0]) as any)?.packages || []} />;
     case "packagesPreview":
       return <PackagesPreview packages={(tFor(bySection[0]) as any)?.packages || []} />;
-    case "testimonials":
-      return <Testimonials testimonials={(tFor(bySection[0]) as any)?.items || []} />;
     case "richText":
       return (
         <div className="container mx-auto px-4 py-12">

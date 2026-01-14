@@ -137,17 +137,6 @@ export default function ContactPage() {
             </div>
           </div>
 
-          <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-6 text-center">
-            <p className="text-blue-800 mb-4">
-              {t('contact.bookMessage')}
-            </p>
-            <a
-              href="/rezervacija"
-              className="inline-block px-8 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
-            >
-              {t('contact.bookNow')}
-            </a>
-          </div>
         </div>
       </div>
     </div>

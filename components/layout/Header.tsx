@@ -5,7 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
-import CartButton from '@/components/CartButton';
 import { supabase } from '@/lib/supabase';
 import { signOut } from '@/lib/auth';
 import { useLanguage } from '@/lib/i18n';
@@ -79,9 +78,6 @@ export default function Header() {
     { name: t('nav.therapies'), href: '/terapije' },
     { name: t('nav.packages'), href: '/paketi' },
     { name: 'MotioScan', href: '/motioscan' },
-    { name: 'Trgovina', href: '/trgovina' },
-    { name: t('nav.booking'), href: '/rezervacija' },
-    { name: 'Mediji', href: '/mediji' },
     { name: t('nav.contact'), href: '/kontakt' },
   ];
 
@@ -141,8 +137,6 @@ export default function Header() {
               </Link>
             ))}
             
-            <CartButton />
-            
             {user ? (
               <div className="flex items-center space-x-4">
                 <Link
@@ -158,14 +152,7 @@ export default function Header() {
                   {t('nav.logout')}
                 </button>
               </div>
-            ) : (
-              <Link
-                href="/prijava"
-                className="px-6 py-2 text-sm font-medium text-white bg-[#00B5AD] rounded-lg hover:bg-[#009891] transition-colors"
-              >
-                {t('nav.login')}
-              </Link>
-            )}
+            ) : null}
           </div>
 
           {/* Mobile menu button */}
@@ -217,15 +204,7 @@ export default function Header() {
                     {t('nav.logout')}
                   </button>
                 </>
-              ) : (
-                <Link
-                  href="/prijava"
-                  onClick={() => setIsOpen(false)}
-                  className="block px-6 py-2 text-base font-medium text-white bg-[#00B5AD] rounded-lg hover:bg-[#009891] text-center"
-                >
-                  {t('nav.login')}
-                </Link>
-              )}
+              ) : null}
             </div>
           </div>
         )}

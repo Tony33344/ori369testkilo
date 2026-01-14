@@ -487,6 +487,31 @@
     "contactUs": "Contact Us",
     "frequencyBalance": "Frequencies of Balance"
   },
+  "therapyDetail": {
+    "backToTherapies": "Back to all therapies",
+    "howItWorks": "How does it work?",
+    "benefits": "Therapy Benefits",
+    "indications": "Indications - When is therapy suitable?",
+    "contraindications": "Contraindications - When is therapy not suitable?",
+    "priceAndDuration": "Price and Duration",
+    "price": "Price",
+    "duration": "Duration",
+    "ctaTitle": "Take the first step to a healthier and more balanced life",
+    "ctaSubtitle": "Book your appointment today and start your journey to better well-being.",
+    "bookAppointment": "Book Appointment",
+    "contactUs": "Contact Us",
+    "discoverOther": "Discover other therapies",
+    "allTherapies": "All therapies →"
+  },
+  "team": {
+    "title": "Our Team",
+    "subtitle": "Meet the experts who care for your health and well-being",
+    "qualifications": "Qualifications",
+    "specializations": "Specializations",
+    "readMore": "More about me",
+    "hideDetails": "Hide details",
+    "more": "more"
+  },
   "pricing": {
     "title": "Service Pricing",
     "subtitle": "Transparent prices for all our therapeutic services and packages",

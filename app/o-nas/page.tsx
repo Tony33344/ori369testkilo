@@ -21,6 +21,7 @@ const THERAPY_IMAGES = [
 export default function AboutPage() {
   const { t } = useLanguage();
   const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+  const [expandedMember, setExpandedMember] = useState<number | null>(null);
 
   return (
     <div className="min-h-screen bg-white">
@@ -248,9 +249,9 @@ export default function AboutPage() {
       <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4">Naša ekipa</h2>
+            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4">{t('team.title')}</h2>
             <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-              Spoznajte strokovnjake, ki skrbijo za vaše zdravje in dobro počutje
+              {t('team.subtitle')}
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -266,19 +267,66 @@ export default function AboutPage() {
                   </div>
                 </div>
                 <p className="text-gray-600 mb-4">{member.bio}</p>
+                
+                {/* Expandable Long Bio */}
+                {expandedMember === index && (
+                  <div className="mb-4 p-4 bg-white rounded-lg border border-gray-200">
+                    <p className="text-gray-700 whitespace-pre-line text-sm leading-relaxed">
+                      {member.longBio}
+                    </p>
+                  </div>
+                )}
+                
+                <button
+                  onClick={() => setExpandedMember(expandedMember === index ? null : index)}
+                  className="mb-4 flex items-center gap-2 text-[#00B5AD] hover:text-[#009891] font-medium transition-colors"
+                >
+                  {expandedMember === index ? (
+                    <>
+                      <ChevronUp size={18} />
+                      {t('team.hideDetails')}
+                    </>
+                  ) : (
+                    <>
+                      <ChevronDown size={18} />
+                      {t('team.readMore')}
+                    </>
+                  )}
+                </button>
+                
                 <div className="mb-4">
                   <h4 className="font-semibold text-black mb-2 flex items-center gap-2">
                     <Award size={18} className="text-[#00B5AD]" />
-                    Kvalifikacije
+                    {t('team.qualifications')}
                   </h4>
                   <div className="flex flex-wrap gap-2">
-                    {member.qualifications.slice(0, 4).map((qual, i) => (
+                    {(expandedMember === index ? member.qualifications : member.qualifications.slice(0, 4)).map((qual, i) => (
                       <span key={i} className="bg-white px-3 py-1 rounded-full text-sm text-gray-700 border border-gray-200">
                         {qual}
                       </span>
                     ))}
+                    {expandedMember !== index && member.qualifications.length > 4 && (
+                      <span className="bg-[#00B5AD]/10 px-3 py-1 rounded-full text-sm text-[#00B5AD] font-medium">
+                        +{member.qualifications.length - 4} {t('team.more')}
+                      </span>
+                    )}
                   </div>
                 </div>
+                
+                {/* Specializations - shown when expanded */}
+                {expandedMember === index && member.specializations && (
+                  <div className="mb-4">
+                    <h4 className="font-semibold text-black mb-2">{t('team.specializations')}</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {member.specializations.map((spec, i) => (
+                        <span key={i} className="bg-[#00B5AD]/10 px-3 py-1 rounded-full text-sm text-[#00B5AD]">
+                          {spec}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
+                
                 <div className="flex items-center gap-2 text-gray-600">
                   <Phone size={16} className="text-[#00B5AD]" />
                   <a href={`tel:${member.phone}`} className="hover:text-[#00B5AD] transition-colors">

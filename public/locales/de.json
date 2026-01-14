@@ -302,5 +302,48 @@
     "total": "Gesamt",
     "checkout": "Zur Kasse",
     "remove": "Entfernen"
+  },
+  "therapyDetail": {
+    "backToTherapies": "Zurück zu allen Therapien",
+    "howItWorks": "Wie funktioniert es?",
+    "benefits": "Therapievorteile",
+    "indications": "Indikationen - Wann ist die Therapie geeignet?",
+    "contraindications": "Kontraindikationen - Wann ist die Therapie nicht geeignet?",
+    "priceAndDuration": "Preis und Dauer",
+    "price": "Preis",
+    "duration": "Dauer",
+    "ctaTitle": "Machen Sie den ersten Schritt zu einem gesünderen und ausgeglicheneren Leben",
+    "ctaSubtitle": "Buchen Sie noch heute Ihren Termin und beginnen Sie Ihren Weg zu besserem Wohlbefinden.",
+    "bookAppointment": "Termin buchen",
+    "contactUs": "Kontaktieren Sie uns",
+    "discoverOther": "Entdecken Sie andere Therapien",
+    "allTherapies": "Alle Therapien →"
+  },
+  "team": {
+    "title": "Unser Team",
+    "subtitle": "Lernen Sie die Experten kennen, die sich um Ihre Gesundheit und Ihr Wohlbefinden kümmern",
+    "qualifications": "Qualifikationen",
+    "specializations": "Spezialisierungen",
+    "readMore": "Mehr über mich",
+    "hideDetails": "Details ausblenden",
+    "more": "mehr"
+  },
+  "pricing": {
+    "title": "Preisliste",
+    "subtitle": "Transparente Preise für alle unsere therapeutischen Dienstleistungen und Pakete",
+    "individualTherapies": "Einzelne Therapien",
+    "individualPrices": "Preise für einzelne Therapien und Dienstleistungen",
+    "questionsTitle": "Haben Sie Fragen zu Preisen oder Dienstleistungen?",
+    "questionsSubtitle": "Unser Team steht Ihnen zur Verfügung, um Ihre Fragen zu beantworten.",
+    "bookAppointment": "Termin buchen",
+    "contactUs": "Kontaktieren Sie uns"
+  },
+  "about": {
+    "title": "Über uns",
+    "subtitle": "Lernen Sie ORI 369 kennen",
+    "ctaTitle": "Bereit für eine Veränderung?",
+    "ctaSubtitle": "Schließen Sie sich vielen an, die bereits den Unterschied mit unserem fortschrittlichen Ansatz gespürt haben.",
+    "bookAppointment": "Termin buchen",
+    "contactUs": "Kontaktieren Sie uns"
   }
 }

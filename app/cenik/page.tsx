@@ -9,7 +9,7 @@ import { getDataForLanguage } from '@/lib/data-loader';
 import { packagesData, individualPrices } from '@/lib/servicesData';
 
 export default function PricingPage() {
-  const { language } = useLanguage();
+  const { language, t } = useLanguage();
   const data = getDataForLanguage(language);
 
   return (
@@ -23,10 +23,10 @@ export default function PricingPage() {
           className="text-center mb-16"
         >
           <h1 className="text-4xl md:text-6xl font-bold text-black mb-4 tracking-wide">
-            Cenik storitev
+            {t('pricing.title')}
           </h1>
           <p className="text-xl text-gray-700 max-w-3xl mx-auto">
-            Transparentne cene za vse naše terapevtske storitve in pakete
+            {t('pricing.subtitle')}
           </p>
         </motion.div>
 
@@ -376,10 +376,10 @@ export default function PricingPage() {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-              Posamezne terapije
+              {t('pricing.individualTherapies') || 'Posamezne terapije'}
             </h2>
             <p className="text-xl text-gray-600">
-              Cene posameznih terapij in storitev
+              {t('pricing.individualPrices') || 'Cene posameznih terapij in storitev'}
             </p>
           </div>
 
@@ -413,24 +413,23 @@ export default function PricingPage() {
           className="text-center mt-16 bg-white rounded-2xl shadow-lg p-8"
         >
           <h3 className="text-2xl font-bold text-black mb-4">
-            Imate vprašanja o cenah ali storitvah?
+            {t('pricing.questionsTitle')}
           </h3>
           <p className="text-gray-700 mb-6 max-w-2xl mx-auto">
-            Naša ekipa je na voljo za odgovore na vaša vprašanja in pomoč pri izbiri 
-            najprimernejše terapije ali paketa za vaše potrebe.
+            {t('pricing.questionsSubtitle')}
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/kontakt"
               className="px-8 py-3 bg-black hover:bg-gray-800 text-white font-semibold rounded-lg transition-all duration-200"
             >
-              Kontaktirajte nas
+              {t('pricing.contactUs')}
             </Link>
             <Link
               href="/rezervacija"
               className="px-8 py-3 bg-[#00B5AD] hover:bg-[#009891] text-white font-semibold rounded-lg transition-all duration-200"
             >
-              Rezervirajte termin
+              {t('pricing.bookAppointment')}
             </Link>
           </div>
         </motion.div>

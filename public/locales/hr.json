@@ -302,5 +302,48 @@
     "total": "Ukupno",
     "checkout": "Blagajna",
     "remove": "Ukloni"
+  },
+  "therapyDetail": {
+    "backToTherapies": "Natrag na sve terapije",
+    "howItWorks": "Kako djeluje?",
+    "benefits": "Koristi terapije",
+    "indications": "Indikacije - Kada je terapija prikladna?",
+    "contraindications": "Kontraindikacije - Kada terapija nije prikladna?",
+    "priceAndDuration": "Cijena i trajanje",
+    "price": "Cijena",
+    "duration": "Trajanje",
+    "ctaTitle": "Napravite prvi korak prema zdravijem i uravnoteženijem životu",
+    "ctaSubtitle": "Rezervirajte svoj termin danas i započnite put do boljeg osjećaja.",
+    "bookAppointment": "Rezerviraj termin",
+    "contactUs": "Kontaktirajte nas",
+    "discoverOther": "Otkrijte i druge terapije",
+    "allTherapies": "Sve terapije →"
+  },
+  "team": {
+    "title": "Naš tim",
+    "subtitle": "Upoznajte stručnjake koji brinu o vašem zdravlju i dobrobiti",
+    "qualifications": "Kvalifikacije",
+    "specializations": "Specijalizacije",
+    "readMore": "Više o meni",
+    "hideDetails": "Sakrij detalje",
+    "more": "više"
+  },
+  "pricing": {
+    "title": "Cjenik usluga",
+    "subtitle": "Transparentne cijene za sve naše terapeutske usluge i pakete",
+    "individualTherapies": "Pojedinačne terapije",
+    "individualPrices": "Cijene pojedinačnih terapija i usluga",
+    "questionsTitle": "Imate pitanja o cijenama ili uslugama?",
+    "questionsSubtitle": "Naš tim je na raspolaganju za odgovore na vaša pitanja.",
+    "bookAppointment": "Rezerviraj termin",
+    "contactUs": "Kontaktirajte nas"
+  },
+  "about": {
+    "title": "O nama",
+    "subtitle": "Upoznajte ORI 369",
+    "ctaTitle": "Spremni za promjenu?",
+    "ctaSubtitle": "Pridružite se mnogima koji su već osjetili razliku s našim naprednim pristupom.",
+    "bookAppointment": "Rezerviraj termin",
+    "contactUs": "Kontaktirajte nas"
   }
 }

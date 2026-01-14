@@ -427,6 +427,31 @@
     "contactUs": "Kontaktirajte nas",
     "frequencyBalance": "Frekvence ravnovesja"
   },
+  "therapyDetail": {
+    "backToTherapies": "Nazaj na vse terapije",
+    "howItWorks": "Kako deluje?",
+    "benefits": "Koristi terapije",
+    "indications": "Indikacije - Kdaj je terapija primerna?",
+    "contraindications": "Kontraindikacije - Kdaj terapija ni primerna?",
+    "priceAndDuration": "Cena in trajanje",
+    "price": "Cena",
+    "duration": "Trajanje",
+    "ctaTitle": "Naredite prvi korak k bolj zdravemu in uravnoteženemu življenju",
+    "ctaSubtitle": "Rezervirajte svoj termin še danes in začnite svojo pot do boljšega počutja.",
+    "bookAppointment": "Rezerviraj termin",
+    "contactUs": "Kontaktirajte nas",
+    "discoverOther": "Odkrijte tudi druge terapije",
+    "allTherapies": "Vse terapije →"
+  },
+  "team": {
+    "title": "Naša ekipa",
+    "subtitle": "Spoznajte strokovnjake, ki skrbijo za vaše zdravje in dobro počutje",
+    "qualifications": "Kvalifikacije",
+    "specializations": "Specializacije",
+    "readMore": "Več o meni",
+    "hideDetails": "Skrij podrobnosti",
+    "more": "več"
+  },
   "pricing": {
     "title": "Cenik storitev",
     "subtitle": "Transparentne cene za vse naše terapevtske storitve in pakete",

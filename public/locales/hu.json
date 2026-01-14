@@ -302,5 +302,48 @@
     "total": "Összesen",
     "checkout": "Pénztár",
     "remove": "Eltávolítás"
+  },
+  "therapyDetail": {
+    "backToTherapies": "Vissza az összes terápiához",
+    "howItWorks": "Hogyan működik?",
+    "benefits": "Terápia előnyei",
+    "indications": "Indikációk - Mikor alkalmas a terápia?",
+    "contraindications": "Kontraindikációk - Mikor nem alkalmas a terápia?",
+    "priceAndDuration": "Ár és időtartam",
+    "price": "Ár",
+    "duration": "Időtartam",
+    "ctaTitle": "Tegye meg az első lépést az egészségesebb és kiegyensúlyozottabb élet felé",
+    "ctaSubtitle": "Foglalja le időpontját még ma, és kezdje el útját a jobb közérzet felé.",
+    "bookAppointment": "Időpont foglalás",
+    "contactUs": "Lépjen kapcsolatba velünk",
+    "discoverOther": "Fedezze fel a többi terápiát",
+    "allTherapies": "Minden terápia →"
+  },
+  "team": {
+    "title": "Csapatunk",
+    "subtitle": "Ismerje meg a szakértőket, akik az Ön egészségéről és jólétéről gondoskodnak",
+    "qualifications": "Képesítések",
+    "specializations": "Specializációk",
+    "readMore": "Többet rólam",
+    "hideDetails": "Részletek elrejtése",
+    "more": "több"
+  },
+  "pricing": {
+    "title": "Árlista",
+    "subtitle": "Átlátható árak minden terápiás szolgáltatásunkra és csomagunkra",
+    "individualTherapies": "Egyedi terápiák",
+    "individualPrices": "Egyedi terápiák és szolgáltatások árai",
+    "questionsTitle": "Kérdései vannak az árakkal vagy szolgáltatásokkal kapcsolatban?",
+    "questionsSubtitle": "Csapatunk rendelkezésére áll kérdései megválaszolására.",
+    "bookAppointment": "Időpont foglalás",
+    "contactUs": "Lépjen kapcsolatba velünk"
+  },
+  "about": {
+    "title": "Rólunk",
+    "subtitle": "Ismerje meg az ORI 369-et",
+    "ctaTitle": "Készen áll a változásra?",
+    "ctaSubtitle": "Csatlakozzon sokakhoz, akik már érezték a különbséget fejlett megközelítésünkkel.",
+    "bookAppointment": "Időpont foglalás",
+    "contactUs": "Lépjen kapcsolatba velünk"
   }
 }

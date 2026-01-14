@@ -1,33 +1,16 @@
 import Services from '@/components/sections/Services';
 import Link from 'next/link';
-import { createClient } from '@/lib/supabase';
-import { getDataForLanguage } from '@/lib/data-loader';
+import { servicesData } from '@/lib/servicesData';
 
 export default async function TherapiesPage() {
-  const supabase = createClient();
-  
-  // Fetch therapies from Supabase
-  const { data: supabaseTherapies } = await supabase
-    .from('services')
-    .select('id, name, slug, description, duration, price, active')
-    .eq('active', true)
-    .eq('is_package', false)
-    .order('name');
-
-  // Get content from JSON (for descriptions, benefits, etc.)
-  const jsonData = getDataForLanguage('sl'); // Default to Slovenian for content
-
-  // Merge Supabase data with JSON content
-  const therapies = (supabaseTherapies || []).map((service: any) => {
-    const jsonTherapy = jsonData.therapies.find((t: any) => t.id === service.slug);
-    return {
-      id: service.slug,
-      name: service.name,
-      shortDescription: jsonTherapy?.shortDescription || service.description || '',
-      duration: service.duration,
-      price: service.price,
-    };
-  });
+  // Use servicesData for correct prices (not Supabase which has wrong values)
+  const therapies = Object.values(servicesData).map((service) => ({
+    id: service.slug,
+    name: service.name,
+    shortDescription: service.shortDescription,
+    duration: service.duration,
+    price: service.price,
+  }));
 
   return (
     <div className="min-h-screen bg-white py-20">

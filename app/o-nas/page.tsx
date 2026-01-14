@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { useLanguage } from "@/lib/i18n";
-import { CheckCircle2, Zap, Heart, Shield, Users, Globe } from "lucide-react";
+import { CheckCircle2, Zap, Heart, Shield, Users, Globe, Phone, Award, ChevronDown, ChevronUp } from "lucide-react";
 import ImageModal from "@/components/ImageModal";
+import { teamData } from "@/lib/servicesData";
 
 const OFFICE_IMAGE = "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/pisarna/pisarna1.webp";
 const THERAPY_IMAGES = [
@@ -243,8 +244,55 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* CTA */}
+      {/* Team Section */}
       <section className="py-12 md:py-20 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4">Naša ekipa</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Spoznajte strokovnjake, ki skrbijo za vaše zdravje in dobro počutje
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {teamData.map((member, index) => (
+              <div key={index} className="bg-gray-50 rounded-2xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
+                <div className="flex items-start gap-4 mb-4">
+                  <div className="w-16 h-16 bg-[#00B5AD] rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                    {member.name.split(' ').map(n => n[0]).join('')}
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-bold text-black">{member.name}</h3>
+                    <p className="text-[#00B5AD] font-medium">{member.title}</p>
+                  </div>
+                </div>
+                <p className="text-gray-600 mb-4">{member.bio}</p>
+                <div className="mb-4">
+                  <h4 className="font-semibold text-black mb-2 flex items-center gap-2">
+                    <Award size={18} className="text-[#00B5AD]" />
+                    Kvalifikacije
+                  </h4>
+                  <div className="flex flex-wrap gap-2">
+                    {member.qualifications.slice(0, 4).map((qual, i) => (
+                      <span key={i} className="bg-white px-3 py-1 rounded-full text-sm text-gray-700 border border-gray-200">
+                        {qual}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+                <div className="flex items-center gap-2 text-gray-600">
+                  <Phone size={16} className="text-[#00B5AD]" />
+                  <a href={`tel:${member.phone}`} className="hover:text-[#00B5AD] transition-colors">
+                    {member.phone}
+                  </a>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4 text-center">
           <div className="max-w-3xl mx-auto bg-black text-white p-8 md:p-12 rounded-3xl shadow-2xl relative overflow-hidden">
             <div className="absolute top-0 right-0 w-32 h-32 bg-[#00B5AD] opacity-20 blur-3xl rounded-full -mr-16 -mt-16"></div>

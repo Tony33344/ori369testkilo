@@ -71,20 +71,25 @@
     }
   },
   "booking": {
-    "title": "Időpont foglálása",
+    "title": "Időpont foglalása",
     "subtitle": "Válasszon szolgáltatást és elérhető időpontot",
     "selectService": "Válasszon szolgáltatást",
     "selectDate": "Válasszon dátumot",
     "selectTime": "Válasszon időpontot",
     "additionalNotes": "További megjegyzések",
     "notesPlaceholder": "Különleges kérések vagy információk...",
-    "submit": "Foglálás megerősítése",
-    "loginRequired": "Kérjük, jelentkezzen be a fogláláshoz",
+    "submit": "Foglalás megerősítése",
+    "loginRequired": "Kérjük, jelentkezzen be a foglaláshoz",
     "selectServiceFirst": "Kérjük, először válasszon szolgáltatást",
     "selectDateFirst": "Kérjük, először válasszon dátumot",
     "noSlotsAvailable": "Nincs elérhető időpont erre a dátumra",
-    "success": "Foglálás sikeresen létrehozva!",
-    "error": "Hiba a foglálás létrehozásakor. Kérjük, próbálja újra."
+    "success": "Foglalás sikeresen létrehozva!",
+    "error": "Hiba a foglalás létrehozásakor. Kérjük, próbálja újra.",
+    "selected": "Kiválasztva",
+    "unavailable": "Nem elérhető",
+    "available": "Elérhető",
+    "bookedReservation": "Foglalt (foglalás)",
+    "bookedCalendar": "Foglalt (naptár)"
   },
   "dashboard": {
     "welcome": "Üdvözöljük",
@@ -266,14 +271,36 @@
   "toast": {
     "success": "Siker!",
     "error": "Hiba!",
-    "bookingCreated": "Foglálás sikeresen létrehozva!",
-    "bookingCancelled": "Foglálás lemondva",
-    "bookingUpdated": "Foglálás frissítve",
+    "bookingCreated": "Foglalás sikeresen létrehozva!",
+    "bookingCancelled": "Foglalás lemondva",
+    "bookingUpdated": "Foglalás frissítve",
     "statusUpdated": "Állapot frissítve",
     "serviceAdded": "Szolgáltatás hozzáadva",
     "serviceUpdated": "Szolgáltatás frissítve",
     "serviceDeleted": "Szolgáltatás törölve",
     "syncSuccess": "Szinkronizálva Google Naptárral",
-    "syncError": "Hiba a szinkronizálás során"
+    "syncError": "Hiba a szinkronizálás során",
+    "addedToCart": "Kosárba helyezve",
+    "removedFromCart": "Eltávolítva a kosárból",
+    "cartCleared": "Kosár kiürítve",
+    "orderCreated": "Rendelés sikeresen létrehozva!"
+  },
+  "shop": {
+    "title": "Bolt",
+    "subtitle": "Étrend-kiegészítők, funkcionális gombák, homeopátia, gyógynövény készítmények és prémium CBD",
+    "noProducts": "Nincs termék ebben a kategóriában",
+    "addToCart": "Kosárba",
+    "outOfStock": "Nincs raktáron",
+    "inStock": "Raktáron",
+    "price": "Ár",
+    "quantity": "Mennyiség"
+  },
+  "cart": {
+    "title": "Kosár",
+    "empty": "A kosara üres",
+    "subtotal": "Részösszeg",
+    "total": "Összesen",
+    "checkout": "Pénztár",
+    "remove": "Eltávolítás"
   }
 }

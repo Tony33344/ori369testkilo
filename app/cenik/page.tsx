@@ -2,9 +2,11 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Check, Zap, Package, Clock, Euro } from 'lucide-react';
+import { Check, Zap, Package, Clock, Euro, ChevronDown, ChevronUp } from 'lucide-react';
+import { useState } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import { getDataForLanguage } from '@/lib/data-loader';
+import { packagesData, individualPrices } from '@/lib/servicesData';
 
 export default function PricingPage() {
   const { language } = useLanguage();
@@ -363,6 +365,44 @@ export default function PricingPage() {
             </div>
           </motion.div>
         )}
+
+        {/* Individual Therapy Prices */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-16"
+        >
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
+              Posamezne terapije
+            </h2>
+            <p className="text-xl text-gray-600">
+              Cene posameznih terapij in storitev
+            </p>
+          </div>
+
+          <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0">
+              {individualPrices.map((therapy, index) => (
+                <div 
+                  key={index} 
+                  className="flex items-center justify-between p-4 border-b border-gray-100 hover:bg-gray-50 transition-colors"
+                >
+                  <div className="flex items-center gap-3">
+                    <div className="w-2 h-2 bg-[#00B5AD] rounded-full"></div>
+                    <span className="text-gray-800 font-medium">{therapy.name}</span>
+                  </div>
+                  <div className="flex items-center gap-4">
+                    <span className="text-sm text-gray-500">{therapy.duration} min</span>
+                    <span className="font-bold text-[#00B5AD]">{therapy.price} €</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
 
         {/* Bottom CTA */}
         <motion.div

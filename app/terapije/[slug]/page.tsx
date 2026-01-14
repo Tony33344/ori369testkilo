@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowLeft, Clock, Calendar } from 'lucide-react';
+import { ArrowLeft, Clock, Calendar, CheckCircle, AlertCircle, Zap, Euro } from 'lucide-react';
 import { getTherapyBySlug, getAllTherapySlugs } from '@/lib/therapyContent';
 import { createClient } from '@/lib/supabase';
 import { getDataForLanguage } from '@/lib/data-loader';
+import { servicesData } from '@/lib/servicesData';
 import BuyButton from '@/components/BuyButton';
 
 // Map therapy slugs to their images
@@ -51,6 +52,9 @@ export default async function TherapyDetailPage({ params }: { params: Promise<{ 
   // Get content from JSON for full descriptions
   const jsonData = getDataForLanguage('sl');
   const jsonTherapy = jsonData.therapies.find((t: any) => t.id === slug) as any;
+  
+  // Get rich content from servicesData
+  const richContent = servicesData[slug];
 
   const therapyImage = therapyImages[slug] || '/images/therapies/IMG_5779-768x513.webp';
 
@@ -99,52 +103,126 @@ export default async function TherapyDetailPage({ params }: { params: Promise<{ 
       {/* Content Section */}
       <div className="container mx-auto px-4 py-12 md:py-16">
         <div className="max-w-4xl mx-auto">
-          {/* Introduction */}
-          {jsonTherapy?.fullContent && (
-            <div className="mb-12">
-              <p className="text-lg text-gray-700 leading-relaxed">
-                {jsonTherapy.fullContent.introduction}
-              </p>
-            </div>
-          )}
+          {/* Rich Content from servicesData */}
+          {richContent && (
+            <>
+              {/* Long Description */}
+              <div className="mb-12">
+                <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
+                  {richContent.longDescription}
+                </p>
+              </div>
 
-          {/* Sections */}
-          {jsonTherapy?.fullContent?.sections && (
-            <div className="space-y-12">
-              {jsonTherapy.fullContent.sections.map((section: any, index: number) => (
-                <div key={index} className="border-l-4 border-[#00B5AD] pl-6">
-                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-4">
-                    {section.title}
+              {/* How It Works */}
+              {richContent.howItWorks && (
+                <div className="mb-12 border-l-4 border-[#00B5AD] pl-6">
+                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-4 flex items-center gap-2">
+                    <Zap className="text-[#00B5AD]" size={28} />
+                    Kako deluje?
                   </h2>
-                  <div className="prose prose-lg max-w-none">
-                    {section.content.split('\n\n').map((paragraph: string, pIndex: number) => {
-                      // Check if paragraph starts with a bullet point indicator
-                      if (paragraph.trim().startsWith('-')) {
-                        const items = paragraph.split('\n').filter((line: string) => line.trim().startsWith('-'));
-                        return (
-                          <ul key={pIndex} className="list-disc list-inside space-y-2 text-gray-700 mb-4">
-                            {items.map((item: string, iIndex: number) => (
-                              <li key={iIndex} className="ml-4">
-                                {item.replace(/^-\s*/, '')}
-                              </li>
-                            ))}
-                          </ul>
-                        );
-                      }
-                      
-                      // Regular paragraph
-                      return (
-                        <p key={pIndex} className="text-gray-700 leading-relaxed mb-4">
-                          {paragraph.split('**').map((part: string, i: number) => 
-                            i % 2 === 0 ? part : <strong key={i} className="font-semibold text-black">{part}</strong>
-                          )}
-                        </p>
-                      );
-                    })}
+                  <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                    {richContent.howItWorks}
+                  </p>
+                </div>
+              )}
+
+              {/* Benefits */}
+              {richContent.benefits && richContent.benefits.length > 0 && (
+                <div className="mb-12 bg-green-50 rounded-2xl p-8">
+                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 flex items-center gap-2">
+                    <CheckCircle className="text-green-600" size={28} />
+                    Koristi terapije
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-4">
+                    {richContent.benefits.map((benefit, index) => (
+                      <div key={index} className="flex items-start gap-3">
+                        <CheckCircle className="text-green-600 mt-1 flex-shrink-0" size={20} />
+                        <span className="text-gray-700">{benefit}</span>
+                      </div>
+                    ))}
                   </div>
                 </div>
-              ))}
-            </div>
+              )}
+
+              {/* Indications */}
+              {richContent.indications && richContent.indications.length > 0 && (
+                <div className="mb-12 bg-blue-50 rounded-2xl p-8">
+                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-6">
+                    Indikacije - Kdaj je terapija primerna?
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    {richContent.indications.map((indication, index) => (
+                      <div key={index} className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm">
+                        <div className="w-2 h-2 bg-[#00B5AD] rounded-full"></div>
+                        <span className="text-gray-700">{indication}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Contraindications */}
+              {richContent.contraindications && richContent.contraindications.length > 0 && (
+                <div className="mb-12 bg-red-50 rounded-2xl p-8">
+                  <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 flex items-center gap-2">
+                    <AlertCircle className="text-red-600" size={28} />
+                    Kontraindikacije - Kdaj terapija ni primerna?
+                  </h2>
+                  <div className="grid md:grid-cols-2 gap-3">
+                    {richContent.contraindications.map((contraindication, index) => (
+                      <div key={index} className="flex items-center gap-3 bg-white rounded-lg px-4 py-3 shadow-sm">
+                        <AlertCircle className="text-red-500 flex-shrink-0" size={18} />
+                        <span className="text-gray-700">{contraindication}</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {/* Price & Duration Info */}
+              <div className="mb-12 bg-gray-50 rounded-2xl p-8">
+                <h2 className="text-2xl font-bold text-black mb-6">Cena in trajanje</h2>
+                <div className="flex flex-wrap gap-6">
+                  <div className="flex items-center gap-3 bg-white rounded-lg px-6 py-4 shadow-sm">
+                    <Euro className="text-[#00B5AD]" size={24} />
+                    <div>
+                      <p className="text-sm text-gray-500">Cena</p>
+                      <p className="text-2xl font-bold text-black">{richContent.price} €</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center gap-3 bg-white rounded-lg px-6 py-4 shadow-sm">
+                    <Clock className="text-[#00B5AD]" size={24} />
+                    <div>
+                      <p className="text-sm text-gray-500">Trajanje</p>
+                      <p className="text-2xl font-bold text-black">{richContent.duration} min</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </>
+          )}
+
+          {/* Fallback to JSON content if no rich content */}
+          {!richContent && jsonTherapy?.fullContent && (
+            <>
+              <div className="mb-12">
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  {jsonTherapy.fullContent.introduction}
+                </p>
+              </div>
+              {jsonTherapy.fullContent.sections && (
+                <div className="space-y-12">
+                  {jsonTherapy.fullContent.sections.map((section: any, index: number) => (
+                    <div key={index} className="border-l-4 border-[#00B5AD] pl-6">
+                      <h2 className="text-2xl md:text-3xl font-bold text-black mb-4">
+                        {section.title}
+                      </h2>
+                      <p className="text-gray-700 leading-relaxed">{section.content}</p>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </>
           )}
 
           {/* CTA Section */}

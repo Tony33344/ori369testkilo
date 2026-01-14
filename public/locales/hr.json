@@ -84,7 +84,12 @@
     "selectDateFirst": "Molimo prvo odaberite datum",
     "noSlotsAvailable": "Nema dostupnih termina za ovaj datum",
     "success": "Rezervacija uspješno kreirana!",
-    "error": "Greška pri kreiranju rezervacije. Molimo pokušajte ponovo."
+    "error": "Greška pri kreiranju rezervacije. Molimo pokušajte ponovo.",
+    "selected": "Odabrano",
+    "unavailable": "Nedostupno",
+    "available": "Dostupno",
+    "bookedReservation": "Zauzeto (rezervacija)",
+    "bookedCalendar": "Zauzeto (kalendar)"
   },
   "dashboard": {
     "welcome": "Dobrodošli",
@@ -274,6 +279,28 @@
     "serviceUpdated": "Usluga ažurirana",
     "serviceDeleted": "Usluga obrisana",
     "syncSuccess": "Sinkronizirano s Google Calendrom",
-    "syncError": "Greška pri sinkronizaciji"
+    "syncError": "Greška pri sinkronizaciji",
+    "addedToCart": "Dodano u košaricu",
+    "removedFromCart": "Uklonjeno iz košarice",
+    "cartCleared": "Košarica ispražnjena",
+    "orderCreated": "Naručba uspješno kreirana!"
+  },
+  "shop": {
+    "title": "Trgovina",
+    "subtitle": "Prehrambeni dodaci, funkcionalne gljive, homeopatija, biljni pripravci i premium CBD",
+    "noProducts": "Nema proizvoda u ovoj kategoriji",
+    "addToCart": "Dodaj u košaricu",
+    "outOfStock": "Nema na zalihi",
+    "inStock": "Na zalihi",
+    "price": "Cijena",
+    "quantity": "Količina"
+  },
+  "cart": {
+    "title": "Košarica",
+    "empty": "Vaša košarica je prazna",
+    "subtotal": "Međuzbroj",
+    "total": "Ukupno",
+    "checkout": "Blagajna",
+    "remove": "Ukloni"
   }
 }

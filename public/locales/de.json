@@ -84,7 +84,12 @@
     "selectDateFirst": "Bitte wählen Sie zuerst ein Datum",
     "noSlotsAvailable": "Keine verfügbaren Zeitfenster für dieses Datum",
     "success": "Buchung erfolgreich erstellt!",
-    "error": "Fehler beim Erstellen der Buchung. Bitte versuchen Sie es erneut."
+    "error": "Fehler beim Erstellen der Buchung. Bitte versuchen Sie es erneut.",
+    "selected": "Ausgewählt",
+    "unavailable": "Nicht verfügbar",
+    "available": "Verfügbar",
+    "bookedReservation": "Gebucht (Reservierung)",
+    "bookedCalendar": "Gebucht (Kalender)"
   },
   "dashboard": {
     "welcome": "Willkommen",
@@ -274,6 +279,28 @@
     "serviceUpdated": "Dienstleistung aktualisiert",
     "serviceDeleted": "Dienstleistung gelöscht",
     "syncSuccess": "Mit Google Calendar synchronisiert",
-    "syncError": "Fehler bei der Synchronisierung"
+    "syncError": "Fehler bei der Synchronisierung",
+    "addedToCart": "Zum Warenkorb hinzugefügt",
+    "removedFromCart": "Aus Warenkorb entfernt",
+    "cartCleared": "Warenkorb geleert",
+    "orderCreated": "Bestellung erfolgreich erstellt!"
+  },
+  "shop": {
+    "title": "Shop",
+    "subtitle": "Nahrungsergänzungsmittel, funktionelle Pilze, Homöopathie, Kräuterpräparate und Premium-CBD",
+    "noProducts": "Keine Produkte in dieser Kategorie",
+    "addToCart": "In den Warenkorb",
+    "outOfStock": "Nicht verfügbar",
+    "inStock": "Auf Lager",
+    "price": "Preis",
+    "quantity": "Menge"
+  },
+  "cart": {
+    "title": "Warenkorb",
+    "empty": "Ihr Warenkorb ist leer",
+    "subtotal": "Zwischensumme",
+    "total": "Gesamt",
+    "checkout": "Zur Kasse",
+    "remove": "Entfernen"
   }
 }

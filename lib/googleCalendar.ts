@@ -131,8 +131,12 @@ export async function createCalendarEvent(data: CalendarEventData) {
   const startDateTime = new Date(data.date);
   startDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
 
-  const endDateTime = new Date(startDateTime);
-  endDateTime.setMinutes(endDateTime.getMinutes() + data.duration);
+  // Convert to UTC for Google Calendar API
+  const timezoneOffset = startDateTime.getTimezoneOffset() * 60000;
+  const startDateTimeUTC = new Date(startDateTime.getTime() - timezoneOffset);
+
+  const endDateTimeUTC = new Date(startDateTimeUTC);
+  endDateTimeUTC.setMinutes(endDateTimeUTC.getMinutes() + data.duration);
 
   // Build description
   let description = `Klient: ${data.clientName}\nEmail: ${data.clientEmail}`;
@@ -149,11 +153,11 @@ export async function createCalendarEvent(data: CalendarEventData) {
     summary: `ORI 369 - ${data.serviceName}`,
     description,
     start: {
-      dateTime: startDateTime.toISOString(),
+      dateTime: startDateTimeUTC.toISOString(),
       timeZone: 'Europe/Ljubljana',
     },
     end: {
-      dateTime: endDateTime.toISOString(),
+      dateTime: endDateTimeUTC.toISOString(),
       timeZone: 'Europe/Ljubljana',
     },
     reminders: {
@@ -195,15 +199,19 @@ export async function updateCalendarEvent(eventId: string, data: Partial<Calenda
     const startDateTime = new Date(data.date);
     startDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
 
-    const endDateTime = new Date(startDateTime);
-    endDateTime.setMinutes(endDateTime.getMinutes() + data.duration);
+    // Convert to UTC for Google Calendar API
+    const timezoneOffset = startDateTime.getTimezoneOffset() * 60000;
+    const startDateTimeUTC = new Date(startDateTime.getTime() - timezoneOffset);
+
+    const endDateTimeUTC = new Date(startDateTimeUTC);
+    endDateTimeUTC.setMinutes(endDateTimeUTC.getMinutes() + data.duration);
 
     updateData.start = {
-      dateTime: startDateTime.toISOString(),
+      dateTime: startDateTimeUTC.toISOString(),
       timeZone: 'Europe/Ljubljana',
     };
     updateData.end = {
-      dateTime: endDateTime.toISOString(),
+      dateTime: endDateTimeUTC.toISOString(),
       timeZone: 'Europe/Ljubljana',
     };
   }

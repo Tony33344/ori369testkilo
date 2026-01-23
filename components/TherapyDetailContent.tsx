@@ -36,8 +36,8 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
           <div className="absolute inset-0 bg-gradient-to-b from-white/90 via-white/80 to-white/95"></div>
         </div>
 
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-wrap justify-between items-center mb-6 gap-4">
+        <div className="container mx-auto px-4 relative z-10 text-center">
+          <div className="flex flex-wrap justify-between items-center mb-10 gap-4">
             <Link 
               href="/terapije"
               className="inline-flex items-center text-[#00B5AD] hover:text-[#009891] transition-colors font-medium"
@@ -55,46 +55,46 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
             </Link>
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-black mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-black mb-6">
             {richContent.name}
           </h1>
           
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mb-8">
+          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-10">
             {richContent.shortDescription}
           </p>
 
-          <div className="flex flex-wrap gap-6">
-            <div className="flex items-center space-x-2 bg-white px-4 py-3 rounded-lg shadow-sm">
-              <Clock className="text-[#00B5AD]" size={20} />
-              <span className="text-gray-700"><strong>{richContent.duration} min</strong></span>
+          <div className="flex flex-wrap justify-center gap-6">
+            <div className="flex items-center space-x-2 bg-white px-6 py-3 rounded-xl shadow-sm border border-gray-100">
+              <Clock className="text-[#00B5AD]" size={22} />
+              <span className="text-gray-700 text-lg"><strong>{richContent.duration} min</strong></span>
             </div>
-            <div className="flex items-center space-x-2 bg-white px-4 py-3 rounded-lg shadow-sm">
-              <Euro className="text-[#00B5AD]" size={20} />
-              <span className="text-gray-700"><strong>{richContent.price} €</strong></span>
+            <div className="flex items-center space-x-2 bg-white px-6 py-3 rounded-xl shadow-sm border border-gray-100">
+              <Euro className="text-[#00B5AD]" size={22} />
+              <span className="text-gray-700 text-lg"><strong>{richContent.price} €</strong></span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Content Section */}
-      <div className="container mx-auto px-4 py-12 md:py-16">
+      {/* Content Section - RESTORED */}
+      <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="max-w-4xl mx-auto">
-          {/* Main Description */}
-          <div className="mb-12">
-            <p className="text-lg text-gray-700 leading-relaxed whitespace-pre-line">
+          {/* Main Description - LEFT ALIGNED */}
+          <div className="mb-16 text-left">
+            <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
               {richContent.longDescription}
             </p>
           </div>
 
-          <div className="space-y-12">
+          <div className="space-y-16 text-left">
             {/* How It Works */}
             {richContent.howItWorks && (
-              <div className="border-l-4 border-[#00B5AD] pl-6 py-2 bg-gray-50/50 rounded-r-2xl">
-                <h2 className="text-2xl md:text-3xl font-bold text-black mb-4 flex items-center gap-2">
-                  <Zap className="text-[#00B5AD]" size={28} />
+              <div className="border-l-4 border-[#00B5AD] pl-8 py-4 bg-gray-50/50 rounded-r-3xl">
+                <h2 className="text-3xl md:text-4xl font-bold text-black mb-6 flex items-center gap-3">
+                  <Zap className="text-[#00B5AD]" size={32} />
                   {t('therapyDetail.howItWorks')}
                 </h2>
-                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
                   {richContent.howItWorks}
                 </p>
               </div>
@@ -154,27 +154,6 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
             )}
           </div>
 
-          {/* Price & Duration Info (Always visible at bottom) */}
-          <div className="mt-12 bg-gray-50 rounded-2xl p-8 border border-gray-100">
-            <h2 className="text-2xl font-bold text-black mb-6">{t('therapyDetail.priceAndDuration')}</h2>
-            <div className="flex flex-wrap gap-6">
-              <div className="flex items-center gap-3 bg-white rounded-lg px-6 py-4 shadow-sm border border-gray-100">
-                <Euro className="text-[#00B5AD]" size={24} />
-                <div>
-                  <p className="text-sm text-gray-500">{t('therapyDetail.price')}</p>
-                  <p className="text-2xl font-bold text-black">{richContent.price} €</p>
-                </div>
-              </div>
-              <div className="flex items-center gap-3 bg-white rounded-lg px-6 py-4 shadow-sm border border-gray-100">
-                <Clock className="text-[#00B5AD]" size={24} />
-                <div>
-                  <p className="text-sm text-gray-500">{t('therapyDetail.duration')}</p>
-                  <p className="text-2xl font-bold text-black">{richContent.duration} min</p>
-                </div>
-              </div>
-            </div>
-          </div>
-
           {/* CTA Section */}
           <div className="mt-16 bg-gradient-to-br from-[#00B5AD] to-[#009891] rounded-2xl p-8 md:p-12 text-white">
             <div className="text-center">
@@ -186,7 +165,7 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href={`/rezervacija`}
+                  href="/kontakt"
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#00B5AD] font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
                 >
                   <Calendar size={20} className="mr-2" />
@@ -200,19 +179,6 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
                 </Link>
               </div>
             </div>
-          </div>
-
-          {/* Related Therapies */}
-          <div className="mt-16">
-            <h3 className="text-2xl font-bold text-black mb-6">
-              {t('therapyDetail.discoverOther')}
-            </h3>
-            <Link
-              href="/terapije"
-              className="inline-block px-6 py-3 border-2 border-[#00B5AD] text-[#00B5AD] font-semibold rounded-lg hover:bg-[#00B5AD] hover:text-white transition-colors"
-            >
-              {t('therapyDetail.allTherapies')}
-            </Link>
           </div>
         </div>
       </div>

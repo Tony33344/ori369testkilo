@@ -7,6 +7,7 @@ import { Sparkles, Zap, Heart, Brain, Activity, Shield, Waves } from 'lucide-rea
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import { useLanguage } from '@/lib/i18n';
+import { servicesData } from '@/lib/servicesData';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
 
@@ -131,36 +132,30 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto"
+              className="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-5xl mx-auto justify-items-center"
             >
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto">
-                  <Zap className="text-[#00B5AD]" size={20} />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900 text-center">TECAR</h3>
-                <p className="text-xs text-gray-500 text-center mt-1">{t('categories.methods.tecar')}</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto">
-                  <Activity className="text-[#00B5AD]" size={20} />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900 text-center">Laser</h3>
-                <p className="text-xs text-gray-500 text-center mt-1">{t('categories.methods.laser')}</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto">
-                  <Shield className="text-[#00B5AD]" size={20} />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900 text-center">{t('categories.methods.magnetic')}</h3>
-                <p className="text-xs text-gray-500 text-center mt-1">{t('categories.methods.traction')}</p>
-              </div>
-              <div className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1">
-                <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto">
-                  <Waves className="text-[#00B5AD]" size={20} />
-                </div>
-                <h3 className="text-sm font-semibold text-gray-900 text-center">{t('categories.methods.frequency')}</h3>
-                <p className="text-xs text-gray-500 text-center mt-1">{t('categories.methods.sound')}</p>
-              </div>
+              {Object.values(servicesData).map((service, index, array) => {
+                const totalItems = array.length;
+                const itemsPerRow = 5; // On large screens
+                const isLastRow = Math.floor(index / itemsPerRow) === Math.floor((totalItems - 1) / itemsPerRow);
+                const itemsInLastRow = totalItems % itemsPerRow || itemsPerRow;
+                
+                return (
+                  <Link
+                    key={service.slug}
+                    href={`/terapije/${service.slug}`}
+                    className={`bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1 group w-full ${
+                      isLastRow && itemsInLastRow < itemsPerRow ? 'lg:col-span-1' : ''
+                    }`}
+                  >
+                    <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto group-hover:bg-[#00B5AD]/20 transition-colors">
+                      <Zap className="text-[#00B5AD]" size={20} />
+                    </div>
+                    <h3 className="text-sm font-semibold text-gray-900 text-center line-clamp-1">{service.name}</h3>
+                    <p className="text-xs text-gray-500 text-center mt-1 line-clamp-2">{service.shortDescription}</p>
+                  </Link>
+                );
+              })}
             </motion.div>
           </motion.div>
         </div>

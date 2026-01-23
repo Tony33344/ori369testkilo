@@ -8,6 +8,7 @@ import { useLanguage } from '@/lib/i18n';
 import { toast } from 'react-hot-toast';
 import { Calendar, Clock, User, Mail, Phone, MessageSquare } from 'lucide-react';
 import { format, addDays, startOfWeek } from 'date-fns';
+import { fromZonedTime, toZonedTime } from 'date-fns-tz';
 import dynamic from 'next/dynamic';
 
 const BookingCalendar = dynamic(() => import('@/components/BookingCalendar'), {
@@ -32,6 +33,7 @@ function BookingForm() {
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
   const [useCalendarView, setUseCalendarView] = useState(true);
+  const [calendarReady, setCalendarReady] = useState(false);
 
   useEffect(() => {
     loadUser();
@@ -46,10 +48,10 @@ function BookingForm() {
   }, [packageId, services]);
 
   useEffect(() => {
-    if (selectedDate) {
+    if (selectedDate && selectedService) {
       loadAvailableSlots(selectedDate);
     }
-  }, [selectedDate]);
+  }, [selectedDate, selectedService]);
 
   const loadUser = async () => {
     const currentUser = await getCurrentUser();
@@ -57,13 +59,18 @@ function BookingForm() {
   };
 
   const loadServices = async () => {
+    // Fetch services and order them to match the site display order
     const { data, error } = await supabase
       .from('services')
       .select('*')
-      .eq('active', true)
-      .order('name');
+      .eq('active', true);
     
-    if (data) setServices(data);
+    if (data) {
+      // Sort therapies first, then packages, each alphabetically by name
+      const therapies = data.filter((s: any) => !s.is_package).sort((a: any, b: any) => a.name.localeCompare(b.name, 'sl'));
+      const packages = data.filter((s: any) => s.is_package).sort((a: any, b: any) => a.name.localeCompare(b.name, 'sl'));
+      setServices([...therapies, ...packages]);
+    }
     if (error) console.error('Error loading services:', error);
   };
 
@@ -72,9 +79,9 @@ function BookingForm() {
 
     const selectedServiceObj = services.find((s) => s.id === selectedService);
     const serviceDurationMin = Number(selectedServiceObj?.duration || 60);
-    
+
     const dayOfWeek = new Date(date).getDay();
-    
+
     // Get availability for this day
     const { data: slots } = await supabase
       .from('availability_slots')
@@ -99,11 +106,14 @@ function BookingForm() {
     // Get busy events from Google Calendar for this date
     let googleBusyRanges: Array<{ start: Date; end: Date }> = [];
     try {
-      const dayStart = new Date(`${date}T00:00:00`);
-      const dayEnd = new Date(`${date}T23:59:59`);
-      const res = await fetch(`/api/google-calendar/busy?timeMin=${encodeURIComponent(dayStart.toISOString())}&timeMax=${encodeURIComponent(dayEnd.toISOString())}`);
+      // Day start and end in Ljubljana timezone
+      const dayStartUTC = fromZonedTime(`${date}T00:00:00`, 'Europe/Ljubljana');
+      const dayEndUTC = fromZonedTime(`${date}T23:59:59`, 'Europe/Ljubljana');
+
+      const res = await fetch(`/api/google-calendar/busy?timeMin=${encodeURIComponent(dayStartUTC.toISOString())}&timeMax=${encodeURIComponent(dayEndUTC.toISOString())}`);
       if (res.ok) {
         const json = await res.json();
+        console.log('[Booking] Google Calendar response:', json);
         googleBusyRanges = (json?.busy || [])
           .map((e: any) => {
             const s = e?.start?.dateTime || e?.start?.date;
@@ -112,45 +122,62 @@ function BookingForm() {
             return { start: new Date(s), end: new Date(en) };
           })
           .filter(Boolean);
+        console.log('[Booking] Parsed busy ranges:', googleBusyRanges);
       }
     } catch (e) {
       console.error('Failed to load Google busy events:', e);
     }
+
+    // Convert busy ranges to Ljubljana minutes since midnight
+    const busyMinutes: Array<{ start: number; end: number }> = googleBusyRanges.map(r => {
+      const startLj = toZonedTime(r.start, 'Europe/Ljubljana');
+      const endLj = toZonedTime(r.end, 'Europe/Ljubljana');
+      const startMin = startLj.getHours() * 60 + startLj.getMinutes();
+      const endMin = endLj.getHours() * 60 + endLj.getMinutes();
+      return { start: startMin, end: endMin };
+    });
 
     // Generate all possible time slots and categorize them
     const generatedSlots: string[] = [];
     const available: string[] = [];
     const booked: string[] = [];
     const busy: string[] = [];
-    
+
+    const formatTime = (minutes: number) => {
+      const h = Math.floor(minutes / 60);
+      const m = minutes % 60;
+      return `${h.toString().padStart(2, '0')}:${m.toString().padStart(2, '0')}`;
+    };
+
     (slots as Array<{ start_time: string; end_time: string }>).forEach((slot) => {
-      const start = parseInt(slot.start_time.split(':')[0]);
-      const end = parseInt(slot.end_time.split(':')[0]);
-      
-      for (let hour = start; hour < end; hour++) {
-        const timeSlot = `${hour.toString().padStart(2, '0')}:00`;
-        if (generatedSlots.includes(timeSlot)) continue;
-        generatedSlots.push(timeSlot);
-        
-        const slotStart = new Date(`${date}T${timeSlot}:00`);
-        const slotEnd = new Date(slotStart);
-        slotEnd.setMinutes(slotEnd.getMinutes() + serviceDurationMin);
+      const [startH, startM] = slot.start_time.split(':').map(Number);
+      const [endH, endM] = slot.end_time.split(':').map(Number);
+      const startMin = startH * 60 + startM;
+      const endMin = endH * 60 + endM;
+
+      for (let time = startMin; time <= endMin - serviceDurationMin; time += serviceDurationMin) {
+        const slotTime = formatTime(time);
+        if (generatedSlots.includes(slotTime)) continue;
+        generatedSlots.push(slotTime);
+
+        const slotStartMin = time;
+        const slotEndMin = time + serviceDurationMin;
 
         // Check if booked
-        if (bookedTimes.includes(timeSlot)) {
-          booked.push(timeSlot);
+        if (bookedTimes.includes(slotTime)) {
+          booked.push(slotTime);
           continue;
         }
 
-        // Check if blocked by Google Calendar
-        const overlapsGoogle = googleBusyRanges.some((r) => slotStart < r.end && slotEnd > r.start);
+        // Check if overlaps with Google busy
+        const overlapsGoogle = busyMinutes.some(b => slotStartMin < b.end && slotEndMin > b.start);
         if (overlapsGoogle) {
-          busy.push(timeSlot);
+          busy.push(slotTime);
           continue;
         }
 
         // Otherwise available
-        available.push(timeSlot);
+        available.push(slotTime);
       }
     });
 
@@ -205,6 +232,28 @@ function BookingForm() {
       toast.error(t('booking.error'));
       console.error(error);
     } else {
+      // Sync to Google Calendar
+      const selectedServiceObj = services.find((s) => s.id === selectedService);
+      try {
+        await fetch('/api/google-calendar/sync', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            bookingId: data.id,
+            date: selectedDate,
+            time: selectedTime,
+            serviceName: selectedServiceObj?.name || 'Terapija',
+            duration: selectedServiceObj?.duration || 60,
+            clientName: user.user_metadata?.full_name || user.email,
+            clientEmail: user.email,
+            clientPhone: user.user_metadata?.phone || '',
+            notes: notes || ''
+          })
+        });
+      } catch (syncError) {
+        console.error('Failed to sync to Google Calendar:', syncError);
+      }
+      
       toast.success(t('booking.success'));
       // Redirect to checkout page with booking details
       window.location.href = `/checkout?service=${selectedService}&date=${selectedDate}&time=${selectedTime}&bookingId=${data.id}`;
@@ -276,7 +325,8 @@ function BookingForm() {
                 </select>
               </div>
 
-              {/* Date Selection */}
+              {/* Date Selection - Calendar shown immediately when service is selected */}
+              {selectedService && (
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="block text-sm font-semibold text-gray-700 flex items-center space-x-2">
@@ -292,7 +342,7 @@ function BookingForm() {
                   </button>
                 </div>
                 
-                {useCalendarView && selectedService ? (
+                {useCalendarView ? (
                   <div className="border border-gray-300 rounded-lg p-4">
                     <BookingCalendar
                       serviceId={selectedService}
@@ -320,6 +370,7 @@ function BookingForm() {
                   </select>
                 )}
               </div>
+              )}
 
               {/* Time Selection */}
               {selectedDate && (
@@ -395,21 +446,6 @@ function BookingForm() {
                   )}
                 </div>
               )}
-
-              {/* Notes */}
-              <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2 flex items-center space-x-2">
-                  <MessageSquare size={18} />
-                  <span>{t('booking.additionalNotes')}</span>
-                </label>
-                <textarea
-                  value={notes}
-                  onChange={(e) => setNotes(e.target.value)}
-                  rows={4}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  placeholder={t('booking.notesPlaceholder')}
-                />
-              </div>
 
               {/* Submit Button */}
               <button

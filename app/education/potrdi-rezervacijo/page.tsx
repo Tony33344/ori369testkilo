@@ -155,7 +155,7 @@ export default function EducationReservationPage() {
                   </div>
                 ))}
               </div>
-            )
+            )}
           </div>
 
           {/* Action Button */}

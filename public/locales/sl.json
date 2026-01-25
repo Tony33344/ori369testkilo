@@ -7,7 +7,7 @@
     "contact": "Kontakt",
     "login": "Prijava",
     "register": "Registracija",
-    "dashboard": "Dashboard",
+    "dashboard": "Moj profil",
     "admin": "Admin",
     "logout": "Odjava",
     "booking": "Rezervacija"
@@ -102,15 +102,19 @@
     "welcome": "Dobrodošli",
     "subtitle": "Upravljajte svoje rezervacije in nastavitve",
     "adminAccess": "Imate administratorski dostop",
-    "goToAdmin": "Pojdi na Admin Dashboard",
+    "goToAdmin": "Pojdi na Admin panel",
     "stats": {
       "totalBookings": "Skupaj rezervacij",
       "activeBookings": "Aktivne rezervacije",
       "profile": "Profil"
     },
     "myBookings": "Moje rezervacije",
+    "myOrders": "Moja naročila",
+    "myEducation": "Moja izobraževanja",
     "newBooking": "Nova rezervacija",
     "noBookings": "Še nimate nobene rezervacije",
+    "noOrders": "Trenutno nimate nobenih naročil",
+    "noEducation": "Še niste registrirani na nobeno izobraževanje",
     "createFirst": "Ustvari prvo rezervacijo",
     "cancel": "Prekliči",
     "confirmCancel": "Ali ste prepričani, da želite preklicati to rezervacijo?",
@@ -120,6 +124,20 @@
       "completed": "Zaključeno",
       "cancelled": "Preklicano"
     }
+  },
+  "education": {
+    "title": "ORI Izobraževanja",
+    "subtitle": "Naučite se naprednih tehnik in znanja od naših strokovnjakov",
+    "confirmReservation": "Potrdi rezervacijo",
+    "selectCourse": "Izberite izobraževanje",
+    "selectSession": "Izberite termin",
+    "noSessions": "Trenutno ni razpisanih terminov za to izobraževanje",
+    "continueToCheckout": "Nadaljuj na blagajno",
+    "loginRequired": "Za nadaljevanje se boste morali prijaviti ali registrirati",
+    "backToEducation": "Nazaj na izobraževanja",
+    "confirmYourParticipation": "Potrdi svojo udeležbo",
+    "selectEducationAndSession": "Izberite izobraževanje in termin za nadaljevanje",
+    "free": "Brezplačno"
   },
   "admin": {
     "title": "Admin Dashboard",

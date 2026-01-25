@@ -2,14 +2,14 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { ShoppingCart, Search, Filter, Star, Package, Sparkles, Check, SlidersHorizontal } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useCart } from '@/components/CartProvider';
 import toast from 'react-hot-toast';
 
-export default function ShopPage() {
+function ShopPageContent() {
   const searchParams = useSearchParams();
   const { addToCart } = useCart();
   const [categories, setCategories] = useState<any[]>([]);
@@ -107,17 +107,6 @@ export default function ShopPage() {
     if (!byCategory[key]) byCategory[key] = [];
     byCategory[key].push(p);
   });
-
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-teal-50 to-green-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-16 w-16 border-4 border-teal-200 border-t-teal-600 mx-auto"></div>
-          <p className="mt-4 text-gray-600 font-medium">Nalagam izdelke...</p>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-teal-50 via-white to-green-50 py-20">
@@ -341,5 +330,22 @@ export default function ShopPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ShopPage() {
+  return (
+    <Suspense
+      fallback={(
+        <div className="min-h-screen bg-gradient-to-br from-teal-50 to-green-50 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-16 w-16 border-4 border-teal-200 border-t-teal-600 mx-auto"></div>
+            <p className="mt-4 text-gray-600 font-medium">Nalagam izdelke...</p>
+          </div>
+        </div>
+      )}
+    >
+      <ShopPageContent />
+    </Suspense>
   );
 }

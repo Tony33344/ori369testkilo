@@ -628,19 +628,18 @@ function CheckoutPageContent() {
         quantity: 1,
         totalPrice: price,
         type: 'service',
-        bookingDate: educationSession.start_at?.split('T')[0],
-        bookingTime: educationSession.start_at ? new Date(educationSession.start_at).toISOString().slice(11, 16) : undefined,
+        bookingDate: educationSession.start_at?.slice(0, 10) || null,
+        bookingTime: educationSession.start_at ? educationSession.start_at.slice(11, 16) : null,
       });
 
       const registrationPayload: any = {
-        session_id: educationSession.id,
+        session_id: educationSessionId,
         user_id: user?.id || null,
         full_name: customerName,
         email: customerEmail,
         phone: customerPhone,
-        status: 'pending',
-        payment_status: paymentMethod === 'upn' ? 'pending' : 'paid',
-        notes,
+        status: paymentMethod === 'upn' ? 'pending' : 'pending',
+        payment_status: paymentMethod === 'upn' ? 'pending' : 'unpaid',
         order_id: order.id,
       };
 
@@ -696,10 +695,19 @@ function CheckoutPageContent() {
       if (orderItemsError) throw orderItemsError;
     }
 
+    // Deduplicate summary items by id and bookingDate/time
+    const uniqueSummary = summaryItems.reduce<OrderSummaryItem[]>((acc, item) => {
+      const exists = acc.some(
+        i => i.id === item.id && i.bookingDate === item.bookingDate && i.bookingTime === item.bookingTime && i.type === item.type
+      );
+      if (!exists) acc.push(item);
+      return acc;
+    }, []);
+
     // Persist final totals before clearing cart (needed for success screen + UPN QR)
     const finalTotal = total;
     setCreatedOrderTotal(finalTotal);
-    setOrderSummaryItems(summaryItems);
+    setOrderSummaryItems(uniqueSummary);
     setOrderCreatedAt(order.created_at || new Date().toISOString());
 
     // Clear cart and show success (only if not in education-only mode)

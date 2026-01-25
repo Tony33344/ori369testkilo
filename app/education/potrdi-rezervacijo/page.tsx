@@ -65,38 +65,38 @@ export default function EducationReservationPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#111827]">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <Loader2 className="w-8 h-8 text-[#00B5AD] animate-spin" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#111827] py-12 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto">
         {/* Header */}
         <div className="mb-8">
-          <Link href="/education" className="inline-flex items-center text-gray-400 hover:text-[#00B5AD] transition-colors mb-6">
+          <Link href="/education" className="inline-flex items-center text-gray-600 hover:text-[#00B5AD] transition-colors mb-6">
             <ArrowLeft className="w-5 h-5 mr-2" />
             Nazaj na izobraževanja
           </Link>
-          <h1 className="text-3xl font-bold text-white">Potrdi svojo udeležbo</h1>
-          <p className="text-gray-400 mt-2">Izberite izobraževanje in termin za nadaljevanje.</p>
+          <h1 className="text-3xl font-bold text-gray-900">Potrdi svojo udeležbo</h1>
+          <p className="text-gray-600 mt-2">Izberite izobraževanje in termin za nadaljevanje.</p>
         </div>
 
         {/* Selection Card */}
-        <div className="bg-[#1F2937] rounded-2xl p-6 sm:p-8 border border-gray-800 shadow-xl">
+        <div className="bg-white rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-lg">
           
           {/* Course Selection */}
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-300 mb-2">Izobraževanje</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Izobraževanje</label>
             <select
               value={selectedCourseId}
               onChange={(e) => {
                 setSelectedCourseId(e.target.value);
                 setSelectedSessionId(''); // Reset session
               }}
-              className="w-full bg-[#111827] border border-gray-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent outline-none transition-all"
+              className="w-full bg-white border border-gray-200 rounded-xl px-4 py-3 text-gray-900 focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent outline-none transition-all"
             >
               <option value="" disabled>Izberite tečaj</option>
               {courses.map(course => (
@@ -109,13 +109,13 @@ export default function EducationReservationPage() {
 
           {/* Session Selection */}
           <div className="mb-8">
-            <label className="block text-sm font-medium text-gray-300 mb-2">Termin</label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Termin</label>
             {!selectedCourseId ? (
-              <div className="p-4 bg-gray-800/50 border border-gray-700 rounded-xl text-gray-500 text-sm text-center">
+              <div className="p-4 bg-gray-100 border border-gray-300 rounded-xl text-gray-600 text-sm text-center">
                 Najprej izberite izobraževanje zgoraj.
               </div>
             ) : sessions.length === 0 ? (
-              <div className="p-4 bg-yellow-900/20 border border-yellow-700/50 rounded-xl text-yellow-500 text-sm">
+              <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl text-amber-700 text-sm">
                 Trenutno ni razpisanih terminov za to izobraževanje.
               </div>
             ) : (
@@ -127,20 +127,20 @@ export default function EducationReservationPage() {
                     className={`cursor-pointer p-4 rounded-xl border transition-all flex items-center justify-between ${
                       selectedSessionId === session.id 
                         ? 'bg-[#00B5AD]/10 border-[#00B5AD] ring-1 ring-[#00B5AD]' 
-                        : 'bg-[#111827] border-gray-700 hover:border-gray-500'
+                        : 'bg-gray-50 border-gray-200 hover:border-gray-300'
                     }`}
                   >
                     <div className="flex items-center space-x-4">
                       <div className={`w-5 h-5 rounded-full border-2 flex items-center justify-center ${
-                        selectedSessionId === session.id ? 'border-[#00B5AD]' : 'border-gray-500'
+                        selectedSessionId === session.id ? 'border-[#00B5AD]' : 'border-gray-400'
                       }`}>
                         {selectedSessionId === session.id && <div className="w-2.5 h-2.5 bg-[#00B5AD] rounded-full" />}
                       </div>
                       <div>
-                        <div className="text-white font-medium">
+                        <div className="text-gray-900 font-medium">
                           {format(new Date(session.start_at), 'd. MMMM yyyy', { locale: sl })}
                         </div>
-                        <div className="text-sm text-gray-400 flex items-center mt-1">
+                        <div className="text-sm text-gray-600 flex items-center mt-1">
                           <Clock className="w-3 h-3 mr-1" />
                           {format(new Date(session.start_at), 'HH:mm')} 
                           {session.duration && ` - ${session.duration} min`}
@@ -155,7 +155,7 @@ export default function EducationReservationPage() {
                   </div>
                 ))}
               </div>
-            )}
+            )
           </div>
 
           {/* Action Button */}
@@ -173,7 +173,7 @@ export default function EducationReservationPage() {
           </button>
           
           {!user && selectedSessionId && (
-            <p className="text-center text-sm text-gray-500 mt-4">
+            <p className="text-center text-sm text-gray-600 mt-4">
               Za nadaljevanje se boste morali prijaviti ali registrirati.
             </p>
           )}

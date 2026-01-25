@@ -60,6 +60,11 @@ function normalizeCoursePayload(body: any) {
     cover_image_url: normalizeText(body.cover_image_url ?? body.coverImageUrl),
     highlight_color: (body.highlight_color ?? body.highlightColor ?? '#00B5AD').trim(),
     published: body.published !== false,
+    price: body.price !== undefined ? Number(body.price) : undefined,
+    max_attendees: body.max_attendees !== undefined ? Number(body.max_attendees) : undefined,
+    status: body.status || 'active',
+    language: body.language || 'sl',
+    start_time: body.start_time || null,
   };
 }
 
@@ -83,6 +88,11 @@ export async function GET(request: NextRequest) {
       cover_image_url,
       highlight_color,
       published,
+      price,
+      max_attendees,
+      status,
+      language,
+      start_time,
       created_at,
       updated_at,
       sessions:education_course_sessions (

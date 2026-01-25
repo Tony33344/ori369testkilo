@@ -51,6 +51,11 @@ interface Course {
   cover_image_url: string | null;
   highlight_color: string;
   published: boolean;
+  price?: number | null;
+  max_attendees?: number | null;
+  status?: string | null;
+  language?: string | null;
+  start_time?: string | null;
   sessions: Session[];
 }
 
@@ -121,10 +126,7 @@ export default function EducationManager() {
 
   const handleSaveCourse = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!editingCourse?.title || !editingCourse?.slug) {
-      toast.error('Naslov in slug sta obvezna');
-      return;
-    }
+    if (!editingCourse) return;
 
     try {
       const method = editingCourse.id ? 'PUT' : 'POST';
@@ -136,10 +138,30 @@ export default function EducationManager() {
         headers['Authorization'] = `Bearer ${session.access_token}`;
       }
 
+      const payload = {
+        title: editingCourse.title,
+        slug: editingCourse.slug,
+        subtitle: editingCourse.subtitle,
+        short_description: editingCourse.short_description,
+        long_description: editingCourse.long_description,
+        level: editingCourse.level,
+        organizer: editingCourse.organizer,
+        location: editingCourse.location,
+        cover_image_url: editingCourse.cover_image_url,
+        highlight_color: editingCourse.highlight_color,
+        published: editingCourse.published,
+        price: editingCourse.price,
+        max_attendees: editingCourse.max_attendees,
+        status: editingCourse.status,
+        language: editingCourse.language,
+        start_time: editingCourse.start_time,
+        sessions: editingCourse.sessions || [],
+      };
+
       const response = await fetch('/api/education/admin/courses', {
         method,
         headers,
-        body: JSON.stringify(editingCourse),
+        body: JSON.stringify(payload),
       });
 
       if (response.ok) {
@@ -334,7 +356,12 @@ export default function EducationManager() {
                 slug: '',
                 level: 'beginner',
                 highlight_color: '#00B5AD',
-                published: true
+                published: true,
+                price: 0,
+                max_attendees: 0,
+                status: 'active',
+                language: 'sl',
+                start_time: '',
               });
               setShowCourseModal(true);
             }}
@@ -608,6 +635,64 @@ export default function EducationManager() {
                     />
                     <span className="text-sm font-medium text-gray-700">Objavljeno</span>
                   </label>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-gray-700">Cena (€)</label>
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={editingCourse?.price ?? 0}
+                    onChange={e => setEditingCourse({ ...editingCourse, price: parseFloat(e.target.value) || 0 })}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                    placeholder="npr. 240"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-gray-700">Max udeležencev</label>
+                  <input
+                    type="number"
+                    min="0"
+                    value={editingCourse?.max_attendees ?? 0}
+                    onChange={e => setEditingCourse({ ...editingCourse, max_attendees: parseInt(e.target.value) || 0 })}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                    placeholder="npr. 20"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-gray-700">Status</label>
+                  <input
+                    type="text"
+                    value={editingCourse?.status || 'active'}
+                    onChange={e => setEditingCourse({ ...editingCourse, status: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                    placeholder="npr. active / draft / closed"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-gray-700">Jezik</label>
+                  <input
+                    type="text"
+                    value={editingCourse?.language || 'sl'}
+                    onChange={e => setEditingCourse({ ...editingCourse, language: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                    placeholder="npr. sl / en"
+                  />
+                </div>
+                <div className="space-y-1">
+                  <label className="text-sm font-semibold text-gray-700">Čas začetka (hh:mm)</label>
+                  <input
+                    type="time"
+                    value={editingCourse?.start_time || ''}
+                    onChange={e => setEditingCourse({ ...editingCourse, start_time: e.target.value })}
+                    className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                  />
                 </div>
               </div>
 

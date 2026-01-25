@@ -78,6 +78,7 @@ export default function Header() {
     { name: t('nav.about'), href: '/o-nas' },
     { name: t('nav.therapies'), href: '/terapije' },
     { name: t('nav.packages'), href: '/paketi' },
+    { name: 'ORI Education', href: '/education' },
     { name: 'MotioScan', href: '/motioscan' },
     { name: 'Trgovina', href: '/trgovina' },
     { name: t('nav.booking'), href: '/rezervacija' },
@@ -160,9 +161,6 @@ export default function Header() {
               </div>
             ) : (
               <div>
-                <Link href="/education" className="text-gray-600 hover:text-[#00B5AD] transition-colors">
-                  ORI Education
-                </Link>
                 <Link href="/kontakt" className="px-6 py-2 bg-[#00B5AD] text-white rounded-lg hover:bg-[#009891] transition-all">
                   {t('nav.contact')}
                 </Link>

@@ -67,10 +67,10 @@ export default function AdminEducationRegistrationsPage() {
             .select('id, payment_method')
             .in('id', orderIds);
           
-          const orderMap = orders?.reduce((acc: any, o) => {
+          const orderMap = (orders || []).reduce((acc: Record<string, string | null>, o: { id: string; payment_method: string | null }) => {
             acc[o.id] = o.payment_method;
             return acc;
-          }, {}) || {};
+          }, {} as Record<string, string | null>);
           
           const enriched = regs.map(r => ({
             ...r,

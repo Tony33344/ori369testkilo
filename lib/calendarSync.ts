@@ -45,11 +45,25 @@ export async function syncBookingToCalendar(payload: CalendarSyncPayload) {
 
     date = date || booking.date;
     time = time || (booking.time_slot || '').slice(0, 5);
-    serviceName = serviceName || booking.services?.name || 'Terapija';
-    duration = duration || booking.services?.duration || 60;
-    clientName = clientName || booking.profiles?.full_name || 'Stranka';
-    clientEmail = clientEmail || booking.profiles?.email || '';
-    clientPhone = clientPhone || booking.profiles?.phone || '';
+    const services = booking.services as any;
+    const serviceNameValue = Array.isArray(services)
+      ? services[0]?.name
+      : services?.name;
+
+    const serviceDurationValue = Array.isArray(services)
+      ? services[0]?.duration
+      : services?.duration;
+
+    const profiles = booking.profiles as any;
+    const profileFullName = Array.isArray(profiles) ? profiles[0]?.full_name : profiles?.full_name;
+    const profileEmail = Array.isArray(profiles) ? profiles[0]?.email : profiles?.email;
+    const profilePhone = Array.isArray(profiles) ? profiles[0]?.phone : profiles?.phone;
+
+    serviceName = serviceName || serviceNameValue || 'Terapija';
+    duration = duration || serviceDurationValue || 60;
+    clientName = clientName || profileFullName || 'Stranka';
+    clientEmail = clientEmail || profileEmail || '';
+    clientPhone = clientPhone || profilePhone || '';
     notes = notes || booking.notes || '';
   }
 

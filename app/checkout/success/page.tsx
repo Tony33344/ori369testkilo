@@ -13,9 +13,9 @@ const supabase = createClient(
 );
 
 interface SuccessProps {
-  searchParams: {
+  searchParams: Promise<{
     session_id?: string;
-  };
+  }>;
 }
 
 async function getOrderDetails(sessionId?: string) {
@@ -39,7 +39,16 @@ async function getOrderDetails(sessionId?: string) {
 
   const summaryItems: OrderSummaryItem[] = (items || []).map((item) => {
     const type = item.service_id ? 'service' : 'product';
-    const name = item.service_id ? item.services?.name : item.shop_products?.name;
+
+    const serviceName = Array.isArray(item.services)
+      ? item.services[0]?.name
+      : (item.services as { name?: string } | null | undefined)?.name;
+
+    const productName = Array.isArray(item.shop_products)
+      ? item.shop_products[0]?.name
+      : (item.shop_products as { name?: string } | null | undefined)?.name;
+
+    const name = item.service_id ? serviceName : productName;
     return {
       id: (item.service_id || item.product_id) as string,
       name: name || 'Artikel',
@@ -146,14 +155,14 @@ function SuccessContent({ order }: { order: Awaited<ReturnType<typeof getOrderDe
 }
 
 async function CheckoutSuccessPage({ searchParams }: SuccessProps) {
-  const order = await getOrderDetails(searchParams.session_id);
+  const params = await searchParams;
+  const order = await getOrderDetails(params?.session_id);
   return <SuccessContent order={order} />;
 }
 
 export default function CheckoutSuccessPageWrapper(props: SuccessProps) {
   return (
     <Suspense fallback={<div className="min-h-screen bg-gray-50" />}>
-      {/* @ts-expect-error Async Server Component */}
       <CheckoutSuccessPage {...props} />
     </Suspense>
   );

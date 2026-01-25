@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
 import { supabase } from '@/lib/supabase';
-import { ArrowLeft, ShoppingCart, Image as ImageIcon } from 'lucide-react';
+import { ArrowLeft, ShoppingCart, Image as ImageIcon, ChevronDown, ChevronUp, Info, AlertTriangle, BookOpen, HelpCircle } from 'lucide-react';
 import toast from 'react-hot-toast';
 import { useCart } from '@/components/CartProvider';
 
@@ -15,12 +15,25 @@ interface Product {
   slug: string;
   description: string | null;
   description_sl?: string | null;
+  short_description?: string | null;
+  short_description_sl?: string | null;
   price: number;
   currency: string;
   stock: number;
   active: boolean;
   image_url: string | null;
   category_id: string;
+  ingredients?: string | null;
+  ingredients_sl?: string | null;
+  nutrition_facts?: any;
+  usage_instructions?: string | null;
+  usage_instructions_sl?: string | null;
+  warnings?: string | null;
+  warnings_sl?: string | null;
+  faq?: any;
+  brand?: string | null;
+  weight?: string | null;
+  dosage?: string | null;
 }
 
 interface Category {
@@ -28,6 +41,36 @@ interface Category {
   name: string;
   name_sl?: string | null;
   slug: string;
+}
+
+// Accordion component for expandable sections
+function Accordion({ title, icon: Icon, children, defaultOpen = false }: { 
+  title: string; 
+  icon: React.ElementType; 
+  children: React.ReactNode;
+  defaultOpen?: boolean;
+}) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+  
+  return (
+    <div className="border border-gray-200 rounded-xl overflow-hidden">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full px-6 py-4 flex items-center justify-between bg-gray-50 hover:bg-gray-100 transition-colors"
+      >
+        <div className="flex items-center gap-3">
+          <Icon size={20} className="text-teal-600" />
+          <span className="font-semibold text-gray-900">{title}</span>
+        </div>
+        {isOpen ? <ChevronUp size={20} className="text-gray-500" /> : <ChevronDown size={20} className="text-gray-500" />}
+      </button>
+      {isOpen && (
+        <div className="px-6 py-4 bg-white">
+          {children}
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default function ProductPage() {
@@ -49,7 +92,7 @@ export default function ProductPage() {
     try {
       const { data: prod, error } = await supabase
         .from('shop_products')
-        .select('id, name, name_sl, slug, description, description_sl, price, currency, stock, active, image_url, category_id')
+        .select('id, name, name_sl, slug, description, description_sl, short_description, short_description_sl, price, currency, stock, active, image_url, category_id, ingredients, ingredients_sl, nutrition_facts, usage_instructions, usage_instructions_sl, warnings, warnings_sl, faq, brand, weight, dosage')
         .eq('slug', slug)
         .eq('active', true)
         .single();
@@ -180,13 +223,39 @@ export default function ProductPage() {
               </p>
             </div>
 
-            {/* Description */}
-            {(product.description_sl || product.description) && (
+            {/* Short Description */}
+            {(product.short_description_sl || product.short_description || product.description_sl || product.description) && (
               <div className="bg-white rounded-2xl p-6 border border-gray-100">
-                <h2 className="text-xl font-semibold text-gray-900 mb-3">Podroben opis</h2>
                 <p className="text-base text-gray-700 leading-relaxed">
-                  {(product.description_sl || product.description || '').trim()}
+                  {(product.short_description_sl || product.short_description || product.description_sl || product.description || '').trim().slice(0, 300)}
+                  {((product.short_description_sl || product.short_description || product.description_sl || product.description || '').length > 300) && '...'}
                 </p>
+              </div>
+            )}
+
+            {/* Product Meta Info */}
+            {(product.brand || product.weight || product.dosage) && (
+              <div className="bg-white rounded-2xl p-6 border border-gray-100">
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  {product.brand && (
+                    <div>
+                      <span className="text-gray-500">Blagovna znamka:</span>
+                      <span className="ml-2 font-medium text-gray-900">{product.brand}</span>
+                    </div>
+                  )}
+                  {product.weight && (
+                    <div>
+                      <span className="text-gray-500">Neto količina:</span>
+                      <span className="ml-2 font-medium text-gray-900">{product.weight}</span>
+                    </div>
+                  )}
+                  {product.dosage && (
+                    <div className="col-span-2">
+                      <span className="text-gray-500">Priporočeno doziranje:</span>
+                      <span className="ml-2 font-medium text-gray-900">{product.dosage}</span>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
 
@@ -249,6 +318,92 @@ export default function ProductPage() {
               </button>
             )}
           </div>
+        </div>
+
+        {/* Detailed Information Accordions */}
+        <div className="mb-12 space-y-4">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6">Za tiste, ki želijo več</h2>
+          
+          {/* Full Description */}
+          {(product.description_sl || product.description) && (
+            <Accordion title="Podroben opis" icon={Info} defaultOpen={true}>
+              <div className="prose prose-gray max-w-none">
+                <p className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  {(product.description_sl || product.description || '').trim()}
+                </p>
+              </div>
+            </Accordion>
+          )}
+
+          {/* Ingredients */}
+          {(product.ingredients_sl || product.ingredients) && (
+            <Accordion title="Sestavine" icon={BookOpen}>
+              <div className="space-y-4">
+                <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                  {(product.ingredients_sl || product.ingredients || '').trim()}
+                </div>
+                
+                {/* Nutrition Facts Table */}
+                {product.nutrition_facts && typeof product.nutrition_facts === 'object' && (
+                  <div className="mt-4">
+                    <h4 className="font-semibold text-gray-900 mb-3">Hranilne vrednosti</h4>
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-sm border-collapse">
+                        <thead>
+                          <tr className="bg-gray-100">
+                            <th className="text-left px-4 py-2 border border-gray-200">Sestavina</th>
+                            <th className="text-right px-4 py-2 border border-gray-200">Na porcijo</th>
+                            <th className="text-right px-4 py-2 border border-gray-200">%DV</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {Array.isArray(product.nutrition_facts) && product.nutrition_facts.map((item: any, idx: number) => (
+                            <tr key={idx} className={idx % 2 === 0 ? 'bg-white' : 'bg-gray-50'}>
+                              <td className="px-4 py-2 border border-gray-200">{item.name || item.ingredient}</td>
+                              <td className="text-right px-4 py-2 border border-gray-200">{item.amount}</td>
+                              <td className="text-right px-4 py-2 border border-gray-200">{item.dv || '-'}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                )}
+              </div>
+            </Accordion>
+          )}
+
+          {/* Usage Instructions */}
+          {(product.usage_instructions_sl || product.usage_instructions) && (
+            <Accordion title="Uporaba / Navodila" icon={BookOpen}>
+              <div className="text-gray-700 leading-relaxed whitespace-pre-line">
+                {(product.usage_instructions_sl || product.usage_instructions || '').trim()}
+              </div>
+            </Accordion>
+          )}
+
+          {/* Warnings */}
+          {(product.warnings_sl || product.warnings) && (
+            <Accordion title="Opozorila" icon={AlertTriangle}>
+              <div className="text-amber-800 bg-amber-50 p-4 rounded-lg leading-relaxed whitespace-pre-line">
+                {(product.warnings_sl || product.warnings || '').trim()}
+              </div>
+            </Accordion>
+          )}
+
+          {/* FAQ */}
+          {product.faq && Array.isArray(product.faq) && product.faq.length > 0 && (
+            <Accordion title="Pogosta vprašanja" icon={HelpCircle}>
+              <div className="space-y-4">
+                {product.faq.map((item: any, idx: number) => (
+                  <div key={idx} className="border-b border-gray-100 pb-4 last:border-0 last:pb-0">
+                    <h4 className="font-semibold text-gray-900 mb-2">{item.q || item.question}</h4>
+                    <p className="text-gray-700">{item.a || item.answer}</p>
+                  </div>
+                ))}
+              </div>
+            </Accordion>
+          )}
         </div>
 
         {/* Related Products */}

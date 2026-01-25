@@ -3,19 +3,35 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { ShoppingCart, Search, Filter, Star, Package, Sparkles, Check } from 'lucide-react';
+import { useSearchParams } from 'next/navigation';
+import { ShoppingCart, Search, Filter, Star, Package, Sparkles, Check, SlidersHorizontal } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { useCart } from '@/components/CartProvider';
 import toast from 'react-hot-toast';
 
 export default function ShopPage() {
+  const searchParams = useSearchParams();
   const { addToCart } = useCart();
   const [categories, setCategories] = useState<any[]>([]);
   const [products, setProducts] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
+  const [sortBy, setSortBy] = useState<'name' | 'price-asc' | 'price-desc'>('name');
+  const [showFilters, setShowFilters] = useState(false);
   const [addedProducts, setAddedProducts] = useState<Set<string>>(new Set());
+
+  // Read search query from URL on mount
+  useEffect(() => {
+    const urlSearch = searchParams.get('search');
+    if (urlSearch) {
+      setSearchQuery(urlSearch);
+    }
+    const urlCategory = searchParams.get('category');
+    if (urlCategory) {
+      setSelectedCategory(urlCategory);
+    }
+  }, [searchParams]);
 
   useEffect(() => {
     loadData();
@@ -78,8 +94,15 @@ export default function ShopPage() {
     return matchesSearch && matchesCategory;
   });
 
+  // Sort products
+  const sortedProducts = [...filteredProducts].sort((a, b) => {
+    if (sortBy === 'price-asc') return Number(a.price) - Number(b.price);
+    if (sortBy === 'price-desc') return Number(b.price) - Number(a.price);
+    return (a.name_sl || a.name || '').localeCompare(b.name_sl || b.name || '', 'sl');
+  });
+
   const byCategory: Record<string, any[]> = {};
-  filteredProducts.forEach((p) => {
+  sortedProducts.forEach((p) => {
     const key = p.category_id || 'uncategorized';
     if (!byCategory[key]) byCategory[key] = [];
     byCategory[key].push(p);
@@ -156,10 +179,24 @@ export default function ShopPage() {
             </div>
           </div>
           
-          {/* Results count */}
-          <div className="mt-4 text-sm text-gray-600 font-medium">
-            Prikazano: {filteredProducts.length} {filteredProducts.length === 1 ? 'izdelek' : 'izdelkov'}
-            {searchQuery && ` za "${searchQuery}"`}
+          {/* Sort and Results */}
+          <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+            <div className="text-sm text-gray-600 font-medium">
+              Prikazano: {filteredProducts.length} {filteredProducts.length === 1 ? 'izdelek' : 'izdelkov'}
+              {searchQuery && ` za "${searchQuery}"`}
+            </div>
+            <div className="flex items-center gap-2">
+              <SlidersHorizontal size={16} className="text-gray-500" />
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value as any)}
+                className="px-3 py-1.5 text-sm border border-gray-200 rounded-lg focus:ring-2 focus:ring-teal-500 focus:border-transparent bg-white"
+              >
+                <option value="name">Po imenu (A-Ž)</option>
+                <option value="price-asc">Cena: nizka → visoka</option>
+                <option value="price-desc">Cena: visoka → nizka</option>
+              </select>
+            </div>
           </div>
         </div>
 

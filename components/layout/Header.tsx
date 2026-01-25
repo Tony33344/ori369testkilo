@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { Menu, X, Search } from 'lucide-react';
 import CartButton from '@/components/CartButton';
 import { supabase } from '@/lib/supabase';
 import { signOut } from '@/lib/auth';
@@ -23,8 +23,27 @@ export default function Header() {
   const [user, setUser] = useState<any>(null);
   const [banner, setBanner] = useState<any>(null);
   const [bannerDismissed, setBannerDismissed] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
+  const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
+  const router = useRouter();
   const { t } = useLanguage();
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      router.push(`/trgovina?search=${encodeURIComponent(searchQuery.trim())}`);
+      setShowSearch(false);
+      setSearchQuery('');
+    }
+  };
+
+  useEffect(() => {
+    if (showSearch && searchInputRef.current) {
+      searchInputRef.current.focus();
+    }
+  }, [showSearch]);
 
   useEffect(() => {
     supabase.auth.getUser().then(({ data: { user: authUser } }: { data: { user: any } }) => {
@@ -126,6 +145,43 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-6">
+            {/* Search */}
+            <div className="relative">
+              {showSearch ? (
+                <form onSubmit={handleSearch} className="flex items-center">
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Išči izdelke..."
+                    className="w-48 px-3 py-1.5 text-sm border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent"
+                  />
+                  <button
+                    type="submit"
+                    className="px-3 py-1.5 bg-[#00B5AD] text-white rounded-r-lg hover:bg-[#009891]"
+                  >
+                    <Search size={18} />
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => { setShowSearch(false); setSearchQuery(''); }}
+                    className="ml-2 text-gray-500 hover:text-gray-700"
+                  >
+                    <X size={18} />
+                  </button>
+                </form>
+              ) : (
+                <button
+                  onClick={() => setShowSearch(true)}
+                  className="p-2 text-gray-600 hover:text-[#00B5AD] transition-colors"
+                  title="Išči"
+                >
+                  <Search size={20} />
+                </button>
+              )}
+            </div>
+            
             {/* Language Selector */}
             <LanguageSelector />
             {navItems.map((item) => (
@@ -181,6 +237,24 @@ export default function Header() {
         {isOpen && (
           <div className="md:hidden pt-4 pb-2 border-t border-gray-200 mt-4">
             <div className="flex flex-col space-y-4">
+              {/* Mobile Search */}
+              <form onSubmit={(e) => { handleSearch(e); setIsOpen(false); }} className="pb-3 border-b border-gray-200">
+                <div className="flex items-center">
+                  <input
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Išči izdelke..."
+                    className="flex-1 px-3 py-2 text-sm border border-gray-300 rounded-l-lg focus:outline-none focus:ring-2 focus:ring-[#00B5AD]"
+                  />
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-[#00B5AD] text-white rounded-r-lg hover:bg-[#009891]"
+                  >
+                    <Search size={18} />
+                  </button>
+                </div>
+              </form>
               {/* Mobile Language Selector */}
               <div className="pb-2 border-b border-gray-200">
                 <LanguageSelector />

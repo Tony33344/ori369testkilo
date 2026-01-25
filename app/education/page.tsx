@@ -169,7 +169,7 @@ export default function EducationPage() {
                       <span className="text-2xl font-black text-gray-900">€{course.sessions[0]?.price || '0'}</span>
                     </div>
                     <Link 
-                      href={`/checkout?courseId=${course.id}${course.sessions[0]?.id ? `&sessionId=${course.sessions[0].id}` : ''}`}
+                      href="/education/potrdi-rezervacijo"
                       className="inline-flex items-center space-x-2 px-5 py-2.5 bg-[#00B5AD] text-white text-sm font-bold rounded-xl hover:bg-[#009891] transition-all shadow-md shadow-[#00B5AD]/10"
                     >
                       <span>Potrdi rezervacijo</span>

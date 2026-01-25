@@ -78,7 +78,6 @@ export default function Header() {
     { name: t('nav.about'), href: '/o-nas' },
     { name: t('nav.therapies'), href: '/terapije' },
     { name: t('nav.packages'), href: '/paketi' },
-    { name: 'ORI Education', href: '/education' },
     { name: 'MotioScan', href: '/motioscan' },
     { name: 'Trgovina', href: '/trgovina' },
     { name: t('nav.booking'), href: '/rezervacija' },

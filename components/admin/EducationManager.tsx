@@ -644,6 +644,16 @@ export default function EducationManager() {
                 />
               </div>
 
+              <div className="pt-4 border-t border-gray-100">
+                <h4 className="text-sm font-semibold text-gray-900 mb-4 flex items-center">
+                  <Calendar className="w-4 h-4 mr-2 text-[#00B5AD]" />
+                  Prvo sejo lahko dodate ali uredite v razdelku "Seje tečaja" spodaj
+                </h4>
+                <p className="text-xs text-gray-500">
+                  Kliknite na "Dodaj sejo" v razširjenem pogledu tečaja, da dodate datum, čas in druge podrobnosti seje.
+                </p>
+              </div>
+
               <div className="pt-4 flex items-center justify-end space-x-3 border-t border-gray-100">
                 <button
                   type="button"

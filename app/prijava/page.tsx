@@ -28,8 +28,9 @@ function LoginForm() {
     if (error) {
       toast.error(t('auth.login.error'));
     } else {
-      toast.success(t('toast.success'));
-      window.location.href = redirect;
+      toast.success(t('auth.login.success') || t('toast.success'));
+      // Use replace instead of href for smoother redirect
+      window.location.replace(redirect);
     }
   };
 

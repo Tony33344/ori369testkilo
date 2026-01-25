@@ -38,6 +38,7 @@ yarn-error.log*
 *.env*
 !.env.example
 ori369-calendar-*.json
+google-calendar-credentials.json
 
 # vercel
 .vercel

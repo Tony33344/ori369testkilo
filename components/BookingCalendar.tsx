@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
+import { format } from 'date-fns';
 import { supabase } from '@/lib/supabase';
 import { useLanguage } from '@/lib/i18n';
 import { toast } from 'react-hot-toast';
@@ -116,7 +117,7 @@ export default function BookingCalendar({
   };
 
   const handleDateClick = (date: Date) => {
-    const dateStr = date.toISOString().split('T')[0];
+    const dateStr = format(date, 'yyyy-MM-dd');
     if (!isDaySelectable(date)) {
       toast.error(t('booking.noSlotsAvailable'));
       return;
@@ -163,7 +164,7 @@ export default function BookingCalendar({
               {days.map((date, index) => {
                 if (!date) return <div key={index} className="aspect-square" />;
 
-                const dateStr = date.toISOString().split('T')[0];
+                const dateStr = format(date, 'yyyy-MM-dd');
                 const isSelected = selectedDate === dateStr;
                 const isToday = date.getTime() === today.getTime();
                 const selectable = isDaySelectable(date);

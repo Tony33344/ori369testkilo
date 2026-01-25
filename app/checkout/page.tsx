@@ -10,6 +10,7 @@ import { companyData, generateUPNReference, formatIBAN, generateUPNQRData } from
 import { supabase } from '@/lib/supabase';
 import toast from 'react-hot-toast';
 import QRCode from 'qrcode';
+import { OrderSummaryItem, paymentMethodLabels, formatOrderDateTime, formatSlotDateTime } from '@/lib/orderSummary';
 
 type PaymentMethod = 'card' | 'upn' | 'cash_pickup' | 'cash_delivery';
 type ShippingMethod = 'pickup' | 'post' | 'delivery';
@@ -37,6 +38,36 @@ interface ServiceDetails {
   image_url?: string;
 }
 
+interface EducationSession {
+  id: string;
+  headline: string | null;
+  start_at: string;
+  end_at: string | null;
+  price: number | null;
+  course: {
+    id: string;
+    title: string;
+  } | null;
+}
+
+
+const syncBookingToCalendar = async (bookingId?: string | null) => {
+  if (!bookingId) return;
+  try {
+    const response = await fetch('/api/google-calendar/sync', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ bookingId }),
+    });
+    if (!response.ok) {
+      const errorPayload = await response.json().catch(() => null);
+      console.error('Google Calendar sync failed for booking', bookingId, response.status, errorPayload);
+    }
+  } catch (error) {
+    console.error('Failed to sync booking to Google Calendar:', error);
+  }
+};
+
 export default function CheckoutPage() {
   return (
     <Suspense fallback={<div className="min-h-screen bg-gray-50 py-12" />}>
@@ -57,20 +88,25 @@ function CheckoutPageContent() {
   const [authFullName, setAuthFullName] = useState('');
   const [authLoading, setAuthLoading] = useState(false);
   
-  // URL params for direct service checkout
+  // URL params for direct service/education checkout
   const serviceId = searchParams.get('service');
   const bookingDate = searchParams.get('date');
   const bookingTime = searchParams.get('time');
   const bookingId = searchParams.get('bookingId');
+  const educationCourseId = searchParams.get('courseId');
+  const educationSessionId = searchParams.get('sessionId');
   
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('card');
   const [shippingMethod, setShippingMethod] = useState<ShippingMethod>('pickup');
   const [loading, setLoading] = useState(false);
   const [serviceDetails, setServiceDetails] = useState<ServiceDetails | null>(null);
+  const [educationSession, setEducationSession] = useState<EducationSession | null>(null);
   const [orderCreated, setOrderCreated] = useState(false);
   const [orderReference, setOrderReference] = useState('');
   const [upnQrDataUrl, setUpnQrDataUrl] = useState<string>('');
   const [createdOrderTotal, setCreatedOrderTotal] = useState<number>(0);
+  const [orderSummaryItems, setOrderSummaryItems] = useState<OrderSummaryItem[]>([]);
+  const [orderCreatedAt, setOrderCreatedAt] = useState<string>('');
   
   // Customer info
   const [customerName, setCustomerName] = useState('');
@@ -81,6 +117,8 @@ function CheckoutPageContent() {
   const [customerPostal, setCustomerPostal] = useState('');
   const [notes, setNotes] = useState('');
   const [saveDetailsToProfile, setSaveDetailsToProfile] = useState(true);
+  const [gdprConsent, setGdprConsent] = useState(false);
+  const [dateOfBirth, setDateOfBirth] = useState('');
 
   const [discountCodeInput, setDiscountCodeInput] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState<DiscountCode | null>(null);
@@ -88,8 +126,12 @@ function CheckoutPageContent() {
 
   // Determine if this is a service checkout or cart checkout
   const isServiceCheckout = !!serviceId;
-  const hasProducts = cart.items.some(item => item.type === 'product');
-  const hasServices = cart.items.some(item => item.type === 'service') || isServiceCheckout;
+  const isEducationCheckout = !!educationCourseId || !!educationSessionId;
+  const educationMode = isEducationCheckout && !isServiceCheckout;
+
+  const cartItems = educationMode ? [] : cart.items;
+  const hasProducts = educationMode ? false : cartItems.some(item => item.type === 'product');
+  const hasServices = educationMode ? true : cartItems.some(item => item.type === 'service') || isServiceCheckout;
 
   // Load service details if service checkout
   useEffect(() => {
@@ -97,6 +139,13 @@ function CheckoutPageContent() {
       loadServiceDetails(serviceId);
     }
   }, [serviceId]);
+
+  // Load education session/course details if education checkout
+  useEffect(() => {
+    if (educationSessionId) {
+      loadEducationDetails(educationSessionId);
+    }
+  }, [educationSessionId]);
 
   // Load user info if logged in
   useEffect(() => {
@@ -131,6 +180,20 @@ function CheckoutPageContent() {
     if (data && !error) {
       setServiceDetails(data);
     }
+  }
+
+  async function loadEducationDetails(id: string) {
+    const { data, error } = await supabase
+      .from('education_course_sessions')
+      .select('id, headline, start_at, end_at, price, course:education_courses(id, title)')
+      .eq('id', id)
+      .single();
+
+    if (error) {
+      console.error('Failed to load education session', error);
+      return;
+    }
+    setEducationSession(data as unknown as EducationSession);
   }
 
   async function handleAuthSubmit(e: React.FormEvent) {
@@ -215,10 +278,11 @@ function CheckoutPageContent() {
 
   // Calculate totals
   const serviceDirectTotal = serviceDetails?.price || 0;
-  const servicesCartTotal = cart.items
+  const educationTotal = isEducationCheckout ? Number(educationSession?.price || 0) : 0;
+  const servicesCartTotal = cartItems
     .filter(item => item.type === 'service')
     .reduce((sum, item) => sum + item.price * item.quantity, 0);
-  const productsTotal = cart.items
+  const productsTotal = cartItems
     .filter(item => item.type === 'product')
     .reduce((sum, item) => sum + item.price * item.quantity, 0);
   
@@ -228,7 +292,7 @@ function CheckoutPageContent() {
     0
   ) : 0;
   
-  const servicesTotal = (isServiceCheckout ? serviceDirectTotal : 0) + servicesCartTotal;
+  const servicesTotal = (isServiceCheckout ? serviceDirectTotal : 0) + servicesCartTotal + educationTotal;
   const subtotal = servicesTotal + productsTotal;
 
   const eligibleSubtotal = (() => {
@@ -356,6 +420,11 @@ function CheckoutPageContent() {
       return;
     }
 
+    if (!gdprConsent) {
+      toast.error('Za nadaljevanje morate sprejeti pogoje obdelave osebnih podatkov (GDPR)');
+      return;
+    }
+
     if (hasProducts && shippingMethod !== 'pickup' && (!customerAddress || !customerCity || !customerPostal)) {
       toast.error('Prosimo, vnesite naslov za dostavo');
       return;
@@ -394,8 +463,16 @@ function CheckoutPageContent() {
         bookingTime,
       });
     }
+
+    if (isEducationCheckout && educationSession) {
+      items.push({
+        educationCourseId,
+        educationSessionId,
+        quantity: 1,
+      });
+    }
     
-    cart.items.forEach(item => {
+    cartItems.forEach(item => {
       items.push({
         serviceId: item.type === 'service' ? item.id : undefined,
         productId: item.type === 'product' ? item.id : undefined,
@@ -445,6 +522,9 @@ function CheckoutPageContent() {
     const random = Math.random().toString(36).substring(2, 6).toUpperCase();
     const reference = `ORI-${timestamp}-${random}`;
     
+    // Determine order type for proper filtering in dashboard
+    const orderType = isEducationCheckout ? 'education' : (hasProducts ? 'shop' : 'service');
+    
     // Create order in database
     const orderData = {
       user_id: user?.id || null,
@@ -460,6 +540,7 @@ function CheckoutPageContent() {
       shipping_cost: shippingCost,
       metadata: {
         reference,
+        order_type: orderType,
         discount: appliedDiscount
           ? {
               code: appliedDiscount.code,
@@ -491,7 +572,8 @@ function CheckoutPageContent() {
 
     // Create order items
     const orderItems = [];
-    
+    const summaryItems: OrderSummaryItem[] = [];
+
     if (isServiceCheckout && serviceDetails) {
       orderItems.push({
         order_id: order.id,
@@ -502,21 +584,78 @@ function CheckoutPageContent() {
         metadata: { bookingDate, bookingTime },
       });
 
-      // Create booking for service
-      if (bookingDate && bookingTime) {
-        const { error: bookingError } = await supabase.from('bookings').insert({
+      summaryItems.push({
+        id: serviceDetails.id,
+        name: serviceDetails.name,
+        quantity: 1,
+        totalPrice: serviceDetails.price,
+        type: 'service',
+        bookingDate,
+        bookingTime,
+      });
+
+      if (bookingId) {
+        const { error: bookingUpdateError } = await supabase
+          .from('bookings')
+          .update({
+            status: 'pending',
+            notes: `Order: ${reference}`,
+            service_id: serviceDetails.id,
+          })
+          .eq('id', bookingId);
+        if (bookingUpdateError) throw bookingUpdateError;
+        await syncBookingToCalendar(bookingId);
+      } else if (bookingDate && bookingTime) {
+        const { data: createdBooking, error: bookingError } = await supabase.from('bookings').insert({
           user_id: user?.id || null,
           service_id: serviceDetails.id,
           date: bookingDate,
           time_slot: bookingTime,
           status: 'pending',
           notes: `Order: ${reference}`,
-        });
+        }).select().single();
         if (bookingError) throw bookingError;
+        await syncBookingToCalendar(createdBooking?.id);
       }
     }
 
-    for (const item of cart.items) {
+    if (isEducationCheckout && educationSession) {
+      const price = Number(educationSession.price || 0);
+
+      summaryItems.push({
+        id: educationSession.id,
+        name: educationSession.course?.title || 'Izobraževanje',
+        quantity: 1,
+        totalPrice: price,
+        type: 'service',
+        bookingDate: educationSession.start_at?.split('T')[0],
+        bookingTime: educationSession.start_at ? new Date(educationSession.start_at).toISOString().slice(11, 16) : undefined,
+      });
+
+      const registrationPayload: any = {
+        session_id: educationSession.id,
+        user_id: user?.id || null,
+        full_name: customerName,
+        email: customerEmail,
+        phone: customerPhone,
+        status: 'pending',
+        payment_status: paymentMethod === 'upn' ? 'pending' : 'paid',
+        notes,
+        order_id: order.id,
+      };
+
+      const { error: regError } = await supabase
+        .from('education_course_registrations')
+        .insert(registrationPayload);
+
+      if (regError) throw regError;
+
+      // Do NOT add education items to order_items - they violate the constraint
+      // Education registrations are stored separately in education_course_registrations
+      // and are fetched directly in the dashboard
+    }
+
+    for (const item of cartItems) {
       orderItems.push({
         order_id: order.id,
         service_id: item.type === 'service' ? item.id : null,
@@ -529,16 +668,27 @@ function CheckoutPageContent() {
 
       // Create booking for services in cart
       if (item.type === 'service' && item.bookingDate) {
-        const { error: bookingError } = await supabase.from('bookings').insert({
+        const { data: cartBooking, error: bookingError } = await supabase.from('bookings').insert({
           user_id: user?.id || null,
           service_id: item.id,
           date: item.bookingDate,
           time_slot: item.bookingTime,
           status: 'pending',
           notes: `Order: ${reference}`,
-        });
+        }).select().single();
         if (bookingError) throw bookingError;
+        await syncBookingToCalendar(cartBooking?.id);
       }
+
+      summaryItems.push({
+        id: item.id,
+        name: item.name,
+        quantity: item.quantity,
+        totalPrice: item.price * item.quantity,
+        type: item.type,
+        bookingDate: item.bookingDate,
+        bookingTime: item.bookingTime,
+      });
     }
 
     if (orderItems.length > 0) {
@@ -549,9 +699,13 @@ function CheckoutPageContent() {
     // Persist final totals before clearing cart (needed for success screen + UPN QR)
     const finalTotal = total;
     setCreatedOrderTotal(finalTotal);
+    setOrderSummaryItems(summaryItems);
+    setOrderCreatedAt(order.created_at || new Date().toISOString());
 
-    // Clear cart and show success
-    clearCart();
+    // Clear cart and show success (only if not in education-only mode)
+    if (!educationMode) {
+      clearCart();
+    }
     setOrderReference(reference);
     setOrderCreated(true);
     
@@ -569,6 +723,64 @@ function CheckoutPageContent() {
             <p className="text-gray-600 mb-6">
               Vaša referenca naročila: <strong className="text-[#00B5AD]">{orderReference}</strong>
             </p>
+
+            <div className="bg-gray-50 rounded-lg p-6 mb-6 text-left">
+              <h2 className="text-xl font-bold mb-4">Podrobnosti naročila</h2>
+              <dl className="space-y-3 text-gray-700">
+                <div className="flex justify-between">
+                  <dt className="text-gray-500">Status plačila</dt>
+                  <dd className="font-semibold">{paymentMethodLabels[paymentMethod]}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-gray-500">Datum in ura naročila</dt>
+                  <dd className="font-semibold">{formatOrderDateTime(orderCreatedAt)}</dd>
+                </div>
+                <div className="flex justify-between">
+                  <dt className="text-gray-500">Skupni znesek</dt>
+                  <dd className="font-bold text-[#00B5AD]">€{createdOrderTotal.toFixed(2)}</dd>
+                </div>
+              </dl>
+
+              {orderSummaryItems.length > 0 && (
+                <div className="mt-6">
+                  <h3 className="text-lg font-semibold mb-3">Kupljeni artikli</h3>
+                  <ul className="space-y-3">
+                    {orderSummaryItems.map((item) => (
+                      <li key={`${item.id}-${item.bookingDate || ''}-${item.bookingTime || ''}`} className="bg-white rounded-lg p-4 border border-gray-100">
+                        <div className="flex justify-between">
+                          <div>
+                            <p className="font-semibold text-gray-900">{item.name}</p>
+                            <p className="text-sm text-gray-500">Količina: {item.quantity}</p>
+                            {item.type === 'service' && item.bookingDate && item.bookingTime && (
+                              <p className="text-sm text-[#00B5AD] mt-1">
+                                Termin: {formatSlotDateTime(item.bookingDate, item.bookingTime)}
+                              </p>
+                            )}
+                          </div>
+                          <div className="text-right">
+                            <p className="font-bold">€{item.totalPrice.toFixed(2)}</p>
+                          </div>
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Education item (from URL) */}
+              {isEducationCheckout && educationSession && (
+                <div className="flex gap-3 py-3 border-b">
+                  <div className="flex-1">
+                    <p className="font-semibold">{educationSession.course?.title || 'Izobraževanje'}</p>
+                    <p className="text-sm text-gray-500">{educationSession.headline || 'Termin izobraževanja'}</p>
+                    {educationSession.start_at && (
+                      <p className="text-sm text-[#00B5AD]">{formatOrderDateTime(educationSession.start_at)}</p>
+                    )}
+                  </div>
+                  <p className="font-bold">€{Number(educationSession.price || 0).toFixed(2)}</p>
+                </div>
+              )}
+            </div>
 
             {paymentMethod === 'upn' && (
               <div className="bg-gray-50 rounded-lg p-6 mb-6 text-left">
@@ -661,7 +873,7 @@ function CheckoutPageContent() {
   }
 
   // Empty cart check
-  if (!isServiceCheckout && cart.items.length === 0) {
+  if (!isServiceCheckout && !isEducationCheckout && cartItems.length === 0) {
     return (
       <div className="min-h-screen bg-gray-50 py-12">
         <div className="container mx-auto px-4 max-w-2xl text-center">
@@ -691,11 +903,11 @@ function CheckoutPageContent() {
       <div className="container mx-auto px-4 max-w-6xl">
         {/* Header */}
         <div className="mb-8">
-          <Link href={isServiceCheckout ? '/terapije' : '/trgovina'} className="inline-flex items-center text-gray-600 hover:text-[#00B5AD] mb-4">
+          <Link href={isServiceCheckout ? '/terapije' : isEducationCheckout ? '/education' : '/trgovina'} className="inline-flex items-center text-gray-600 hover:text-[#00B5AD] mb-4">
             <ArrowLeft size={20} className="mr-2" />
             Nazaj
           </Link>
-          <h1 className="text-3xl font-bold text-gray-900">Blagajna</h1>
+          <h1 className="text-3xl font-bold text-gray-900">{educationMode ? 'Potrditev vpisa na tečaj' : 'Blagajna'}</h1>
         </div>
 
         {!authedUser && (
@@ -823,11 +1035,48 @@ function CheckoutPageContent() {
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent"
                   />
                 </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Datum rojstva <span className="text-gray-400">(opcijsko)</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={dateOfBirth}
+                    onChange={(e) => setDateOfBirth(e.target.value)}
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent"
+                  />
+                </div>
+              </div>
+
+              {/* GDPR Consent */}
+              <div className="mt-6 p-4 rounded-lg border border-gray-200 bg-gray-50">
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={gdprConsent}
+                    onChange={(e) => setGdprConsent(e.target.checked)}
+                    className="mt-1 h-5 w-5 text-[#00B5AD] border-gray-300 rounded focus:ring-[#00B5AD]"
+                    required
+                  />
+                  <div>
+                    <div className="text-sm font-semibold text-gray-800">
+                      Strinjam se z obdelavo osebnih podatkov *
+                    </div>
+                    <div className="text-xs text-gray-600 mt-1">
+                      S potrditvijo soglašate, da ORI 369 d.o.o. zbira in obdeluje vaše osebne podatke 
+                      (ime, e-pošta, telefon) za namene izvedbe naročila in komunikacije. 
+                      Vaši podatki so varovani v skladu z GDPR. 
+                      <a href="/zasebnost" target="_blank" className="text-[#00B5AD] hover:underline ml-1">
+                        Več o politiki zasebnosti
+                      </a>
+                    </div>
+                  </div>
+                </label>
               </div>
             </div>
 
             {/* Shipping Address (only for products) */}
-            {hasProducts && shippingMethod !== 'pickup' && (
+            {hasProducts && shippingMethod !== 'pickup' && !educationMode && (
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h2 className="text-xl font-bold mb-4">Naslov za dostavo</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -872,7 +1121,7 @@ function CheckoutPageContent() {
             )}
 
             {/* Shipping Method (only for products) */}
-            {hasProducts && (
+            {hasProducts && !educationMode && (
               <div className="bg-white rounded-xl shadow-sm p-6">
                 <h2 className="text-xl font-bold mb-4">Način dostave</h2>
                 <div className="space-y-3">
@@ -1038,7 +1287,7 @@ function CheckoutPageContent() {
               )}
 
               {/* Cart items */}
-              {cart.items.map((item) => (
+              {!educationMode && cartItems.map((item) => (
                 <div key={`${item.id}-${item.bookingDate || ''}`} className="flex gap-3 py-3 border-b">
                   {item.image && (
                     <div className="relative w-16 h-16 flex-shrink-0">
@@ -1056,40 +1305,44 @@ function CheckoutPageContent() {
                     {item.bookingDate && (
                       <p className="text-sm text-gray-500">{item.bookingDate} ob {item.bookingTime}</p>
                     )}
+                  </div>
+                  <div className="text-right">
+                    <p className="font-bold">€{(item.price * item.quantity).toFixed(2)}</p>
                     {item.type === 'product' && item.quantity > 1 && (
                       <p className="text-sm text-gray-500">Količina: {item.quantity}</p>
                     )}
                   </div>
-                  <p className="font-bold">€{(item.price * item.quantity).toFixed(2)}</p>
                 </div>
               ))}
 
               {/* Discount code */}
-              <div className="py-4 border-b">
-                <div className="text-sm font-semibold text-gray-900 mb-2">Koda za popust</div>
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    value={discountCodeInput}
-                    onChange={(e) => setDiscountCodeInput(e.target.value)}
-                    placeholder="Vnesite kodo"
-                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent"
-                  />
-                  <button
-                    type="button"
-                    onClick={applyDiscountCode}
-                    disabled={discountLoading}
-                    className="px-4 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-black disabled:opacity-50"
-                  >
-                    {discountLoading ? '...' : 'Uporabi'}
-                  </button>
-                </div>
-                {appliedDiscount && discountAmount > 0 && (
-                  <div className="mt-2 text-xs text-green-700">
-                    Uporabljena koda: <span className="font-semibold">{appliedDiscount.code}</span>
+              {!educationMode && (
+                <div className="py-4 border-b">
+                  <div className="text-sm font-semibold text-gray-900 mb-2">Koda za popust</div>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      value={discountCodeInput}
+                      onChange={(e) => setDiscountCodeInput(e.target.value)}
+                      placeholder="Vnesite kodo"
+                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent"
+                    />
+                    <button
+                      type="button"
+                      onClick={applyDiscountCode}
+                      disabled={discountLoading}
+                      className="px-4 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-black disabled:opacity-50"
+                    >
+                      {discountLoading ? '...' : 'Uporabi'}
+                    </button>
                   </div>
-                )}
-              </div>
+                </div>
+              )}
+              {appliedDiscount && discountAmount > 0 && (
+                <div className="mt-2 text-xs text-green-700">
+                  Uporabljena koda: <span className="font-semibold">{appliedDiscount.code}</span>
+                </div>
+              )}
 
               {/* Totals */}
               <div className="space-y-2 py-4">

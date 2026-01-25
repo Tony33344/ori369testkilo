@@ -1,63 +1,160 @@
+import { Suspense } from 'react';
 import Link from 'next/link';
-import { CheckCircle, ArrowRight, Home, ShoppingBag } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
+import { redirect } from 'next/navigation';
+import { createClient } from '@supabase/supabase-js';
+import { paymentMethodLabels, formatOrderDateTime, formatSlotDateTime, OrderSummaryItem } from '@/lib/orderSummary';
 
 export const runtime = 'nodejs';
 
-export default function CheckoutSuccessPage() {
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.SUPABASE_SERVICE_ROLE_KEY!
+);
+
+interface SuccessProps {
+  searchParams: {
+    session_id?: string;
+  };
+}
+
+async function getOrderDetails(sessionId?: string) {
+  if (!sessionId) return null;
+
+  const { data, error } = await supabase
+    .from('orders')
+    .select('*')
+    .eq('stripe_session_id', sessionId)
+    .single();
+
+  if (error || !data) {
+    console.error('Order not found for session:', sessionId, error);
+    return null;
+  }
+
+  const { data: items } = await supabase
+    .from('order_items')
+    .select('service_id, product_id, quantity, total_price, metadata, services(name), shop_products(name)')
+    .eq('order_id', data.id);
+
+  const summaryItems: OrderSummaryItem[] = (items || []).map((item) => {
+    const type = item.service_id ? 'service' : 'product';
+    const name = item.service_id ? item.services?.name : item.shop_products?.name;
+    return {
+      id: (item.service_id || item.product_id) as string,
+      name: name || 'Artikel',
+      quantity: item.quantity,
+      totalPrice: item.total_price,
+      type,
+      bookingDate: item.metadata?.bookingDate || null,
+      bookingTime: item.metadata?.bookingTime || null,
+    };
+  });
+
+  return {
+    reference: (data.metadata as any)?.reference || data.id,
+    total: data.total_amount,
+    paymentMethod: (data.payment_method || 'card') as keyof typeof paymentMethodLabels,
+    createdAt: data.created_at,
+    summaryItems,
+  };
+}
+
+function SuccessContent({ order }: { order: Awaited<ReturnType<typeof getOrderDetails>> }) {
+  if (!order) {
+    redirect('/');
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#00B5AD]/10 via-white to-[#B8D52E]/10 py-14">
-      <div className="container mx-auto px-4">
-        <div className="max-w-2xl mx-auto">
-          <div className="bg-white/90 backdrop-blur rounded-3xl shadow-xl border border-black/5 overflow-hidden">
-            <div className="p-10 text-center">
-              <div className="mx-auto mb-6 w-16 h-16 rounded-2xl bg-[#00B5AD]/10 flex items-center justify-center">
-                <CheckCircle className="text-[#00B5AD]" size={34} />
-              </div>
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="container mx-auto px-4 max-w-2xl">
+        <div className="bg-white rounded-xl shadow-lg p-8 text-center">
+          <CheckCircle className="mx-auto text-green-500 mb-4" size={64} />
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Hvala za naročilo!</h1>
+          <p className="text-gray-600 mb-6">
+            Vaša referenca naročila: <strong className="text-[#00B5AD]">{order.reference}</strong>
+          </p>
 
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Plačilo uspešno</h1>
-              <p className="text-gray-600 mb-8">
-                Hvala! Vaše plačilo je bilo uspešno izvedeno. Potrditev naročila boste prejeli tudi na e-pošto.
-              </p>
-
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-10 text-left">
-                <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
-                  <div className="text-xs font-semibold text-gray-500 mb-1">1. Potrditev</div>
-                  <div className="text-sm text-gray-800">Vaše naročilo je potrjeno</div>
-                </div>
-                <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
-                  <div className="text-xs font-semibold text-gray-500 mb-1">2. Obdelava</div>
-                  <div className="text-sm text-gray-800">Priprava in obveščanje</div>
-                </div>
-                <div className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
-                  <div className="text-xs font-semibold text-gray-500 mb-1">3. Prevzem/Dostava</div>
-                  <div className="text-sm text-gray-800">Po dogovoru ali po pošti</div>
-                </div>
+          <div className="bg-gray-50 rounded-lg p-6 mb-6 text-left">
+            <h2 className="text-xl font-bold mb-4">Podrobnosti naročila</h2>
+            <dl className="space-y-3 text-gray-700">
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Status plačila</dt>
+                <dd className="font-semibold">{paymentMethodLabels[order.paymentMethod]}</dd>
               </div>
-
-              <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
-                <Link
-                  href="/dashboard#orders"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-[#00B5AD] text-white font-semibold hover:bg-[#009891] transition"
-                >
-                  Poglej naročila
-                </Link>
-                <Link
-                  href="/trgovina"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gray-100 text-gray-800 font-semibold hover:bg-gray-200 transition"
-                >
-                  Nadaljuj z nakupovanjem
-                </Link>
-                <Link
-                  href="/"
-                  className="inline-flex items-center justify-center px-6 py-3 rounded-lg bg-gray-900 text-white font-semibold hover:bg-black transition"
-                >
-                  Domov
-                </Link>
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Datum in ura naročila</dt>
+                <dd className="font-semibold">{formatOrderDateTime(order.createdAt)}</dd>
               </div>
-            </div>
+              <div className="flex justify-between">
+                <dt className="text-gray-500">Skupni znesek</dt>
+                <dd className="font-bold text-[#00B5AD]">€{Number(order.total).toFixed(2)}</dd>
+              </div>
+            </dl>
+
+            {order.summaryItems.length > 0 && (
+              <div className="mt-6">
+                <h3 className="text-lg font-semibold mb-3">Kupljeni artikli</h3>
+                <ul className="space-y-3">
+                  {order.summaryItems.map((item) => (
+                    <li key={`${item.id}-${item.bookingDate || ''}-${item.bookingTime || ''}`} className="bg-white rounded-lg p-4 border border-gray-100">
+                      <div className="flex justify-between">
+                        <div>
+                          <p className="font-semibold text-gray-900">{item.name}</p>
+                          <p className="text-sm text-gray-500">Količina: {item.quantity}</p>
+                          {item.type === 'service' && item.bookingDate && item.bookingTime && (
+                            <p className="text-sm text-[#00B5AD] mt-1">
+                              Termin: {formatSlotDateTime(item.bookingDate, item.bookingTime)}
+                            </p>
+                          )}
+                        </div>
+                        <div className="text-right">
+                          <p className="font-bold">€{item.totalPrice.toFixed(2)}</p>
+                        </div>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </div>
+
+          <div className="flex gap-4 justify-center">
+            <Link
+              href="/dashboard#orders"
+              className="px-6 py-3 bg-[#00B5AD] text-white rounded-lg hover:bg-[#009891] transition-colors"
+            >
+              Poglej naročila
+            </Link>
+            <Link
+              href="/"
+              className="px-6 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors"
+            >
+              Na domačo stran
+            </Link>
+            <Link
+              href="/trgovina"
+              className="px-6 py-3 bg-gray-900 text-white rounded-lg hover:bg-black transition-colors"
+            >
+              Nadaljuj z nakupovanjem
+            </Link>
           </div>
         </div>
       </div>
     </div>
+  );
+}
+
+async function CheckoutSuccessPage({ searchParams }: SuccessProps) {
+  const order = await getOrderDetails(searchParams.session_id);
+  return <SuccessContent order={order} />;
+}
+
+export default function CheckoutSuccessPageWrapper(props: SuccessProps) {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-gray-50" />}>
+      {/* @ts-expect-error Async Server Component */}
+      <CheckoutSuccessPage {...props} />
+    </Suspense>
   );
 }

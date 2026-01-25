@@ -25,6 +25,11 @@ const CMSManager = dynamic(() => import('@/components/admin/CMSManagerWithImages
   loading: () => <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>
 });
 
+const EducationManager = dynamic(() => import('@/components/admin/EducationManager'), {
+  ssr: false,
+  loading: () => <div className="flex items-center justify-center h-64"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>
+});
+
 interface Booking {
   id: string;
   date: string;
@@ -232,7 +237,7 @@ export default function AdminPage() {
   const { t } = useLanguage();
   const [user, setUser] = useState<any>(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'analytics' | 'content' | 'orders' | 'products' | 'cms' | 'marketing'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'analytics' | 'content' | 'orders' | 'products' | 'cms' | 'marketing' | 'education'>('bookings');
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<Booking[]>([]);
   const [filter, setFilter] = useState<string>('all');
@@ -865,8 +870,19 @@ export default function AdminPage() {
                   : 'text-gray-600 hover:text-gray-900'
               }`}
             >
-              <Tag size={20} />
+              <Megaphone className="w-5 h-5" />
               <span>Marketing</span>
+            </button>
+            <button
+              onClick={() => setActiveTab('education')}
+              className={`flex items-center space-x-2 px-6 py-4 font-medium transition-colors ${
+                activeTab === 'education'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <CalendarIcon className="w-5 h-5" />
+              <span>Education</span>
             </button>
           </div>
         </div>
@@ -1326,18 +1342,23 @@ export default function AdminPage() {
           </div>
         )}
 
+        {activeTab === 'education' && (
+          <div className="bg-white rounded-lg shadow p-6">
+            <EducationManager />
+          </div>
+        )}
+
         {activeTab === 'marketing' && (
-          <>
+          <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
               <div className="bg-white rounded-lg shadow p-6">
-                <div className="flex items-center justify-between mb-4">
-                  <h2 className="text-2xl font-bold text-gray-900">Discount Codes</h2>
+                <div className="flex items-center justify-between mb-6">
+                  <h3 className="text-lg font-bold text-gray-900">Kode za popust</h3>
                   <button
-                    type="button"
-                    onClick={resetDiscountForm}
-                    className="px-4 py-2 rounded-lg bg-gray-100 text-gray-800 hover:bg-gray-200"
+                    onClick={() => resetDiscountForm()}
+                    className="p-2 text-gray-400 hover:text-blue-600"
                   >
-                    New
+                    <Plus className="w-5 h-5" />
                   </button>
                 </div>
 
@@ -1407,7 +1428,7 @@ export default function AdminPage() {
                     <button
                       type="button"
                       onClick={upsertDiscountCode}
-                      className="px-6 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700"
+                      className="px-6 py-2 rounded-lg bg-[#00B5AD] text-white font-semibold hover:bg-[#009891]"
                     >
                       Save
                     </button>
@@ -1512,7 +1533,7 @@ export default function AdminPage() {
                 </div>
               </div>
             </div>
-          </>
+          </div>
         )}
 
         {showOrderModal && selectedOrder && (

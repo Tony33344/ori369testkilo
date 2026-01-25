@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { useSearchParams } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { getCurrentUser } from '@/lib/auth';
 import { useLanguage } from '@/lib/i18n';
@@ -19,6 +19,7 @@ const BookingCalendar = dynamic(() => import('@/components/BookingCalendar'), {
 function BookingForm() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
+  const router = useRouter();
   const packageId = searchParams.get('package');
   
   const [user, setUser] = useState<any>(null);
@@ -48,6 +49,13 @@ function BookingForm() {
   }, [packageId, services]);
 
   useEffect(() => {
+    if (selectedService && !selectedDate) {
+      const todayStr = format(new Date(), 'yyyy-MM-dd');
+      setSelectedDate(todayStr);
+    }
+  }, [selectedService, selectedDate]);
+
+  useEffect(() => {
     if (selectedDate && selectedService) {
       loadAvailableSlots(selectedDate);
     }
@@ -56,6 +64,12 @@ function BookingForm() {
   const loadUser = async () => {
     const currentUser = await getCurrentUser();
     setUser(currentUser);
+
+    if (!currentUser) {
+      const search = typeof window !== 'undefined' ? window.location.search : '';
+      const redirectPath = `/rezervacija${search || ''}`;
+      router.replace(`/prijava?redirect=${encodeURIComponent(redirectPath)}`);
+    }
   };
 
   const loadServices = async () => {
@@ -79,6 +93,7 @@ function BookingForm() {
 
     const selectedServiceObj = services.find((s) => s.id === selectedService);
     const serviceDurationMin = Number(selectedServiceObj?.duration || 60);
+    const slotIntervalMin = Number(selectedServiceObj?.slot_interval_min || 30);
 
     const dayOfWeek = new Date(date).getDay();
 
@@ -101,7 +116,9 @@ function BookingForm() {
       .eq('date', date)
       .eq('service_id', selectedService);
 
-    const bookedTimes = (bookings as Array<{ time_slot: string }> | null)?.map((b) => b.time_slot) || [];
+    const bookedTimes = (bookings as Array<{ time_slot: string }> | null)?.map((b) =>
+      (b.time_slot || '').slice(0, 5)
+    ) || [];
 
     // Get busy events from Google Calendar for this date
     let googleBusyRanges: Array<{ start: Date; end: Date }> = [];
@@ -155,7 +172,7 @@ function BookingForm() {
       const startMin = startH * 60 + startM;
       const endMin = endH * 60 + endM;
 
-      for (let time = startMin; time <= endMin - serviceDurationMin; time += serviceDurationMin) {
+      for (let time = startMin; time <= endMin - serviceDurationMin; time += slotIntervalMin) {
         const slotTime = formatTime(time);
         if (generatedSlots.includes(slotTime)) continue;
         generatedSlots.push(slotTime);
@@ -299,7 +316,16 @@ function BookingForm() {
                 </label>
                 <select
                   value={selectedService}
-                  onChange={(e) => setSelectedService(e.target.value)}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setSelectedService(value);
+                    if (!value) {
+                      setSelectedDate('');
+                      setSelectedTime('');
+                    } else if (!selectedDate) {
+                      setSelectedDate(format(new Date(), 'yyyy-MM-dd'));
+                    }
+                  }}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 >

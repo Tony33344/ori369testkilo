@@ -223,6 +223,8 @@ export async function POST(req: NextRequest) {
     }
 
     // Create order in database
+    const reference = `ORI-${Date.now().toString(36).toUpperCase()}-${Math.random().toString(36).slice(2, 6).toUpperCase()}`;
+
     const { data: order, error: orderError } = await supabase
       .from('orders')
       .insert({
@@ -239,6 +241,7 @@ export async function POST(req: NextRequest) {
         shipping_method: shippingMethod || null,
         shipping_cost: shippingCost || 0,
         metadata: {
+          reference,
           items: orderItemsData,
           customer: customerMetadata,
           discount: appliedDiscount

@@ -1,33 +1,12 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { createCalendarEvent } from '@/lib/googleCalendar';
+import { syncBookingToCalendar } from '@/lib/calendarSync';
 
 export const runtime = 'nodejs';
 
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { bookingId, date, time, serviceName, duration, clientName, clientEmail, clientPhone, notes } = body;
-
-    // Validate required fields
-    if (!bookingId || !date || !time || !serviceName || !duration || !clientName || !clientEmail) {
-      return NextResponse.json(
-        { error: 'Missing required fields' },
-        { status: 400 }
-      );
-    }
-
-    // Create calendar event using service account
-    const result = await createCalendarEvent({
-      bookingId,
-      date,
-      time,
-      serviceName,
-      duration,
-      clientName,
-      clientEmail,
-      clientPhone,
-      notes,
-    });
+    const result = await syncBookingToCalendar(body);
 
     return NextResponse.json({
       success: true,

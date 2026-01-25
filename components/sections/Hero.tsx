@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles, Zap, Heart, Brain, Activity, Shield, Waves } from 'lucide-react';
+import { Sparkles, Zap, Heart, Brain, Activity, Shield, Waves, BookOpen } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import { useLanguage } from '@/lib/i18n';
@@ -124,6 +124,13 @@ export default function Hero() {
                 className="px-8 py-4 bg-black hover:bg-gray-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
               >
                 {t('hero.exploreCta')}
+              </Link>
+              <Link
+                href="/education"
+                className="px-8 py-4 bg-white text-[#00B5AD] border-2 border-[#00B5AD] font-bold rounded-lg shadow-lg hover:shadow-xl hover:bg-[#00B5AD] hover:text-white transform hover:scale-105 transition-all duration-200 flex items-center"
+              >
+                <BookOpen className="w-5 h-5 mr-2" />
+                ORI Education
               </Link>
             </motion.div>
 

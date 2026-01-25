@@ -48,7 +48,8 @@ function RegisterForm() {
       toast.error(t('auth.register.error'));
     } else {
       toast.success(t('auth.register.success'));
-      window.location.href = '/prijava';
+      // Auto-login or redirect back to login with same redirect param
+      window.location.href = `/prijava?redirect=${encodeURIComponent(redirect)}`;
     }
   };
 

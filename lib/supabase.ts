@@ -2,13 +2,22 @@ import { createClient as createSupabaseClient } from '@supabase/supabase-js';
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
+const supabaseServiceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
 
-const globalForSupabase = globalThis as unknown as { supabase?: any };
+const globalForSupabase = globalThis as unknown as { supabase?: any; supabaseAdmin?: any };
 
 export const supabase = globalForSupabase.supabase ?? createSupabaseClient(supabaseUrl, supabaseAnonKey);
 
+// Admin client with service role key for server-side operations (bypasses RLS)
+export const supabaseAdmin = globalForSupabase.supabaseAdmin ?? (
+  supabaseServiceKey 
+    ? createSupabaseClient(supabaseUrl, supabaseServiceKey)
+    : supabase
+);
+
 if (process.env.NODE_ENV !== 'production') {
   globalForSupabase.supabase = supabase;
+  globalForSupabase.supabaseAdmin = supabaseAdmin;
 }
 
 export function createClient() {

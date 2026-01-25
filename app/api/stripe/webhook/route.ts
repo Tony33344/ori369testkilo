@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
+import { syncBookingToCalendar } from '@/lib/calendarSync';
 
 export const runtime = 'nodejs';
 
@@ -82,24 +83,78 @@ export async function POST(req: NextRequest) {
 
           if (bookingUpdateError) {
             console.error('Error updating booking with Stripe payment info:', bookingUpdateError);
+          } else {
+            try {
+              await syncBookingToCalendar({ bookingId });
+            } catch (syncError) {
+              console.error('Failed to sync booking to Google Calendar after Stripe payment:', syncError);
+            }
           }
         }
 
         const metadata = order.metadata as any;
-        
-        if (metadata?.serviceId) {
-          const { error: itemError } = await supabase
-            .from('order_items')
-            .insert({
-              order_id: order.id,
-              service_id: metadata.serviceId,
-              quantity: 1,
-              unit_price: order.total_amount,
-              total_price: order.total_amount,
-            });
+        const orderReference = metadata?.reference || order.id;
+        const orderedItems = Array.isArray(metadata?.items) ? metadata.items : [];
 
-          if (itemError) {
-            console.error('Error creating order item:', itemError);
+        for (const item of orderedItems) {
+          if (item?.type !== 'service') continue;
+
+          const serviceId = item.itemId || item.serviceId;
+          const bookingDate = item.bookingDate;
+          const bookingTime = item.bookingTime;
+
+          if (!serviceId || !bookingDate || !bookingTime) {
+            continue;
+          }
+
+          let bookingId = item.bookingId as string | undefined;
+
+          if (!bookingId) {
+            const { data: existingBooking } = await supabase
+              .from('bookings')
+              .select('id')
+              .eq('service_id', serviceId)
+              .eq('date', bookingDate)
+              .eq('time_slot', bookingTime)
+              .eq('notes', `Order: ${orderReference}`)
+              .maybeSingle();
+
+            if (existingBooking?.id) {
+              bookingId = existingBooking.id;
+            }
+          }
+
+          if (!bookingId) {
+            const { data: newBooking, error: bookingInsertError } = await supabase
+              .from('bookings')
+              .insert({
+                user_id: order.user_id || null,
+                service_id: serviceId,
+                date: bookingDate,
+                time_slot: bookingTime,
+                status: 'confirmed',
+                notes: `Order: ${orderReference}`,
+                payment_status: 'paid',
+                paid_at: new Date().toISOString(),
+                stripe_session_id: session.id,
+                stripe_payment_intent_id: session.payment_intent as string,
+              })
+              .select('id')
+              .single();
+
+            if (bookingInsertError) {
+              console.error('Error creating booking from Stripe order:', bookingInsertError);
+            } else {
+              bookingId = newBooking?.id || undefined;
+            }
+          }
+
+          if (bookingId) {
+            try {
+              await syncBookingToCalendar({ bookingId });
+            } catch (syncError) {
+              console.error('Failed to sync Stripe-created booking to Google Calendar:', syncError);
+            }
           }
         }
 

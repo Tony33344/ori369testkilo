@@ -174,11 +174,15 @@ export async function POST(request: NextRequest) {
   const supabase = adminCheck.supabase;
 
   const body = await request.json();
-  const payload = normalizeCoursePayload(body);
+  const normalized = normalizeCoursePayload(body);
 
-  if (!payload.slug || !payload.title) {
+  if (!normalized.slug || !normalized.title) {
     return NextResponse.json({ error: 'Title and slug are required' }, { status: 400 });
   }
+
+  const payload = Object.fromEntries(
+    Object.entries(normalized).filter(([_, v]) => v !== undefined)
+  );
 
   const { data, error } = await supabase
     .from('education_courses')
@@ -205,10 +209,11 @@ export async function PUT(request: NextRequest) {
     return NextResponse.json({ error: 'Course id is required' }, { status: 400 });
   }
 
-  const payload = {
-    ...normalizeCoursePayload(body),
-    updated_at: new Date().toISOString(),
-  };
+  const normalized = normalizeCoursePayload(body);
+  const payload = Object.fromEntries(
+    Object.entries(normalized).filter(([_, v]) => v !== undefined)
+  );
+  payload.updated_at = new Date().toISOString();
 
   const { data, error } = await supabase
     .from('education_courses')

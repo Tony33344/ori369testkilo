@@ -1,14 +1,14 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { supabase } from '@/lib/supabase';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
 import Link from 'next/link';
 import { ArrowLeft, Loader2, Calendar, Clock, CheckCircle } from 'lucide-react';
 
-export default function EducationReservationPage() {
+function EducationReservationPageContent() {
   const [courses, setCourses] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedCourseId, setSelectedCourseId] = useState<string>('');
@@ -16,6 +16,7 @@ export default function EducationReservationPage() {
   const [user, setUser] = useState<any>(null);
   
   const router = useRouter();
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     async function init() {
@@ -35,15 +36,25 @@ export default function EducationReservationPage() {
 
       if (data) {
         setCourses(data);
-        // Auto-select first if available
-        if (data.length > 0) {
+        // Preselect from query params if provided
+        const courseParam = searchParams.get('courseId');
+        const sessionParam = searchParams.get('sessionId');
+
+        if (courseParam && data.some((c: any) => c.id === courseParam)) {
+          setSelectedCourseId(courseParam);
+          if (sessionParam) {
+            const course = data.find((c: any) => c.id === courseParam);
+            const hasSession = course?.sessions?.some((s: any) => s.id === sessionParam);
+            if (hasSession) setSelectedSessionId(sessionParam);
+          }
+        } else if (data.length > 0) {
           setSelectedCourseId(data[0].id);
         }
       }
       setLoading(false);
     }
     init();
-  }, [supabase]);
+  }, [supabase, searchParams]);
 
   const handleProceed = () => {
     if (!selectedSessionId) return;
@@ -181,5 +192,13 @@ export default function EducationReservationPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function EducationReservationPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-gray-50"><Loader2 className="w-8 h-8 text-[#00B5AD] animate-spin" /></div>}>
+      <EducationReservationPageContent />
+    </Suspense>
   );
 }

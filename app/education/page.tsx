@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
+import { type EducationCourse } from '@/lib/education';
 
 interface EducationSession {
   id: string;
@@ -30,21 +31,7 @@ interface EducationSession {
   max_participants: number | null;
   registrationsCount: number;
   availableSpots: number | null;
-}
-
-interface EducationCourse {
-  id: string;
-  slug: string;
-  title: string;
-  subtitle: string | null;
-  short_description: string | null;
-  long_description: string | null;
-  level: 'beginner' | 'intermediate' | 'advanced';
-  organizer: string | null;
-  location: string | null;
-  cover_image_url: string | null;
-  highlight_color: string | null;
-  sessions: EducationSession[];
+  isFull?: boolean;
 }
 
 export default function EducationPage() {
@@ -149,16 +136,26 @@ export default function EducationPage() {
                     {course.short_description}
                   </p>
 
-                  <div className="space-y-2 mb-6">
-                    {course.organizer && (
-                      <div className="flex items-center text-sm text-gray-500">
-                        <Users className="w-4 h-4 mr-2 text-gray-400" />
-                        <span><span className="font-medium text-gray-700">Voditelj:</span> {course.organizer}</span>
-                      </div>
-                    )}
+                  <div className="flex flex-wrap items-center text-sm text-gray-500 gap-4 mb-4">
+                    <div className="flex items-center space-x-2">
+                      <Clock className="w-4 h-4 text-gray-400" />
+                      <span>
+                        {course.sessions[0]?.start_at
+                          ? format(new Date(course.sessions[0].start_at), 'd. MMMM yyyy', { locale: sl })
+                          : 'Datum po dogovoru'}
+                      </span>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Clock className="w-4 h-4 text-gray-400" />
+                      <span className="font-medium text-gray-700">
+                        {course.sessions[0]?.start_at
+                          ? format(new Date(course.sessions[0].start_at), 'HH:mm')
+                          : course.start_time || 'Čas po dogovoru'}
+                      </span>
+                    </div>
                     {course.location && (
-                      <div className="flex items-center text-sm text-gray-500">
-                        <MapPin className="w-4 h-4 mr-2 text-gray-400" />
+                      <div className="flex items-center space-x-2">
+                        <MapPin className="w-4 h-4 text-gray-400" />
                         <span><span className="font-medium text-gray-700">Lokacija:</span> {course.location}</span>
                       </div>
                     )}
@@ -166,15 +163,25 @@ export default function EducationPage() {
                   
                   <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
                     <div>
-                      <span className="text-2xl font-black text-gray-900">€{course.sessions[0]?.price || '0'}</span>
+                      {course.sessions[0]?.isFull ? (
+                        <span className="text-lg font-bold text-red-600">Polno</span>
+                      ) : (
+                        <span className="text-2xl font-black text-gray-900">€{course.sessions[0]?.price ?? course.price ?? '0'}</span>
+                      )}
                     </div>
-                    <Link 
-                      href="/education/potrdi-rezervacijo"
-                      className="inline-flex items-center space-x-2 px-5 py-2.5 bg-[#00B5AD] text-white text-sm font-bold rounded-xl hover:bg-[#009891] transition-all shadow-md shadow-[#00B5AD]/10"
-                    >
-                      <span>Potrdi rezervacijo</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </Link>
+                    {course.sessions[0]?.isFull ? (
+                      <div className="inline-flex items-center space-x-2 px-5 py-2.5 bg-gray-300 text-gray-600 text-sm font-bold rounded-xl cursor-not-allowed opacity-60">
+                        <span>Polno</span>
+                      </div>
+                    ) : (
+                      <Link 
+                        href={`/education/potrdi-rezervacijo?courseId=${course.id}${course.sessions[0]?.id ? `&sessionId=${course.sessions[0].id}` : ''}`}
+                        className="inline-flex items-center space-x-2 px-5 py-2.5 bg-[#00B5AD] text-white text-sm font-bold rounded-xl hover:bg-[#009891] transition-all shadow-md shadow-[#00B5AD]/10"
+                      >
+                        <span>Potrdi rezervacijo</span>
+                        <ArrowRight className="w-4 h-4" />
+                      </Link>
+                    )}
                   </div>
                 </div>
               </div>

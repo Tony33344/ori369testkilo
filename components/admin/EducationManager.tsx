@@ -139,6 +139,7 @@ export default function EducationManager() {
       }
 
       const payload = {
+        ...(editingCourse.id && { id: editingCourse.id }),
         title: editingCourse.title,
         slug: editingCourse.slug,
         subtitle: editingCourse.subtitle,

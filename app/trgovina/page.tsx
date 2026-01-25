@@ -22,9 +22,10 @@ export default function ShopPage() {
   }, []);
 
   const handleAddToCart = (product: any) => {
+    const displayName = (product.name_sl || product.name || 'Izdelek').trim();
     addToCart({
       id: product.id,
-      name: product.name,
+      name: displayName,
       price: Number(product.price),
       type: 'product',
       image: product.image_url,
@@ -40,7 +41,7 @@ export default function ShopPage() {
       });
     }, 1500);
     
-    toast.success(`${product.name} dodan v košarico`);
+    toast.success(`${displayName} dodan v košarico`);
   };
 
   const loadData = async () => {
@@ -48,13 +49,13 @@ export default function ShopPage() {
     try {
       const { data: cats } = await supabase
         .from('shop_categories')
-        .select('*')
+        .select('id, name, name_sl, description, description_sl, active, order_index')
         .eq('active', true)
         .order('order_index', { ascending: true });
 
       const { data: prods } = await supabase
         .from('shop_products')
-        .select('*')
+        .select('id, name, name_sl, description, description_sl, price, image_url, stock, category_id, slug, active')
         .eq('active', true)
         .order('name', { ascending: true });
 
@@ -69,7 +70,9 @@ export default function ShopPage() {
   // Filter products based on search and category
   const filteredProducts = products.filter(p => {
     const matchesSearch = !searchQuery || 
+      p.name_sl?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      p.description_sl?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       p.description?.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesCategory = !selectedCategory || p.category_id === selectedCategory;
     return matchesSearch && matchesCategory;
@@ -106,7 +109,7 @@ export default function ShopPage() {
             Trgovina
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Prehranska dopolnila, funkcionalne gobe, homeopatija, zeliščni pripravki in premium CBD izdelki.
+            Prehranska dopolnila, funkcionalne gobe, homeopatija, zeliščni pripravki in premium CBD izdelki za vašo zdravje in počutje.
           </p>
         </div>
 
@@ -118,7 +121,7 @@ export default function ShopPage() {
               <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" size={20} />
               <input
                 type="text"
-                placeholder="Išči izdelke..."
+                placeholder="Išči po imenu ali opisu..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
@@ -135,7 +138,7 @@ export default function ShopPage() {
                     : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                 }`}
               >
-                Vse
+                Vse kategorije
               </button>
               {categories.map(cat => (
                 <button
@@ -147,15 +150,15 @@ export default function ShopPage() {
                       : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
                   }`}
                 >
-                  {cat.name}
+                  {(cat.name_sl || cat.name || '').trim()}
                 </button>
               ))}
             </div>
           </div>
           
           {/* Results count */}
-          <div className="mt-4 text-sm text-gray-500">
-            {filteredProducts.length} {filteredProducts.length === 1 ? 'izdelek' : 'izdelkov'}
+          <div className="mt-4 text-sm text-gray-600 font-medium">
+            Prikazano: {filteredProducts.length} {filteredProducts.length === 1 ? 'izdelek' : 'izdelkov'}
             {searchQuery && ` za "${searchQuery}"`}
           </div>
         </div>
@@ -164,14 +167,15 @@ export default function ShopPage() {
         {categories.length === 0 ? (
           <div className="text-center py-16 bg-white rounded-2xl shadow-lg">
             <Package size={48} className="mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-500 text-lg">Ni kategorij. Seeding v teku...</p>
+            <p className="text-gray-600 text-lg font-medium">Ni kategorij na voljo</p>
+            <p className="text-gray-500 text-sm mt-2">Seeding podatkov v teku...</p>
           </div>
         ) : (
           (selectedCategory ? [categories.find(c => c.id === selectedCategory)].filter(Boolean) : categories).map((cat) => (
             <section key={cat.id} className="mb-12">
               <div className="flex items-center gap-3 mb-6">
                 <div className="w-1 h-8 bg-gradient-to-b from-teal-500 to-green-500 rounded-full"></div>
-                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{cat.name}</h2>
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-900">{(cat.name_sl || cat.name || '').trim()}</h2>
                 <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-sm">
                   {(byCategory[cat.id] || []).length} izdelkov
                 </span>
@@ -181,98 +185,104 @@ export default function ShopPage() {
                 {(byCategory[cat.id] || []).length === 0 ? (
                   <div className="col-span-full text-center py-12 bg-white rounded-2xl border-2 border-dashed border-gray-200">
                     <Package size={32} className="mx-auto text-gray-300 mb-2" />
-                    <p className="text-gray-400">Ni izdelkov v tej kategoriji</p>
+                    <p className="text-gray-500 font-medium">Ni izdelkov v tej kategoriji</p>
                   </div>
                 ) : (
-                  (byCategory[cat.id] || []).map((p) => (
-                    <div key={p.id} className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-                      <Link href={`/trgovina/${p.slug}`}>
-                        <div className="relative">
+                  (byCategory[cat.id] || []).map((p) => {
+                    const descriptionText = (p.description_sl || p.description || '').trim();
+                    const shortDescription = descriptionText.length > 220 ? `${descriptionText.slice(0, 220)}…` : descriptionText;
+
+                    return (
+                    <div key={p.id} className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 flex flex-col h-full">
+                      <Link href={`/trgovina/${p.slug}`} className="flex-1 flex flex-col">
+                        <div className="relative flex-1 bg-gray-50 overflow-hidden">
                           {p.image_url ? (
-                            <div className="relative h-56 w-full bg-gray-50 overflow-hidden">
+                            <div className="relative w-full h-64 overflow-hidden">
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img 
                                 src={p.image_url} 
-                                alt={p.name} 
-                                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                                alt={(p.name_sl || p.name || '').trim()} 
+                                className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 p-4" 
                               />
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                             </div>
                           ) : (
-                            <div className="h-56 w-full bg-gradient-to-br from-teal-100 to-green-100 flex items-center justify-center">
+                            <div className="h-64 w-full bg-gradient-to-br from-teal-100 to-green-100 flex items-center justify-center">
                               <Package size={48} className="text-teal-300" />
                             </div>
                           )}
                           
                           {/* Badge for stock status */}
-                          {p.stock_quantity !== null && p.stock_quantity <= 5 && p.stock_quantity > 0 && (
-                            <div className="absolute top-3 left-3 bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-                              Samo še {p.stock_quantity}!
+                          {p.stock !== null && p.stock <= 5 && p.stock > 0 && (
+                            <div className="absolute top-3 right-3 bg-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
+                              Samo še {p.stock}!
                             </div>
                           )}
-                          {p.stock_quantity === 0 && (
-                            <div className="absolute top-3 left-3 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full">
+                          {p.stock === 0 && (
+                            <div className="absolute top-3 right-3 bg-red-500 text-white text-xs font-bold px-3 py-1 rounded-full shadow-lg">
                               Razprodano
                             </div>
                           )}
                         </div>
                       </Link>
                       
-                      <div className="p-5">
+                      <div className="p-5 flex flex-col flex-1">
                         <Link href={`/trgovina/${p.slug}`}>
-                          <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-teal-600 transition-colors line-clamp-2">
-                            {p.name}
+                          <h3 className="text-lg font-bold text-gray-900 mb-2 group-hover:text-teal-600 transition-colors line-clamp-2 min-h-14">
+                            {(p.name_sl || p.name || '').trim()}
                           </h3>
                         </Link>
                         
-                        {p.description && (
-                          <p className="text-sm text-gray-500 line-clamp-2 mb-4">{p.description}</p>
+                        {(p.description_sl || p.description) && (
+                          <p className="text-sm text-gray-700 mb-3 flex-1 leading-relaxed">
+                            {shortDescription || 'Opis bo kmalu na voljo v slovenščini.'}
+                          </p>
                         )}
                         
-                        <div className="flex items-center justify-between pt-3 border-t border-gray-100">
+                        <div className="flex items-center justify-between pt-3 border-t border-gray-100 mt-auto">
                           <div className="flex flex-col">
                             <span className="text-2xl font-bold text-teal-600">
                               €{Number(p.price || 0).toFixed(2)}
                             </span>
-                            {p.compare_at_price && p.compare_at_price > p.price && (
-                              <span className="text-sm text-gray-400 line-through">
-                                €{Number(p.compare_at_price).toFixed(2)}
-                              </span>
-                            )}
+                            <span className="text-xs text-gray-500 mt-1 font-medium">
+                              {p.stock > 0 ? `Na zalogi: ${p.stock}` : 'Ni na zalogi'}
+                            </span>
                           </div>
-                          
                           <button
-                            onClick={(e) => {
-                              e.preventDefault();
-                              e.stopPropagation();
-                              handleAddToCart(p);
-                            }}
-                            disabled={p.stock_quantity === 0}
-                            className={`px-4 py-2.5 text-sm font-bold rounded-xl transition-all duration-300 flex items-center gap-2 ${
+                            onClick={() => handleAddToCart(p)}
+                            disabled={p.stock === 0 || addedProducts.has(p.id)}
+                            className={`px-3 py-2 rounded-lg font-semibold transition-all text-sm flex items-center gap-1 ${
                               addedProducts.has(p.id)
                                 ? 'bg-green-500 text-white'
-                                : p.stock_quantity === 0
-                                ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                                : 'bg-gradient-to-r from-teal-500 to-green-500 text-white hover:shadow-lg hover:scale-105'
+                                : p.stock === 0
+                                ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                                : 'bg-teal-600 text-white hover:bg-teal-700'
                             }`}
-                            title="Dodaj v košarico"
                           >
                             {addedProducts.has(p.id) ? (
                               <>
-                                <Check size={18} />
-                                Dodano!
+                                <Check size={16} />
+                                Dodano
                               </>
                             ) : (
                               <>
-                                <ShoppingCart size={18} />
-                                V košarico
+                                <ShoppingCart size={16} />
+                                Dodaj
                               </>
                             )}
                           </button>
                         </div>
+
+                        <Link
+                          href={`/trgovina/${p.slug}`}
+                          className="mt-3 inline-flex items-center text-teal-600 font-semibold text-sm hover:underline"
+                        >
+                          Več podrobnosti v slovenščini →
+                        </Link>
                       </div>
                     </div>
-                  ))
+                    );
+                  })
                 )}
               </div>
             </section>
@@ -282,7 +292,8 @@ export default function ShopPage() {
         {filteredProducts.length === 0 && searchQuery && (
           <div className="text-center py-16 bg-white rounded-2xl shadow-lg">
             <Search size={48} className="mx-auto text-gray-300 mb-4" />
-            <p className="text-gray-500 text-lg">Ni rezultatov za "{searchQuery}"</p>
+            <p className="text-gray-600 text-lg font-medium">Ni rezultatov za "{searchQuery}"</p>
+            <p className="text-gray-500 text-sm mt-2">Poskusite z drugimi ključnimi besedami</p>
             <button 
               onClick={() => setSearchQuery('')}
               className="mt-4 text-teal-600 font-medium hover:underline"

@@ -4,6 +4,7 @@ import { CheckCircle } from 'lucide-react';
 import { redirect } from 'next/navigation';
 import { createClient } from '@supabase/supabase-js';
 import { paymentMethodLabels, formatOrderDateTime, formatSlotDateTime, OrderSummaryItem } from '@/lib/orderSummary';
+import CollapsibleOrderItem from '@/components/CollapsibleOrderItem';
 
 export const runtime = 'nodejs';
 
@@ -49,23 +50,36 @@ async function getOrderDetails(sessionId?: string) {
       : (item.shop_products as { name?: string } | null | undefined)?.name;
 
     const name = item.service_id ? serviceName : productName;
+    const startAt = item.metadata?.start_at;
+    const bookingDate = item.metadata?.bookingDate || (startAt ? startAt.slice(0, 10) : null);
+    const bookingTime = item.metadata?.bookingTime || (startAt ? new Date(startAt).toISOString().slice(11, 16) : null);
+
     return {
       id: (item.service_id || item.product_id) as string,
       name: name || 'Artikel',
       quantity: item.quantity,
       totalPrice: item.total_price,
       type,
-      bookingDate: item.metadata?.bookingDate || null,
-      bookingTime: item.metadata?.bookingTime || null,
+      bookingDate,
+      bookingTime,
     };
   });
+
+  // Deduplicate by id + bookingDate + bookingTime + type to avoid duplicate education entries
+  const uniqueSummary: OrderSummaryItem[] = [];
+  for (const item of summaryItems) {
+    const exists = uniqueSummary.some(
+      (i) => i.id === item.id && i.bookingDate === item.bookingDate && i.bookingTime === item.bookingTime && i.type === item.type
+    );
+    if (!exists) uniqueSummary.push(item);
+  }
 
   return {
     reference: (data.metadata as any)?.reference || data.id,
     total: data.total_amount,
     paymentMethod: (data.payment_method || 'card') as keyof typeof paymentMethodLabels,
     createdAt: data.created_at,
-    summaryItems,
+    summaryItems: uniqueSummary,
   };
 }
 
@@ -104,26 +118,20 @@ function SuccessContent({ order }: { order: Awaited<ReturnType<typeof getOrderDe
             {order.summaryItems.length > 0 && (
               <div className="mt-6">
                 <h3 className="text-lg font-semibold mb-3">Kupljeni artikli</h3>
-                <ul className="space-y-3">
+                <div className="space-y-2">
                   {order.summaryItems.map((item) => (
-                    <li key={`${item.id}-${item.bookingDate || ''}-${item.bookingTime || ''}`} className="bg-white rounded-lg p-4 border border-gray-100">
-                      <div className="flex justify-between">
-                        <div>
-                          <p className="font-semibold text-gray-900">{item.name}</p>
-                          <p className="text-sm text-gray-500">Količina: {item.quantity}</p>
-                          {item.type === 'service' && item.bookingDate && item.bookingTime && (
-                            <p className="text-sm text-[#00B5AD] mt-1">
-                              Termin: {formatSlotDateTime(item.bookingDate, item.bookingTime)}
-                            </p>
-                          )}
-                        </div>
-                        <div className="text-right">
-                          <p className="font-bold">€{item.totalPrice.toFixed(2)}</p>
-                        </div>
-                      </div>
-                    </li>
+                    <CollapsibleOrderItem
+                      key={`${item.id}-${item.bookingDate || ''}-${item.bookingTime || ''}`}
+                      id={item.id}
+                      name={item.name}
+                      quantity={item.quantity}
+                      totalPrice={item.totalPrice}
+                      type={item.type}
+                      bookingDate={item.bookingDate}
+                      bookingTime={item.bookingTime}
+                    />
                   ))}
-                </ul>
+                </div>
               </div>
             )}
           </div>

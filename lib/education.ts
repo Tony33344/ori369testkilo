@@ -24,6 +24,7 @@ export type EducationCourseSession = {
   max_participants: number | null;
   registrationsCount: number;
   availableSpots: number | null;
+  isFull: boolean;
 };
 
 export type EducationCourse = {
@@ -38,6 +39,11 @@ export type EducationCourse = {
   location: string | null;
   cover_image_url: string | null;
   highlight_color: string | null;
+  price: number | null;
+  max_attendees: number | null;
+  status: string | null;
+  language: string | null;
+  start_time: string | null;
   sessions: EducationCourseSession[];
 };
 
@@ -56,6 +62,11 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
       location,
       cover_image_url,
       highlight_color,
+      price,
+      max_attendees,
+      status,
+      language,
+      start_time,
       sessions:education_course_sessions (
         id,
         status,
@@ -109,8 +120,14 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
     location: course.location,
     cover_image_url: course.cover_image_url,
     highlight_color: course.highlight_color,
+    price: course.price ?? null,
+    max_attendees: course.max_attendees ?? null,
+    status: course.status ?? null,
+    language: course.language ?? null,
+    start_time: course.start_time ?? null,
     sessions: (course.sessions || []).map((session: any) => {
       const used = countsMap[session.id] || 0;
+      const isFull = session.max_participants && session.max_participants > 0 && used >= session.max_participants;
       return {
         id: session.id,
         status: session.status,
@@ -120,13 +137,15 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
         location: session.location,
         language: session.language,
         format: session.format,
-        price: session.price,
+        // Prefer session price; fallback to course base price when session price is missing
+        price: session.price ?? course.price ?? null,
         max_participants: session.max_participants,
         registrationsCount: used,
         availableSpots:
           session.max_participants && session.max_participants > 0
             ? Math.max(0, session.max_participants - used)
             : null,
+        isFull,
       } as EducationCourseSession;
     }),
   }));

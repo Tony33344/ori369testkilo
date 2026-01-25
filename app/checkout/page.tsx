@@ -112,13 +112,13 @@ function CheckoutPageContent() {
   const [customerName, setCustomerName] = useState('');
   const [customerEmail, setCustomerEmail] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
+  const [customerDateOfBirth, setCustomerDateOfBirth] = useState('');
   const [customerAddress, setCustomerAddress] = useState('');
   const [customerCity, setCustomerCity] = useState('');
   const [customerPostal, setCustomerPostal] = useState('');
   const [notes, setNotes] = useState('');
   const [saveDetailsToProfile, setSaveDetailsToProfile] = useState(true);
   const [gdprConsent, setGdprConsent] = useState(false);
-  const [dateOfBirth, setDateOfBirth] = useState('');
 
   const [discountCodeInput, setDiscountCodeInput] = useState('');
   const [appliedDiscount, setAppliedDiscount] = useState<DiscountCode | null>(null);
@@ -263,6 +263,7 @@ function CheckoutPageContent() {
     const payload: any = {
       full_name: customerName || null,
       phone: customerPhone || null,
+      date_of_birth: customerDateOfBirth || null,
       address: customerAddress || null,
       city: customerCity || null,
       postal: customerPostal || null,
@@ -1049,8 +1050,8 @@ function CheckoutPageContent() {
                   </label>
                   <input
                     type="date"
-                    value={dateOfBirth}
-                    onChange={(e) => setDateOfBirth(e.target.value)}
+                    value={customerDateOfBirth}
+                    onChange={(e) => setCustomerDateOfBirth(e.target.value)}
                     className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent"
                   />
                 </div>

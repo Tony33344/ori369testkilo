@@ -65,6 +65,13 @@ function normalizeCoursePayload(body: any) {
     status: body.status || 'active',
     language: body.language || 'sl',
     start_time: body.start_time || null,
+    // New detail fields
+    image_url_2: normalizeText(body.image_url_2),
+    image_url_3: normalizeText(body.image_url_3),
+    detailed_description: normalizeText(body.detailed_description),
+    program_schedule: normalizeText(body.program_schedule),
+    what_youll_get: normalizeText(body.what_youll_get),
+    requirements: normalizeText(body.requirements),
   };
 }
 
@@ -95,6 +102,12 @@ export async function GET(request: NextRequest) {
       start_time,
       created_at,
       updated_at,
+      image_url_2,
+      image_url_3,
+      detailed_description,
+      program_schedule,
+      what_youll_get,
+      requirements,
       sessions:education_course_sessions (
         id,
         course_id,

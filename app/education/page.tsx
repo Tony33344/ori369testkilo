@@ -175,11 +175,10 @@ export default function EducationPage() {
                       </div>
                     ) : (
                       <Link 
-                        href={`/education/potrdi-rezervacijo?courseId=${course.id}${course.sessions[0]?.id ? `&sessionId=${course.sessions[0].id}` : ''}`}
-                        className="inline-flex items-center space-x-2 px-5 py-2.5 bg-[#00B5AD] text-white text-sm font-bold rounded-xl hover:bg-[#009891] transition-all shadow-md shadow-[#00B5AD]/10"
+                        href={`/education/${course.slug}`}
+                        className="block w-full text-center py-3 bg-[#00B5AD] text-white font-bold rounded-xl hover:bg-[#009891] transition-colors"
                       >
-                        <span>Potrdi rezervacijo</span>
-                        <ArrowRight className="w-4 h-4" />
+                        Več informacij
                       </Link>
                     )}
                   </div>
@@ -243,7 +242,7 @@ export default function EducationPage() {
                           {course.short_description}
                         </p>
                         <Link 
-                          href={`/checkout?courseId=${course.id}${course.sessions[0]?.id ? `&sessionId=${course.sessions[0].id}` : ''}`} 
+                          href={`/education/${course.slug}`}
                           className="inline-flex items-center space-x-3 px-8 py-4 bg-white text-gray-900 font-bold rounded-xl hover:bg-gray-100 transition-all group"
                         >
                           <span>Potrdi rezervacijo</span>

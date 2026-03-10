@@ -56,6 +56,13 @@ interface Course {
   status?: string | null;
   language?: string | null;
   start_time?: string | null;
+  // New detail fields
+  image_url_2?: string | null;
+  image_url_3?: string | null;
+  detailed_description?: string | null;
+  program_schedule?: string | null;
+  what_youll_get?: string | null;
+  requirements?: string | null;
   sessions: Session[];
 }
 
@@ -156,6 +163,13 @@ export default function EducationManager() {
         status: editingCourse.status,
         language: editingCourse.language,
         start_time: editingCourse.start_time,
+        // New detail fields
+        image_url_2: editingCourse.image_url_2,
+        image_url_3: editingCourse.image_url_3,
+        detailed_description: editingCourse.detailed_description,
+        program_schedule: editingCourse.program_schedule,
+        what_youll_get: editingCourse.what_youll_get,
+        requirements: editingCourse.requirements,
         sessions: editingCourse.sessions || [],
       };
 
@@ -727,6 +741,72 @@ export default function EducationManager() {
                   onChange={e => setEditingCourse({ ...editingCourse, cover_image_url: e.target.value })}
                   className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
                   placeholder="https://images.unsplash.com/..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-semibold text-gray-700">URL 2. slike (galerija)</label>
+                <input
+                  type="text"
+                  value={editingCourse?.image_url_2 || ''}
+                  onChange={e => setEditingCourse({ ...editingCourse, image_url_2: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                  placeholder="https://images.unsplash.com/..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-semibold text-gray-700">URL 3. slike (galerija)</label>
+                <input
+                  type="text"
+                  value={editingCourse?.image_url_3 || ''}
+                  onChange={e => setEditingCourse({ ...editingCourse, image_url_3: e.target.value })}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                  placeholder="https://images.unsplash.com/..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-semibold text-gray-700">Podroben opis (za podstran)</label>
+                <textarea
+                  value={editingCourse?.detailed_description || ''}
+                  onChange={e => setEditingCourse({ ...editingCourse, detailed_description: e.target.value })}
+                  rows={6}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                  placeholder="Podroben opis programa, izkustveno učenje..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-semibold text-gray-700">Časovni potek programa</label>
+                <textarea
+                  value={editingCourse?.program_schedule || ''}
+                  onChange={e => setEditingCourse({ ...editingCourse, program_schedule: e.target.value })}
+                  rows={8}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none font-mono text-sm"
+                  placeholder="14:00 – Prihod in uvod&#10;15:00 – Energijska priprava&#10;16:00 – Karuna Reiki iniciacija..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-semibold text-gray-700">Kaj boste prejeli (en element na vrstico)</label>
+                <textarea
+                  value={editingCourse?.what_youll_get || ''}
+                  onChange={e => setEditingCourse({ ...editingCourse, what_youll_get: e.target.value })}
+                  rows={6}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                  placeholder="Prejeli Karuna Reiki iniciacijo 1. stopnje&#10;Spolnili osnovne principe in filozofijo Reiki sistema..."
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-sm font-semibold text-gray-700">Zahteve / za koga je tečaj</label>
+                <textarea
+                  value={editingCourse?.requirements || ''}
+                  onChange={e => setEditingCourse({ ...editingCourse, requirements: e.target.value })}
+                  rows={3}
+                  className="w-full px-4 py-2 border border-gray-200 rounded-lg focus:ring-2 focus:ring-[#00B5AD]/20 focus:border-[#00B5AD] outline-none"
+                  placeholder="Tečaj je primeren za vse, ki želijo..."
                 />
               </div>
 

@@ -301,8 +301,8 @@ export default function EducationCoursePage() {
                 )}
 
                 <div className="mt-6 pt-6 border-t border-gray-100">
-                  <div className="flex items-center justify-between mb-6">
-                    <span className="text-gray-500">Cena</span>
+                  <div className="text-center mb-6">
+                    <span className="text-sm text-gray-500 block mb-1">Cena</span>
                     <span className="text-3xl font-black text-gray-900">
                       €{firstSession?.price ?? course.price ?? '0'}
                     </span>

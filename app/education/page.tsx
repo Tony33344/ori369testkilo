@@ -161,8 +161,8 @@ export default function EducationPage() {
                     )}
                   </div>
                   
-                  <div className="mt-auto pt-6 border-t border-gray-50 flex items-center justify-between">
-                    <div>
+                  <div className="mt-auto pt-6 border-t border-gray-50">
+                    <div className="mb-4">
                       {course.sessions[0]?.isFull ? (
                         <span className="text-lg font-bold text-red-600">Polno</span>
                       ) : (
@@ -170,13 +170,13 @@ export default function EducationPage() {
                       )}
                     </div>
                     {course.sessions[0]?.isFull ? (
-                      <div className="inline-flex items-center space-x-2 px-5 py-2.5 bg-gray-300 text-gray-600 text-sm font-bold rounded-xl cursor-not-allowed opacity-60">
-                        <span>Polno</span>
+                      <div className="w-full py-3 bg-gray-300 text-gray-600 font-bold rounded-xl text-center cursor-not-allowed opacity-60">
+                        Polno
                       </div>
                     ) : (
                       <Link 
                         href={`/education/${course.slug}`}
-                        className="block w-full text-center py-3 bg-[#00B5AD] text-white font-bold rounded-xl hover:bg-[#009891] transition-colors"
+                        className="block w-full py-3 bg-[#00B5AD] text-white font-bold rounded-xl text-center hover:bg-[#009891] transition-colors"
                       >
                         Več informacij
                       </Link>

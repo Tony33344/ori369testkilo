@@ -16,7 +16,48 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
-import { type EducationCourse, getEducationCourseBySlug } from '@/lib/education';
+
+interface EducationSession {
+  id: string;
+  status: 'current' | 'upcoming' | 'past';
+  headline: string | null;
+  start_at: string;
+  end_at: string | null;
+  location: string | null;
+  language: string | null;
+  format: string | null;
+  price: number | null;
+  max_participants: number | null;
+  registrationsCount: number;
+  availableSpots: number | null;
+  isFull?: boolean;
+}
+
+interface EducationCourse {
+  id: string;
+  slug: string;
+  title: string;
+  subtitle: string | null;
+  short_description: string | null;
+  long_description: string | null;
+  level: 'beginner' | 'intermediate' | 'advanced';
+  organizer: string | null;
+  location: string | null;
+  cover_image_url: string | null;
+  highlight_color: string | null;
+  price: number | null;
+  max_attendees: number | null;
+  status: string | null;
+  language: string | null;
+  start_time: string | null;
+  image_url_2: string | null;
+  image_url_3: string | null;
+  detailed_description: string | null;
+  program_schedule: string | null;
+  what_youll_get: string | null;
+  requirements: string | null;
+  sessions: EducationSession[];
+}
 
 export default function EducationCoursePage() {
   const params = useParams();
@@ -28,8 +69,11 @@ export default function EducationCoursePage() {
   useEffect(() => {
     async function loadData() {
       try {
-        const data = await getEducationCourseBySlug(slug);
-        setCourse(data);
+        const response = await fetch('/api/education/list'); 
+        const data = await response.json();
+        const coursesList: EducationCourse[] = data.courses || [];
+        const foundCourse = coursesList.find(c => c.slug === slug);
+        setCourse(foundCourse || null);
       } catch (error) {
         console.error('Failed to load course:', error);
       } finally {

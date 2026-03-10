@@ -55,7 +55,8 @@ export type EducationCourse = {
 };
 
 export async function getEducationOverview(): Promise<EducationCourse[]> {
-  const { data: courses, error } = await supabase
+  // First try with all fields, if that fails (columns don't exist), try without new fields
+  let { data: courses, error } = await supabase
     .from('education_courses')
     .select(`
       id,
@@ -95,6 +96,48 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
     `)
     .eq('published', true)
     .order('created_at', { ascending: true });
+
+  // If error, retry without new columns (for backward compatibility)
+  if (error) {
+    console.log('Retrying education query without new columns:', error.message);
+    const fallback = await supabase
+      .from('education_courses')
+      .select(`
+        id,
+        slug,
+        title,
+        subtitle,
+        short_description,
+        long_description,
+        level,
+        organizer,
+        location,
+        cover_image_url,
+        highlight_color,
+        price,
+        max_attendees,
+        status,
+        language,
+        start_time,
+        sessions:education_course_sessions (
+          id,
+          status,
+          headline,
+          start_at,
+          end_at,
+          location,
+          language,
+          format,
+          price,
+          max_participants
+        )
+      `)
+      .eq('published', true)
+      .order('created_at', { ascending: true });
+    
+    courses = fallback.data;
+    error = fallback.error;
+  }
 
   if (error) {
     console.error('Failed to load education courses:', error);

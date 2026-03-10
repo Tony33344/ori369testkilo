@@ -137,6 +137,12 @@ export default function Packages({ packages }: { packages: Package[] }) {
 
                 <div className="space-y-3">
                   <Link
+                    href={`/paketi/${pkg.id}`}
+                    className="flex items-center justify-center w-full py-3 border border-[#00B5AD] text-[#00B5AD] font-semibold rounded-lg hover:bg-[#00B5AD]/5 transition-all duration-200"
+                  >
+                    {t('therapies.viewMore')}
+                  </Link>
+                  <Link
                     href={`/rezervacija?package=${pkg.id}`}
                     className="flex items-center justify-center w-full py-3 bg-[#00B5AD] hover:bg-[#009891] text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-200"
                   >

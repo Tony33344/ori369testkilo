@@ -5,6 +5,8 @@ ALTER TABLE public.services ADD COLUMN IF NOT EXISTS indications TEXT[];
 ALTER TABLE public.services ADD COLUMN IF NOT EXISTS contraindications TEXT[];
 ALTER TABLE public.services ADD COLUMN IF NOT EXISTS how_it_works TEXT;
 ALTER TABLE public.services ADD COLUMN IF NOT EXISTS image_url TEXT;
+ALTER TABLE public.services ADD COLUMN IF NOT EXISTS image_url_2 TEXT;
+ALTER TABLE public.services ADD COLUMN IF NOT EXISTS image_url_3 TEXT;
 ALTER TABLE public.services ADD COLUMN IF NOT EXISTS category TEXT DEFAULT 'therapy';
 
 -- Create team members table

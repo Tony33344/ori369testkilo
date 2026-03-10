@@ -4,30 +4,28 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowLeft, ArrowRight, Clock, Calendar, CheckCircle, AlertCircle, Zap, Euro } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
-import { ServiceDetail, servicesData } from '@/lib/servicesData';
+import type { PublicServiceContent } from '@/lib/public-services';
 
 interface TherapyDetailContentProps {
-  richContent: ServiceDetail;
-  therapyImage: string;
+  richContent: PublicServiceContent;
+  images: string[];
+  backHref: string;
+  nextHref?: string;
+  nextLabel?: string;
 }
 
-export default function TherapyDetailContent({ richContent, therapyImage }: TherapyDetailContentProps) {
+export default function TherapyDetailContent({ richContent, images, backHref, nextHref, nextLabel }: TherapyDetailContentProps) {
   const { t } = useLanguage();
 
-  // Find the next therapy for navigation
-  const allSlugs = Object.keys(servicesData);
-  const currentIndex = allSlugs.indexOf(richContent.slug);
-  const nextSlug = allSlugs[(currentIndex + 1) % allSlugs.length];
-  const nextTherapyName = servicesData[nextSlug].name;
+  const gallery = images.length > 0 ? images : ['/images/therapies/IMG_5779-768x513.webp'];
+  const heroImage = gallery[0];
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Hero Section with Image */}
       <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-16 md:py-24 overflow-hidden">
-        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src={therapyImage}
+            src={heroImage}
             alt={richContent.name}
             fill
             className="object-cover opacity-30"
@@ -39,20 +37,22 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
         <div className="container mx-auto px-4 relative z-10 text-center">
           <div className="flex flex-wrap justify-between items-center mb-10 gap-4">
             <Link 
-              href="/terapije"
+              href={backHref}
               className="inline-flex items-center text-[#00B5AD] hover:text-[#009891] transition-colors font-medium"
             >
               <ArrowLeft size={20} className="mr-2" />
-              {t('therapyDetail.backToTherapies')}
+              {backHref === '/paketi' ? 'Nazaj na pakete' : t('therapyDetail.backToTherapies')}
             </Link>
 
-            <Link 
-              href={`/terapije/${nextSlug}`}
-              className="inline-flex items-center text-[#00B5AD] hover:text-[#009891] transition-colors font-medium"
-            >
-              <span className="mr-2">Naslednja: {nextTherapyName}</span>
-              <ArrowRight size={20} />
-            </Link>
+            {nextHref && nextLabel && (
+              <Link 
+                href={nextHref}
+                className="inline-flex items-center text-[#00B5AD] hover:text-[#009891] transition-colors font-medium"
+              >
+                <span className="mr-2">Naslednja: {nextLabel}</span>
+                <ArrowRight size={20} />
+              </Link>
+            )}
           </div>
           
           <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-black mb-6">
@@ -76,10 +76,23 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
         </div>
       </div>
 
-      {/* Content Section - RESTORED */}
       <div className="container mx-auto px-4 py-16 md:py-24">
         <div className="max-w-4xl mx-auto">
-          {/* Main Description - LEFT ALIGNED */}
+          {gallery.length > 1 && (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
+              {gallery.map((image, index) => (
+                <div key={`${image}-${index}`} className="relative aspect-[4/3] overflow-hidden rounded-2xl shadow-sm border border-gray-100">
+                  <Image
+                    src={image}
+                    alt={`${richContent.name} ${index + 1}`}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+          )}
+          
           <div className="mb-16 text-left">
             <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
               {richContent.longDescription}
@@ -87,7 +100,6 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
           </div>
 
           <div className="space-y-16 text-left">
-            {/* How It Works */}
             {richContent.howItWorks && (
               <div className="border-l-4 border-[#00B5AD] pl-8 py-4 bg-gray-50/50 rounded-r-3xl">
                 <h2 className="text-3xl md:text-4xl font-bold text-black mb-6 flex items-center gap-3">
@@ -100,7 +112,6 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
               </div>
             )}
 
-            {/* Benefits */}
             {richContent.benefits && richContent.benefits.length > 0 && (
               <div className="bg-green-50 rounded-2xl p-8 shadow-sm">
                 <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 flex items-center gap-2">
@@ -118,7 +129,6 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
               </div>
             )}
 
-            {/* Indications */}
             {richContent.indications && richContent.indications.length > 0 && (
               <div className="bg-blue-50 rounded-2xl p-8 shadow-sm">
                 <h2 className="text-2xl md:text-3xl font-bold text-black mb-6">
@@ -135,7 +145,6 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
               </div>
             )}
 
-            {/* Contraindications */}
             {richContent.contraindications && richContent.contraindications.length > 0 && (
               <div className="bg-red-50 rounded-2xl p-8 shadow-sm">
                 <h2 className="text-2xl md:text-3xl font-bold text-black mb-6 flex items-center gap-2">
@@ -154,7 +163,6 @@ export default function TherapyDetailContent({ richContent, therapyImage }: Ther
             )}
           </div>
 
-          {/* CTA Section */}
           <div className="mt-16 bg-gradient-to-br from-[#00B5AD] to-[#009891] rounded-2xl p-8 md:p-12 text-white">
             <div className="text-center">
               <h3 className="text-3xl font-bold mb-4">

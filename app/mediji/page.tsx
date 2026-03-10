@@ -1,58 +1,116 @@
 'use client';
 
-import { Facebook, Instagram, Youtube, ExternalLink, Newspaper, Star } from 'lucide-react';
+import { Facebook, Instagram, Youtube, ExternalLink, Star } from 'lucide-react';
 import { useLanguage } from '@/lib/i18n';
 import { companyData } from '@/lib/companyData';
 import Link from 'next/link';
 
 const socialLinks = [
   {
-    name: 'Facebook',
-    url: 'https://www.facebook.com/ori369therapy',
+    name: 'Facebook - Jernej Babij',
+    url: 'https://www.facebook.com/jernej.babij/',
     icon: Facebook,
     color: 'bg-blue-600 hover:bg-blue-700',
-    description: 'Sledite nam na Facebooku za novice in dogodke',
-    followers: '500+',
+    description: 'Sledite Jerneju na Facebooku',
+    followers: '',
+  },
+  {
+    name: 'Facebook - Izkoristi Potencial',
+    url: 'https://www.facebook.com/izkoristipotencial/',
+    icon: Facebook,
+    color: 'bg-blue-600 hover:bg-blue-700',
+    description: 'Stran Izkoristi Potencial',
+    followers: '',
   },
   {
     name: 'Instagram',
-    url: 'https://www.instagram.com/ori369therapy',
+    url: 'https://www.instagram.com/jernej_power/',
     icon: Instagram,
     color: 'bg-gradient-to-br from-purple-600 via-pink-500 to-orange-400 hover:from-purple-700 hover:via-pink-600 hover:to-orange-500',
     description: 'Oglejte si naše zgodbe in fotografije',
-    followers: '1.2k',
+    followers: '',
   },
   {
     name: 'YouTube',
-    url: 'https://www.youtube.com/@ori369therapy',
+    url: 'https://www.youtube.com/@jernej_power',
     icon: Youtube,
     color: 'bg-red-600 hover:bg-red-700',
     description: 'Glejte naše video vsebine in izobraževanja',
-    followers: '200+',
+    followers: '',
   },
 ];
 
-const pressArticles = [
+const youtubeVideos = [
   {
-    title: 'ORI 369 - Celostni pristop k zdravju',
-    source: 'Večer',
-    date: '2024-10-15',
-    url: '#',
-    excerpt: 'V Mariboru deluje center ORI 369, ki združuje sodobne terapevtske pristope z energijskim zdravljenjem.',
+    title: 'Ledeni potop Bled',
+    url: 'https://youtu.be/y_tb37LPCsI?si=7Z279eNL44zA85gG',
+    thumbnail: 'https://img.youtube.com/vi/y_tb37LPCsI/maxresdefault.jpg',
   },
   {
-    title: 'Frekvence 3-6-9 in njihov vpliv na zdravje',
-    source: 'Delo',
-    date: '2024-09-20',
-    url: '#',
-    excerpt: 'Intervju z ustanoviteljem centra ORI 369 o pomenu frekvenc v terapevtskem procesu.',
+    title: 'Podcast Zavedanje',
+    url: 'https://youtu.be/WyeXvVrqP14?si=hOjxV7bwy-djVp7k',
+    thumbnail: 'https://img.youtube.com/vi/WyeXvVrqP14/maxresdefault.jpg',
   },
   {
-    title: 'Nove terapevtske metode v Sloveniji',
-    source: 'RTV Slovenija',
-    date: '2024-08-10',
-    url: '#',
-    excerpt: 'Predstavitev inovativnih terapevtskih pristopov, ki jih ponuja center ORI 369.',
+    title: 'Dihalna tehnika',
+    url: 'https://youtu.be/CnZq-ku-Kfs?si=CbDQcOt8OD8NFefi',
+    thumbnail: 'https://img.youtube.com/vi/CnZq-ku-Kfs/maxresdefault.jpg',
+  },
+  {
+    title: 'Zdravi recepti',
+    url: 'https://youtu.be/o29rKbc28xY?si=MsghaITAudyaWMGr',
+    thumbnail: 'https://img.youtube.com/vi/o29rKbc28xY/maxresdefault.jpg',
+  },
+];
+
+const mediaGallery = [
+  {
+    url: 'https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/tvslo1.jpg',
+    title: 'TV Slovenija',
+    description: 'Nastop na TV Slovenija',
+  },
+  {
+    url: 'https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/tvslo1%20prvic.jpg',
+    title: 'TV SLO - Prvi nastop',
+    description: 'Prvi nastop na TV Slovenija',
+  },
+  {
+    url: 'https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/tanja%20pia%20inm%20boris%20vene.jpg',
+    title: 'Tanja, Pia in Boris Vene',
+    description: 'S Tanjo, Pio in Borisom Venetom',
+  },
+  {
+    url: 'https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/snemanje%20tednik%20slo%201.jpg',
+    title: 'Snemanje Tednik SLO 1',
+    description: 'Snemanje za Tednik na SLO 1',
+  },
+  {
+    url: 'https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/potop%20bohinj.jpg',
+    title: 'Potop Bohinj',
+    description: 'Ledeni potop na Bohinju',
+  },
+  {
+    url: 'https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/petra%20skarja%20pisateljica.jpg',
+    title: 'Petra Škarja - Pisateljica',
+    description: 'S pisateljico Petro Škarja',
+  },
+  {
+    url: 'https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/izvir%20cetine.jpg',
+    title: 'Izvir Cetine',
+    description: 'Ekspedicija na izvir Cetine',
+  },
+  {
+    url: 'https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/boris%20vene.jpg',
+    title: 'Boris Vene',
+    description: 'Z Borisom Venetom',
+  },
+];
+
+const partnerLinks = [
+  {
+    name: 'Wolfpack.si',
+    url: 'https://wolfpack.si',
+    description: 'Ekspedicije v naravo, ledene kopeli in dihalne vaje',
   },
 ];
 
@@ -92,7 +150,6 @@ export default function MediaPage() {
                   <div className={`${social.color} p-6 text-white`}>
                     <social.icon size={48} className="mb-2" />
                     <h3 className="text-xl font-bold">{social.name}</h3>
-                    <p className="text-sm opacity-90">{social.followers} sledilcev</p>
                   </div>
                   <div className="p-6">
                     <p className="text-gray-600 mb-4">{social.description}</p>
@@ -146,40 +203,96 @@ export default function MediaPage() {
             </div>
           </section>
 
-          {/* Press Section */}
+          {/* YouTube Videos Section */}
           <section className="mb-16">
             <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
               <span className="w-8 h-1 bg-[#00B5AD] rounded"></span>
-              {t('media.pressReleases')}
+              YouTube Videoposnetki
             </h2>
             
-            <div className="space-y-6">
-              {pressArticles.map((article, index) => (
-                <div
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {youtubeVideos.map((video, index) => (
+                <a
                   key={index}
-                  className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-shadow"
+                  href={video.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className="p-3 bg-gray-100 rounded-lg">
-                      <Newspaper className="text-gray-600" size={24} />
-                    </div>
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-2">
-                        <span className="text-sm font-semibold text-[#00B5AD]">{article.source}</span>
-                        <span className="text-gray-400">•</span>
-                        <span className="text-sm text-gray-500">
-                          {new Date(article.date).toLocaleDateString('sl-SI', {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
-                          })}
-                        </span>
-                      </div>
-                      <h3 className="text-lg font-bold text-gray-900 mb-2">{article.title}</h3>
-                      <p className="text-gray-600">{article.excerpt}</p>
+                  <div className="aspect-video bg-gray-200 relative">
+                    <img 
+                      src={video.thumbnail} 
+                      alt={video.title}
+                      className="w-full h-full object-cover"
+                    />
+                    <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 hover:opacity-100 transition-opacity">
+                      <Youtube size={64} className="text-white" />
                     </div>
                   </div>
+                  <div className="p-4">
+                    <h3 className="font-bold text-gray-900">{video.title}</h3>
+                    <span className="inline-flex items-center text-[#00B5AD] text-sm mt-2">
+                      Oglej si video <ExternalLink size={14} className="ml-1" />
+                    </span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </section>
+
+          {/* Media Gallery Section */}
+          <section className="mb-16">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
+              <span className="w-8 h-1 bg-[#00B5AD] rounded"></span>
+              Galerija
+            </h2>
+            
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {mediaGallery.map((item, index) => (
+                <div
+                  key={index}
+                  className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-all duration-300 group"
+                >
+                  <div className="aspect-square bg-gray-200 relative overflow-hidden">
+                    <img 
+                      src={item.url} 
+                      alt={item.title}
+                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                    />
+                  </div>
+                  <div className="p-4">
+                    <h3 className="font-bold text-gray-900 text-sm">{item.title}</h3>
+                    <p className="text-gray-600 text-xs mt-1">{item.description}</p>
+                  </div>
                 </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Partners Section */}
+          <section className="mb-16">
+            <h2 className="text-2xl font-bold text-gray-900 mb-8 flex items-center gap-2">
+              <span className="w-8 h-1 bg-[#00B5AD] rounded"></span>
+              Partnerji in Projekti
+            </h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {partnerLinks.map((partner, index) => (
+                <a
+                  key={index}
+                  href={partner.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 flex items-center gap-4"
+                >
+                  <div className="p-3 bg-[#00B5AD]/10 rounded-lg">
+                    <ExternalLink className="text-[#00B5AD]" size={24} />
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-gray-900">{partner.name}</h3>
+                    <p className="text-gray-600 text-sm">{partner.description}</p>
+                  </div>
+                </a>
               ))}
             </div>
           </section>

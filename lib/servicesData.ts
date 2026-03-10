@@ -861,19 +861,30 @@ Samo vi ste kreator vaših mislih in samo vi lahko igrate glavno vlogo v vašem 
 
 export const packagesData: TherapyPackage[] = [
   {
-    slug: 'uvodni-termin',
-    name: 'Uvodni termin + analiza',
-    description: 'Prvi pregled + meritev s Physio Motio + celovit personaliziran plan terapij in vaj za vrnitev v ravnovesje',
+    slug: 'prvi-pregled',
+    name: 'Prvi pregled, analiza, osebni program (terapija)',
+    description: 'Celovit prvi pregled z analizo vašega stanja in pripravo personaliziranega programa terapij za vrnitev v ravnovesje.',
     sessions: 1,
     regularPrice: null,
     packagePrice: 96,
     pricePerSession: 96,
-    includedServices: ['Meritev Physio Motio', 'Analiza gibanja in drže', 'Personaliziran plan terapij', 'Vaje za ravnovesje'],
+    includedServices: ['Celovit prvi pregled', 'Analiza stanja', 'Osebni program terapij'],
     benefits: ['Celovita analiza stanja', 'Personaliziran pristop', 'Jasen načrt zdravljenja']
   },
   {
-    slug: 'paket-3-obravnave',
-    name: 'Aktivacija - Paket 3 obravnave',
+    slug: 'meritev-physio-motio',
+    name: 'Samo meritev Physio Motio',
+    description: 'Natančna 3D digitalna analiza telesne drže in gibalnih vzorcev s sistemom Physio Motio.',
+    sessions: 1,
+    regularPrice: null,
+    packagePrice: 69,
+    pricePerSession: 69,
+    includedServices: ['Meritev Physio Motio', '3D analiza drže', 'Digitalni izpis rezultatov'],
+    benefits: ['Zgodnje odkrivanje asimetrij', 'Natančna analiza', 'Osnova za terapevtski plan']
+  },
+  {
+    slug: 'aktivacija-prebudi-telo',
+    name: 'Aktivacija Prebudi telo – Paket 3 obravnave',
     description: 'Uvodna meritev + fizična analiza + osebni program, 3x Elektrostimulacija, 3x Tacer terapija, 3x Iteracare in masaža, 3x Manualna - Storm terapija, 1x Končna obravnava',
     sessions: 13,
     regularPrice: 335,
@@ -883,8 +894,8 @@ export const packagesData: TherapyPackage[] = [
     benefits: ['Aktivacija telesa', 'Regeneracija', 'Prihranek 139€']
   },
   {
-    slug: 'paket-6-obravnave',
-    name: 'Osveščanje Telesa - Paket 6 obravnav',
+    slug: 'osvescanje-telesa',
+    name: 'Osveščanje Telesa – Paket 6 obravnav',
     description: 'Uvodna meritev + fizična analiza + osebni program, 6x Elektrostimulacija, 6x Iteracare in masaža, 6x Laser, 6x Tacer terapija, 6x Manualna - Storm terapija, 1x Končna obravnava',
     sessions: 31,
     regularPrice: 690,
@@ -894,33 +905,34 @@ export const packagesData: TherapyPackage[] = [
     benefits: ['Globlja transformacija', 'Celovita regeneracija', 'Prihranek 294€']
   },
   {
-    slug: 'paket-9-obravnave',
-    name: 'Univerzum - Paket 9 obravnav',
-    description: 'Uvodna meritev + fizična analiza + osebni program, 9x Elektrostimulacija, 9x Tacer terapija in masaža, 9x Trakcijska miza, 9x Manualna - Storm terapija, 9x MIS Magnetna indukcijska stimulacija, 9x Skalarni valovi - uravnovešanje čaker, 1x Moti-physio Scan',
+    slug: 'univerzum',
+    name: 'Univerzum – Paket 9 obravnav',
+    description: 'Uvodna meritev + fizična analiza + osebni program, 9x Elektrostimulacija, 9x Tacer terapija in masaža, 9x Trakcijska miza, 9x Manualna - Storm terapija, 9x MIS Magnetna indukcijska stimulacija, 9x Skalarni valovi - uravnovešanje čaker, 3x AO Scan, 1x Moti-physio Scan',
     sessions: 58,
     regularPrice: 1835,
     packagePrice: 796,
     pricePerSession: 13.72,
-    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '9x Elektrostimulacija', '9x Tacer terapija in masaža', '9x Trakcijska miza', '9x Manualna - Storm terapija', '9x MIS Magnetna indukcijska stimulacija', '9x Skalarni valovi - uravnovešanje čaker', '1x Moti-physio Scan'],
+    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '9x Elektrostimulacija', '9x Tacer terapija in masaža', '9x Trakcijska miza', '9x Manualna - Storm terapija', '9x MIS Magnetna indukcijska stimulacija', '9x Skalarni valovi - uravnovešanje čaker', '3x AO Scan', '1x Moti-physio Scan'],
     benefits: ['Popolna transformacija', 'Vse tehnologije ORI 369', 'Prihranek 1039€']
   },
 ];
 
 export const individualPrices = [
-  { name: 'Elektrostimulacija', price: 20, duration: 20 },
-  { name: 'Tecar terapija', price: 40, duration: 30 },
-  { name: 'Media Tape', price: 10, duration: 15 },
-  { name: 'Iteracare', price: 20, duration: 20 },
-  { name: 'Laser', price: 10, duration: 10 },
-  { name: 'MIS - Magnetna indukcijska stimulacija', price: 30, duration: 20 },
-  { name: 'Storm terapija - manualna terapija', price: 30, duration: 20 },
-  { name: 'Scan AO', price: 50, duration: 30 },
-  { name: 'Motio-physio Scan', price: 120, duration: 30 },
-  { name: 'Skalarni valovi - uravnovešanje čaker', price: 35, duration: 30 },
-  { name: 'Trakcijska miza', price: 40, duration: 30 },
-  { name: 'SU JOK therapy', price: 30, duration: 30 },
-  { name: 'Ventuze (Cupping)', price: 30, duration: 30 },
+  { name: 'Motio-Physio Scan', price: 69, duration: 30 },
+  { name: 'Storm terapija – manualna terapija', price: 30, duration: 20 },
+  { name: 'Dekompresijska miza – Platinium', price: 30, duration: 20 },
+  { name: 'Tacer', price: 29, duration: 30 },
+  { name: 'Cryoscreen', price: 9, duration: 15 },
+  { name: 'Udarni valovi', price: 39, duration: 20 },
+  { name: 'Laser', price: 9, duration: 10 },
+  { name: 'Elektrostimulacija', price: 19, duration: 20 },
+  { name: 'Media Tape', price: 9, duration: 10 },
+  { name: 'Iteracare', price: 19, duration: 20 },
+  { name: 'Skalarni valovi – uravnovešanje čaker', price: 30, duration: 30 },
+  { name: 'Ultrazvok', price: 19, duration: 15 },
+  { name: 'SU JOK', price: 29, duration: 30 },
   { name: 'Dry needling', price: 30, duration: 30 },
+  { name: 'Ventuze', price: 19, duration: 20 },
   { name: 'Individualno vodeno dihanje', price: 30, duration: 30 },
-  { name: 'Individualna protibolečinska vadba', price: 40, duration: 60 }
+  { name: 'Individualna protibolečinska ali antistresna vadba', price: 39, duration: 60 }
 ];

@@ -194,6 +194,15 @@ interface Service {
   name: string;
   slug: string;
   description: string | null;
+  long_description?: string | null;
+  benefits?: string[] | null;
+  indications?: string[] | null;
+  contraindications?: string[] | null;
+  how_it_works?: string | null;
+  image_url?: string | null;
+  image_url_2?: string | null;
+  image_url_3?: string | null;
+  category?: string | null;
   duration: number;
   price: number;
   is_package: boolean;
@@ -1578,6 +1587,15 @@ function ServiceModal({
     name: service?.name || '',
     slug: service?.slug || '',
     description: service?.description || '',
+    long_description: service?.long_description || '',
+    how_it_works: service?.how_it_works || '',
+    benefits: (service?.benefits || []).join('\n'),
+    indications: (service?.indications || []).join('\n'),
+    contraindications: (service?.contraindications || []).join('\n'),
+    image_url: service?.image_url || '',
+    image_url_2: service?.image_url_2 || '',
+    image_url_3: service?.image_url_3 || '',
+    category: service?.category || 'therapy',
     duration: service?.duration || 30,
     price: service?.price || 0,
     is_package: service?.is_package || false,
@@ -1591,6 +1609,15 @@ function ServiceModal({
       name: service?.name || '',
       slug: service?.slug || '',
       description: service?.description || '',
+      long_description: service?.long_description || '',
+      how_it_works: service?.how_it_works || '',
+      benefits: (service?.benefits || []).join('\n'),
+      indications: (service?.indications || []).join('\n'),
+      contraindications: (service?.contraindications || []).join('\n'),
+      image_url: service?.image_url || '',
+      image_url_2: service?.image_url_2 || '',
+      image_url_3: service?.image_url_3 || '',
+      category: service?.category || 'therapy',
       duration: service?.duration || 30,
       price: service?.price || 0,
       is_package: service?.is_package || false,
@@ -1601,7 +1628,12 @@ function ServiceModal({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSave(formData);
+    onSave({
+      ...formData,
+      benefits: formData.benefits.split('\n').map((item) => item.trim()).filter(Boolean),
+      indications: formData.indications.split('\n').map((item) => item.trim()).filter(Boolean),
+      contraindications: formData.contraindications.split('\n').map((item) => item.trim()).filter(Boolean),
+    });
   };
 
   const generateSlug = (name: string) => {
@@ -1669,6 +1701,98 @@ function ServiceModal({
               className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               placeholder="Kratek opis storitve..."
             />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Dolg opis
+            </label>
+            <textarea
+              value={formData.long_description}
+              onChange={(e) => setFormData({ ...formData, long_description: e.target.value })}
+              rows={6}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Podroben opis storitve ali tečaja..."
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-2">
+              Kako deluje
+            </label>
+            <textarea
+              value={formData.how_it_works}
+              onChange={(e) => setFormData({ ...formData, how_it_works: e.target.value })}
+              rows={5}
+              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="Razlaga procesa, poteka ali metodologije..."
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Slika 1 URL</label>
+              <input
+                type="text"
+                value={formData.image_url}
+                onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="https://..."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Slika 2 URL</label>
+              <input
+                type="text"
+                value={formData.image_url_2}
+                onChange={(e) => setFormData({ ...formData, image_url_2: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="https://..."
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Slika 3 URL</label>
+              <input
+                type="text"
+                value={formData.image_url_3}
+                onChange={(e) => setFormData({ ...formData, image_url_3: e.target.value })}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="https://..."
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Koristi</label>
+              <textarea
+                value={formData.benefits}
+                onChange={(e) => setFormData({ ...formData, benefits: e.target.value })}
+                rows={5}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Ena korist na vrstico"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Indikacije</label>
+              <textarea
+                value={formData.indications}
+                onChange={(e) => setFormData({ ...formData, indications: e.target.value })}
+                rows={5}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Ena indikacija na vrstico"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-2">Kontraindikacije</label>
+              <textarea
+                value={formData.contraindications}
+                onChange={(e) => setFormData({ ...formData, contraindications: e.target.value })}
+                rows={5}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                placeholder="Ena kontraindikacija na vrstico"
+              />
+            </div>
           </div>
 
           <div className="grid grid-cols-2 gap-4">

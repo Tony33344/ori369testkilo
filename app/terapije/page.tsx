@@ -1,11 +1,10 @@
 import Services from '@/components/sections/Services';
 import Link from 'next/link';
 import { BookOpen, ArrowRight } from 'lucide-react';
-import { servicesData } from '@/lib/servicesData';
+import { fetchPublicServices } from '@/lib/public-services';
 
 export default async function TherapiesPage() {
-  // Use servicesData for correct prices (not Supabase which has wrong values)
-  const therapies = Object.values(servicesData).map((service) => ({
+  const therapies = (await fetchPublicServices(false)).map((service) => ({
     id: service.slug,
     name: service.name,
     shortDescription: service.shortDescription,

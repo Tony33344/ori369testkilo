@@ -60,8 +60,8 @@ function EducationReservationPageContent() {
     if (!selectedSessionId) return;
 
     if (!user) {
-      // Redirect to login with callback
-      const callbackUrl = encodeURIComponent(`/education/potrdi-rezervacijo`);
+      // Redirect to login with callback - include courseId and sessionId in callback
+      const callbackUrl = encodeURIComponent(`/education/potrdi-rezervacijo?courseId=${selectedCourseId}&sessionId=${selectedSessionId}`);
       router.push(`/prijava?redirect=${callbackUrl}`); 
       return;
     }

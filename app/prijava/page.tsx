@@ -37,7 +37,7 @@ function LoginForm() {
 
   const handleGoogleSignIn = async () => {
     setGoogleLoading(true);
-    const { error } = await signInWithGoogle();
+    const { error } = await signInWithGoogle(redirect);
     if (error) {
       toast.error('Napaka pri prijavi z Google');
       setGoogleLoading(false);

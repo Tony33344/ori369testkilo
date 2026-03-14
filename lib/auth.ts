@@ -1,12 +1,14 @@
 import { supabase } from './supabase';
 
-export async function signInWithGoogle() {
+export async function signInWithGoogle(redirectTo?: string) {
+  const oauthRedirectTo = typeof window !== 'undefined' 
+    ? `${window.location.origin}${redirectTo || '/dashboard'}`
+    : undefined;
+  
   const { data, error } = await supabase.auth.signInWithOAuth({
     provider: 'google',
     options: {
-      redirectTo: typeof window !== 'undefined' 
-        ? `${window.location.origin}/dashboard`
-        : undefined,
+      redirectTo: oauthRedirectTo,
     },
   });
   return { data, error };

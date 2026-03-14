@@ -119,6 +119,12 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
         status,
         language,
         start_time,
+        image_url_2,
+        image_url_3,
+        detailed_description,
+        program_schedule,
+        what_youll_get,
+        requirements,
         sessions:education_course_sessions (
           id,
           status,
@@ -135,7 +141,7 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
       .eq('published', true)
       .order('created_at', { ascending: true });
     
-    courses = fallback.data;
+    courses = fallback.data as typeof courses;
     error = fallback.error;
   }
 

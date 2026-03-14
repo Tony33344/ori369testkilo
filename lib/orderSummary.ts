@@ -5,7 +5,7 @@ export interface OrderSummaryItem {
   name: string;
   quantity: number;
   totalPrice: number;
-  type: 'service' | 'product';
+  type: 'service' | 'product' | 'education';
   bookingDate?: string | null;
   bookingTime?: string | null;
 }

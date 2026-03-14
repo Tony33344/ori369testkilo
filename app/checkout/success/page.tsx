@@ -33,6 +33,7 @@ async function getOrderDetails(sessionId?: string) {
     return null;
   }
 
+  // Get regular order items (services and products)
   const { data: items } = await supabase
     .from('order_items')
     .select('service_id, product_id, quantity, total_price, metadata, services(name), shop_products(name)')
@@ -64,6 +65,39 @@ async function getOrderDetails(sessionId?: string) {
       bookingTime,
     };
   });
+
+  // Get education course registrations for this order
+  const { data: eduRegistrations } = await supabase
+    .from('education_course_registrations')
+    .select('id, session_id, status')
+    .eq('order_id', data.id);
+
+  // Add education items to summary
+  if (eduRegistrations && eduRegistrations.length > 0) {
+    const sessionIds = eduRegistrations.map(r => r.session_id).filter(Boolean);
+    
+    if (sessionIds.length > 0) {
+      const { data: sessionsData } = await supabase
+        .from('education_course_sessions')
+        .select('id, headline, start_at, price, course:education_courses(id, title)')
+        .in('id', sessionIds);
+
+      if (sessionsData) {
+        for (const session of sessionsData) {
+          const course = Array.isArray(session.course) ? session.course[0] : session.course;
+          summaryItems.push({
+            id: session.id,
+            name: course?.title || 'Izobraževanje',
+            quantity: 1,
+            totalPrice: Number(session.price || 0),
+            type: 'education' as const,
+            bookingDate: session.start_at?.slice(0, 10) || null,
+            bookingTime: session.start_at ? session.start_at.slice(11, 16) : null,
+          });
+        }
+      }
+    }
+  }
 
   // Deduplicate by id + bookingDate + bookingTime + type to avoid duplicate education entries
   const uniqueSummary: OrderSummaryItem[] = [];

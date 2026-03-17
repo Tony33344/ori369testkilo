@@ -115,7 +115,8 @@ export default function EducationCoursePage() {
     course.image_url_3
   ].filter(Boolean) as string[];
 
-  const firstSession = course.sessions?.[0];
+  const upcomingSessions = (course.sessions || []).filter((session) => session.status !== 'past');
+  const primarySession = upcomingSessions[0] || course.sessions?.[0];
 
   return (
     <div className="bg-white min-h-screen">
@@ -145,7 +146,7 @@ export default function EducationCoursePage() {
             <span className={`px-3 py-1 bg-[#00B5AD] text-white text-sm font-bold rounded-full`}>
               {course.level === 'beginner' ? 'Začetni' : course.level === 'intermediate' ? 'Nadaljevalni' : 'Napredni'}
             </span>
-            {firstSession?.status === 'current' && (
+            {primarySession?.status === 'current' && (
               <span className="px-3 py-1 bg-green-500 text-white text-sm font-bold rounded-full">
                 Aktualno
               </span>
@@ -254,73 +255,72 @@ export default function EducationCoursePage() {
             <div className="sticky top-6 space-y-6">
               {/* Session Info Card */}
               <div className="bg-white border border-gray-100 rounded-3xl p-6 shadow-lg">
-                <h3 className="text-xl font-bold text-gray-900 mb-6">Termin in lokacija</h3>
+                <h3 className="text-xl font-bold text-gray-900 mb-6">Termini in lokacija</h3>
                 
-                {firstSession ? (
+                {upcomingSessions.length > 0 ? (
                   <div className="space-y-4">
-                    {firstSession.start_at && (
-                      <div className="flex items-start">
-                        <Calendar className="w-5 h-5 text-[#00B5AD] mr-3 mt-0.5" />
-                        <div>
-                          <p className="font-semibold text-gray-900">
-                            {format(new Date(firstSession.start_at), 'EEEE, d. MMMM yyyy', { locale: sl })}
-                          </p>
-                          <p className="text-gray-500 text-sm">
-                            {firstSession.end_at 
-                              ? `${format(new Date(firstSession.start_at), 'HH:mm')} – ${format(new Date(firstSession.end_at), 'HH:mm')}`
-                              : format(new Date(firstSession.start_at), 'HH:mm')
-                            }
-                          </p>
-                        </div>
-                      </div>
-                    )}
-
-                    {(firstSession.location || course.location) && (
-                      <div className="flex items-start">
-                        <MapPin className="w-5 h-5 text-[#00B5AD] mr-3 mt-0.5" />
-                        <p className="text-gray-700">{firstSession.location || course.location}</p>
-                      </div>
-                    )}
-
-                    {firstSession.max_participants && (
-                      <div className="flex items-start">
-                        <Users className="w-5 h-5 text-[#00B5AD] mr-3 mt-0.5" />
-                        <div>
-                          <p className="text-gray-700">{firstSession.max_participants} mest</p>
-                          {firstSession.availableSpots !== null && firstSession.availableSpots > 0 && (
-                            <p className="text-green-600 text-sm font-medium">
-                              Še {firstSession.availableSpots} prostih mest
+                    {upcomingSessions.map((session) => (
+                      <div key={session.id} className="rounded-2xl border border-gray-100 bg-gray-50 p-4">
+                        <div className="flex items-start gap-3">
+                          <Calendar className="mt-0.5 h-5 w-5 text-[#00B5AD]" />
+                          <div className="min-w-0 flex-1">
+                            <p className="font-semibold text-gray-900">
+                              {format(new Date(session.start_at), 'EEEE, d. MMMM yyyy', { locale: sl })}
                             </p>
+                            <p className="mt-1 text-sm text-gray-500">
+                              {session.end_at
+                                ? `${format(new Date(session.start_at), 'HH:mm')} – ${format(new Date(session.end_at), 'HH:mm')}`
+                                : format(new Date(session.start_at), 'HH:mm')}
+                            </p>
+                          </div>
+                        </div>
+
+                        {(session.location || course.location) && (
+                          <div className="mt-4 flex items-start gap-3">
+                            <MapPin className="mt-0.5 h-5 w-5 text-[#00B5AD]" />
+                            <p className="text-gray-700">{session.location || course.location}</p>
+                          </div>
+                        )}
+
+                        {session.max_participants && (
+                          <div className="mt-4 flex items-start gap-3">
+                            <Users className="mt-0.5 h-5 w-5 text-[#00B5AD]" />
+                            <div>
+                              <p className="text-gray-700">{session.max_participants} mest</p>
+                              {session.availableSpots !== null && session.availableSpots > 0 && (
+                                <p className="text-sm font-medium text-green-600">
+                                  Še {session.availableSpots} prostih mest
+                                </p>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        <div className="mt-5 border-t border-gray-200 pt-4">
+                          <div className="mb-4 text-center">
+                            <span className="mb-1 block text-sm text-gray-500">Cena</span>
+                            <span className="text-3xl font-black text-gray-900">€{session.price ?? course.price ?? '0'}</span>
+                          </div>
+
+                          {session.isFull ? (
+                            <button disabled className="w-full rounded-xl bg-gray-300 py-4 font-bold text-gray-600 cursor-not-allowed">
+                              Polno
+                            </button>
+                          ) : (
+                            <Link
+                              href={`/education/potrdi-rezervacijo?courseId=${course.id}&sessionId=${session.id}`}
+                              className="block w-full rounded-xl bg-[#00B5AD] py-4 text-center font-bold text-white transition-colors hover:bg-[#009891] shadow-lg shadow-[#00B5AD]/20"
+                            >
+                              Prijava na ta termin
+                            </Link>
                           )}
                         </div>
                       </div>
-                    )}
+                    ))}
                   </div>
                 ) : (
                   <p className="text-gray-500">Termin bo objavljen kmalu</p>
                 )}
-
-                <div className="mt-6 pt-6 border-t border-gray-100">
-                  <div className="text-center mb-6">
-                    <span className="text-sm text-gray-500 block mb-1">Cena</span>
-                    <span className="text-3xl font-black text-gray-900">
-                      €{firstSession?.price ?? course.price ?? '0'}
-                    </span>
-                  </div>
-
-                  {firstSession?.isFull ? (
-                    <button disabled className="w-full py-4 bg-gray-300 text-gray-600 font-bold rounded-xl cursor-not-allowed">
-                      Polno
-                    </button>
-                  ) : (
-                    <Link 
-                      href={`/education/potrdi-rezervacijo?courseId=${course.id}${firstSession?.id ? `&sessionId=${firstSession.id}` : ''}`}
-                      className="block w-full py-4 bg-[#00B5AD] text-white font-bold rounded-xl text-center hover:bg-[#009891] transition-colors shadow-lg shadow-[#00B5AD]/20"
-                    >
-                      Prijava na tečaj
-                    </Link>
-                  )}
-                </div>
               </div>
 
               {/* Organizer */}

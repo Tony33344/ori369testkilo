@@ -56,7 +56,7 @@ export type EducationCourse = {
 };
 
 export async function getEducationOverview(): Promise<EducationCourse[]> {
-  // First try with all fields, if that fails (columns don't exist), try without new fields
+  // First try with all fields, if that fails (columns don't exist), try a narrower fallback
   let { data: courses, error } = await supabase
     .from('education_courses')
     .select(`
@@ -116,18 +116,11 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
         location,
         cover_image_url,
         highlight_color,
-        featured,
         price,
         max_attendees,
         status,
         language,
         start_time,
-        image_url_2,
-        image_url_3,
-        detailed_description,
-        program_schedule,
-        what_youll_get,
-        requirements,
         sessions:education_course_sessions (
           id,
           status,
@@ -185,7 +178,7 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
     location: course.location,
     cover_image_url: course.cover_image_url,
     highlight_color: course.highlight_color,
-    featured: course.featured ?? false,
+    featured: 'featured' in course ? course.featured ?? false : false,
     price: course.price ?? null,
     max_attendees: course.max_attendees ?? null,
     status: course.status ?? null,
@@ -225,7 +218,7 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
 }
 
 export async function getEducationCourseBySlug(slug: string): Promise<EducationCourse | null> {
-  const { data: course, error } = await supabase
+  let { data: course, error } = await supabase
     .from('education_courses')
     .select(`
       id,
@@ -267,6 +260,47 @@ export async function getEducationCourseBySlug(slug: string): Promise<EducationC
     .eq('slug', slug)
     .single();
 
+  if (error) {
+    console.log('Retrying single education course query without optional columns:', error.message);
+    const fallback = await supabase
+      .from('education_courses')
+      .select(`
+        id,
+        slug,
+        title,
+        subtitle,
+        short_description,
+        long_description,
+        level,
+        organizer,
+        location,
+        cover_image_url,
+        highlight_color,
+        price,
+        max_attendees,
+        status,
+        language,
+        start_time,
+        sessions:education_course_sessions (
+          id,
+          status,
+          headline,
+          start_at,
+          end_at,
+          location,
+          language,
+          format,
+          price,
+          max_participants
+        )
+      `)
+      .eq('slug', slug)
+      .single();
+
+    course = fallback.data as typeof course;
+    error = fallback.error;
+  }
+
   if (error || !course) {
     console.error('Failed to load education course:', error);
     return null;
@@ -301,7 +335,7 @@ export async function getEducationCourseBySlug(slug: string): Promise<EducationC
     location: course.location,
     cover_image_url: course.cover_image_url,
     highlight_color: course.highlight_color,
-    featured: course.featured ?? false,
+    featured: 'featured' in course ? course.featured ?? false : false,
     price: course.price ?? null,
     max_attendees: course.max_attendees ?? null,
     status: course.status ?? null,

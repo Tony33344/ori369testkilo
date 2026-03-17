@@ -6,7 +6,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
 import Link from 'next/link';
-import { ArrowLeft, Loader2, Calendar, Clock, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Loader2, Calendar, Clock, CheckCircle, MapPin, Users } from 'lucide-react';
 
 function EducationReservationPageContent() {
   const [courses, setCourses] = useState<any[]>([]);
@@ -153,9 +153,22 @@ function EducationReservationPageContent() {
                         </div>
                         <div className="text-sm text-gray-600 flex items-center mt-1">
                           <Clock className="w-3 h-3 mr-1" />
-                          {format(new Date(session.start_at), 'HH:mm')} 
-                          {session.duration && ` - ${session.duration} min`}
+                          {format(new Date(session.start_at), 'HH:mm')}
+                          {session.end_at ? ` – ${format(new Date(session.end_at), 'HH:mm')}` : ''}
                         </div>
+                        {(session.location || selectedCourse?.location) && (
+                          <div className="text-sm text-gray-600 flex items-center mt-1">
+                            <MapPin className="w-3 h-3 mr-1" />
+                            {session.location || selectedCourse?.location}
+                          </div>
+                        )}
+                        {session.max_participants ? (
+                          <div className="text-sm text-gray-600 flex items-center mt-1">
+                            <Users className="w-3 h-3 mr-1" />
+                            {session.max_participants} mest
+                            {typeof session.availableSpots === 'number' ? ` • Še ${session.availableSpots} prostih mest` : ''}
+                          </div>
+                        ) : null}
                       </div>
                     </div>
                     <div className="text-right">

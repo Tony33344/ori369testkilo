@@ -25,8 +25,8 @@ const resolveServiceByPackageParam = (items: any[], packageParam: string) => {
   if (directMatch) return directMatch;
 
   const aliasMap: Record<string, string[]> = {
-    motioscan: ['motioscan', 'moti-physio', 'meritev-physio-motio'],
-    'uvodni-termin': ['uvodni-termin'],
+    motioscan: ['motioscan', 'moti-physio', 'meritev-physio-motio', 'physio-motio-meritev'],
+    'uvodni-termin': ['uvodni-termin', 'physio-motio-pregled'],
   };
 
   const aliases = aliasMap[normalizedParam] || [normalizedParam];
@@ -36,10 +36,10 @@ const resolveServiceByPackageParam = (items: any[], packageParam: string) => {
   return items.find((item) => {
     const haystack = `${item.slug || ''} ${item.name || ''}`.toLowerCase();
     if (normalizedParam === 'motioscan') {
-      return haystack.includes('motio');
+      return haystack.includes('samo meritev physio motio') || haystack.includes('brez plana terapij');
     }
     if (normalizedParam === 'uvodni-termin') {
-      return haystack.includes('uvodni') || haystack.includes('prvi pregled + meritev s physio motio');
+      return haystack.includes('prvi pregled + meritev s physio motio') || haystack.includes('celovit personaliziran plan terapij in vaj');
     }
     return haystack.includes(normalizedParam);
   });
@@ -124,7 +124,8 @@ function BookingForm() {
     const serviceDurationMin = Number(selectedServiceObj?.duration || 60);
     const slotIntervalMin = Number(selectedServiceObj?.slot_interval_min || 30);
 
-    const dayOfWeek = new Date(date).getDay();
+    // Parse date as local noon to avoid UTC midnight shifting day-of-week
+    const dayOfWeek = new Date(`${date}T12:00:00`).getDay();
 
     // Get availability for this day
     const { data: slots } = await supabase

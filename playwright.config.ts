@@ -1,5 +1,8 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const baseURL = process.env.BASE_URL || 'http://localhost:3005';
+const localChromiumExecutable = process.env.PLAYWRIGHT_EXECUTABLE_PATH || '/usr/bin/brave-browser';
+
 /**
  * Enhanced Playwright configuration for ORI369 E2E tests
  * Supports comprehensive testing across all platform features
@@ -31,7 +34,7 @@ export default defineConfig({
   // globalSetup: './tests/e2e/global-setup.ts',
   
   use: {
-    baseURL: process.env.BASE_URL || 'http://localhost:3000',
+    baseURL,
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
@@ -46,7 +49,10 @@ export default defineConfig({
       name: 'chromium',
       use: { 
         ...devices['Desktop Chrome'],
-        viewport: { width: 1920, height: 1080 }
+        viewport: { width: 1920, height: 1080 },
+        launchOptions: {
+          executablePath: localChromiumExecutable,
+        },
       },
     },
     {
@@ -78,7 +84,7 @@ export default defineConfig({
   // Development server configuration
   webServer: {
     command: 'npm run dev',
-    url: 'http://localhost:3000',
+    url: baseURL,
     reuseExistingServer: true,
     timeout: 120 * 1000,
   },

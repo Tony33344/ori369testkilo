@@ -99,7 +99,10 @@ export default function EducationPage() {
           </div>
         ) : (
           <div className="flex flex-wrap justify-center gap-8">
-            {courses.map((course) => (
+            {courses.map((course) => {
+              const nextSession = course.sessions.find((session) => session.status !== 'past') || course.sessions[0];
+
+              return (
               <div key={course.id} className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-md">
                 <div className="relative h-64 overflow-hidden bg-gray-100">
                   <img 
@@ -120,11 +123,11 @@ export default function EducationPage() {
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex items-center justify-between mb-4">
                     <span className="text-sm font-bold text-[#00B5AD] uppercase tracking-wider">
-                      {course.sessions[0]?.status === 'current' ? 'Aktualno' : 'Prihaja'}
+                      {nextSession?.status === 'current' ? 'Aktualno' : 'Prihaja'}
                     </span>
                     <div className="flex items-center text-gray-500 text-xs font-medium">
                       <Clock className="w-3 h-3 mr-1" />
-                      {course.sessions[0]?.start_at ? format(new Date(course.sessions[0].start_at), 'd. MMM yyyy', { locale: sl }) : 'Termin sledi'}
+                      {nextSession?.start_at ? format(new Date(nextSession.start_at), 'd. MMM yyyy', { locale: sl }) : 'Termin sledi'}
                     </div>
                   </div>
                   
@@ -140,36 +143,36 @@ export default function EducationPage() {
                     <div className="flex items-center space-x-2">
                       <Clock className="w-4 h-4 text-gray-400" />
                       <span>
-                        {course.sessions[0]?.start_at
-                          ? format(new Date(course.sessions[0].start_at), 'd. MMMM yyyy', { locale: sl })
+                        {nextSession?.start_at
+                          ? format(new Date(nextSession.start_at), 'd. MMMM yyyy', { locale: sl })
                           : 'Datum po dogovoru'}
                       </span>
                     </div>
                     <div className="flex items-center space-x-2">
                       <Clock className="w-4 h-4 text-gray-400" />
                       <span className="font-medium text-gray-700">
-                        {course.sessions[0]?.start_at
-                          ? format(new Date(course.sessions[0].start_at), 'HH:mm')
+                        {nextSession?.start_at
+                          ? format(new Date(nextSession.start_at), 'HH:mm')
                           : course.start_time || 'Čas po dogovoru'}
                       </span>
                     </div>
-                    {course.location && (
+                    {(nextSession?.location || course.location) && (
                       <div className="flex items-center space-x-2">
                         <MapPin className="w-4 h-4 text-gray-400" />
-                        <span><span className="font-medium text-gray-700">Lokacija:</span> {course.location}</span>
+                        <span><span className="font-medium text-gray-700">Lokacija:</span> {nextSession?.location || course.location}</span>
                       </div>
                     )}
                   </div>
                   
                   <div className="mt-auto pt-6 border-t border-gray-50">
                     <div className="mb-4">
-                      {course.sessions[0]?.isFull ? (
+                      {nextSession?.isFull ? (
                         <span className="text-lg font-bold text-red-600">Polno</span>
                       ) : (
-                        <span className="text-2xl font-black text-gray-900">€{course.sessions[0]?.price ?? course.price ?? '0'}</span>
+                        <span className="text-2xl font-black text-gray-900">€{nextSession?.price ?? course.price ?? '0'}</span>
                       )}
                     </div>
-                    {course.sessions[0]?.isFull ? (
+                    {nextSession?.isFull ? (
                       <div className="w-full py-3 bg-gray-300 text-gray-600 font-bold rounded-xl text-center cursor-not-allowed opacity-60">
                         Polno
                       </div>
@@ -184,7 +187,7 @@ export default function EducationPage() {
                   </div>
                 </div>
               </div>
-            ))}
+            )})}
           </div>
         )}
       </section>
@@ -203,7 +206,10 @@ export default function EducationPage() {
             <div className="grid grid-cols-1 gap-12">
               {courses
                 .filter(c => c.featured)
-                .map((course, idx) => (
+                .map((course, idx) => {
+                  const nextSession = course.sessions.find((session) => session.status !== 'past') || course.sessions[0];
+
+                  return (
                   <div key={`featured-${course.id}`} className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${idx > 0 ? 'pt-24 border-t border-gray-800' : ''}`}>
                     <div className={`relative ${idx % 2 === 1 ? 'md:order-2' : ''}`}>
                       <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#00B5AD]/20 rounded-full blur-2xl"></div>
@@ -228,13 +234,13 @@ export default function EducationPage() {
                           <div className="flex items-center text-sm text-gray-300">
                             <CheckCircle className="w-4 h-4 mr-2 text-green-400" />
                             Status: <span className="text-white ml-1 font-semibold">
-                              {course.sessions[0]?.status === 'current' ? 'Aktualno' : 'Prihaja'}
+                              {nextSession?.status === 'current' ? 'Aktualno' : 'Prihaja'}
                             </span>
                           </div>
                           <div className="flex items-center text-sm text-gray-300">
                             <Calendar className="w-4 h-4 mr-2 text-[#00B5AD]" />
                             Termin: <span className="text-white ml-1 font-semibold">
-                              {course.sessions[0]?.start_at ? format(new Date(course.sessions[0].start_at), "d. M. yyyy 'ob' HH:mm", { locale: sl }) : 'Termin sledi'}
+                              {nextSession?.start_at ? format(new Date(nextSession.start_at), "d. M. yyyy 'ob' HH:mm", { locale: sl }) : 'Termin sledi'}
                             </span>
                           </div>
                         </div>
@@ -251,7 +257,7 @@ export default function EducationPage() {
                       </div>
                     </div>
                   </div>
-                ))}
+                )})}
             </div>
           </div>
         </section>

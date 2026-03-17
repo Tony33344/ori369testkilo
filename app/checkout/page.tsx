@@ -1325,28 +1325,26 @@ function CheckoutPageContent() {
               ))}
 
               {/* Discount code */}
-              {!educationMode && (
-                <div className="py-4 border-b">
-                  <div className="text-sm font-semibold text-gray-900 mb-2">Koda za popust</div>
-                  <div className="flex gap-2">
-                    <input
-                      type="text"
-                      value={discountCodeInput}
-                      onChange={(e) => setDiscountCodeInput(e.target.value)}
-                      placeholder="Vnesite kodo"
-                      className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent"
-                    />
-                    <button
-                      type="button"
-                      onClick={applyDiscountCode}
-                      disabled={discountLoading}
-                      className="px-4 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-black disabled:opacity-50"
-                    >
-                      {discountLoading ? '...' : 'Uporabi'}
-                    </button>
-                  </div>
+              <div className="py-4 border-b">
+                <div className="text-sm font-semibold text-gray-900 mb-2">Koda za popust</div>
+                <div className="flex gap-2">
+                  <input
+                    type="text"
+                    value={discountCodeInput}
+                    onChange={(e) => setDiscountCodeInput(e.target.value)}
+                    placeholder="Vnesite kodo"
+                    className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00B5AD] focus:border-transparent"
+                  />
+                  <button
+                    type="button"
+                    onClick={applyDiscountCode}
+                    disabled={discountLoading}
+                    className="px-4 py-2 rounded-lg bg-gray-900 text-white font-semibold hover:bg-black disabled:opacity-50"
+                  >
+                    {discountLoading ? '...' : 'Uporabi'}
+                  </button>
                 </div>
-              )}
+              </div>
               {appliedDiscount && discountAmount > 0 && (
                 <div className="mt-2 text-xs text-green-700">
                   Uporabljena koda: <span className="font-semibold">{appliedDiscount.code}</span>

@@ -39,6 +39,28 @@ const heroImages = [
   '/images/therapies/IMG_6009-Copy-768x513.webp',
 ];
 
+const getHeroServiceHref = (service: HeroService) => {
+  const normalized = `${service.slug} ${service.name}`.toLowerCase();
+
+  if (
+    normalized.includes('prvi pregled + meritev s physio motio') ||
+    normalized.includes('celovit personaliziran plan terapij in vaj') ||
+    normalized.includes('uvodni-termin')
+  ) {
+    return '/motioscan/uvodni-termin';
+  }
+
+  if (
+    normalized.includes('moti physio') ||
+    normalized.includes('motioscan') ||
+    normalized.includes('3d analiza telesa in drže')
+  ) {
+    return '/motioscan';
+  }
+
+  return `/terapije/${service.slug}`;
+};
+
 export default function Hero() {
   const { t } = useLanguage();
   const [heroServices, setHeroServices] = useState<HeroService[]>([]);
@@ -143,7 +165,7 @@ export default function Hero() {
               </Link>
               <Link
                 href="/terapije"
-                className="px-8 py-4 bg-black hover:bg-gray-800 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+                className="px-8 py-4 bg-white/88 text-gray-900 border border-gray-200 font-semibold rounded-xl shadow-lg hover:shadow-xl hover:bg-white hover:border-[#00B5AD]/35 hover:text-[#00B5AD] transform hover:scale-[1.02] transition-all duration-200 backdrop-blur-sm"
               >
                 {t('hero.exploreCta')}
               </Link>
@@ -162,29 +184,52 @@ export default function Hero() {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-                className="mt-10 flex flex-wrap justify-center gap-3 max-w-4xl mx-auto"
+                className="mt-12 flex flex-wrap justify-center gap-4 max-w-5xl mx-auto"
               >
                 {heroServices.map((service) => {
-                  const isMotio = service.slug.includes('motio');
-                  const href = isMotio ? '/motioscan' : `/terapije/${service.slug}`;
+                  const normalized = `${service.slug} ${service.name}`.toLowerCase();
+                  const isMotioStarter =
+                    normalized.includes('prvi pregled + meritev s physio motio') ||
+                    normalized.includes('celovit personaliziran plan terapij in vaj') ||
+                    normalized.includes('uvodni-termin');
+                  const isMotioScanOnly =
+                    !isMotioStarter && (
+                      normalized.includes('moti physio') ||
+                      normalized.includes('motioscan') ||
+                      normalized.includes('3d analiza telesa in drže')
+                    );
+                  const href = getHeroServiceHref(service);
                   return (
                     <Link
                       key={service.slug}
                       href={href}
-                      className="group relative flex items-center gap-3 bg-white/85 backdrop-blur-md border border-white/60 shadow-md hover:shadow-xl rounded-2xl px-4 py-3 transition-all duration-300 hover:-translate-y-1 hover:border-[#00B5AD]/40 min-w-[160px] max-w-[220px]"
+                      className="group relative w-full max-w-[310px] min-h-[186px] overflow-hidden rounded-[24px] border border-white/70 bg-white/88 p-5 text-left shadow-[0_12px_40px_rgba(0,0,0,0.08)] backdrop-blur-md transition-all duration-300 hover:-translate-y-1 hover:border-[#00B5AD]/35 hover:shadow-[0_20px_50px_rgba(0,181,173,0.16)]"
                     >
-                      {/* Accent bar */}
-                      <div className="absolute left-0 top-3 bottom-3 w-1 rounded-full bg-[#00B5AD] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="w-9 h-9 shrink-0 bg-gradient-to-br from-[#00B5AD]/20 to-[#00B5AD]/5 rounded-xl flex items-center justify-center group-hover:from-[#00B5AD]/30 group-hover:to-[#00B5AD]/10 transition-all">
-                        <Zap className="text-[#00B5AD]" size={16} />
+                      <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-[#00B5AD] via-[#17d7cf] to-[#B8D52E] opacity-80" />
+                      <div className="flex h-full flex-col">
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#00B5AD]/10 ring-1 ring-[#00B5AD]/10 transition-all duration-300 group-hover:bg-[#00B5AD]/14">
+                            <Zap className="text-[#00B5AD]" size={20} />
+                          </div>
+                          <ArrowUpRight className="mt-1 h-4 w-4 shrink-0 text-gray-300 transition-colors group-hover:text-[#00B5AD]" />
+                        </div>
+                        <div className="mt-5 flex-1">
+                          <h3 className="text-base font-bold leading-snug text-gray-900 min-h-[3.5rem] text-balance">
+                            {service.name}
+                          </h3>
+                          <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-gray-600">
+                            {service.description || 'Preverite podrobnosti in poiščite pristop, ki najbolj ustreza vašemu stanju in ciljem.'}
+                          </p>
+                        </div>
+                        <div className="mt-5 flex items-center justify-between border-t border-gray-100 pt-4">
+                          <span className="text-xs font-semibold uppercase tracking-[0.18em] text-[#00B5AD]">
+                            {isMotioStarter ? 'Začni pot do rešitve' : isMotioScanOnly ? 'Odkrij MotioScan' : 'Razišči možnost'}
+                          </span>
+                          <span className="text-xs font-medium text-gray-400 transition-colors group-hover:text-gray-600">
+                            Več informacij
+                          </span>
+                        </div>
                       </div>
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xs font-bold text-gray-900 leading-tight line-clamp-2">{service.name}</h3>
-                        {isMotio && (
-                          <span className="inline-block mt-0.5 text-[10px] font-semibold text-[#00B5AD] uppercase tracking-wide">motioscan.si</span>
-                        )}
-                      </div>
-                      <ArrowUpRight className="shrink-0 w-3.5 h-3.5 text-gray-300 group-hover:text-[#00B5AD] transition-colors" />
                     </Link>
                   );
                 })}

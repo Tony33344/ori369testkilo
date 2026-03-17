@@ -1239,7 +1239,7 @@ function CheckoutPageContent() {
                   />
                   <Store className={`mr-3 ${paymentMethod === 'cash_pickup' ? 'text-[#00B5AD]' : 'text-gray-400'}`} size={24} />
                   <div className="flex-1">
-                    <p className="font-semibold">{isEducationCheckout ? 'Gotovina na tečaju' : 'Gotovina ob prevzemu'}</p>
+                    <p className="font-semibold">{isEducationCheckout ? 'Gotovina na tečaju' : 'Gotovina na tečaju'}</p>
                     <p className="text-sm text-gray-500">{isEducationCheckout ? 'Plačilo ob prihodu na tečaj' : 'Plačilo v naši trgovini'}</p>
                   </div>
                 </label>

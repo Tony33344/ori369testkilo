@@ -16,6 +16,8 @@ const BookingCalendar = dynamic(() => import('@/components/BookingCalendar'), {
   loading: () => <div className="h-96 flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>
 });
 
+const BUSINESS_TIMEZONE = 'Europe/Vienna';
+
 const resolveServiceByPackageParam = (items: any[], packageParam: string) => {
   const normalizedParam = packageParam.toLowerCase();
 
@@ -44,7 +46,7 @@ const resolveServiceByPackageParam = (items: any[], packageParam: string) => {
 };
 
 function BookingForm() {
-  const { t, translations } = useLanguage();
+  const { t } = useLanguage();
   const searchParams = useSearchParams();
   const router = useRouter();
   const packageId = searchParams.get('package');
@@ -164,9 +166,8 @@ function BookingForm() {
     // Get busy events from Google Calendar for this date
     let googleBusyRanges: Array<{ start: Date; end: Date }> = [];
     try {
-      // Day start and end in Ljubljana timezone
-      const dayStartUTC = fromZonedTime(`${date}T00:00:00`, 'Europe/Ljubljana');
-      const dayEndUTC = fromZonedTime(`${date}T23:59:59`, 'Europe/Ljubljana');
+      const dayStartUTC = fromZonedTime(`${date}T00:00:00`, BUSINESS_TIMEZONE);
+      const dayEndUTC = fromZonedTime(`${date}T23:59:59`, BUSINESS_TIMEZONE);
 
       const res = await fetch(`/api/google-calendar/busy?timeMin=${encodeURIComponent(dayStartUTC.toISOString())}&timeMax=${encodeURIComponent(dayEndUTC.toISOString())}`);
       if (res.ok) {
@@ -186,12 +187,12 @@ function BookingForm() {
       console.error('Failed to load Google busy events:', e);
     }
 
-    // Convert busy ranges to Ljubljana minutes since midnight
+    // Convert busy ranges to business timezone minutes since midnight
     const busyMinutes: Array<{ start: number; end: number }> = googleBusyRanges.map(r => {
-      const startLj = toZonedTime(r.start, 'Europe/Ljubljana');
-      const endLj = toZonedTime(r.end, 'Europe/Ljubljana');
-      const startMin = startLj.getHours() * 60 + startLj.getMinutes();
-      const endMin = endLj.getHours() * 60 + endLj.getMinutes();
+      const startBusiness = toZonedTime(r.start, BUSINESS_TIMEZONE);
+      const endBusiness = toZonedTime(r.end, BUSINESS_TIMEZONE);
+      const startMin = startBusiness.getHours() * 60 + startBusiness.getMinutes();
+      const endMin = endBusiness.getHours() * 60 + endBusiness.getMinutes();
       return { start: startMin, end: endMin };
     });
 
@@ -524,13 +525,6 @@ function BookingForm() {
                 {loading ? t('common.loading') : t('booking.submit')}
               </button>
             </form>
-
-            <div className="mt-8 p-4 bg-gray-50 rounded-lg">
-              <h3 className="font-semibold text-gray-900 mb-2">{t('contact.hours')}:</h3>
-              <p className="text-sm text-gray-600">{t('contact.weekdays')}: {t('site.hours.weekdays')}</p>
-              <p className="text-sm text-gray-600">{t('contact.saturday')}: {t('site.hours.saturday')}</p>
-              <p className="text-sm text-gray-600 mt-2">{t('contact.phone')}: {Array.isArray(translations.site?.phone) ? translations.site.phone.join(' | ') : t('site.phone')}</p>
-            </div>
           </div>
         </div>
       </div>

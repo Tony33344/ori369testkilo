@@ -1,9 +1,11 @@
 import { google } from 'googleapis';
 import path from 'path';
 import fs from 'fs';
+import { fromZonedTime } from 'date-fns-tz';
 
 // Service account credentials - can be from file or environment variable
 const SERVICE_ACCOUNT_KEY_PATH = path.join(process.cwd(), 'google-calendar-credentials.json');
+const BUSINESS_TIMEZONE = 'Europe/Vienna';
 
 // Calendar ID - the service account needs to be invited to this calendar with write permissions
 // For service accounts, use the calendar ID (e.g., primary or the calendar's email address)
@@ -128,12 +130,10 @@ export async function createCalendarEvent(data: CalendarEventData) {
 
   // Parse date and time
   const [hours, minutes] = data.time.split(':');
-  const startDateTime = new Date(data.date);
-  startDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-
-  // Convert to UTC for Google Calendar API
-  const timezoneOffset = startDateTime.getTimezoneOffset() * 60000;
-  const startDateTimeUTC = new Date(startDateTime.getTime() - timezoneOffset);
+  const startDateTimeUTC = fromZonedTime(
+    `${data.date}T${parseInt(hours).toString().padStart(2, '0')}:${parseInt(minutes).toString().padStart(2, '0')}:00`,
+    BUSINESS_TIMEZONE
+  );
 
   const endDateTimeUTC = new Date(startDateTimeUTC);
   endDateTimeUTC.setMinutes(endDateTimeUTC.getMinutes() + data.duration);
@@ -154,11 +154,11 @@ export async function createCalendarEvent(data: CalendarEventData) {
     description,
     start: {
       dateTime: startDateTimeUTC.toISOString(),
-      timeZone: 'Europe/Ljubljana',
+      timeZone: BUSINESS_TIMEZONE,
     },
     end: {
       dateTime: endDateTimeUTC.toISOString(),
-      timeZone: 'Europe/Ljubljana',
+      timeZone: BUSINESS_TIMEZONE,
     },
     reminders: {
       useDefault: false,
@@ -196,23 +196,21 @@ export async function updateCalendarEvent(eventId: string, data: Partial<Calenda
 
   if (data.date && data.time && data.duration) {
     const [hours, minutes] = data.time.split(':');
-    const startDateTime = new Date(data.date);
-    startDateTime.setHours(parseInt(hours), parseInt(minutes), 0, 0);
-
-    // Convert to UTC for Google Calendar API
-    const timezoneOffset = startDateTime.getTimezoneOffset() * 60000;
-    const startDateTimeUTC = new Date(startDateTime.getTime() - timezoneOffset);
+    const startDateTimeUTC = fromZonedTime(
+      `${data.date}T${parseInt(hours).toString().padStart(2, '0')}:${parseInt(minutes).toString().padStart(2, '0')}:00`,
+      BUSINESS_TIMEZONE
+    );
 
     const endDateTimeUTC = new Date(startDateTimeUTC);
     endDateTimeUTC.setMinutes(endDateTimeUTC.getMinutes() + data.duration);
 
     updateData.start = {
       dateTime: startDateTimeUTC.toISOString(),
-      timeZone: 'Europe/Ljubljana',
+      timeZone: BUSINESS_TIMEZONE,
     };
     updateData.end = {
       dateTime: endDateTimeUTC.toISOString(),
-      timeZone: 'Europe/Ljubljana',
+      timeZone: BUSINESS_TIMEZONE,
     };
   }
 

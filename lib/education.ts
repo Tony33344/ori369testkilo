@@ -39,6 +39,7 @@ export type EducationCourse = {
   location: string | null;
   cover_image_url: string | null;
   highlight_color: string | null;
+  featured: boolean;
   price: number | null;
   max_attendees: number | null;
   status: string | null;
@@ -70,6 +71,7 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
       location,
       cover_image_url,
       highlight_color,
+      featured,
       price,
       max_attendees,
       status,
@@ -114,6 +116,7 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
         location,
         cover_image_url,
         highlight_color,
+        featured,
         price,
         max_attendees,
         status,
@@ -182,6 +185,7 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
     location: course.location,
     cover_image_url: course.cover_image_url,
     highlight_color: course.highlight_color,
+    featured: course.featured ?? false,
     price: course.price ?? null,
     max_attendees: course.max_attendees ?? null,
     status: course.status ?? null,

@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase';
 import { getCurrentUser, getUserProfile } from '@/lib/auth';
 import { useLanguage } from '@/lib/i18n';
 import { toast } from 'react-hot-toast';
-import { Calendar as CalendarIcon, Users, Activity, CheckCircle, XCircle, Edit2, Trash2, ExternalLink, Package, DollarSign, Clock, Plus, BarChart3, FileText, Tag, Megaphone } from 'lucide-react';
+import { Calendar as CalendarIcon, Users, Activity, CheckCircle, XCircle, Edit2, Trash2, ExternalLink, Package, DollarSign, Clock, Plus, BarChart3, FileText, Tag, Megaphone, Settings } from 'lucide-react';
 import { format } from 'date-fns';
 import dynamic from 'next/dynamic';
 
@@ -203,6 +203,7 @@ interface Service {
   image_url_2?: string | null;
   image_url_3?: string | null;
   category?: string | null;
+  show_on_hero?: boolean;
   duration: number;
   price: number;
   is_package: boolean;
@@ -246,7 +247,7 @@ export default function AdminPage() {
   const { t } = useLanguage();
   const [user, setUser] = useState<any>(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'analytics' | 'content' | 'orders' | 'products' | 'cms' | 'marketing' | 'education'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'analytics' | 'content' | 'orders' | 'products' | 'cms' | 'marketing' | 'education' | 'settings'>('bookings');
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<Booking[]>([]);
   const [filter, setFilter] = useState<string>('all');
@@ -893,6 +894,17 @@ export default function AdminPage() {
               <CalendarIcon className="w-5 h-5" />
               <span>Education</span>
             </button>
+            <button
+              onClick={() => setActiveTab('settings')}
+              className={`flex items-center space-x-2 px-6 py-4 font-medium transition-colors ${
+                activeTab === 'settings'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Settings className="w-5 h-5" />
+              <span>Nastavitve</span>
+            </button>
           </div>
         </div>
 
@@ -1357,6 +1369,10 @@ export default function AdminPage() {
           </div>
         )}
 
+        {activeTab === 'settings' && (
+          <SiteSettingsPanel />
+        )}
+
         {activeTab === 'marketing' && (
           <div className="space-y-6">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -1596,6 +1612,7 @@ function ServiceModal({
     image_url_2: service?.image_url_2 || '',
     image_url_3: service?.image_url_3 || '',
     category: service?.category || 'therapy',
+    show_on_hero: service?.show_on_hero ?? false,
     duration: service?.duration || 30,
     price: service?.price || 0,
     is_package: service?.is_package || false,
@@ -1618,6 +1635,7 @@ function ServiceModal({
       image_url_2: service?.image_url_2 || '',
       image_url_3: service?.image_url_3 || '',
       category: service?.category || 'therapy',
+      show_on_hero: service?.show_on_hero ?? false,
       duration: service?.duration || 30,
       price: service?.price || 0,
       is_package: service?.is_package || false,
@@ -1853,7 +1871,7 @@ function ServiceModal({
             )}
           </div>
 
-          <div>
+          <div className="space-y-3">
             <label className="flex items-center space-x-2">
               <input
                 type="checkbox"
@@ -1862,6 +1880,15 @@ function ServiceModal({
                 className="w-5 h-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
               <span className="text-sm font-medium text-gray-700">{t('admin.services.active')}</span>
+            </label>
+            <label className="flex items-center space-x-2">
+              <input
+                type="checkbox"
+                checked={formData.show_on_hero}
+                onChange={(e) => setFormData({ ...formData, show_on_hero: e.target.checked })}
+                className="w-5 h-5 text-[#00B5AD] border-gray-300 rounded focus:ring-[#00B5AD]"
+              />
+              <span className="text-sm font-medium text-gray-700">Prikaži na začetni strani (Hero)</span>
             </label>
           </div>
 
@@ -1882,6 +1909,94 @@ function ServiceModal({
           </div>
         </form>
       </div>
+    </div>
+  );
+}
+
+// ─── Site Settings Panel ───────────────────────────────────────────────────────
+const ALL_NAV_ITEMS = [
+  { key: '/o-nas',       label: 'O nas' },
+  { key: '/terapije',    label: 'Terapije' },
+  { key: '/paketi',      label: 'Paketi' },
+  { key: '/education',   label: 'ORI Education' },
+  { key: '/motioscan',   label: 'MotioScan' },
+  { key: '/trgovina',    label: 'Trgovina' },
+  { key: '/rezervacija', label: 'Rezervacija' },
+  { key: '/mediji',      label: 'Mediji' },
+  { key: '/kontakt',     label: 'Kontakt' },
+];
+
+function SiteSettingsPanel() {
+  const [hiddenItems, setHiddenItems] = useState<string[]>([]);
+  const [saving, setSaving] = useState(false);
+  const [loaded, setLoaded] = useState(false);
+
+  useEffect(() => {
+    supabase
+      .from('site_settings')
+      .select('nav_hidden_items')
+      .eq('id', 1)
+      .maybeSingle()
+      .then(({ data }: { data: { nav_hidden_items: string[] | null } | null }) => {
+        setHiddenItems(data?.nav_hidden_items ?? []);
+        setLoaded(true);
+      });
+  }, []);
+
+  const toggle = (key: string) => {
+    setHiddenItems((prev) =>
+      prev.includes(key) ? prev.filter((k) => k !== key) : [...prev, key]
+    );
+  };
+
+  const save = async () => {
+    setSaving(true);
+    const { error } = await supabase
+      .from('site_settings')
+      .upsert({ id: 1, nav_hidden_items: hiddenItems, updated_at: new Date().toISOString() });
+    setSaving(false);
+    if (error) {
+      toast.error('Napaka pri shranjevanju: ' + error.message);
+    } else {
+      toast.success('Nastavitve shranjene – stran se bo posodobila ob naslednjem obisku.');
+    }
+  };
+
+  if (!loaded) {
+    return <div className="bg-white rounded-lg shadow p-8 text-center text-gray-400">Nalaganje…</div>;
+  }
+
+  return (
+    <div className="bg-white rounded-lg shadow p-6 max-w-lg">
+      <h2 className="text-xl font-bold text-gray-900 mb-2">Nastavitve navigacije</h2>
+      <p className="text-sm text-gray-500 mb-6">
+        Obkljukajte elemente, ki jih želite <strong>skriti</strong> iz navigacijske vrstice na spletnem mestu.
+      </p>
+      <div className="space-y-3 mb-8">
+        {ALL_NAV_ITEMS.map((item) => (
+          <label key={item.key} className="flex items-center space-x-3 cursor-pointer group">
+            <input
+              type="checkbox"
+              checked={hiddenItems.includes(item.key)}
+              onChange={() => toggle(item.key)}
+              className="w-5 h-5 text-red-500 border-gray-300 rounded focus:ring-red-400"
+            />
+            <span className={`text-sm font-medium ${hiddenItems.includes(item.key) ? 'line-through text-gray-400' : 'text-gray-700'}`}>
+              {item.label}
+            </span>
+            {hiddenItems.includes(item.key) && (
+              <span className="text-xs text-red-400 font-semibold">Skrito</span>
+            )}
+          </label>
+        ))}
+      </div>
+      <button
+        onClick={save}
+        disabled={saving}
+        className="px-6 py-3 bg-[#00B5AD] text-white font-semibold rounded-lg hover:bg-[#009891] disabled:opacity-50 transition-colors"
+      >
+        {saving ? 'Shranjevanje…' : 'Shrani nastavitve'}
+      </button>
     </div>
   );
 }

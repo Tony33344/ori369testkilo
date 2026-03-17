@@ -190,7 +190,7 @@ export default function EducationPage() {
       </section>
 
       {/* Featured: Začetni tečaji */}
-      {courses.some(c => c.level === 'beginner') && (
+      {courses.some(c => c.featured) && (
         <section className="py-24 bg-gray-900 text-white overflow-hidden">
           <div className="container mx-auto px-4">
             <div className="max-w-3xl mb-16">
@@ -202,7 +202,7 @@ export default function EducationPage() {
 
             <div className="grid grid-cols-1 gap-12">
               {courses
-                .filter(c => c.level === 'beginner')
+                .filter(c => c.featured)
                 .map((course, idx) => (
                   <div key={`featured-${course.id}`} className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${idx > 0 ? 'pt-24 border-t border-gray-800' : ''}`}>
                     <div className={`relative ${idx % 2 === 1 ? 'md:order-2' : ''}`}>

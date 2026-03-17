@@ -1,15 +1,22 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles, Zap, Heart, Brain, Activity, Shield, Waves, BookOpen } from 'lucide-react';
+import { Sparkles, Zap, BookOpen } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import { useLanguage } from '@/lib/i18n';
-import { servicesData } from '@/lib/servicesData';
+import { createClient } from '@/lib/supabase';
 import 'swiper/css';
 import 'swiper/css/effect-fade';
+
+interface HeroService {
+  slug: string;
+  name: string;
+  description: string | null;
+}
 
 const heroImages = [
   '/images/therapies/IMG_5779-768x513.webp',
@@ -34,7 +41,22 @@ const heroImages = [
 
 export default function Hero() {
   const { t } = useLanguage();
-  
+  const [heroServices, setHeroServices] = useState<HeroService[]>([]);
+
+  useEffect(() => {
+    const supabase = createClient();
+    supabase
+      .from('services')
+      .select('slug, name, description')
+      .eq('active', true)
+      .eq('show_on_hero', true)
+      .eq('is_package', false)
+      .order('name')
+      .then(({ data }) => {
+        if (data) setHeroServices(data as HeroService[]);
+      });
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white">
       {/* Background Image Carousel */}
@@ -141,28 +163,22 @@ export default function Hero() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-5xl mx-auto justify-items-center"
             >
-              {Object.values(servicesData).map((service, index, array) => {
-                const totalItems = array.length;
-                const itemsPerRow = 5; // On large screens
-                const isLastRow = Math.floor(index / itemsPerRow) === Math.floor((totalItems - 1) / itemsPerRow);
-                const itemsInLastRow = totalItems % itemsPerRow || itemsPerRow;
-                
-                return (
-                  <Link
-                    key={service.slug}
-                    href={`/terapije/${service.slug}`}
-                    className={`bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1 group w-full ${
-                      isLastRow && itemsInLastRow < itemsPerRow ? 'lg:col-span-1' : ''
-                    }`}
-                  >
-                    <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto group-hover:bg-[#00B5AD]/20 transition-colors">
-                      <Zap className="text-[#00B5AD]" size={20} />
-                    </div>
-                    <h3 className="text-sm font-semibold text-gray-900 text-center line-clamp-1">{service.name}</h3>
-                    <p className="text-xs text-gray-500 text-center mt-1 line-clamp-2">{service.shortDescription}</p>
-                  </Link>
-                );
-              })}
+              {heroServices.length === 0 && (
+                <p className="col-span-5 text-center text-xs text-gray-400">Označite terapije v adminu ("Prikaži na začetni strani") da se prikažejo tukaj.</p>
+              )}
+              {heroServices.map((service) => (
+                <Link
+                  key={service.slug}
+                  href={`/terapije/${service.slug}`}
+                  className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1 group w-full"
+                >
+                  <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto group-hover:bg-[#00B5AD]/20 transition-colors">
+                    <Zap className="text-[#00B5AD]" size={20} />
+                  </div>
+                  <h3 className="text-sm font-semibold text-gray-900 text-center line-clamp-1">{service.name}</h3>
+                  <p className="text-xs text-gray-500 text-center mt-1 line-clamp-2">{service.description}</p>
+                </Link>
+              ))}
             </motion.div>
           </motion.div>
         </div>

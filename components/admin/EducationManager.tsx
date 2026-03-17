@@ -51,6 +51,7 @@ interface Course {
   cover_image_url: string | null;
   highlight_color: string;
   published: boolean;
+  featured?: boolean;
   price?: number | null;
   max_attendees?: number | null;
   status?: string | null;
@@ -158,6 +159,7 @@ export default function EducationManager() {
         cover_image_url: editingCourse.cover_image_url,
         highlight_color: editingCourse.highlight_color,
         published: editingCourse.published,
+        featured: editingCourse.featured ?? false,
         price: editingCourse.price,
         max_attendees: editingCourse.max_attendees,
         status: editingCourse.status,
@@ -640,7 +642,7 @@ export default function EducationManager() {
                     <span className="text-xs text-gray-500 uppercase font-mono">{editingCourse?.highlight_color || '#00B5AD'}</span>
                   </div>
                 </div>
-                <div className="flex items-end pb-3">
+                <div className="flex items-end pb-3 flex-col gap-2">
                   <label className="flex items-center cursor-pointer space-x-2">
                     <input
                       type="checkbox"
@@ -649,6 +651,15 @@ export default function EducationManager() {
                       className="w-4 h-4 text-[#00B5AD] border-gray-300 rounded focus:ring-[#00B5AD]"
                     />
                     <span className="text-sm font-medium text-gray-700">Objavljeno</span>
+                  </label>
+                  <label className="flex items-center cursor-pointer space-x-2">
+                    <input
+                      type="checkbox"
+                      checked={editingCourse?.featured === true}
+                      onChange={e => setEditingCourse({ ...editingCourse, featured: e.target.checked })}
+                      className="w-4 h-4 text-amber-500 border-gray-300 rounded focus:ring-amber-400"
+                    />
+                    <span className="text-sm font-medium text-gray-700">Izpostavljeno (Začetni tečaji)</span>
                   </label>
                 </div>
               </div>

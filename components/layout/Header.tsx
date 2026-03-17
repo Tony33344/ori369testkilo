@@ -18,6 +18,10 @@ type SiteBannerRow = {
   updated_at: string | null;
 };
 
+type SiteSettingsRow = {
+  nav_hidden_items: string[] | null;
+};
+
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState<any>(null);
@@ -25,6 +29,7 @@ export default function Header() {
   const [bannerDismissed, setBannerDismissed] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const [showSearch, setShowSearch] = useState(false);
+  const [navHidden, setNavHidden] = useState<string[]>([]);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const pathname = usePathname();
   const router = useRouter();
@@ -70,6 +75,15 @@ export default function Header() {
         }
       });
 
+    supabase
+      .from('site_settings')
+      .select('nav_hidden_items')
+      .eq('id', 1)
+      .maybeSingle()
+      .then(({ data }: { data: SiteSettingsRow | null }) => {
+        setNavHidden(data?.nav_hidden_items ?? []);
+      });
+
     const { data: { subscription } } = supabase.auth.onAuthStateChange((_event: any, session: any) => {
       setUser(session?.user ?? null);
     });
@@ -103,7 +117,7 @@ export default function Header() {
     { name: t('nav.booking'), href: '/rezervacija' },
     { name: 'Mediji', href: '/mediji' },
     { name: t('nav.contact'), href: '/kontakt' },
-  ];
+  ].filter((item) => !navHidden.includes(item.href));
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">

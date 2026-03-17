@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles, Zap, BookOpen } from 'lucide-react';
+import { Sparkles, Zap, BookOpen, ArrowUpRight } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import { useLanguage } from '@/lib/i18n';
@@ -157,29 +157,39 @@ export default function Hero() {
             </motion.div>
 
             {/* Service Highlights */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="mt-12 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 max-w-5xl mx-auto justify-items-center"
-            >
-              {heroServices.length === 0 && (
-                <p className="col-span-5 text-center text-xs text-gray-400">Označite terapije v adminu ("Prikaži na začetni strani") da se prikažejo tukaj.</p>
-              )}
-              {heroServices.map((service) => (
-                <Link
-                  key={service.slug}
-                  href={`/terapije/${service.slug}`}
-                  className="bg-white/80 backdrop-blur-sm rounded-xl p-4 shadow-lg border border-gray-100 hover:shadow-xl transition-all hover:-translate-y-1 group w-full"
-                >
-                  <div className="w-10 h-10 bg-[#00B5AD]/10 rounded-lg flex items-center justify-center mb-2 mx-auto group-hover:bg-[#00B5AD]/20 transition-colors">
-                    <Zap className="text-[#00B5AD]" size={20} />
-                  </div>
-                  <h3 className="text-sm font-semibold text-gray-900 text-center line-clamp-1">{service.name}</h3>
-                  <p className="text-xs text-gray-500 text-center mt-1 line-clamp-2">{service.description}</p>
-                </Link>
-              ))}
-            </motion.div>
+            {heroServices.length > 0 && (
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+                className="mt-10 flex flex-wrap justify-center gap-3 max-w-4xl mx-auto"
+              >
+                {heroServices.map((service) => {
+                  const isMotio = service.slug.includes('motio');
+                  const href = isMotio ? '/motioscan' : `/terapije/${service.slug}`;
+                  return (
+                    <Link
+                      key={service.slug}
+                      href={href}
+                      className="group relative flex items-center gap-3 bg-white/85 backdrop-blur-md border border-white/60 shadow-md hover:shadow-xl rounded-2xl px-4 py-3 transition-all duration-300 hover:-translate-y-1 hover:border-[#00B5AD]/40 min-w-[160px] max-w-[220px]"
+                    >
+                      {/* Accent bar */}
+                      <div className="absolute left-0 top-3 bottom-3 w-1 rounded-full bg-[#00B5AD] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="w-9 h-9 shrink-0 bg-gradient-to-br from-[#00B5AD]/20 to-[#00B5AD]/5 rounded-xl flex items-center justify-center group-hover:from-[#00B5AD]/30 group-hover:to-[#00B5AD]/10 transition-all">
+                        <Zap className="text-[#00B5AD]" size={16} />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-xs font-bold text-gray-900 leading-tight line-clamp-2">{service.name}</h3>
+                        {isMotio && (
+                          <span className="inline-block mt-0.5 text-[10px] font-semibold text-[#00B5AD] uppercase tracking-wide">motioscan.si</span>
+                        )}
+                      </div>
+                      <ArrowUpRight className="shrink-0 w-3.5 h-3.5 text-gray-300 group-hover:text-[#00B5AD] transition-colors" />
+                    </Link>
+                  );
+                })}
+              </motion.div>
+            )}
           </motion.div>
         </div>
       </div>

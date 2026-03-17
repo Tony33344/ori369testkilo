@@ -16,8 +16,35 @@ const BookingCalendar = dynamic(() => import('@/components/BookingCalendar'), {
   loading: () => <div className="h-96 flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div></div>
 });
 
+const resolveServiceByPackageParam = (items: any[], packageParam: string) => {
+  const normalizedParam = packageParam.toLowerCase();
+
+  const directMatch = items.find((item) => item.slug?.toLowerCase() === normalizedParam);
+  if (directMatch) return directMatch;
+
+  const aliasMap: Record<string, string[]> = {
+    motioscan: ['motioscan', 'moti-physio', 'meritev-physio-motio'],
+    'uvodni-termin': ['uvodni-termin'],
+  };
+
+  const aliases = aliasMap[normalizedParam] || [normalizedParam];
+  const aliasMatch = items.find((item) => aliases.includes(item.slug?.toLowerCase()));
+  if (aliasMatch) return aliasMatch;
+
+  return items.find((item) => {
+    const haystack = `${item.slug || ''} ${item.name || ''}`.toLowerCase();
+    if (normalizedParam === 'motioscan') {
+      return haystack.includes('motio');
+    }
+    if (normalizedParam === 'uvodni-termin') {
+      return haystack.includes('uvodni') || haystack.includes('prvi pregled + meritev s physio motio');
+    }
+    return haystack.includes(normalizedParam);
+  });
+};
+
 function BookingForm() {
-  const { t } = useLanguage();
+  const { t, translations } = useLanguage();
   const searchParams = useSearchParams();
   const router = useRouter();
   const packageId = searchParams.get('package');
@@ -43,7 +70,7 @@ function BookingForm() {
 
   useEffect(() => {
     if (packageId && services.length > 0) {
-      const pkg = services.find(s => s.slug === packageId);
+      const pkg = resolveServiceByPackageParam(services, packageId);
       if (pkg) setSelectedService(pkg.id);
     }
   }, [packageId, services]);
@@ -112,13 +139,27 @@ function BookingForm() {
     // Get existing bookings for this date
     const { data: bookings } = await supabase
       .from('bookings')
-      .select('time_slot')
+      .select('time_slot, status, services(duration)')
       .eq('date', date)
-      .eq('service_id', selectedService);
+      .neq('status', 'cancelled');
 
-    const bookedTimes = (bookings as Array<{ time_slot: string }> | null)?.map((b) =>
-      (b.time_slot || '').slice(0, 5)
-    ) || [];
+    const bookingRanges = ((bookings as Array<{ time_slot: string; services?: { duration?: number } | { duration?: number }[] }> | null) || [])
+      .map((booking) => {
+        const timeValue = (booking.time_slot || '').slice(0, 5);
+        if (!timeValue) return null;
+        const [hours, minutes] = timeValue.split(':').map(Number);
+        const start = hours * 60 + minutes;
+        const services = booking.services as any;
+        const bookingDuration = Array.isArray(services)
+          ? Number(services[0]?.duration || 60)
+          : Number(services?.duration || 60);
+
+        return {
+          start,
+          end: start + bookingDuration,
+        };
+      })
+      .filter((value): value is { start: number; end: number } => Boolean(value));
 
     // Get busy events from Google Calendar for this date
     let googleBusyRanges: Array<{ start: Date; end: Date }> = [];
@@ -181,7 +222,8 @@ function BookingForm() {
         const slotEndMin = time + serviceDurationMin;
 
         // Check if booked
-        if (bookedTimes.includes(slotTime)) {
+        const overlapsReservation = bookingRanges.some((booking) => slotStartMin < booking.end && slotEndMin > booking.start);
+        if (overlapsReservation) {
           booked.push(slotTime);
           continue;
         }
@@ -487,7 +529,7 @@ function BookingForm() {
               <h3 className="font-semibold text-gray-900 mb-2">{t('contact.hours')}:</h3>
               <p className="text-sm text-gray-600">{t('contact.weekdays')}: {t('site.hours.weekdays')}</p>
               <p className="text-sm text-gray-600">{t('contact.saturday')}: {t('site.hours.saturday')}</p>
-              <p className="text-sm text-gray-600 mt-2">{t('contact.phone')}: {t('site.phone')[0]} | {t('site.phone')[1]}</p>
+              <p className="text-sm text-gray-600 mt-2">{t('contact.phone')}: {Array.isArray(translations.site?.phone) ? translations.site.phone.join(' | ') : t('site.phone')}</p>
             </div>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { createCalendarEvent } from './googleCalendar';
+import { createCalendarEvent, updateCalendarEvent } from './googleCalendar';
 
 const supabase = createClient(
   process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -20,6 +20,7 @@ interface CalendarSyncPayload {
 
 export async function syncBookingToCalendar(payload: CalendarSyncPayload) {
   let { bookingId, date, time, serviceName, duration, clientName, clientEmail, clientPhone, notes } = payload;
+  let existingEventId: string | null = null;
 
   if (!bookingId) {
     throw new Error('bookingId is required');
@@ -33,6 +34,7 @@ export async function syncBookingToCalendar(payload: CalendarSyncPayload) {
         date,
         time_slot,
         notes,
+        google_calendar_event_id,
         services (name, duration),
         profiles (full_name, email, phone)
       `)
@@ -43,6 +45,7 @@ export async function syncBookingToCalendar(payload: CalendarSyncPayload) {
       throw new Error('Booking not found for calendar sync');
     }
 
+    existingEventId = booking.google_calendar_event_id || null;
     date = date || booking.date;
     time = time || (booking.time_slot || '').slice(0, 5);
     const services = booking.services as any;
@@ -71,7 +74,7 @@ export async function syncBookingToCalendar(payload: CalendarSyncPayload) {
     throw new Error('Missing booking data for calendar sync');
   }
 
-  const result = await createCalendarEvent({
+  const bookingPayload = {
     bookingId,
     date,
     time,
@@ -81,7 +84,11 @@ export async function syncBookingToCalendar(payload: CalendarSyncPayload) {
     clientEmail,
     clientPhone,
     notes,
-  });
+  };
+
+  const result = existingEventId
+    ? await updateCalendarEvent(existingEventId, bookingPayload)
+    : await createCalendarEvent(bookingPayload);
 
   await supabase
     .from('bookings')

@@ -170,7 +170,7 @@ function BookingForm() {
       const dayStartUTC = fromZonedTime(`${date}T00:00:00`, BUSINESS_TIMEZONE);
       const dayEndUTC = fromZonedTime(`${date}T23:59:59`, BUSINESS_TIMEZONE);
 
-      const res = await fetch(`/api/google-calendar/busy?timeMin=${encodeURIComponent(dayStartUTC.toISOString())}&timeMax=${encodeURIComponent(dayEndUTC.toISOString())}`);
+      const res = await fetch(`/api/google-calendar/busy?timeMin=${encodeURIComponent(dayStartUTC.toISOString())}&timeMax=${encodeURIComponent(dayEndUTC.toISOString())}`, { cache: 'no-store' });
       if (res.ok) {
         const json = await res.json();
         console.log('[Booking] Google Calendar response:', json);
@@ -179,7 +179,11 @@ function BookingForm() {
             const s = e?.start?.dateTime || e?.start?.date;
             const en = e?.end?.dateTime || e?.end?.date;
             if (!s || !en) return null;
-            return { start: new Date(s), end: new Date(en) };
+            console.log('[Booking] Raw event times:', { start: s, end: en });
+            const startDate = new Date(s);
+            const endDate = new Date(en);
+            console.log('[Booking] Parsed to Date objects:', { start: startDate.toISOString(), end: endDate.toISOString() });
+            return { start: startDate, end: endDate };
           })
           .filter(Boolean);
         console.log('[Booking] Parsed busy ranges:', googleBusyRanges);
@@ -192,8 +196,15 @@ function BookingForm() {
     const busyMinutes: Array<{ start: number; end: number }> = googleBusyRanges.map(r => {
       const startBusiness = toZonedTime(r.start, BUSINESS_TIMEZONE);
       const endBusiness = toZonedTime(r.end, BUSINESS_TIMEZONE);
+      console.log('[Booking] Converted to business timezone:', {
+        startUTC: r.start.toISOString(),
+        endUTC: r.end.toISOString(),
+        startVienna: startBusiness.toString(),
+        endVienna: endBusiness.toString(),
+      });
       const startMin = startBusiness.getHours() * 60 + startBusiness.getMinutes();
       const endMin = endBusiness.getHours() * 60 + endBusiness.getMinutes();
+      console.log('[Booking] Minutes since midnight:', { startMin, endMin });
       return { start: startMin, end: endMin };
     });
 

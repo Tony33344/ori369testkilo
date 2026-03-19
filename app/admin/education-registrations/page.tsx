@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
+import { formatInTimeZone } from 'date-fns-tz';
 import { 
   Users, Calendar, Mail, Phone, 
   CheckCircle, Clock, AlertCircle, 
@@ -12,6 +13,8 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from 'react-hot-toast';
+
+const BUSINESS_TIMEZONE = 'Europe/Vienna';
 
 interface Registration {
   id: string;
@@ -279,12 +282,12 @@ export default function AdminEducationRegistrationsPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600">
-                        {reg.session?.start_at ? format(new Date(reg.session.start_at), 'dd. MM. yyyy', { locale: sl }) : 'N/A'}
+                        {reg.session?.start_at ? formatInTimeZone(new Date(reg.session.start_at), BUSINESS_TIMEZONE, 'dd. MM. yyyy', { locale: sl }) : 'N/A'}
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-600">
                         <div className="flex flex-col">
-                          <span>{reg.created_at ? format(new Date(reg.created_at), 'dd. MM. yyyy', { locale: sl }) : 'N/A'}</span>
-                          <span className="text-xs text-gray-500">{reg.created_at ? format(new Date(reg.created_at), 'HH:mm', { locale: sl }) : ''}</span>
+                          <span>{reg.created_at ? formatInTimeZone(new Date(reg.created_at), BUSINESS_TIMEZONE, 'dd. MM. yyyy', { locale: sl }) : 'N/A'}</span>
+                          <span className="text-xs text-gray-500">{reg.created_at ? formatInTimeZone(new Date(reg.created_at), BUSINESS_TIMEZONE, 'HH:mm', { locale: sl }) : ''}</span>
                         </div>
                       </td>
                       <td className="px-6 py-4">

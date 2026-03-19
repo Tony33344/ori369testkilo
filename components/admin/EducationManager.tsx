@@ -11,7 +11,7 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { format } from 'date-fns';
-import { toZonedTime, fromZonedTime } from 'date-fns-tz';
+import { toZonedTime, fromZonedTime, formatInTimeZone } from 'date-fns-tz';
 
 const BUSINESS_TIMEZONE = 'Europe/Vienna';
 
@@ -497,7 +497,7 @@ export default function EducationManager() {
                             <div>
                               <div className="text-xs text-gray-400 font-medium uppercase tracking-wider">Datum / Čas</div>
                               <div className="text-sm font-medium text-gray-900">
-                                {format(new Date(session.start_at), 'dd. MM. yyyy HH:mm')}
+                                {formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'dd. MM. yyyy HH:mm')}
                               </div>
                             </div>
                             <div>
@@ -1014,7 +1014,7 @@ export default function EducationManager() {
               <div>
                 <h3 className="text-xl font-bold text-gray-900">Prijave za sejo</h3>
                 <p className="text-sm text-gray-500">
-                  {format(new Date(selectedSessionForRegistrations.start_at), 'dd. MM. yyyy HH:mm')}
+                  {formatInTimeZone(new Date(selectedSessionForRegistrations.start_at), BUSINESS_TIMEZONE, 'dd. MM. yyyy HH:mm')}
                 </p>
               </div>
               <button 
@@ -1053,7 +1053,7 @@ export default function EducationManager() {
                           {reg.status}
                         </span>
                         <div className="text-xs text-gray-400 mt-1">
-                          {format(new Date(reg.created_at), 'dd. MM. HH:mm')}
+                          {formatInTimeZone(new Date(reg.created_at), BUSINESS_TIMEZONE, 'dd. MM. HH:mm')}
                         </div>
                       </div>
                     </div>

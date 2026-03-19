@@ -6,7 +6,10 @@ import { useRouter } from 'next/navigation';
 import { Calendar, Clock, Package, LogOut, User, ShoppingBag, GraduationCap, MapPin, Settings, Loader2 } from 'lucide-react';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
+import { formatInTimeZone } from 'date-fns-tz';
 import Link from 'next/link';
+
+const BUSINESS_TIMEZONE = 'Europe/Vienna';
 
 // Types
 interface Profile {
@@ -318,11 +321,11 @@ export default function DashboardPage() {
                           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
                             <div className="flex items-center text-gray-600">
                               <Calendar className="w-4 h-4 mr-2 text-[#00B5AD]" />
-                              <span>{reg.session?.start_at ? format(new Date(reg.session.start_at), 'd. MMMM yyyy', { locale: sl }) : 'Termin sledi'}</span>
+                              <span>{reg.session?.start_at ? formatInTimeZone(new Date(reg.session.start_at), BUSINESS_TIMEZONE, 'd. MMMM yyyy', { locale: sl }) : 'Termin sledi'}</span>
                             </div>
                             <div className="flex items-center text-gray-600">
                               <Clock className="w-4 h-4 mr-2 text-[#00B5AD]" />
-                              <span>{reg.session?.start_at ? format(new Date(reg.session.start_at), 'HH:mm', { locale: sl }) : 'Čas sledi'}</span>
+                              <span>{reg.session?.start_at ? formatInTimeZone(new Date(reg.session.start_at), BUSINESS_TIMEZONE, 'HH:mm') : 'Čas sledi'}</span>
                             </div>
                             {reg.session?.location && (
                               <div className="flex items-center text-gray-600">

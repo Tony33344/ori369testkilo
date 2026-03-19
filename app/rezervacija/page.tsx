@@ -60,6 +60,7 @@ function BookingForm() {
   const [bookedSlots, setBookedSlots] = useState<string[]>([]);
   const [busySlots, setBusySlots] = useState<string[]>([]);
   const [allSlots, setAllSlots] = useState<string[]>([]);
+  const [calendarEvents, setCalendarEvents] = useState<Array<{ start: string; end: string; summary: string }>>([]);
   const [notes, setNotes] = useState('');
   const [loading, setLoading] = useState(false);
   const [useCalendarView, setUseCalendarView] = useState(true);
@@ -174,6 +175,24 @@ function BookingForm() {
       if (res.ok) {
         const json = await res.json();
         console.log('[Booking] Google Calendar response:', json);
+        
+        // Store calendar events for display
+        const events = (json?.busy || []).map((e: any) => {
+          const s = e?.start?.dateTime || e?.start?.date;
+          const en = e?.end?.dateTime || e?.end?.date;
+          if (!s || !en) return null;
+          const startDate = new Date(s);
+          const endDate = new Date(en);
+          const startVienna = toZonedTime(startDate, BUSINESS_TIMEZONE);
+          const endVienna = toZonedTime(endDate, BUSINESS_TIMEZONE);
+          return {
+            start: `${startVienna.getHours().toString().padStart(2, '0')}:${startVienna.getMinutes().toString().padStart(2, '0')}`,
+            end: `${endVienna.getHours().toString().padStart(2, '0')}:${endVienna.getMinutes().toString().padStart(2, '0')}`,
+            summary: e?.summary || 'Busy'
+          };
+        }).filter(Boolean);
+        setCalendarEvents(events);
+        
         googleBusyRanges = (json?.busy || [])
           .map((e: any) => {
             const s = e?.start?.dateTime || e?.start?.date;
@@ -468,6 +487,21 @@ function BookingForm() {
                     <span>{t('booking.selectTime')} *</span>
                   </label>
                   
+                  {/* Display actual Google Calendar events */}
+                  {calendarEvents.length > 0 && (
+                    <div className="mb-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
+                      <div className="text-sm font-semibold text-orange-900 mb-2">📅 Google Calendar dogodki:</div>
+                      <div className="space-y-1">
+                        {calendarEvents.map((event, idx) => (
+                          <div key={idx} className="text-sm text-orange-800">
+                            <span className="font-mono font-bold">{event.start} - {event.end}</span>
+                            {event.summary !== 'Busy' && <span className="ml-2 text-orange-600">({event.summary})</span>}
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
                   {/* Legend for time slots */}
                   <div className="mb-3 p-3 bg-gray-50 rounded-lg">
                     <div className="flex flex-wrap items-center gap-4 text-xs">

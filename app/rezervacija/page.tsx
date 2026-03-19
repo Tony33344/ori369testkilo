@@ -253,6 +253,13 @@ function BookingForm() {
       }
     });
 
+    console.log('[Booking] Final slot categorization:', {
+      allSlots: generatedSlots.sort(),
+      available: available.sort(),
+      booked: booked.sort(),
+      busy: busy.sort(),
+    });
+
     setAllSlots(generatedSlots.sort());
     setAvailableSlots(available.sort());
     setBookedSlots(booked.sort());

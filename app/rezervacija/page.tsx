@@ -251,7 +251,10 @@ function BookingForm() {
         generatedSlots.push(slotTime);
 
         const slotStartMin = time;
-        const slotEndMin = time + serviceDurationMin;
+        // Use the LARGER of service duration or slot interval for blocking
+        // This ensures the entire time slot is blocked even if service is shorter
+        const blockingDuration = Math.max(serviceDurationMin, slotIntervalMin);
+        const slotEndMin = time + blockingDuration;
 
         // Check if booked
         const overlapsReservation = bookingRanges.some((booking) => slotStartMin < booking.end && slotEndMin > booking.start);
@@ -330,27 +333,10 @@ function BookingForm() {
       toast.error(t('booking.error'));
       console.error(error);
     } else {
-      // Sync to Google Calendar
-      const selectedServiceObj = services.find((s) => s.id === selectedService);
-      try {
-        await fetch('/api/google-calendar/sync', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            bookingId: data.id,
-            date: selectedDate,
-            time: selectedTime,
-            serviceName: selectedServiceObj?.name || 'Terapija',
-            duration: selectedServiceObj?.duration || 60,
-            clientName: user.user_metadata?.full_name || user.email,
-            clientEmail: user.email,
-            clientPhone: user.user_metadata?.phone || '',
-            notes: notes || ''
-          })
-        });
-      } catch (syncError) {
-        console.error('Failed to sync to Google Calendar:', syncError);
-      }
+      // DO NOT sync to Google Calendar here - only sync AFTER successful payment
+      // Calendar sync happens in:
+      // 1. app/api/stripe/webhook/route.ts (after successful Stripe payment)
+      // 2. app/checkout/page.tsx (after successful checkout)
       
       toast.success(t('booking.success'));
       // Redirect to checkout page with booking details

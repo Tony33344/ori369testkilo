@@ -27,7 +27,18 @@ interface CalendarEventData {
  * Get service account credentials from file or environment variable
  */
 function getServiceAccountCredentials() {
-  // First try environment variable (base64 encoded JSON)
+  // PRIORITY 1: Try split environment variables (client_email + private_key)
+  // This is the recommended approach for Netlify to avoid 4KB env limit
+  if (process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL && process.env.GOOGLE_PRIVATE_KEY) {
+    console.log('[Google Calendar] Loaded credentials from GOOGLE_SERVICE_ACCOUNT_EMAIL + GOOGLE_PRIVATE_KEY');
+    return {
+      type: 'service_account',
+      client_email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
+      private_key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+    };
+  }
+
+  // PRIORITY 2: Try full JSON in environment variable (base64 encoded or plain)
   if (process.env.GOOGLE_SERVICE_ACCOUNT_KEY) {
     try {
       const decoded = Buffer.from(process.env.GOOGLE_SERVICE_ACCOUNT_KEY, 'base64').toString('utf8');
@@ -44,8 +55,6 @@ function getServiceAccountCredentials() {
         console.error('[Google Calendar] Failed to parse GOOGLE_SERVICE_ACCOUNT_KEY:', err instanceof Error ? err.message : err);
       }
     }
-  } else {
-    console.log('[Google Calendar] GOOGLE_SERVICE_ACCOUNT_KEY environment variable not set');
   }
 
   // Then try file

@@ -473,17 +473,11 @@ function BookingForm() {
                     <span>{t('booking.selectTime')} *</span>
                   </label>
                   
-                  {/* Display actual Google Calendar events */}
+                  {/* Show blocked times count only - do NOT expose personal event details */}
                   {calendarEvents.length > 0 && (
                     <div className="mb-3 p-3 bg-orange-50 border border-orange-200 rounded-lg">
-                      <div className="text-sm font-semibold text-orange-900 mb-2">📅 Google Calendar dogodki:</div>
-                      <div className="space-y-1">
-                        {calendarEvents.map((event, idx) => (
-                          <div key={idx} className="text-sm text-orange-800">
-                            <span className="font-mono font-bold">{event.start} - {event.end}</span>
-                            {event.summary !== 'Busy' && <span className="ml-2 text-orange-600">({event.summary})</span>}
-                          </div>
-                        ))}
+                      <div className="text-sm text-orange-800">
+                        📅 {calendarEvents.length} {calendarEvents.length === 1 ? 'termin' : 'termini'} že zaseden{calendarEvents.length === 1 ? '' : 'i'} v Google Calendar
                       </div>
                     </div>
                   )}

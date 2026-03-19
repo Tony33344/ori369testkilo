@@ -605,7 +605,7 @@ function CheckoutPageContent() {
           })
           .eq('id', bookingId);
         if (bookingUpdateError) throw bookingUpdateError;
-        await syncBookingToCalendar(bookingId);
+        // DO NOT sync to calendar here - only after payment confirmation via webhook
       } else if (bookingDate && bookingTime) {
         const { data: createdBooking, error: bookingError } = await supabase.from('bookings').insert({
           user_id: user?.id || null,
@@ -616,7 +616,7 @@ function CheckoutPageContent() {
           notes: `Order: ${reference}`,
         }).select().single();
         if (bookingError) throw bookingError;
-        await syncBookingToCalendar(createdBooking?.id);
+        // DO NOT sync to calendar here - only after payment confirmation via webhook
       }
     }
 
@@ -677,7 +677,7 @@ function CheckoutPageContent() {
           notes: `Order: ${reference}`,
         }).select().single();
         if (bookingError) throw bookingError;
-        await syncBookingToCalendar(cartBooking?.id);
+        // DO NOT sync to calendar here - only after payment confirmation via webhook
       }
 
       summaryItems.push({

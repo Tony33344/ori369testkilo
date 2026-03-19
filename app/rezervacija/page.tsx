@@ -334,9 +334,9 @@ function BookingForm() {
       console.error(error);
     } else {
       // DO NOT sync to Google Calendar here - only sync AFTER successful payment
-      // Calendar sync happens in:
-      // 1. app/api/stripe/webhook/route.ts (after successful Stripe payment)
-      // 2. app/checkout/page.tsx (after successful checkout)
+      // Calendar sync ONLY happens in:
+      // - app/api/stripe/webhook/route.ts (after Stripe payment confirmed)
+      // - Admin panel (manual approval of UPN payments)
       
       toast.success(t('booking.success'));
       // Redirect to checkout page with booking details

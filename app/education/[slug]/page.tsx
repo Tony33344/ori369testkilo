@@ -16,6 +16,9 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
+import { formatInTimeZone } from 'date-fns-tz';
+
+const BUSINESS_TIMEZONE = 'Europe/Vienna';
 
 interface EducationSession {
   id: string;
@@ -265,12 +268,12 @@ export default function EducationCoursePage() {
                           <Calendar className="mt-0.5 h-5 w-5 text-[#00B5AD]" />
                           <div className="min-w-0 flex-1">
                             <p className="font-semibold text-gray-900">
-                              {format(new Date(session.start_at), 'EEEE, d. MMMM yyyy', { locale: sl })}
+                              {formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'EEEE, d. MMMM yyyy', { locale: sl })}
                             </p>
                             <p className="mt-1 text-sm text-gray-500">
                               {session.end_at
-                                ? `${format(new Date(session.start_at), 'HH:mm')} – ${format(new Date(session.end_at), 'HH:mm')}`
-                                : format(new Date(session.start_at), 'HH:mm')}
+                                ? `${formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'HH:mm')} – ${formatInTimeZone(new Date(session.end_at), BUSINESS_TIMEZONE, 'HH:mm')}`
+                                : formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'HH:mm')}
                             </p>
                           </div>
                         </div>

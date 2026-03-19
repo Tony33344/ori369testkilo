@@ -5,8 +5,11 @@ import { supabase } from '@/lib/supabase';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
+import { formatInTimeZone } from 'date-fns-tz';
 import Link from 'next/link';
 import { ArrowLeft, Loader2, Calendar, Clock, CheckCircle, MapPin, Users } from 'lucide-react';
+
+const BUSINESS_TIMEZONE = 'Europe/Vienna';
 
 function EducationReservationPageContent() {
   const [courses, setCourses] = useState<any[]>([]);
@@ -149,12 +152,12 @@ function EducationReservationPageContent() {
                       </div>
                       <div>
                         <div className="text-gray-900 font-medium">
-                          {format(new Date(session.start_at), 'd. MMMM yyyy', { locale: sl })}
+                          {formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'd. MMMM yyyy', { locale: sl })}
                         </div>
                         <div className="text-sm text-gray-600 flex items-center mt-1">
                           <Clock className="w-3 h-3 mr-1" />
-                          {format(new Date(session.start_at), 'HH:mm')}
-                          {session.end_at ? ` – ${format(new Date(session.end_at), 'HH:mm')}` : ''}
+                          {formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'HH:mm')}
+                          {session.end_at ? ` – ${formatInTimeZone(new Date(session.end_at), BUSINESS_TIMEZONE, 'HH:mm')}` : ''}
                         </div>
                         {(session.location || selectedCourse?.location) && (
                           <div className="text-sm text-gray-600 flex items-center mt-1">

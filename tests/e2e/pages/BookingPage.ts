@@ -28,11 +28,28 @@ export class BookingPage {
   }
 
   async selectService(serviceName: string) {
-    await this.serviceSelect.selectOption({ label: new RegExp(serviceName, 'i') });
+    // Get all options and find matching one by text
+    const options = await this.serviceSelect.locator('option').all();
+    for (const opt of options) {
+      const text = await opt.textContent();
+      if (text && text.toLowerCase().includes(serviceName.toLowerCase())) {
+        const value = await opt.getAttribute('value');
+        if (value) {
+          await this.serviceSelect.selectOption({ value });
+          return;
+        }
+      }
+    }
+    // fallback: try direct label match
+    await this.serviceSelect.selectOption({ label: serviceName });
   }
 
   async selectDate(date: string) {
-    await this.dateSelect.selectOption({ value: date });
+    // The booking page uses a custom calendar with day buttons, not a <select>
+    // date format: 'YYYY-MM-DD' - click the day number button in the calendar
+    const day = parseInt(date.split('-')[2], 10);
+    const dayButton = this.page.locator(`button:has-text("${day}")`).filter({ hasNotText: /prev|next|<|>/ });
+    await dayButton.first().click();
   }
 
   async selectTimeSlot(time: string) {

@@ -11,6 +11,25 @@ import {
   ExternalLink
 } from 'lucide-react';
 import { format } from 'date-fns';
+import { toZonedTime, fromZonedTime } from 'date-fns-tz';
+
+const BUSINESS_TIMEZONE = 'Europe/Vienna';
+
+/** Convert a UTC ISO string from DB to 'YYYY-MM-DDTHH:mm' in Vienna time for datetime-local input */
+function utcToViennaLocal(utcIso: string): string {
+  const viennaDate = toZonedTime(new Date(utcIso), BUSINESS_TIMEZONE);
+  const y = viennaDate.getFullYear();
+  const mo = String(viennaDate.getMonth() + 1).padStart(2, '0');
+  const d = String(viennaDate.getDate()).padStart(2, '0');
+  const h = String(viennaDate.getHours()).padStart(2, '0');
+  const mi = String(viennaDate.getMinutes()).padStart(2, '0');
+  return `${y}-${mo}-${d}T${h}:${mi}`;
+}
+
+/** Convert a 'YYYY-MM-DDTHH:mm' Vienna local string to UTC ISO for storage */
+function viennaLocalToUtc(localStr: string): string {
+  return fromZonedTime(localStr, BUSINESS_TIMEZONE).toISOString();
+}
 
 interface Session {
   id: string;
@@ -234,7 +253,10 @@ export default function EducationManager() {
       const method = editingSession.id ? 'PUT' : 'POST';
       const payload = {
         ...editingSession,
-        course_id: selectedCourseId
+        course_id: selectedCourseId,
+        // Convert Vienna local datetime-local values to UTC before sending
+        start_at: editingSession.start_at ? viennaLocalToUtc(editingSession.start_at) : null,
+        end_at: editingSession.end_at ? viennaLocalToUtc(editingSession.end_at) : null,
       };
 
       const { data: { session } } = await supabase.auth.getSession();
@@ -299,7 +321,7 @@ export default function EducationManager() {
       format: 'in_person',
       max_participants: 10,
       price: 0,
-      start_at: new Date().toISOString().slice(0, 16) // Default to now
+      start_at: utcToViennaLocal(new Date().toISOString()) // Default to now in Vienna time
     });
     setShowSessionModal(true);
   };
@@ -308,8 +330,8 @@ export default function EducationManager() {
     setSelectedCourseId(courseId);
     setEditingSession({
       ...session,
-      start_at: session.start_at ? new Date(session.start_at).toISOString().slice(0, 16) : '',
-      end_at: session.end_at ? new Date(session.end_at).toISOString().slice(0, 16) : ''
+      start_at: session.start_at ? utcToViennaLocal(session.start_at) : '',
+      end_at: session.end_at ? utcToViennaLocal(session.end_at) : ''
     });
     setShowSessionModal(true);
   };

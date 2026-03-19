@@ -16,7 +16,10 @@ import {
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
+import { formatInTimeZone } from 'date-fns-tz';
 import { type EducationCourse } from '@/lib/education';
+
+const BUSINESS_TIMEZONE = 'Europe/Vienna';
 
 interface EducationSession {
   id: string;
@@ -127,7 +130,7 @@ export default function EducationPage() {
                     </span>
                     <div className="flex items-center text-gray-500 text-xs font-medium">
                       <Clock className="w-3 h-3 mr-1" />
-                      {nextSession?.start_at ? format(new Date(nextSession.start_at), 'd. MMM yyyy', { locale: sl }) : 'Termin sledi'}
+                      {nextSession?.start_at ? formatInTimeZone(new Date(nextSession.start_at), BUSINESS_TIMEZONE, 'd. MMM yyyy', { locale: sl }) : 'Termin sledi'}
                     </div>
                   </div>
                   
@@ -144,7 +147,7 @@ export default function EducationPage() {
                       <Clock className="w-4 h-4 text-gray-400" />
                       <span>
                         {nextSession?.start_at
-                          ? format(new Date(nextSession.start_at), 'd. MMMM yyyy', { locale: sl })
+                          ? formatInTimeZone(new Date(nextSession.start_at), BUSINESS_TIMEZONE, 'd. MMMM yyyy', { locale: sl })
                           : 'Datum po dogovoru'}
                       </span>
                     </div>
@@ -152,7 +155,7 @@ export default function EducationPage() {
                       <Clock className="w-4 h-4 text-gray-400" />
                       <span className="font-medium text-gray-700">
                         {nextSession?.start_at
-                          ? format(new Date(nextSession.start_at), 'HH:mm')
+                          ? formatInTimeZone(new Date(nextSession.start_at), BUSINESS_TIMEZONE, 'HH:mm')
                           : course.start_time || 'Čas po dogovoru'}
                       </span>
                     </div>
@@ -240,7 +243,7 @@ export default function EducationPage() {
                           <div className="flex items-center text-sm text-gray-300">
                             <Calendar className="w-4 h-4 mr-2 text-[#00B5AD]" />
                             Termin: <span className="text-white ml-1 font-semibold">
-                              {nextSession?.start_at ? format(new Date(nextSession.start_at), "d. M. yyyy 'ob' HH:mm", { locale: sl }) : 'Termin sledi'}
+                              {nextSession?.start_at ? formatInTimeZone(new Date(nextSession.start_at), BUSINESS_TIMEZONE, "d. M. yyyy 'ob' HH:mm", { locale: sl }) : 'Termin sledi'}
                             </span>
                           </div>
                         </div>

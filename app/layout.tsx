@@ -7,6 +7,7 @@ import { Toaster } from "react-hot-toast";
 import { LanguageProvider } from "@/lib/i18n";
 import { CartProvider } from "@/components/CartProvider";
 import CartDrawer from "@/components/CartDrawer";
+import LocalBusinessSchema from "@/components/seo/LocalBusinessSchema";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,9 +15,16 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ORI 369 - Vaš most med znanostjo in energijo",
-  description: "V ORI 369 združujemo vrhunske terapevtske pristope, najnovejše tehnologije in globoko razumevanje frekvenc 3-6-9 za ravnovesje telesa, uma in duha.",
-  keywords: "terapija, sound healing, retreats, wellness, zdravje, Maribor",
+  title: "ORI 369 - Fizioterapija in Wellness Terapije | Maribor, Celje, Murska Sobota, Graz",
+  description: "Vrhunska fizioterapija in wellness terapije v Mariboru. Pokrivamo Celje, Murska Soboto in regijo do Graza. Tecar terapija, elektrostimulacija, MotioScan 3D analiza in več.",
+  keywords: "fizioterapija Maribor, wellness Celje, terapije Murska Sobota, zdravljenje Graz, Tecar terapija, elektrostimulacija, MotioScan 3D, manualna terapija, magnetna terapija, laserska terapija, rehabilitacija, regeneracija, ORI 369, Slovenija, Avstrija",
+  openGraph: {
+    title: "ORI 369 - Fizioterapija in Wellness Terapije | Maribor, Celje, Murska Sobota, Graz",
+    description: "Vrhunska fizioterapija in wellness terapije v Mariboru. Pokrivamo Celje, Murska Soboto in regijo do Graza.",
+    type: "website",
+    locale: "sl_SI",
+    siteName: "ORI 369",
+  },
 };
 
 export default function RootLayout({
@@ -26,6 +34,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="sl">
+      <head>
+        <LocalBusinessSchema />
+      </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <LanguageProvider>
           <CartProvider>

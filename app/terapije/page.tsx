@@ -3,6 +3,8 @@ import Link from 'next/link';
 import { BookOpen, ArrowRight } from 'lucide-react';
 import { fetchPublicServices } from '@/lib/public-services';
 
+export const dynamic = 'force-dynamic';
+
 export default async function TherapiesPage() {
   const therapies = (await fetchPublicServices(false)).map((service) => ({
     id: service.slug,

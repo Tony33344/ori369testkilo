@@ -1,6 +1,8 @@
 import Packages from '@/components/sections/Packages';
 import { fetchPublicServices } from '@/lib/public-services';
 
+export const dynamic = 'force-dynamic';
+
 export default async function PackagesPage() {
   const packages = (await fetchPublicServices(true)).map((service) => ({
     id: service.slug,

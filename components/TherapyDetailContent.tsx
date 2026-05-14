@@ -22,7 +22,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
 
   return (
     <div className="min-h-screen bg-white">
-      <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-16 md:py-24 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-gray-50 to-gray-100 py-4 md:py-6 overflow-hidden">
         <div className="absolute inset-0 z-0">
           <Image
             src={heroImage}
@@ -35,7 +35,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
         </div>
 
         <div className="container mx-auto px-4 relative z-10 text-center">
-          <div className="flex flex-wrap justify-between items-center mb-10 gap-4">
+          <div className="flex flex-wrap justify-between items-center mb-4 gap-4">
             <Link 
               href={backHref}
               className="inline-flex items-center text-[#00B5AD] hover:text-[#009891] transition-colors font-medium"

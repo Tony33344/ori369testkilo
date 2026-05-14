@@ -55,7 +55,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
             )}
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-black mb-10">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-black mb-4">
             {richContent.name}
           </h1>
 
@@ -72,7 +72,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-16 md:py-24">
+      <div className="container mx-auto px-4 py-8 md:py-12">
         <div className="max-w-4xl mx-auto">
           {gallery.length > 1 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">

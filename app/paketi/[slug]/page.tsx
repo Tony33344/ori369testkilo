@@ -1,10 +1,8 @@
 import { notFound } from 'next/navigation';
-import { fetchPublicServiceBySlug, fetchPublicServiceSlugs, fetchPublicServices } from '@/lib/public-services';
+import { fetchPublicServiceBySlug, fetchPublicServices } from '@/lib/public-services';
 import TherapyDetailContent from '@/components/TherapyDetailContent';
 
-export async function generateStaticParams() {
-  return fetchPublicServiceSlugs(true);
-}
+export const dynamic = 'force-dynamic';
 
 export default async function PackageDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;

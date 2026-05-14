@@ -549,7 +549,7 @@ export default function AdminPage() {
     const { data, error } = await supabase
       .from('services')
       .select('*')
-      .order('name');
+      .order('display_order', { ascending: true });
 
     if (data) {
       setServices(data);
@@ -1131,9 +1131,6 @@ export default function AdminPage() {
                             <DollarSign size={16} />
                             <span>€{service.price}</span>
                           </div>
-                          {service.is_package && service.sessions > 0 && (
-                            <div className="text-xs text-gray-500">{service.sessions} seans</div>
-                          )}
                         </td>
                         <td className="px-6 py-4">
                           <button

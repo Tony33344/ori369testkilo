@@ -103,7 +103,8 @@ export default function EducationPage() {
         ) : (
           <div className="flex flex-wrap justify-center gap-8">
             {courses.map((course) => {
-              const nextSession = course.sessions.find((session) => session.status !== 'past') || course.sessions[0];
+              const upcomingSessions = course.sessions.filter((session) => session.status !== 'past');
+              const nextSession = upcomingSessions[0] || course.sessions[0];
 
               return (
               <div key={course.id} className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-md">
@@ -128,10 +129,11 @@ export default function EducationPage() {
                     <span className="text-sm font-bold text-[#00B5AD] uppercase tracking-wider">
                       {nextSession?.status === 'current' ? 'Aktualno' : 'Prihaja'}
                     </span>
-                    <div className="flex items-center text-gray-500 text-xs font-medium">
-                      <Clock className="w-3 h-3 mr-1" />
-                      {nextSession?.start_at ? formatInTimeZone(new Date(nextSession.start_at), BUSINESS_TIMEZONE, 'd. MMM yyyy', { locale: sl }) : 'Termin sledi'}
-                    </div>
+                    {upcomingSessions.length > 1 && (
+                      <span className="text-xs font-bold text-[#00B5AD] bg-[#00B5AD]/10 px-2 py-0.5 rounded-full">
+                        {upcomingSessions.length} termini
+                      </span>
+                    )}
                   </div>
                   
                   <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-[#00B5AD] transition-colors">
@@ -142,30 +144,46 @@ export default function EducationPage() {
                     {course.short_description}
                   </p>
 
-                  <div className="flex flex-wrap items-center text-sm text-gray-500 gap-4 mb-4">
-                    <div className="flex items-center space-x-2">
-                      <Clock className="w-4 h-4 text-gray-400" />
-                      <span>
-                        {nextSession?.start_at
-                          ? formatInTimeZone(new Date(nextSession.start_at), BUSINESS_TIMEZONE, 'd. MMMM yyyy', { locale: sl })
-                          : 'Datum po dogovoru'}
-                      </span>
-                    </div>
-                    <div className="flex items-center space-x-2">
-                      <Clock className="w-4 h-4 text-gray-400" />
-                      <span className="font-medium text-gray-700">
-                        {nextSession?.start_at
-                          ? formatInTimeZone(new Date(nextSession.start_at), BUSINESS_TIMEZONE, 'HH:mm')
-                          : course.start_time || 'Čas po dogovoru'}
-                      </span>
-                    </div>
-                    {(nextSession?.location || course.location) && (
-                      <div className="flex items-center space-x-2">
-                        <MapPin className="w-4 h-4 text-gray-400" />
-                        <span><span className="font-medium text-gray-700">Lokacija:</span> {nextSession?.location || course.location}</span>
+                  {/* Show ALL upcoming session dates */}
+                  <div className="space-y-3 mb-4">
+                    {(upcomingSessions.length > 0 ? upcomingSessions : course.sessions.slice(0, 1)).map((session, idx) => (
+                      <div key={session.id || idx} className="flex flex-wrap items-center text-sm text-gray-500 gap-3 bg-gray-50 rounded-xl px-3 py-2">
+                        <div className="flex items-center space-x-2">
+                          <Calendar className="w-4 h-4 text-[#00B5AD]" />
+                          <span className="font-medium text-gray-700">
+                            {session.start_at
+                              ? formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'd. MMMM yyyy', { locale: sl })
+                              : 'Datum po dogovoru'}
+                          </span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Clock className="w-3.5 h-3.5 text-gray-400" />
+                          <span className="text-gray-600">
+                            {session.start_at
+                              ? formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'HH:mm')
+                              : course.start_time || '—'}
+                            {session.end_at && ` – ${formatInTimeZone(new Date(session.end_at), BUSINESS_TIMEZONE, 'HH:mm')}`}
+                          </span>
+                        </div>
+                        {session.isFull && (
+                          <span className="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full">Polno</span>
+                        )}
+                      </div>
+                    ))}
+                    {upcomingSessions.length === 0 && course.sessions.length === 0 && (
+                      <div className="flex items-center text-sm text-gray-400 gap-2">
+                        <Clock className="w-4 h-4" />
+                        <span>Termin sledi</span>
                       </div>
                     )}
                   </div>
+
+                  {(nextSession?.location || course.location) && (
+                    <div className="flex items-center space-x-2 text-sm text-gray-500 mb-4">
+                      <MapPin className="w-4 h-4 text-gray-400" />
+                      <span><span className="font-medium text-gray-700">Lokacija:</span> {nextSession?.location || course.location}</span>
+                    </div>
+                  )}
                   
                   <div className="mt-auto pt-6 border-t border-gray-50">
                     <div className="mb-4">
@@ -210,7 +228,8 @@ export default function EducationPage() {
               {courses
                 .filter(c => c.featured)
                 .map((course, idx) => {
-                  const nextSession = course.sessions.find((session) => session.status !== 'past') || course.sessions[0];
+                  const upcomingSessions = course.sessions.filter((session) => session.status !== 'past');
+                  const nextSession = upcomingSessions[0] || course.sessions[0];
 
                   return (
                   <div key={`featured-${course.id}`} className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${idx > 0 ? 'pt-24 border-t border-gray-800' : ''}`}>
@@ -240,12 +259,29 @@ export default function EducationPage() {
                               {nextSession?.status === 'current' ? 'Aktualno' : 'Prihaja'}
                             </span>
                           </div>
-                          <div className="flex items-center text-sm text-gray-300">
-                            <Calendar className="w-4 h-4 mr-2 text-[#00B5AD]" />
-                            Termin: <span className="text-white ml-1 font-semibold">
-                              {nextSession?.start_at ? formatInTimeZone(new Date(nextSession.start_at), BUSINESS_TIMEZONE, "d. M. yyyy 'ob' HH:mm", { locale: sl }) : 'Termin sledi'}
-                            </span>
-                          </div>
+                        </div>
+                        {/* Show all upcoming session dates for featured courses */}
+                        <div className="space-y-2 mb-6">
+                          {(upcomingSessions.length > 0 ? upcomingSessions : course.sessions.slice(0, 1)).map((session, sIdx) => (
+                            <div key={session.id || sIdx} className="flex items-center text-sm text-gray-300">
+                              <Calendar className="w-4 h-4 mr-2 text-[#00B5AD]" />
+                              <span className="text-white font-semibold">
+                                {session.start_at
+                                  ? formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, "d. M. yyyy 'ob' HH:mm", { locale: sl })
+                                  : 'Termin sledi'}
+                                {session.end_at && ` – ${formatInTimeZone(new Date(session.end_at), BUSINESS_TIMEZONE, 'HH:mm')}`}
+                              </span>
+                              {session.isFull && (
+                                <span className="ml-2 text-xs font-bold text-red-400 bg-red-900/30 px-2 py-0.5 rounded-full">Polno</span>
+                              )}
+                            </div>
+                          ))}
+                          {upcomingSessions.length === 0 && course.sessions.length === 0 && (
+                            <div className="flex items-center text-sm text-gray-400">
+                              <Calendar className="w-4 h-4 mr-2" />
+                              <span>Termin sledi</span>
+                            </div>
+                          )}
                         </div>
                         <p className="text-gray-400 leading-relaxed mb-8">
                           {course.short_description}

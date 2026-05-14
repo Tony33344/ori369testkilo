@@ -118,7 +118,6 @@ export default function Packages({ packages }: { packages: Package[] }) {
                       )}
                       <div className="flex items-baseline space-x-2 mb-2">
                         <span className="text-4xl font-bold text-[#00B5AD]">€{pkg.price}</span>
-                        {pkg.sessions > 0 && <span className="text-gray-600">/ {pkg.sessions} {t('packages.sessionsUnit')}</span>}
                       </div>
                     </div>
                   ) : (

@@ -103,17 +103,15 @@ function BookingForm() {
   };
 
   const loadServices = async () => {
-    // Fetch services and order them to match the site display order
+    // Fetch services ordered by display_order
     const { data, error } = await supabase
       .from('services')
       .select('*')
-      .eq('active', true);
-    
+      .eq('active', true)
+      .order('display_order', { ascending: true });
+
     if (data) {
-      // Sort therapies first, then packages, each alphabetically by name
-      const therapies = data.filter((s: any) => !s.is_package).sort((a: any, b: any) => a.name.localeCompare(b.name, 'sl'));
-      const packages = data.filter((s: any) => s.is_package).sort((a: any, b: any) => a.name.localeCompare(b.name, 'sl'));
-      setServices([...therapies, ...packages]);
+      setServices(data);
     }
     if (error) console.error('Error loading services:', error);
   };

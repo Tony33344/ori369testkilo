@@ -173,7 +173,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link
-                  href="/kontakt"
+                  href={`/rezervacija?package=${richContent.slug}`}
                   className="inline-flex items-center justify-center px-8 py-4 bg-white text-[#00B5AD] font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
                 >
                   <Calendar size={20} className="mr-2" />

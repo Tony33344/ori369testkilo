@@ -70,10 +70,10 @@ export async function fetchPublicServices(isPackage: boolean): Promise<PublicSer
   const supabase = createClient();
   const { data, error } = await supabase
     .from('services')
-    .select('id, slug, name, description, long_description, how_it_works, benefits, indications, contraindications, duration, price, sessions, is_package, image_url, image_url_2, image_url_3, active')
+    .select('id, slug, name, description, long_description, how_it_works, benefits, indications, contraindications, duration, price, sessions, is_package, image_url, image_url_2, image_url_3, active, display_order')
     .eq('active', true)
     .eq('is_package', isPackage)
-    .order('name');
+    .order('display_order', { ascending: true });
 
   if (error || !data) {
     return [];
@@ -102,10 +102,10 @@ export async function fetchPublicServiceSlugs(isPackage: boolean): Promise<{ slu
   const supabase = createClient();
   const { data, error } = await supabase
     .from('services')
-    .select('slug')
+    .select('slug, display_order')
     .eq('active', true)
     .eq('is_package', isPackage)
-    .order('name');
+    .order('display_order', { ascending: true });
 
   if (error || !data) {
     return [];

@@ -73,8 +73,8 @@ const pagesData = [
 <p>info@ori369.si</p>
 <h2>Delovni čas</h2>
 <ul>
-<li>Ponedeljek - Petek: 8:00 - 20:00</li>
-<li>Sobota: 9:00 - 14:00</li>
+<li>Ponedeljek - Petek: 8:00 - 20:00 Oz. po dogovoru</li>
+<li>Sobota: 9:00 - 14:00 Oz. po dogovoru</li>
 <li>Nedelja: Zaprto</li>
 </ul>`
   }

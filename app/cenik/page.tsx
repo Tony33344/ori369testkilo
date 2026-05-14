@@ -292,11 +292,6 @@ export default function PricingPage() {
                     <h3 className="text-2xl md:text-3xl font-bold mb-2">
                       {pkg.name}
                     </h3>
-                    {pkg.sessions > 0 && (
-                      <p className="text-white/90 text-sm">
-                        {pkg.sessions} seans
-                      </p>
-                    )}
                   </div>
 
                   <div className="p-6">

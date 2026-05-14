@@ -6,7 +6,7 @@ import { supabase } from '@/lib/supabase';
 import { getCurrentUser, getUserProfile } from '@/lib/auth';
 import { useLanguage } from '@/lib/i18n';
 import { toast } from 'react-hot-toast';
-import { Calendar as CalendarIcon, Users, Activity, CheckCircle, XCircle, Edit2, Trash2, ExternalLink, Package, DollarSign, Clock, Plus, BarChart3, FileText, Tag, Megaphone, Settings } from 'lucide-react';
+import { Calendar as CalendarIcon, Users, Activity, CheckCircle, XCircle, Edit2, Trash2, ExternalLink, Package, DollarSign, Clock, Plus, BarChart3, FileText, Tag, Megaphone, Settings, Clipboard } from 'lucide-react';
 import { format } from 'date-fns';
 import dynamic from 'next/dynamic';
 
@@ -247,7 +247,7 @@ export default function AdminPage() {
   const { t } = useLanguage();
   const [user, setUser] = useState<any>(null);
   const [isAdmin, setIsAdmin] = useState(false);
-  const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'analytics' | 'content' | 'orders' | 'products' | 'cms' | 'marketing' | 'education' | 'settings'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'services' | 'analytics' | 'content' | 'orders' | 'products' | 'cms' | 'marketing' | 'education' | 'settings' | 'questionnaire'>('bookings');
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [filteredBookings, setFilteredBookings] = useState<Booking[]>([]);
   const [filter, setFilter] = useState<string>('all');
@@ -272,6 +272,9 @@ export default function AdminPage() {
   });
 
   const [discountCodes, setDiscountCodes] = useState<DiscountCodeRow[]>([]);
+  const [questions, setQuestions] = useState<any[]>([]);
+  const [editingQuestion, setEditingQuestion] = useState<any>(null);
+  const [showQuestionModal, setShowQuestionModal] = useState(false);
   const [banner, setBanner] = useState<SiteBannerRow | null>(null);
   const [marketingLoading, setMarketingLoading] = useState(false);
 
@@ -328,11 +331,60 @@ export default function AdminPage() {
         message: (bannerData as any)?.message || '',
         link_url: (bannerData as any)?.link_url || '',
       });
-    } catch (e: any) {
-      console.error('Failed to load marketing:', e);
-      toast.error(e?.message || 'Napaka pri nalaganju marketing nastavitev.');
+    } catch (err) {
+      console.error('Failed to load marketing data:', err);
     } finally {
       setMarketingLoading(false);
+    }
+  };
+
+  const loadQuestions = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('questionnaire_questions')
+        .select('*')
+        .order('display_order', { ascending: true });
+      if (error) throw error;
+      setQuestions(data || []);
+    } catch (err) {
+      console.error('Failed to load questions:', err);
+    }
+  };
+
+  const saveQuestion = async (question: any) => {
+    try {
+      const payload = {
+        question: question.question.trim(),
+        category: question.category || null,
+        display_order: question.display_order || 0,
+        active: question.active !== undefined ? question.active : true,
+      };
+
+      const { error } = question.id
+        ? await supabase.from('questionnaire_questions').update(payload).eq('id', question.id)
+        : await supabase.from('questionnaire_questions').insert(payload);
+
+      if (error) throw error;
+      toast.success('Vprašanje shranjeno.');
+      loadQuestions();
+      setShowQuestionModal(false);
+      setEditingQuestion(null);
+    } catch (err) {
+      console.error('Failed to save question:', err);
+      toast.error('Napaka pri shranjevanju.');
+    }
+  };
+
+  const deleteQuestion = async (id: string) => {
+    if (!confirm('Izbrišem to vprašanje?')) return;
+    try {
+      const { error } = await supabase.from('questionnaire_questions').delete().eq('id', id);
+      if (error) throw error;
+      toast.success('Vprašanje izbrisano.');
+      loadQuestions();
+    } catch (err) {
+      console.error('Failed to delete question:', err);
+      toast.error('Napaka pri brisanju.');
     }
   };
 
@@ -904,6 +956,20 @@ export default function AdminPage() {
             >
               <Settings className="w-5 h-5" />
               <span>Nastavitve</span>
+            </button>
+            <button
+              onClick={() => {
+                setActiveTab('questionnaire');
+                loadQuestions();
+              }}
+              className={`flex items-center space-x-2 px-6 py-4 font-medium transition-colors ${
+                activeTab === 'questionnaire'
+                  ? 'border-b-2 border-blue-600 text-blue-600'
+                  : 'text-gray-600 hover:text-gray-900'
+              }`}
+            >
+              <Clipboard size={20} />
+              <span>Vprašalnik</span>
             </button>
           </div>
         </div>
@@ -1555,6 +1621,124 @@ export default function AdminPage() {
                 </div>
               </div>
             </div>
+          </div>
+        )}
+
+        {activeTab === 'questionnaire' && (
+          <div className="bg-white rounded-lg shadow p-6">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl font-bold text-gray-900">Upravljanje vprašalnika</h2>
+              <button
+                onClick={() => {
+                  setEditingQuestion({ question: '', category: '', display_order: questions.length + 1, active: true });
+                  setShowQuestionModal(true);
+                }}
+                className="px-4 py-2 bg-[#00B5AD] text-white font-semibold rounded-lg hover:bg-[#009891] flex items-center gap-2"
+              >
+                <Plus size={18} />
+                Dodaj vprašanje
+              </button>
+            </div>
+
+            <div className="space-y-3">
+              {questions.map((q) => (
+                <div key={q.id} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:border-[#00B5AD]/50 transition-colors">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3">
+                      <span className="text-sm font-bold text-[#00B5AD] w-6">#{q.display_order}</span>
+                      <p className="font-medium text-gray-900">{q.question}</p>
+                      {!q.active && <span className="text-xs px-2 py-1 bg-gray-200 text-gray-600 rounded-full">Neaktivno</span>}
+                    </div>
+                    {q.category && <p className="text-sm text-gray-500 mt-1 ml-9">{q.category}</p>}
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <button
+                      onClick={() => {
+                        setEditingQuestion(q);
+                        setShowQuestionModal(true);
+                      }}
+                      className="p-2 text-gray-500 hover:text-[#00B5AD]"
+                    >
+                      <Edit2 size={18} />
+                    </button>
+                    <button
+                      onClick={() => deleteQuestion(q.id)}
+                      className="p-2 text-gray-500 hover:text-red-600"
+                    >
+                      <Trash2 size={18} />
+                    </button>
+                  </div>
+                </div>
+              ))}
+              {questions.length === 0 && (
+                <div className="text-center py-8 text-gray-500">
+                  Ni vprašanj. Dodajte prvo vprašanje.
+                </div>
+              )}
+            </div>
+
+            {showQuestionModal && editingQuestion && (
+              <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                <div className="bg-white rounded-lg p-6 w-full max-w-md">
+                  <h3 className="text-lg font-bold mb-4">{editingQuestion.id ? 'Uredi vprašanje' : 'Dodaj vprašanje'}</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Vprašanje</label>
+                      <textarea
+                        value={editingQuestion.question}
+                        onChange={(e) => setEditingQuestion({ ...editingQuestion, question: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                        rows={3}
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Kategorija</label>
+                      <input
+                        type="text"
+                        value={editingQuestion.category || ''}
+                        onChange={(e) => setEditingQuestion({ ...editingQuestion, category: e.target.value })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                        placeholder="pain, energy, mobility..."
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-1">Zaporedna številka</label>
+                      <input
+                        type="number"
+                        value={editingQuestion.display_order}
+                        onChange={(e) => setEditingQuestion({ ...editingQuestion, display_order: parseInt(e.target.value) || 0 })}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-lg"
+                      />
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="checkbox"
+                        checked={editingQuestion.active !== false}
+                        onChange={(e) => setEditingQuestion({ ...editingQuestion, active: e.target.checked })}
+                      />
+                      <label className="text-sm text-gray-700">Aktivno</label>
+                    </div>
+                  </div>
+                  <div className="flex justify-end gap-3 mt-6">
+                    <button
+                      onClick={() => {
+                        setShowQuestionModal(false);
+                        setEditingQuestion(null);
+                      }}
+                      className="px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50"
+                    >
+                      Prekliči
+                    </button>
+                    <button
+                      onClick={() => saveQuestion(editingQuestion)}
+                      className="px-4 py-2 bg-[#00B5AD] text-white rounded-lg hover:bg-[#009891]"
+                    >
+                      Shrani
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
 

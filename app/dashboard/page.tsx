@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter } from 'next/navigation';
-import { Calendar, Clock, Package, LogOut, User, ShoppingBag, GraduationCap, MapPin, Settings, Loader2 } from 'lucide-react';
+import { Calendar, Clock, Package, LogOut, User, ShoppingBag, GraduationCap, MapPin, Settings, Loader2, ClipboardList } from 'lucide-react';
 import { format } from 'date-fns';
 import { sl } from 'date-fns/locale';
 import { formatInTimeZone } from 'date-fns-tz';
@@ -64,12 +64,23 @@ interface EducationRegistration {
   } | null;
 }
 
+interface QuestionnaireResponse {
+  id: string;
+  email: string;
+  full_name: string | null;
+  score: number;
+  analysis: string | null;
+  answers: Array<{ question: string; answer: boolean }>;
+  created_at: string;
+}
+
 export default function DashboardPage() {
-  const [activeTab, setActiveTab] = useState<'bookings' | 'orders' | 'education'>('bookings');
+  const [activeTab, setActiveTab] = useState<'bookings' | 'orders' | 'education' | 'questionnaire'>('bookings');
   const [profile, setProfile] = useState<Profile | null>(null);
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
   const [registrations, setRegistrations] = useState<EducationRegistration[]>([]);
+  const [questionnaires, setQuestionnaires] = useState<QuestionnaireResponse[]>([]);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
 
@@ -106,6 +117,14 @@ export default function DashboardPage() {
         setBookings(data.bookings || []);
         setRegistrations(data.registrations || []);
         setOrders(data.orders || []);
+
+        // Load questionnaire responses (RLS allows user to view own)
+        const { data: qData } = await supabase
+          .from('questionnaire_responses')
+          .select('id, email, full_name, score, analysis, answers, created_at')
+          .eq('user_id', session.user.id)
+          .order('created_at', { ascending: false });
+        if (qData) setQuestionnaires(qData as QuestionnaireResponse[]);
 
       } catch (err) {
         console.error('Dashboard data fetch error:', err);
@@ -217,6 +236,25 @@ export default function DashboardPage() {
                     activeTab === 'education' ? 'bg-white/20 text-white' : 'bg-[#00B5AD]/10 text-[#00B5AD]'
                   }`}>
                     {registrations.length}
+                  </span>
+                )}
+              </button>
+
+              <button
+                onClick={() => setActiveTab('questionnaire')}
+                className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl transition-all ${
+                  activeTab === 'questionnaire'
+                    ? 'bg-[#00B5AD] text-white shadow-lg shadow-[#00B5AD]/20'
+                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                }`}
+              >
+                <ClipboardList size={20} />
+                <span>Moji vprašalniki</span>
+                {questionnaires.length > 0 && (
+                  <span className={`ml-auto text-xs px-2 py-0.5 rounded-full ${
+                    activeTab === 'questionnaire' ? 'bg-white/20 text-white' : 'bg-[#00B5AD]/10 text-[#00B5AD]'
+                  }`}>
+                    {questionnaires.length}
                   </span>
                 )}
               </button>
@@ -355,6 +393,65 @@ export default function DashboardPage() {
                       </div>
                     </div>
                   ))
+                )}
+              </div>
+            )}
+
+            {/* Questionnaire Tab */}
+            {activeTab === 'questionnaire' && (
+              <div className="space-y-6">
+                <div className="flex items-center justify-between mb-4">
+                  <h2 className="text-xl font-bold text-gray-900">Moji vprašalniki</h2>
+                  <Link
+                    href="/vprasalnik"
+                    className="px-4 py-2 bg-[#00B5AD] hover:bg-[#009891] text-white text-sm font-semibold rounded-lg transition-colors"
+                  >
+                    Nov vprašalnik
+                  </Link>
+                </div>
+                {questionnaires.length === 0 ? (
+                  <div className="bg-white rounded-2xl p-8 text-center border border-gray-200 shadow-sm">
+                    <ClipboardList className="w-12 h-12 text-gray-300 mx-auto mb-4" />
+                    <h3 className="text-gray-900 font-bold mb-2">Še nimate izpolnjenih vprašalnikov</h3>
+                    <p className="text-gray-500 mb-6">Pridobite brezplačno analizo vašega stanja v 2 minutah.</p>
+                    <Link href="/vprasalnik" className="inline-block px-6 py-2 bg-[#00B5AD] text-white rounded-lg hover:bg-[#009891] transition-colors">
+                      Začni vprašalnik
+                    </Link>
+                  </div>
+                ) : (
+                  questionnaires.map((q) => {
+                    const total = (q.answers || []).length;
+                    return (
+                      <div key={q.id} className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm">
+                        <div className="flex items-start justify-between mb-4">
+                          <div>
+                            <h3 className="text-lg font-bold text-gray-900">{q.analysis || 'Analiza stanja'}</h3>
+                            <p className="text-sm text-gray-500 mt-1">
+                              {format(new Date(q.created_at), 'd. MMMM yyyy, HH:mm', { locale: sl })}
+                            </p>
+                          </div>
+                          <span className="px-3 py-1 rounded-full text-xs font-bold uppercase bg-[#00B5AD]/10 text-[#00B5AD]">
+                            {q.score} / {total}
+                          </span>
+                        </div>
+                        <details className="text-sm">
+                          <summary className="cursor-pointer text-[#00B5AD] hover:underline font-medium">
+                            Prikaži odgovore
+                          </summary>
+                          <ul className="mt-3 space-y-2">
+                            {(q.answers || []).map((a, i) => (
+                              <li key={i} className="flex items-start justify-between gap-3 py-2 border-b border-gray-100 last:border-0">
+                                <span className="text-gray-700">{a.question}</span>
+                                <span className={`shrink-0 text-xs font-bold px-2 py-1 rounded-full ${a.answer ? 'bg-rose-100 text-rose-700' : 'bg-emerald-100 text-emerald-700'}`}>
+                                  {a.answer ? 'Da' : 'Ne'}
+                                </span>
+                              </li>
+                            ))}
+                          </ul>
+                        </details>
+                      </div>
+                    );
+                  })
                 )}
               </div>
             )}

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Sparkles, Zap, BookOpen, ArrowUpRight } from 'lucide-react';
+import { Sparkles, Zap, BookOpen, ArrowUpRight, ClipboardList } from 'lucide-react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, EffectFade } from 'swiper/modules';
 import { useLanguage } from '@/lib/i18n';
@@ -175,6 +175,13 @@ export default function Hero() {
               >
                 <BookOpen className="w-5 h-5 mr-2" />
                 ORI Education
+              </Link>
+              <Link
+                href="/vprasalnik"
+                className="px-8 py-4 bg-gradient-to-r from-[#B8D52E] to-[#9ec628] text-gray-900 font-bold rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center"
+              >
+                <ClipboardList className="w-5 h-5 mr-2" />
+                Brezplačni vprašalnik
               </Link>
             </motion.div>
 

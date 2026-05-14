@@ -94,7 +94,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
           )}
           
           <div className="mb-16 text-left">
-            <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
+            <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line text-justify">
               {richContent.longDescription}
             </p>
           </div>
@@ -106,7 +106,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
                   <Zap className="text-[#00B5AD]" size={32} />
                   {t('therapyDetail.howItWorks')}
                 </h2>
-                <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line">
+                <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line text-justify">
                   {richContent.howItWorks}
                 </p>
               </div>

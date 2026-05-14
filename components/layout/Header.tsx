@@ -123,8 +123,8 @@ export default function Header() {
     <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-sm shadow-sm">
       {banner?.enabled && banner?.message && !bannerDismissed && (
         <div className="bg-[#00B5AD] text-white">
-          <div className="container mx-auto px-4 py-2 flex items-center justify-between gap-3">
-            <div className="text-sm font-medium">
+          <div className="container mx-auto px-4 py-2 flex items-center justify-center gap-3 relative">
+            <div className="text-sm font-medium text-center">
               {banner.link_url ? (
                 <Link href={banner.link_url} className="underline underline-offset-2">
                   {banner.message}
@@ -136,7 +136,7 @@ export default function Header() {
             <button
               type="button"
               onClick={dismissBanner}
-              className="text-white/90 hover:text-white text-sm font-semibold"
+              className="absolute right-4 text-white/90 hover:text-white text-sm font-semibold"
             >
               Zapri
             </button>

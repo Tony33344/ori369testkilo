@@ -292,8 +292,8 @@
     "phone": ["051 302 206", "041 458 931"],
     "address": "Ulica škofa Maksimilijana Držečnika 11, 2000 Maribor, Slovenia",
     "hours": {
-      "weekdays": "07:00–14:00 in 16:00–21:00 Oz. po dogovoru",
-      "saturday": "08:00–14:00 Oz. po dogovoru"
+      "weekdays": "07:00–14:00 in 16:00–21:00  oz. po dogovoru",
+      "saturday": "08:00–14:00  oz. po dogovoru"
     }
   },
   "toast": {

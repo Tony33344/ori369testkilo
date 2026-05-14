@@ -72,7 +72,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 md:py-12">
+      <div className="container mx-auto px-4 py-4 md:py-6">
         <div className="max-w-4xl mx-auto">
           {gallery.length > 1 && (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mb-12">
@@ -89,7 +89,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
             </div>
           )}
           
-          <div className="mb-16 text-left">
+          <div className="mb-6 text-left">
             <h2 className="text-2xl md:text-3xl font-bold text-black mb-6">
               {backHref === '/paketi' ? 'O paketu' : 'O terapiji'}
             </h2>
@@ -98,7 +98,7 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
             </p>
           </div>
 
-          <div className="space-y-16 text-left">
+          <div className="space-y-8 text-left">
             {richContent.howItWorks && (
               <div className="border-l-4 border-[#00B5AD] pl-8 py-4 bg-gray-50/50 rounded-r-3xl">
                 <h2 className="text-3xl md:text-4xl font-bold text-black mb-6 flex items-center gap-3">

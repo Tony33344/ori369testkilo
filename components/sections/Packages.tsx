@@ -106,7 +106,7 @@ export default function Packages({ packages }: { packages: Package[] }) {
             >
               <div className="p-6 md:p-8">
                 <h3 className="text-xl md:text-2xl font-bold text-black mb-3">{pkg.name}</h3>
-                <p className="text-gray-600 mb-6">{pkg.description}</p>
+                <p className="text-gray-600 mb-6 text-justify">{pkg.description}</p>
 
                 <div className="mb-6">
                   {pkg.price ? (

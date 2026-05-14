@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useLanguage } from "@/lib/i18n";
 import { CheckCircle2, Zap, Heart, Shield, Users, Globe, Phone, Award, ChevronDown, ChevronUp } from "lucide-react";
 import ImageModal from "@/components/ImageModal";
+import VideoEmbed from "@/components/sections/VideoEmbed";
 import { teamData } from "@/lib/servicesData";
 
 const OFFICE_IMAGE = "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/servicesimages/pisarna/pisarna1.webp";
@@ -75,38 +76,13 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Why ORI 369 Works - The Comparison */}
+      {/* Why ORI 369 Works - Video */}
       <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-16">
             <h2 className="text-2xl md:text-4xl font-bold text-black mb-4 md:mb-6">Zakaj ORI 369 deluje?</h2>
-            <p className="text-lg text-gray-600">
-              Najbolj preprosta primerjava: <span className="font-bold text-black">Lopata ali bager?</span>
-            </p>
           </div>
-
-          <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-            <div className="bg-gray-50 p-8 rounded-2xl border border-gray-100">
-              <div className="w-12 h-12 bg-gray-200 rounded-full flex items-center justify-center mb-6">
-                <span className="text-2xl">🚜</span>
-              </div>
-              <h3 className="text-xl font-bold mb-4">Brez tehnologije (Lopata)</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Z lopato lahko kopljemo jamo za bazen – počasi, z veliko truda in omejenim učinkom. 
-                Pri klasičnih terapijah je napredek pogosto počasen, saj se zanašamo le na osnovne metode.
-              </p>
-            </div>
-            <div className="bg-[#00B5AD]/5 p-8 rounded-2xl border border-[#00B5AD]/20">
-              <div className="w-12 h-12 bg-[#00B5AD] rounded-full flex items-center justify-center mb-6">
-                <Zap className="text-white" size={24} />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-black">Z ORI 369 tehnologijo (Bager)</h3>
-              <p className="text-gray-600 leading-relaxed">
-                Bager isto jamo naredi v enem dnevu. Z naprednimi napravami v ORI 369 vaše telo v eni obravnavi 
-                lahko naredi več kot sicer v tednu dni. Uporabljamo opremo, ki ustvarja resnično razliko.
-              </p>
-            </div>
-          </div>
+          <VideoEmbed videoUrl="https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/video/ori.mp4" />
         </div>
       </section>
 

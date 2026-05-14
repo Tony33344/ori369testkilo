@@ -8,6 +8,7 @@ import Testimonials from "@/components/sections/Testimonials";
 import TransformationJourney from "@/components/sections/TransformationJourney";
 import ServicesPreview from "@/components/sections/ServicesPreview";
 import PackagesPreview from "@/components/sections/PackagesPreview";
+import VideoEmbed from "@/components/sections/VideoEmbed";
 import { useLanguage } from "@/lib/i18n";
 
 function SectionRenderer({ section, blocks, lang }: any) {
@@ -25,7 +26,20 @@ function SectionRenderer({ section, blocks, lang }: any) {
     case "hero":
       return <Hero {...(section.settings || {})} {...tFor(bySection[0])} />;
     case "transformationJourney":
-      return <TransformationJourney />;
+      return (
+        <>
+          <div className="bg-white py-12">
+            <VideoEmbed videoUrl="https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/video/ori.mp4" />
+          </div>
+          <TransformationJourney />
+        </>
+      );
+    case "video":
+      return (
+        <div className="bg-white py-12">
+          <VideoEmbed videoUrl={section.settings?.videoUrl || "https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/video/ori.mp4"} />
+        </div>
+      );
     case "services":
       return <Services services={(tFor(bySection[0]) as any)?.services || []} />;
     case "servicesPreview":

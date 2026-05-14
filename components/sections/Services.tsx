@@ -32,7 +32,7 @@ export default function Services({ services }: { services: Service[] }) {
                 <Zap className="text-[#00B5AD]" size={28} />
                 <h3 className="text-xl font-bold text-black">{service.name}</h3>
               </div>
-              <p className="text-gray-700 mb-4 leading-relaxed flex-grow">{service.shortDescription}</p>
+              <p className="text-gray-700 mb-4 leading-relaxed flex-grow text-justify">{service.shortDescription}</p>
               <div className="flex items-center justify-between text-sm text-gray-600 mb-4">
                 <div className="flex items-center space-x-1">
                   <Clock size={16} />

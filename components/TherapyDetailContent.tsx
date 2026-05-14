@@ -55,13 +55,9 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
             )}
           </div>
           
-          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-black mb-6">
+          <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold text-black mb-10">
             {richContent.name}
           </h1>
-          
-          <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto mb-10">
-            {richContent.shortDescription}
-          </p>
 
           <div className="flex flex-wrap justify-center gap-6">
             <div className="flex items-center space-x-2 bg-white px-6 py-3 rounded-xl shadow-sm border border-gray-100">
@@ -94,6 +90,9 @@ export default function TherapyDetailContent({ richContent, images, backHref, ne
           )}
           
           <div className="mb-16 text-left">
+            <h2 className="text-2xl md:text-3xl font-bold text-black mb-6">
+              {backHref === '/paketi' ? 'O paketu' : 'O terapiji'}
+            </h2>
             <p className="text-xl text-gray-700 leading-relaxed whitespace-pre-line text-justify">
               {richContent.longDescription}
             </p>

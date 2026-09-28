@@ -31,7 +31,7 @@ export default function MotioScanStarterPage() {
               Prvi pregled + meritev s Physio Motio + celovit personaliziran plan terapij in vaj
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-200 md:text-xl">
-              To ni samo meritev. To je uvodni diagnostični obisk za ljudi, ki želijo razumeti svoje stanje,
+              To ni samo meritev. To je uvodni obisk za ljudi, ki želijo bolje razumeti svoje telo,
               dobiti jasno razlago in konkreten načrt, kako začeti pot nazaj v ravnovesje.
             </p>
 

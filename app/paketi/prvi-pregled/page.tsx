@@ -64,7 +64,7 @@ export default function FirstConsultPage() {
                   },
                   {
                     title: 'Jasen terapevtski načrt',
-                    desc: 'Po obravnavi veš, ali potrebuješ terapije, vaje, nadaljnjo diagnostiko ali kombinacijo pristopov.',
+                    desc: 'Po obravnavi veš, ali potrebuješ terapije, vaje, dodatno meritev ali kombinacijo pristopov.',
                     icon: <ClipboardList className="h-5 w-5 text-[#00B5AD]" />,
                   },
                   {
@@ -103,7 +103,7 @@ export default function FirstConsultPage() {
               </div>
 
               <div className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-[0_18px_60px_rgba(0,0,0,0.06)]">
-                <h3 className="text-2xl font-bold">Če te zanima tudi globlja diagnostična pot</h3>
+                <h3 className="text-2xl font-bold">Če te zanima tudi poglobljena analiza</h3>
                 <p className="mt-4 leading-relaxed text-gray-600">
                   Poglej še uvodni termin s Physio Motio meritvijo, kjer združimo prvi pregled, meritev in personaliziran plan terapij in vaj.
                 </p>

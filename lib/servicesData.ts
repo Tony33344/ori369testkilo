@@ -832,29 +832,29 @@ Vizija centra ORI 369:
 
 Moj najnovejši cilj v centru ORI 369 je ljudem ponuditi trenutek oddiha, priložnost za vrnitev k sebi in vzpostavitev globoke povezanosti s samim seboj. S tem namenom želim ustvariti prostor, kjer bodo ljudje ob medsebojnem razumevanju in podpori našli stik s svojim notranjim jazom. Moje poslanstvo je izboljševanje splošnega počutja in kakovosti življenja, ki ga dosežem s pomočjo gibanja, dihanja, mrzle vode, narave, simbolov, frekvenc ter moderne tehnologije, ki ljudem omogoča, da se ponovno povežejo s sabo.`,
     qualifications: ['Ustanovitelj Inštituta ŠNUK', 'Izkušnje z ekspedicijami v naravo', 'Specialist za ledene kopeli', 'Dihalne tehnike', 'Energijske terapije', 'Vodja ekspedicij'],
-    specializations: ['Celostni pristop k zdravljenju', 'Ledene terapije', 'Dihalne vaje', 'Gibanje v naravi', 'Zvočne terapije', 'Sistem REVIVE'],
+    specializations: ['Celostni pristop k dobremu počutju', 'Ledene terapije', 'Dihalne vaje', 'Gibanje v naravi', 'Zvočne terapije', 'Sistem REVIVE'],
     phone: '00386 51 302 206'
   },
   {
-    name: 'Evgen Valek M.D.(M.A.)',
-    title: 'Zdravnik in terapevt',
+    name: 'Evgen Valek, M.D.(M.A.)',
+    title: 'Terapevt za celostno obravnavo',
     role: 'therapist',
-    bio: 'Zdravnik z diplomo M.D.(M.A.) in prehranski svetovalec.',
+    bio: 'M.D.(M.A.), Medicina Alternativa, Open International University for Complementary Medicines, Šrilanka (2003).',
     longBio: `Živel sem mladostniško življenje, ki ni bilo glih posuto z rožicami. Bil sem vagabund in z svojim malim kolesom dosegel marsikatero destinacijo vsa oklica me je poznala. Dokaj hitro sem se seznanil z cigareti, alkoholom, lahko drogo. Prihajam iz turističnega kraja – Podčetrtek, kjer sem tudi začel s svojo bogato kariero, ki se je začela zelo zgodaj. Že pri 15 letih sem pričel delati kot natakar in animator. Tri leta kasneje, pa sem se tudi preizkusil kot reševalec iz vode.
 
-V tem času sem ugotovil, da imam sposobnost pomagati ljudem. To me je vodilo k temu, da sem opravil tečaj za maserja, Reiki mojstra, Karuna gautama mojstra itd. A zavedal sem se, da je potrebno še veliko več za učinkovito pomoč. Zato sem po napornem iskanju in temeljitem pogovoru z samim sabo našel študij za alternativne medicinde na Šri Lanki. Z mojo novo pridobljeno diplomo (M.D.M.A), sem lahko bolj suvereno stopil na svojo samostojno pot, ki sem jo nekaj let nadaljeval kot direktor svojega s.p.-ja. V termah Olimia sem odprl svojo prvo poslovno enoto in pričel z izvajanjem terapij, predavanji. Vozil sem goste na energetske točke in ustvarjal delavnice z lokalnimi zeliščarji. Tedanje vodstvo term Olimia me je povabilo k sodelovanju v Wellness centru, kjer sem ustvaril svoj lasten alternativni kotiček z različnimi terapijami. Odprli smo tudi prvi Hamam v Sloveniji in seveda sem bil prvi Hamam terapevt. Bil sem tudi asistent pri hoji po žerjavici, ki jo je izvajal Ladislav Medvešček pri njem sem se tudi seznanil z različnimi oblikami alternativnih tehnik zdravljenja. Tako me je pot popeljala v Južno Ameriko, kjer sem, kot najmlajši član prve Slovenske ekipe odšel na študij IFA. In leta 2006 končal, ter postal Ifa Babalav (Šaman).
+V tem času sem ugotovil, da imam sposobnost pomagati ljudem. To me je vodilo k temu, da sem opravil tečaj za maserja, Reiki mojstra, Karuna gautama mojstra itd. A zavedal sem se, da je potrebno še veliko več za učinkovito pomoč. Zato sem po napornem iskanju in temeljitem pogovoru z samim sabo našel študij za alternativne medicinde na Šri Lanki. Z mojo novo pridobljeno diplomo (M.D.M.A), sem lahko bolj suvereno stopil na svojo samostojno pot, ki sem jo nekaj let nadaljeval kot direktor svojega s.p.-ja. V termah Olimia sem odprl svojo prvo poslovno enoto in pričel z izvajanjem terapij, predavanji. Vozil sem goste na energetske točke in ustvarjal delavnice z lokalnimi zeliščarji. Tedanje vodstvo term Olimia me je povabilo k sodelovanju v Wellness centru, kjer sem ustvaril svoj lasten alternativni kotiček z različnimi terapijami. Odprli smo tudi prvi Hamam v Sloveniji in seveda sem bil prvi Hamam terapevt. Bil sem tudi asistent pri hoji po žerjavici, ki jo je izvajal Ladislav Medvešček pri njem sem se tudi seznanil z različnimi oblikami alternativnih tehnik. Tako me je pot popeljala v Južno Ameriko, kjer sem, kot najmlajši član prve Slovenske ekipe odšel na študij IFA. In leta 2006 končal, ter postal Ifa Babalav (Šaman).
 
-Kot že vsi vemo, se je potrebno ves čas izpopolnjevati in ker se sem na terapevtskem področju dokaj dobro izuril, sem želel svoje izkušnje in potenciale uporabiti tudi na področju vodenja wellness centra. Da sem lahko uspešen tudi na tem področju, sem uspel dokazati, z zaposlitvijo v wellnessih v Sloveniji in zunaj(Harmonija, Costa Pacifica, Grand hotel Donat). ravno v takšnem obdobju, ko je bilo potrebno narediti neke razvojne premike. V veselje mi je bilo delati na takšnem delovnem mestu, saj je moja organiziranost, discipliniranost, razsodnost, samoiniciativnost, ambicioznost…, lahko prišla do izraza. Tako sem vsakem izmed omenjenih Wellnessov dodal nekaj koristnih novih vidikov, kateri so jim dvignili kakovost. Leta 2009 sem sodeloval v tekmovanju naj wellnes Slovenija, kjer sem z svojo ekipo dosegel 2 mesto. Leta 2009 so me povabili, k sodelovanju z boksarsko zvezo Slovenije in sem se istega leta udeležil svetovnega prvenstva, kot zdravnik M.D.(M.A.) v Milanu. Nemirni duh in želja po iskanju nečesa, znanja, moči, dokazovanja me je vodila naprej 2010 sem odšel v Ameriko, kjer sem obiskal indijanske rezervate in se pri šamanih izobraževal v različnih ritualih. 2013 sem odšel delat na luksuzno ladjo Costa Pacifica. Od tam me je pot zanesla v Južno Ameriko, kjer sem se med drugim seznanil z Kulturo Majev. Nato v Novo Zelandijo, kjer sem delal v kliniki za kiropraktiko in se izobraževal o kulturi Maurov in se spoznaval z njihovo bogato kulturo, ritualih. Ustavil sem se še v Avstraliji obiskal tamkajšnje staroselce Aboridžine in se tudi od njih kaj naučil. Po miru, ki sem ga začutil v sebi in spoznanju, da vse, kar iščem je v meni in že vse imam, sem se odpravil v Maribor, ker sem deloval v Fizioterapiji Reha.
+Kot že vsi vemo, se je potrebno ves čas izpopolnjevati in ker se sem na terapevtskem področju dokaj dobro izuril, sem želel svoje izkušnje in potenciale uporabiti tudi na področju vodenja wellness centra. Da sem lahko uspešen tudi na tem področju, sem uspel dokazati, z zaposlitvijo v wellnessih v Sloveniji in zunaj(Harmonija, Costa Pacifica, Grand hotel Donat). ravno v takšnem obdobju, ko je bilo potrebno narediti neke razvojne premike. V veselje mi je bilo delati na takšnem delovnem mestu, saj je moja organiziranost, discipliniranost, razsodnost, samoiniciativnost, ambicioznost…, lahko prišla do izraza. Tako sem vsakem izmed omenjenih Wellnessov dodal nekaj koristnih novih vidikov, kateri so jim dvignili kakovost. Leta 2009 sem sodeloval v tekmovanju naj wellnes Slovenija, kjer sem z svojo ekipo dosegel 2 mesto. Leta 2009 so me povabili, k sodelovanju z boksarsko zvezo Slovenije in sem se istega leta udeležil svetovnega prvenstva, kot terapevt v Milanu. Nemirni duh in želja po iskanju nečesa, znanja, moči, dokazovanja me je vodila naprej 2010 sem odšel v Ameriko, kjer sem obiskal indijanske rezervate in se pri šamanih izobraževal v različnih ritualih. 2013 sem odšel delat na luksuzno ladjo Costa Pacifica. Od tam me je pot zanesla v Južno Ameriko, kjer sem se med drugim seznanil z Kulturo Majev. Nato v Novo Zelandijo, kjer sem delal v kliniki za kiropraktiko in se izobraževal o kulturi Maurov in se spoznaval z njihovo bogato kulturo, ritualih. Ustavil sem se še v Avstraliji obiskal tamkajšnje staroselce Aboridžine in se tudi od njih kaj naučil. Po miru, ki sem ga začutil v sebi in spoznanju, da vse, kar iščem je v meni in že vse imam, sem se odpravil v Maribor, ker sem deloval v Fizioterapiji Reha.
 
 Prišel je čas, da si izpolnim novo željo, pridobim izkušnjo, zato sem pričel z delom varnostnika pri BBR-ju. Delal sem v lokalih, objektih. Ker me je zanimalo delo varnostnika z orožjem sem se zaposlil v Aktiva varovanju. Tedanje vodstvo je v meni videlo velik potencijal in mi omogočilo napredovanje. Zelo hitro sem postal vodja, ter varnostni menedžer na področju intervencije. Postal sem tudi glavni inštuktor za strokovno usposabljanje varnostnega osebja za nošenje orožja in predavatelj v programu nacionalne poklicne kvalifikacije za varnostnike. Ker sem potreboval nove izzive sem se zaposlil v Perutnini Ptuj, kot specialist za fizično varovanje.
 
 Sedaj pa sem tukaj, ponovno med vami. Notranji mir mi ne, da miru. Zato sem se odločil, da bom svoje znanje in izkušnje delil z vami. V eni izmed mojih inicijacij sem dobil poslanstvo, da moram odpreti oči tistim, ki ne vidijo, dvignit tiste, ki so padli, da se zavedo svojega bistva, svojega telesa, svoje okolice in sprejmejo sebe kot popolno kreacijo univerzuma.
 
-Veselim se srečanja z vami, po svojih najboljših močeh vam bom pomagal poiskati odgovore, da boste bolje razumeli svoje zdravstveno stanje in dobili napotke, kako lahko bolj zdravo, suvereno, samozavestno, usmerjeno stopate po poti vašega življenja.
+Veselim se srečanja z vami, po svojih najboljših močeh vam bom pomagal poiskati odgovore, da boste bolje razumeli svoje telo in počutje ter dobili napotke, kako lahko bolj zdravo, suvereno, samozavestno, usmerjeno stopate po poti vašega življenja.
 
 Samo vi ste kreator vaših mislih in samo vi lahko igrate glavno vlogo v vašem filmu in samo od vas je odvisno kakšen bo zaključek vaše kreativnosti.`,
-    qualifications: ['M.D.(M.A.) - Alternativna medicina', 'Reiki mojster', 'Karuna Gautama mojster', 'Certificiran maser', 'Reševalec iz vode', 'Prehranski svetovalec'],
-    specializations: ['Alternativna medicina', 'Energijsko zdravljenje', 'Celostna terapija', 'Meditacija in dihalne tehnike', 'Wellnes vodenje', 'Prehrana in zdravje'],
+    qualifications: ['M.D.(M.A.) – Medicina Alternativa, Šrilanka (2003)', 'Miofascialne tehnike po Ericu Daltonu', 'Prehransko svetovanje', 'Joga, pilates, fitnes', 'Certificiran maser', 'Reševalec iz vode'],
+    specializations: ['Celostna obravnava', 'Miofascialna masaža', 'Vodena sprostitev in dihalne tehnike', 'Wellness vodenje', 'Prehrana in življenjski slog'],
     phone: '00386 41 458 931'
   }
 ];
@@ -869,7 +869,7 @@ export const packagesData: TherapyPackage[] = [
     packagePrice: 96,
     pricePerSession: 96,
     includedServices: ['Celovit prvi pregled', 'Analiza stanja', 'Osebni program terapij'],
-    benefits: ['Celovita analiza stanja', 'Personaliziran pristop', 'Jasen načrt zdravljenja']
+    benefits: ['Celovita analiza stanja', 'Personaliziran pristop', 'Jasen osebni načrt']
   },
   {
     slug: 'meritev-physio-motio',
@@ -885,41 +885,41 @@ export const packagesData: TherapyPackage[] = [
   {
     slug: 'aktivacija-prebudi-telo',
     name: 'Aktivacija Prebudi telo – Paket 3 obravnave',
-    description: 'Uvodna meritev + fizična analiza + osebni program, 3x Elektrostimulacija, 3x Tacer terapija, 3x Iteracare in masaža, 3x Manualna - Storm terapija, 1x Končna obravnava',
+    description: 'Uvodna meritev + fizična analiza + osebni program, 3x Elektrostimulacija, 3x Tacer terapija, 3x Iteracare in masaža, 3x Storm terapija – miofascialna masaža, 1x Končna obravnava',
     sessions: 13,
     regularPrice: 335,
     packagePrice: 196,
     pricePerSession: 15.08,
-    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '3x Elektrostimulacija', '3x Tacer terapija', '3x Iteracare in masaža', '3x Manualna - Storm terapija', '1x Končna obravnava'],
+    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '3x Elektrostimulacija', '3x Tacer terapija', '3x Iteracare in masaža', '3x Storm terapija – miofascialna masaža', '1x Končna obravnava'],
     benefits: ['Aktivacija telesa', 'Regeneracija', 'Prihranek 139€']
   },
   {
     slug: 'osvescanje-telesa',
     name: 'Osveščanje Telesa – Paket 6 obravnav',
-    description: 'Uvodna meritev + fizična analiza + osebni program, 6x Elektrostimulacija, 6x Iteracare in masaža, 6x Laser, 6x Tacer terapija, 6x Manualna - Storm terapija, 1x Končna obravnava',
+    description: 'Uvodna meritev + fizična analiza + osebni program, 6x Elektrostimulacija, 6x Iteracare in masaža, 6x Laser, 6x Tacer terapija, 6x Storm terapija – miofascialna masaža, 1x Končna obravnava',
     sessions: 31,
     regularPrice: 690,
     packagePrice: 396,
     pricePerSession: 12.77,
-    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '6x Elektrostimulacija', '6x Iteracare in masaža', '6x Laser', '6x Tacer terapija', '6x Manualna - Storm terapija', '1x Končna obravnava'],
+    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '6x Elektrostimulacija', '6x Iteracare in masaža', '6x Laser', '6x Tacer terapija', '6x Storm terapija – miofascialna masaža', '1x Končna obravnava'],
     benefits: ['Globlja transformacija', 'Celovita regeneracija', 'Prihranek 294€']
   },
   {
     slug: 'univerzum',
     name: 'Univerzum – Paket 9 obravnav',
-    description: 'Uvodna meritev + fizična analiza + osebni program, 9x Elektrostimulacija, 9x Tacer terapija in masaža, 9x Trakcijska miza, 9x Manualna - Storm terapija, 9x MIS Magnetna indukcijska stimulacija, 9x Skalarni valovi - uravnovešanje čaker, 3x AO Scan, 1x Moti-physio Scan',
+    description: 'Uvodna meritev + fizična analiza + osebni program, 9x Elektrostimulacija, 9x Tacer terapija in masaža, 9x Trakcijska miza, 9x Storm terapija – miofascialna masaža, 9x MIS Magnetna indukcijska stimulacija, 9x Skalarni valovi - uravnovešanje čaker, 1x Moti-physio Scan',
     sessions: 58,
     regularPrice: 1835,
     packagePrice: 796,
     pricePerSession: 13.72,
-    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '9x Elektrostimulacija', '9x Tacer terapija in masaža', '9x Trakcijska miza', '9x Manualna - Storm terapija', '9x MIS Magnetna indukcijska stimulacija', '9x Skalarni valovi - uravnovešanje čaker', '3x AO Scan', '1x Moti-physio Scan'],
+    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '9x Elektrostimulacija', '9x Tacer terapija in masaža', '9x Trakcijska miza', '9x Storm terapija – miofascialna masaža', '9x MIS Magnetna indukcijska stimulacija', '9x Skalarni valovi - uravnovešanje čaker', '1x Moti-physio Scan'],
     benefits: ['Popolna transformacija', 'Vse tehnologije ORI 369', 'Prihranek 1039€']
   },
 ];
 
 export const individualPrices = [
   { name: 'Motio-Physio Scan', price: 69, duration: 30 },
-  { name: 'Storm terapija – manualna terapija', price: 30, duration: 20 },
+  { name: 'Storm terapija – miofascialna masaža', price: 30, duration: 20 },
   { name: 'Dekompresijska miza – Platinium', price: 30, duration: 20 },
   { name: 'Tacer', price: 29, duration: 30 },
   { name: 'Cryoscreen', price: 9, duration: 15 },
@@ -930,7 +930,7 @@ export const individualPrices = [
   { name: 'Iteracare', price: 19, duration: 20 },
   { name: 'Skalarni valovi – uravnovešanje čaker', price: 30, duration: 30 },
   { name: 'Ultrazvok', price: 19, duration: 15 },
-  { name: 'SU JOK', price: 29, duration: 30 },
+  { name: 'Sprostitvena akupresura rok (su jok)', price: 29, duration: 30 },
   { name: 'Dry needling', price: 30, duration: 30 },
   { name: 'Ventuze', price: 19, duration: 20 },
   { name: 'Individualno vodeno dihanje', price: 30, duration: 30 },

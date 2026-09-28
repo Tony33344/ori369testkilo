@@ -26,7 +26,7 @@
     },
     {
       "id": "manualna-terapija",
-      "name": "Manualna Terapija",
+      "name": "Miofascialna masaža",
       "shortDescription": "Z nežnimi ročnimi tehnikami terapevt sprošča napetosti in izboljšuje gibljivost.",
       "fullDescription": "Manualna terapija je dobila ime iz besede manus=roka, ki nakazuje na uporabo terapevtovih rok, kot glavnega orodja zdravljenja. Je ena izmed najbolj priljubljenih oblik zdravljenja.",
       "duration": 20,
@@ -95,14 +95,6 @@
       "fullDescription": "Iteracare je napredna terapevtska metoda za regeneracijo in celjenje.",
       "duration": 20,
       "price": 20
-    },
-    {
-      "id": "ao-scan",
-      "name": "AO Scan",
-      "shortDescription": "Napredno skeniranje za oceno stanja organizma.",
-      "fullDescription": "AO Scan omogoča pregled celotnega organizma in identifikacijo energijskih neravnovesij.",
-      "duration": 30,
-      "price": 50
     },
     {
       "id": "trakcijska-miza",
@@ -183,14 +175,12 @@
       ],
       "spine_and_structure_support": [
         "Trakcija hrbtenice",
-        "Manualna terapija / Holos manual treatment",
-        "Akupunktura in akudraining"
+        "Miofascialna masaža / Holos manual treatment"
       ],
       "frequency_and_energy_harmonization": [
         "Frequency therapy",
         "Skalarni valovi",
-        "IteraCare",
-        "AO Scan (biorezonančna analiza)"
+        "IteraCare"
       ],
       "neuroreset_relaxation_and_integration": [
         "Light & Sound Therapy",

@@ -49,7 +49,8 @@
     "quickLinks": "Quick Links",
     "contactInfo": "Contact",
     "followUs": "Follow Us",
-    "rights": "All rights reserved"
+    "rights": "All rights reserved",
+    "disclaimer": "ORI 369 services are intended for relaxation and well-being. They are not medical services, do not include diagnosis or treatment, and do not replace a visit to a doctor. If you have health problems, please consult your doctor before your visit."
   },
   "auth": {
     "login": {
@@ -257,7 +258,7 @@
   },
   "testimonials": {
     "title": "What our clients say",
-    "subtitle": "Stories of transformation and healing from our clients."
+    "subtitle": "Experiences and stories from our clients."
   },
   "categories": {
     "pathTitle": "HOLISTIC PATH TO HEALTH AND WELL-BEING",
@@ -276,7 +277,7 @@
       "breathing": "BREATHING",
       "movement": "CONSCIOUS MOVEMENT",
       "medicine": "SACRED MEDICINE",
-      "manual": "MANUAL THERAPY",
+      "manual": "MYOFASCIAL MASSAGE",
       "tecar": "TECAR STIMULATION",
       "laser": "LASER",
       "magnetic": "MAGNETIC THERAPY",

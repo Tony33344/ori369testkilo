@@ -26,7 +26,7 @@
     },
     {
       "id": "manualna-terapija",
-      "name": "Manuális terápia",
+      "name": "Miofasciális masszázs",
       "shortDescription": "Gyengéd manuális technikákkal a terapeuta oldja a feszültségeket és javítja a mozgékonyságot.",
       "fullDescription": "A manuális terápia nevét a manus=kéz szóból kapta, ami a terapeuta kezének használatára utal, mint a kezelés fő eszközére. Ez az egyik legnépszerűbb kezelési forma.",
       "duration": 20,
@@ -75,7 +75,7 @@
     {
       "id": "cupping",
       "name": "Köpölyözés terápia",
-      "shortDescription": "Köpölyözés terápia a gyógyuláshoz és regenerációhoz.",
+      "shortDescription": "Köpölyözés terápia a relaxációhoz és regenerációhoz.",
       "fullDescription": "A köpölyözés terápia (cupping) egy manuális technika, amely kis csészék (köpölyök) segítségével felgyorsítja a gyógyulást, regenerációt és enyhíti a fájdalmakat.",
       "duration": 30,
       "price": 30
@@ -95,14 +95,6 @@
       "fullDescription": "Az Iteracare egy fejlett terápiás módszer a regenerációhoz és gyógyuláshoz.",
       "duration": 20,
       "price": 20
-    },
-    {
-      "id": "ao-scan",
-      "name": "AO Scan",
-      "shortDescription": "Fejlett szkennelés a szervezet állapotának felmérésére.",
-      "fullDescription": "Az AO Scan lehetővé teszi a teljes szervezet átvizsgálását és az energetikai egyensúlyhiányok azonosítását.",
-      "duration": 30,
-      "price": 50
     },
     {
       "id": "trakcijska-miza",
@@ -183,14 +175,12 @@
       ],
       "spine_and_structure_support": [
         "Gerinc trakció",
-        "Manuális terápia / Holos manuális kezelés",
-        "Akupunktúra és akudraining"
+        "Miofasciális masszázs / Holos manuális kezelés"
       ],
       "frequency_and_energy_harmonization": [
         "Frekvencia terápia",
         "Skaláris hullámok",
-        "IteraCare",
-        "AO Scan (biorezonancia elemzés)"
+        "IteraCare"
       ],
       "neuroreset_relaxation_and_integration": [
         "Fény és hang terápia",

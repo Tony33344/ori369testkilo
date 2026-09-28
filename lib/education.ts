@@ -55,6 +55,16 @@ export type EducationCourse = {
   sessions: EducationCourseSession[];
 };
 
+export function deriveSessionStatus(session: { start_at: string; end_at: string | null }, now = Date.now()): EducationCourseSession['status'] {
+  const start = new Date(session.start_at).getTime();
+  const end = session.end_at ? new Date(session.end_at).getTime() : start;
+  if (end < now) return 'past';
+  return start <= now ? 'current' : 'upcoming';
+}
+
+const byStartAt = (a: EducationCourseSession, b: EducationCourseSession) =>
+  new Date(a.start_at).getTime() - new Date(b.start_at).getTime();
+
 export async function getEducationOverview(): Promise<EducationCourse[]> {
   // First try with all fields, if that fails (columns don't exist), try a narrower fallback
   let { data: courses, error } = await supabase
@@ -196,7 +206,7 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
       const isFull = session.max_participants && session.max_participants > 0 && used >= session.max_participants;
       return {
         id: session.id,
-        status: session.status,
+        status: deriveSessionStatus(session),
         headline: session.headline,
         start_at: session.start_at,
         end_at: session.end_at,
@@ -213,7 +223,7 @@ export async function getEducationOverview(): Promise<EducationCourse[]> {
             : null,
         isFull,
       } as EducationCourseSession;
-    }),
+    }).sort(byStartAt),
   }));
 }
 
@@ -352,7 +362,7 @@ export async function getEducationCourseBySlug(slug: string): Promise<EducationC
       const isFull = session.max_participants && session.max_participants > 0 && used >= session.max_participants;
       return {
         id: session.id,
-        status: session.status,
+        status: deriveSessionStatus(session),
         headline: session.headline,
         start_at: session.start_at,
         end_at: session.end_at,
@@ -367,6 +377,6 @@ export async function getEducationCourseBySlug(slug: string): Promise<EducationC
           : null,
         isFull,
       } as EducationCourseSession;
-    }),
+    }).sort(byStartAt),
   };
 }

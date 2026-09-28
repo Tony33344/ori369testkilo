@@ -119,7 +119,8 @@ export default function EducationCoursePage() {
   ].filter(Boolean) as string[];
 
   const upcomingSessions = (course.sessions || []).filter((session) => session.status !== 'past');
-  const primarySession = upcomingSessions[0] || course.sessions?.[0];
+  const pastSessions = (course.sessions || []).filter((session) => session.status === 'past');
+  const primarySession = upcomingSessions[0];
 
   return (
     <div className="bg-white min-h-screen">
@@ -322,7 +323,22 @@ export default function EducationCoursePage() {
                     ))}
                   </div>
                 ) : (
-                  <p className="text-gray-500">Termin bo objavljen kmalu</p>
+                  <div className="space-y-4">
+                    {pastSessions.length > 0 && (
+                      <div>
+                        <p className="mb-2 text-sm font-bold uppercase tracking-wider text-gray-400">Pretekli termini</p>
+                        <ul className="space-y-2">
+                          {pastSessions.map((session) => (
+                            <li key={session.id} className="flex items-center gap-3 rounded-xl bg-gray-50 px-4 py-3 text-gray-500">
+                              <Calendar className="h-4 w-4 text-gray-400" />
+                              {formatInTimeZone(new Date(session.start_at), BUSINESS_TIMEZONE, 'd. MMMM yyyy', { locale: sl })}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    <p className="text-gray-500">Nov termin bo objavljen kmalu</p>
+                  </div>
                 )}
               </div>
 

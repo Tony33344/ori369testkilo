@@ -26,7 +26,7 @@
     },
     {
       "id": "manualna-terapija",
-      "name": "Manuelle Therapie",
+      "name": "Myofasziale Massage",
       "shortDescription": "Mit sanften manuellen Techniken löst der Therapeut Verspannungen und verbessert die Beweglichkeit.",
       "fullDescription": "Die manuelle Therapie hat ihren Namen vom Wort manus=Hand, was auf die Verwendung der Hände des Therapeuten als Hauptbehandlungsinstrument hinweist. Sie ist eine der beliebtesten Behandlungsformen.",
       "duration": 20,
@@ -75,7 +75,7 @@
     {
       "id": "cupping",
       "name": "Schröpftherapie",
-      "shortDescription": "Schröpftherapie zur Heilung und Regeneration.",
+      "shortDescription": "Schröpftherapie zur Entspannung und Regeneration.",
       "fullDescription": "Die Schröpftherapie ist eine manuelle Technik, die mit kleinen Gläsern (Schröpfgläsern) die Heilung, Regeneration beschleunigt und Schmerzen lindert.",
       "duration": 30,
       "price": 30
@@ -95,14 +95,6 @@
       "fullDescription": "Iteracare ist eine fortschrittliche therapeutische Methode zur Regeneration und Heilung.",
       "duration": 20,
       "price": 20
-    },
-    {
-      "id": "ao-scan",
-      "name": "AO Scan",
-      "shortDescription": "Fortschrittliches Scannen zur Beurteilung des Organismus.",
-      "fullDescription": "AO Scan ermöglicht eine vollständige Überprüfung des Organismus und die Identifizierung von Energieungleichgewichten.",
-      "duration": 30,
-      "price": 50
     },
     {
       "id": "trakcijska-miza",
@@ -183,14 +175,12 @@
       ],
       "spine_and_structure_support": [
         "Wirbelsäulentraktion",
-        "Manuelle Therapie / Holos manuelle Behandlung",
-        "Akupunktur und Akudraining"
+        "Myofasziale Massage / Holos manuelle Behandlung"
       ],
       "frequency_and_energy_harmonization": [
         "Frequenztherapie",
         "Skalarwellen",
-        "IteraCare",
-        "AO Scan (Biorezonanz-Analyse)"
+        "IteraCare"
       ],
       "neuroreset_relaxation_and_integration": [
         "Licht- und Schalltherapie",

@@ -30,7 +30,7 @@ export async function POST(request: NextRequest) {
 
     const { data: session, error: sessionError } = await supabase
       .from('education_course_sessions')
-      .select('id, course_id, status, start_at, max_participants, education_courses!inner ( title )')
+      .select('id, course_id, status, start_at, end_at, max_participants, education_courses!inner ( title )')
       .eq('id', sessionId)
       .single();
 
@@ -38,6 +38,13 @@ export async function POST(request: NextRequest) {
       return NextResponse.json(
         { error: 'Education session not found' },
         { status: 404 }
+      );
+    }
+
+    if (new Date(session.end_at ?? session.start_at).getTime() < Date.now()) {
+      return NextResponse.json(
+        { error: 'Termin je že minil' },
+        { status: 400 }
       );
     }
 

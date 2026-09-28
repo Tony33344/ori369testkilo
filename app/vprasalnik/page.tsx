@@ -34,7 +34,7 @@ function buildAnalysis(score: number, total: number): AnalysisResult {
       recommendations: [
         'MotioScan – 3D analiza telesne drže za preventivni vpogled',
         'Posvet in predstavitev (15 min, 9 €) za usmerjeno svetovanje',
-        'Iteracare ali manualna terapija za sprostitev in regeneracijo',
+        'Iteracare ali miofascialna masaža za sprostitev in regeneracijo',
       ],
     };
   }
@@ -49,7 +49,7 @@ function buildAnalysis(score: number, total: number): AnalysisResult {
       recommendations: [
         'Prvi pregled + meritev s Physio Motio + celovit personaliziran plan',
         'Paket 3 obravnave – usmerjena terapija za sprostitev napetosti',
-        'TECAR ali manualna terapija za ciljno obravnavo bolečin',
+        'TECAR ali miofascialna masaža za ciljno sprostitev napetosti',
       ],
     };
   }
@@ -63,7 +63,7 @@ function buildAnalysis(score: number, total: number): AnalysisResult {
     recommendations: [
       'Prva posvetovalna obravnava z meritvijo in osebnim planom',
       'Paket 6 ali 9 obravnav za celostno regeneracijo',
-      'Univerzum paket – kombinacija MIS, manualne terapije in AO Scan',
+      'Univerzum paket – kombinacija MIS, miofascialne masaže in skalarnih valov',
     ],
   };
 }

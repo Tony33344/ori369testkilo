@@ -40,7 +40,8 @@
     "quickLinks": "Gyors linkek",
     "contactInfo": "Kapcsolat",
     "followUs": "Kövessen minket",
-    "rights": "Minden jog fenntartva"
+    "rights": "Minden jog fenntartva",
+    "disclaimer": "Az ORI 369 szolgáltatásai a relaxációt és a jó közérzetet szolgálják. Nem egészségügyi szolgáltatások, nem tartalmaznak diagnózist vagy kezelést, és nem helyettesítik az orvosi vizsgálatot. Egészségügyi panaszok esetén látogatása előtt forduljon orvosához."
   },
   "auth": {
     "login": {
@@ -202,7 +203,7 @@
   },
   "testimonials": {
     "title": "Mit mondanak ügyfeleink",
-    "subtitle": "Ügyfeleink átalakulásának és gyógyulásának történetei."
+    "subtitle": "Ügyfeleink tapasztalatai és történetei."
   },
   "categories": {
     "pathTitle": "HOLISZTIKUS ÚT AZ EGÉSZSÉG ÉS JÓLÉT FELÉ",
@@ -221,7 +222,7 @@
       "breathing": "LÉGZÉS",
       "movement": "TUDATOS MOZGÁS",
       "medicine": "SZENT GYÓGYÁSZAT",
-      "manual": "MANUÁLIS TERÁPIA",
+      "manual": "MIOFASCIÁLIS MASSZÁZS",
       "tecar": "TECAR STIMULÁCIÓ",
       "laser": "LÉZER",
       "magnetic": "MÁGNESTERÁPIA",

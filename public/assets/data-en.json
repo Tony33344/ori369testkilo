@@ -26,7 +26,7 @@
     },
     {
       "id": "manualna-terapija",
-      "name": "Manual Therapy",
+      "name": "Myofascial Massage",
       "shortDescription": "With gentle manual techniques, the therapist releases tension and improves mobility.",
       "fullDescription": "Manual therapy gets its name from the word manus=hand, indicating the use of the therapist's hands as the main treatment tool. It is one of the most popular forms of treatment.",
       "duration": 20,
@@ -75,7 +75,7 @@
     {
       "id": "cupping",
       "name": "Cupping Therapy",
-      "shortDescription": "Cupping therapy for healing and regeneration.",
+      "shortDescription": "Cupping therapy for relaxation and regeneration.",
       "fullDescription": "Cupping therapy is a manual technique that uses small cups to accelerate healing, regeneration, and pain relief.",
       "duration": 30,
       "price": 30
@@ -95,14 +95,6 @@
       "fullDescription": "Iteracare is an advanced therapeutic method for regeneration and healing.",
       "duration": 20,
       "price": 20
-    },
-    {
-      "id": "ao-scan",
-      "name": "AO Scan",
-      "shortDescription": "Advanced scanning for organism assessment.",
-      "fullDescription": "AO Scan enables a complete organism review and identification of energy imbalances.",
-      "duration": 30,
-      "price": 50
     },
     {
       "id": "trakcijska-miza",
@@ -183,14 +175,12 @@
       ],
       "spine_and_structure_support": [
         "Spinal Traction",
-        "Manual Therapy / Holos manual treatment",
-        "Acupuncture and Acudraining"
+        "Myofascial Massage / Holos manual treatment"
       ],
       "frequency_and_energy_harmonization": [
         "Frequency therapy",
         "Scalar waves",
-        "IteraCare",
-        "AO Scan (bioresonance analysis)"
+        "IteraCare"
       ],
       "neuroreset_relaxation_and_integration": [
         "Light & Sound Therapy",

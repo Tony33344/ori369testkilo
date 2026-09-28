@@ -40,7 +40,8 @@
     "quickLinks": "Brze poveznice",
     "contactInfo": "Kontakt",
     "followUs": "Pratite nas",
-    "rights": "Sva prava pridržana"
+    "rights": "Sva prava pridržana",
+    "disclaimer": "Usluge ORI 369 namijenjene su opuštanju i boljem osjećaju. Nisu zdravstvene usluge, ne uključuju postavljanje dijagnoza ni liječenje i ne zamjenjuju posjet liječniku. Ako imate zdravstvenih problema, prije posjeta se posavjetujte sa svojim liječnikom."
   },
   "auth": {
     "login": {
@@ -202,7 +203,7 @@
   },
   "testimonials": {
     "title": "Što kažu naši klijenti",
-    "subtitle": "Priče transformacije i ozdravljenja naših klijenata."
+    "subtitle": "Iskustva i priče naših klijenata."
   },
   "categories": {
     "pathTitle": "HOLISTIČKI PUT DO ZDRAVLJA I DOBROBITI",
@@ -221,7 +222,7 @@
       "breathing": "DISANJE",
       "movement": "SVJESNO KRETANJE",
       "medicine": "SVETA MEDICINA",
-      "manual": "MANUALNA TERAPIJA",
+      "manual": "MIOFASCIJALNA MASAŽA",
       "tecar": "TECAR STIMULACIJA",
       "laser": "LASER",
       "magnetic": "MAGNETNA TERAPIJA",

@@ -26,7 +26,7 @@
     },
     {
       "id": "manualna-terapija",
-      "name": "Manualna terapija",
+      "name": "Miofascijalna masaža",
       "shortDescription": "Nježnim ručnim tehnikama terapeut opušta napetosti i poboljšava pokretljivost.",
       "fullDescription": "Manualna terapija dobila je ime od riječi manus=ruka, što ukazuje na uporabu terapeutovih ruku kao glavnog alata liječenja. Jedan je od najpopularnijih oblika liječenja.",
       "duration": 20,
@@ -75,7 +75,7 @@
     {
       "id": "cupping",
       "name": "Cupping terapija",
-      "shortDescription": "Terapija ventuzama za ozdravljenje i regeneraciju.",
+      "shortDescription": "Terapija ventuzama za opuštanje i regeneraciju.",
       "fullDescription": "Terapija ventuzama (cupping) je manualna tehnika koja pomoću malih čašica (ventuza) ubrzava ozdravljenje, regeneraciju i ublažava bolove.",
       "duration": 30,
       "price": 30
@@ -95,14 +95,6 @@
       "fullDescription": "Iteracare je napredna terapeutska metoda za regeneraciju i ozdravljenje.",
       "duration": 20,
       "price": 20
-    },
-    {
-      "id": "ao-scan",
-      "name": "AO Scan",
-      "shortDescription": "Napredno skaniranje za procjenu stanja organizma.",
-      "fullDescription": "AO Scan omogućava pregled cijelog organizma i identifikaciju energijskih neravnoteža.",
-      "duration": 30,
-      "price": 50
     },
     {
       "id": "trakcijska-miza",
@@ -183,14 +175,12 @@
       ],
       "spine_and_structure_support": [
         "Trakcija kralježnice",
-        "Manualna terapija / Holos manualna obrada",
-        "Akupunktura i akudraining"
+        "Miofascijalna masaža / Holos manualna obrada"
       ],
       "frequency_and_energy_harmonization": [
         "Frekvencijska terapija",
         "Skalarni valovi",
-        "IteraCare",
-        "AO Scan (bioresonancijska analiza)"
+        "IteraCare"
       ],
       "neuroreset_relaxation_and_integration": [
         "Svjetlo i zvuk terapija",

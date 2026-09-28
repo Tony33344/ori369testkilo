@@ -40,7 +40,8 @@
     "quickLinks": "Hitre povezave",
     "contactInfo": "Kontakt",
     "followUs": "Sledite nam",
-    "rights": "Vse pravice pridržane"
+    "rights": "Vse pravice pridržane",
+    "disclaimer": "Storitve ORI 369 so namenjene sprostitvi in boljšemu počutju. Niso zdravstvene storitve, ne vključujejo postavljanja diagnoz ali zdravljenja in ne nadomeščajo obiska pri zdravniku. Če imate zdravstvene težave, se pred obiskom posvetujte s svojim zdravnikom."
   },
   "auth": {
     "login": {
@@ -227,7 +228,7 @@
   },
   "testimonials": {
     "title": "Kaj pravijo naši klienti",
-    "subtitle": "Zgodbe transformacije in ozdravitve naših klientov."
+    "subtitle": "Izkušnje in zgodbe naših strank."
   },
   "categories": {
     "pathTitle": "CELOSTNA POT DO ZDRAVJA IN DOBREGA POČUTJA",
@@ -246,7 +247,7 @@
       "breathing": "DIHANJE",
       "movement": "ZAVESTNO GIBANJE",
       "medicine": "SVETA MEDICINA",
-      "manual": "MANUALNA TERAPIJA",
+      "manual": "MIOFASCIALNA MASAŽA",
       "tecar": "TECAR STIMULACIJA",
       "laser": "LASER",
       "magnetic": "MAGNETNA TERAPIJA",

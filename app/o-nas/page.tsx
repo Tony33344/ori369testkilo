@@ -105,12 +105,12 @@ export default function AboutPage() {
               },
               {
                 title: "Podpora strukturi",
-                items: ["Trakcija hrbtenice", "Manualna terapija", "Holos manual treatment", "Akupunktura"],
+                items: ["Trakcija hrbtenice", "Miofascialna masaža", "Holos manual treatment"],
                 icon: <Shield className="text-[#00B5AD]" />
               },
               {
                 title: "Energijska harmonizacija",
-                items: ["Frequency therapy", "Skalarni valovi", "IteraCare", "AO Scan (biorezonanca)"],
+                items: ["Frequency therapy", "Skalarni valovi", "IteraCare"],
                 icon: <Globe className="text-[#00B5AD]" />
               },
               {

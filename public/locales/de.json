@@ -40,7 +40,8 @@
     "quickLinks": "Schnelllinks",
     "contactInfo": "Kontakt",
     "followUs": "Folgen Sie uns",
-    "rights": "Alle Rechte vorbehalten"
+    "rights": "Alle Rechte vorbehalten",
+    "disclaimer": "Die Leistungen von ORI 369 dienen der Entspannung und dem Wohlbefinden. Sie sind keine medizinischen Leistungen, umfassen weder Diagnose noch Behandlung und ersetzen keinen Arztbesuch. Bei gesundheitlichen Beschwerden wenden Sie sich bitte vor Ihrem Besuch an Ihren Arzt."
   },
   "auth": {
     "login": {
@@ -202,7 +203,7 @@
   },
   "testimonials": {
     "title": "Was unsere Klienten sagen",
-    "subtitle": "Geschichten der Transformation und Heilung unserer Klienten."
+    "subtitle": "Erfahrungen und Geschichten unserer Kunden."
   },
   "categories": {
     "pathTitle": "GANZHEITLICHER WEG ZU GESUNDHEIT UND WOHLBEFINDEN",
@@ -221,7 +222,7 @@
       "breathing": "ATMUNG",
       "movement": "BEWUSSTE BEWEGUNG",
       "medicine": "HEILIGE MEDIZIN",
-      "manual": "MANUELLE THERAPIE",
+      "manual": "MYOFASZIALE MASSAGE",
       "tecar": "TECAR STIMULATION",
       "laser": "LASER",
       "magnetic": "MAGNETTHERAPIE",

@@ -46,7 +46,9 @@ export default function EducationPage() {
       try {
         const response = await fetch('/api/education/list'); 
         const data = await response.json();
-        setCourses(data.courses || []);
+        const list: EducationCourse[] = data.courses || [];
+        const hasUpcoming = (c: EducationCourse) => c.sessions.some((s) => s.status !== 'past');
+        setCourses([...list].sort((a, b) => Number(hasUpcoming(b)) - Number(hasUpcoming(a))));
       } catch (error) {
         console.error('Failed to load courses:', error);
       } finally {
@@ -104,7 +106,8 @@ export default function EducationPage() {
           <div className="flex flex-wrap justify-center gap-8">
             {courses.map((course) => {
               const upcomingSessions = course.sessions.filter((session) => session.status !== 'past');
-              const nextSession = upcomingSessions[0] || course.sessions[0];
+              const isPast = upcomingSessions.length === 0 && course.sessions.length > 0;
+              const nextSession = upcomingSessions[0] || course.sessions[course.sessions.length - 1];
 
               return (
               <div key={course.id} className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-md">
@@ -126,8 +129,8 @@ export default function EducationPage() {
                 
                 <div className="p-8 flex-1 flex flex-col">
                   <div className="flex items-center justify-between mb-4">
-                    <span className="text-sm font-bold text-[#00B5AD] uppercase tracking-wider">
-                      {nextSession?.status === 'current' ? 'Aktualno' : 'Prihaja'}
+                    <span className={`text-sm font-bold uppercase tracking-wider ${isPast ? 'text-gray-400' : 'text-[#00B5AD]'}`}>
+                      {isPast ? 'Pretekli dogodek' : nextSession?.status === 'current' ? 'Aktualno' : 'Prihaja'}
                     </span>
                     {upcomingSessions.length > 1 && (
                       <span className="text-xs font-bold text-[#00B5AD] bg-[#00B5AD]/10 px-2 py-0.5 rounded-full">
@@ -146,8 +149,8 @@ export default function EducationPage() {
 
                   {/* Show ALL upcoming session dates */}
                   <div className="space-y-3 mb-4">
-                    {(upcomingSessions.length > 0 ? upcomingSessions : course.sessions.slice(0, 1)).map((session, idx) => (
-                      <div key={session.id || idx} className="flex flex-wrap items-center text-sm text-gray-500 gap-3 bg-gray-50 rounded-xl px-3 py-2">
+                    {(upcomingSessions.length > 0 ? upcomingSessions : course.sessions.slice(-1)).map((session, idx) => (
+                      <div key={session.id || idx} className={`flex flex-wrap items-center text-sm text-gray-500 gap-3 bg-gray-50 rounded-xl px-3 py-2 ${isPast ? 'opacity-60' : ''}`}>
                         <div className="flex items-center space-x-2">
                           <Calendar className="w-4 h-4 text-[#00B5AD]" />
                           <span className="font-medium text-gray-700">
@@ -165,11 +168,14 @@ export default function EducationPage() {
                             {session.end_at && ` – ${formatInTimeZone(new Date(session.end_at), BUSINESS_TIMEZONE, 'HH:mm')}`}
                           </span>
                         </div>
-                        {session.isFull && (
+                        {session.isFull && !isPast && (
                           <span className="text-xs font-bold text-red-600 bg-red-50 px-2 py-0.5 rounded-full">Polno</span>
                         )}
                       </div>
                     ))}
+                    {isPast && (
+                      <p className="text-sm text-gray-500">Nov termin bo objavljen kmalu.</p>
+                    )}
                     {upcomingSessions.length === 0 && course.sessions.length === 0 && (
                       <div className="flex items-center text-sm text-gray-400 gap-2">
                         <Clock className="w-4 h-4" />
@@ -186,14 +192,23 @@ export default function EducationPage() {
                   )}
                   
                   <div className="mt-auto pt-6 border-t border-gray-50">
-                    <div className="mb-4">
-                      {nextSession?.isFull ? (
-                        <span className="text-lg font-bold text-red-600">Polno</span>
-                      ) : (
-                        <span className="text-2xl font-black text-gray-900">€{nextSession?.price ?? course.price ?? '0'}</span>
-                      )}
-                    </div>
-                    {nextSession?.isFull ? (
+                    {!isPast && (
+                      <div className="mb-4">
+                        {nextSession?.isFull ? (
+                          <span className="text-lg font-bold text-red-600">Polno</span>
+                        ) : (
+                          <span className="text-2xl font-black text-gray-900">€{nextSession?.price ?? course.price ?? '0'}</span>
+                        )}
+                      </div>
+                    )}
+                    {isPast ? (
+                      <Link
+                        href={`/education/${course.slug}`}
+                        className="block w-full py-3 border border-gray-300 text-gray-700 font-bold rounded-xl text-center hover:bg-gray-50 transition-colors"
+                      >
+                        Ogled dogodka
+                      </Link>
+                    ) : nextSession?.isFull ? (
                       <div className="w-full py-3 bg-gray-300 text-gray-600 font-bold rounded-xl text-center cursor-not-allowed opacity-60">
                         Polno
                       </div>
@@ -229,7 +244,8 @@ export default function EducationPage() {
                 .filter(c => c.featured)
                 .map((course, idx) => {
                   const upcomingSessions = course.sessions.filter((session) => session.status !== 'past');
-                  const nextSession = upcomingSessions[0] || course.sessions[0];
+                  const isPast = upcomingSessions.length === 0 && course.sessions.length > 0;
+                  const nextSession = upcomingSessions[0] || course.sessions[course.sessions.length - 1];
 
                   return (
                   <div key={`featured-${course.id}`} className={`grid grid-cols-1 md:grid-cols-2 gap-12 items-center ${idx > 0 ? 'pt-24 border-t border-gray-800' : ''}`}>
@@ -256,14 +272,14 @@ export default function EducationPage() {
                           <div className="flex items-center text-sm text-gray-300">
                             <CheckCircle className="w-4 h-4 mr-2 text-green-400" />
                             Status: <span className="text-white ml-1 font-semibold">
-                              {nextSession?.status === 'current' ? 'Aktualno' : 'Prihaja'}
+                              {isPast ? 'Pretekli dogodek' : nextSession?.status === 'current' ? 'Aktualno' : 'Prihaja'}
                             </span>
                           </div>
                         </div>
                         {/* Show all upcoming session dates for featured courses */}
                         <div className="space-y-2 mb-6">
-                          {(upcomingSessions.length > 0 ? upcomingSessions : course.sessions.slice(0, 1)).map((session, sIdx) => (
-                            <div key={session.id || sIdx} className="flex items-center text-sm text-gray-300">
+                          {(upcomingSessions.length > 0 ? upcomingSessions : course.sessions.slice(-1)).map((session, sIdx) => (
+                            <div key={session.id || sIdx} className={`flex items-center text-sm text-gray-300 ${isPast ? 'opacity-60' : ''}`}>
                               <Calendar className="w-4 h-4 mr-2 text-[#00B5AD]" />
                               <span className="text-white font-semibold">
                                 {session.start_at
@@ -271,11 +287,14 @@ export default function EducationPage() {
                                   : 'Termin sledi'}
                                 {session.end_at && ` – ${formatInTimeZone(new Date(session.end_at), BUSINESS_TIMEZONE, 'HH:mm')}`}
                               </span>
-                              {session.isFull && (
+                              {session.isFull && !isPast && (
                                 <span className="ml-2 text-xs font-bold text-red-400 bg-red-900/30 px-2 py-0.5 rounded-full">Polno</span>
                               )}
                             </div>
                           ))}
+                          {isPast && (
+                            <p className="text-sm text-gray-400">Nov termin bo objavljen kmalu.</p>
+                          )}
                           {upcomingSessions.length === 0 && course.sessions.length === 0 && (
                             <div className="flex items-center text-sm text-gray-400">
                               <Calendar className="w-4 h-4 mr-2" />
@@ -290,7 +309,7 @@ export default function EducationPage() {
                           href={`/education/${course.slug}`}
                           className="inline-flex items-center space-x-3 px-8 py-4 bg-white text-gray-900 font-bold rounded-xl hover:bg-gray-100 transition-all group"
                         >
-                          <span>Potrdi rezervacijo</span>
+                          <span>{isPast ? 'Ogled dogodka' : 'Potrdi rezervacijo'}</span>
                           <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                         </Link>
                       </div>

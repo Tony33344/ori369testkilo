@@ -153,6 +153,9 @@ export default function Footer() {
 
           {/* Copyright */}
           <div className="mt-8 pt-6 border-t border-gray-200 text-center">
+            <p className="text-xs text-gray-400 max-w-3xl mx-auto mb-4 leading-relaxed">
+              {t('footer.disclaimer')}
+            </p>
             <p className="text-sm text-gray-500">
               &copy; {new Date().getFullYear()} ORI 369. {t('footer.rights')}.
             </p>

@@ -70,7 +70,7 @@ export default function MotioScanPage() {
                   "rotacije, nagibe in obremenitve",
                   "odstopanja hrbtenice in medenice",
                   "statično in dinamično stabilnost",
-                  "analizo tveganja poškodb"
+                  "oceno drže in gibanja"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center space-x-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
                     <CheckCircle className="text-[#00B5AD] flex-shrink-0" size={20} />
@@ -81,7 +81,7 @@ export default function MotioScanPage() {
               <div className="p-5 md:p-6 bg-[#00B5AD]/5 rounded-2xl border-2 border-[#00B5AD]/20">
                 <p className="text-base md:text-lg font-bold text-gray-900 flex items-center gap-3">
                   <ShieldCheck className="text-[#00B5AD]" />
-                  Brez sevanja. Brez bolečin. Brez ugibanja.
+                  Brez sevanja. Neinvazivno. Jasno prikazano.
                 </p>
               </div>
             </div>
@@ -179,7 +179,7 @@ export default function MotioScanPage() {
       {/* Why MotioScan */}
       <section className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-gray-900">Zakaj je MotioScan tako učinkovit?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16 text-gray-900">Zakaj izbrati meritev MotioScan?</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {[
               {
@@ -189,18 +189,18 @@ export default function MotioScanPage() {
               },
               {
                 icon: <TrendingUp className="text-[#00B5AD]" size={32} />,
-                title: "Skriti problemi",
-                desc: "Mikrozasuki, rotacije in kompenzacije postanejo vidni črno na belem."
+                title: "Podrobnosti drže",
+                desc: "Mikrozasuki, rotacije in kompenzacije so prikazani v razumljivi vizualni obliki."
               },
               {
                 icon: <Users className="text-[#00B5AD]" size={32} />,
-                title: "Točen protokol",
-                desc: "Na podlagi rezultatov določimo natančen načrt za vaše okrevanje."
+                title: "Osebni načrt",
+                desc: "Na podlagi rezultatov pripravimo oseben načrt vadbe."
               },
               {
                 icon: <CheckCircle className="text-[#00B5AD]" size={32} />,
-                title: "Merljiv napredek",
-                desc: "Primerjava stanja pred in po terapiji za jasno potrditev izboljšanja."
+                title: "Primerljive meritve",
+                desc: "Primerjava meritev skozi čas omogoča pregled sprememb v drži in gibanju."
               }
             ].map((item, i) => (
               <div key={i} className="bg-white p-8 rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl transition-all">
@@ -223,7 +223,7 @@ export default function MotioScanPage() {
               { step: 2, title: "3D Model", desc: "Digitalni izris" },
               { step: 3, title: "Analiza", desc: "Pregled asimetrij" },
               { step: 4, title: "Razlaga", desc: "Pogovor s terapevtom" },
-              { step: 5, title: "Protokol", desc: "Načrt povratka" }
+              { step: 5, title: "Načrt", desc: "Osebni načrt vadbe" }
             ].map((item, i) => (
               <div key={i} className="text-center">
                 <div className="w-16 h-16 bg-[#00B5AD] rounded-full flex items-center justify-center mx-auto mb-6 text-2xl font-bold shadow-lg shadow-[#00B5AD]/20">
@@ -245,7 +245,7 @@ export default function MotioScanPage() {
             <div className="relative z-10">
               <h2 className="text-3xl md:text-5xl font-bold mb-4 md:mb-6">NE UGIBAJ. IZMERI.</h2>
               <p className="text-lg md:text-xl mb-8 md:mb-10 opacity-90 max-w-2xl mx-auto">
-                MotioScan ti pokaže realno stanje tvojega telesa. Mi pa poskrbimo za pot nazaj v ravnovesje.
+                MotioScan prikaže držo in gibanje v 3D. Skupaj nato pripravimo oseben načrt vadbe.
               </p>
               <Link
                 href="/rezervacija?package=motioscan"

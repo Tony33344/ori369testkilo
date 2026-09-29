@@ -17,9 +17,8 @@ export default function Footer() {
           <div className="bg-black text-white p-6 rounded-lg">
             <div className="space-y-1 text-sm font-medium">
               <div>{t('categories.symptoms.burnout')} / {t('categories.symptoms.stress')} / {t('categories.symptoms.fear')}</div>
-              <div>{t('categories.symptoms.anxiety')} / {t('categories.symptoms.pain')}</div>
-              <div>{t('categories.symptoms.depression')} / {t('categories.symptoms.distress')}</div>
-              <div>{t('categories.symptoms.panic')} / {t('categories.symptoms.insomnia')}</div>
+              <div>{t('categories.symptoms.pain')} / {t('categories.symptoms.distress')}</div>
+              <div>{t('categories.symptoms.insomnia')}</div>
             </div>
           </div>
 

@@ -19,104 +19,96 @@
     {
       "id": "elektrostimulacija",
       "name": "Elektrostimulation",
-      "shortDescription": "Elektrostimulation aktiviert Muskelgewebe, verbessert die Durchblutung und lindert Schmerzen.",
-      "fullDescription": "Die Elektrostimulationstherapie ist eine Art physikalische Therapie, die mit elektrischem Strom und elektrischen Impulsen Schmerzen reduziert, den Zellmetabolismus beschleunigt und eine schnellere Heilung fördert.",
+      "shortDescription": "Elektrische Impulse erzeugen eine kontrollierte Muskelaktivierung.",
+      "fullDescription": "Während der Anwendung geben Elektroden auf der Haut sanfte elektrische Impulse ab. Die Intensität wird individuell angepasst und fühlt sich wie eine rhythmische Muskelaktivierung an.",
       "duration": 20,
       "price": 20
     },
     {
       "id": "manualna-terapija",
       "name": "Myofasziale Massage",
-      "shortDescription": "Mit sanften manuellen Techniken löst der Therapeut Verspannungen und verbessert die Beweglichkeit.",
-      "fullDescription": "Die manuelle Therapie hat ihren Namen vom Wort manus=Hand, was auf die Verwendung der Hände des Therapeuten als Hauptbehandlungsinstrument hinweist. Sie ist eine der beliebtesten Behandlungsformen.",
+      "shortDescription": "Sanfte manuelle Techniken zur Entspannung von Muskeln und Faszien.",
+      "fullDescription": "Die Anwendung erfolgt mit individuell angepassten Handgriffen. Im Mittelpunkt stehen die Entspannung verspannter Bereiche und ein angenehmes Bewegungsgefühl.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "tecar-terapija",
-      "name": "Tecar-Therapie",
-      "shortDescription": "Fortschrittliche Therapie mit Radiofrequenzenergie.",
-      "fullDescription": "Fortschrittliche Therapie, die mit Radiofrequenzenergie die Geweberegeneration beschleunigt, Schmerzen lindert und die Durchblutung sowie den Zellstoffwechsel verbessert.",
+      "name": "TECAR-Anwendung",
+      "shortDescription": "Eine Anwendung mit Radiofrequenzenergie.",
+      "fullDescription": "Während der Anwendung entsteht eine angenehme Tiefenwärme, begleitet von manueller Entspannung verspannter Bereiche.",
       "duration": 30,
       "price": 40
     },
     {
       "id": "magnetna-terapija",
-      "name": "Magnetfeldtherapie",
-      "shortDescription": "Einsatz von Magnetfeldern zur Körperstimulation und Regeneration.",
-      "fullDescription": "Einsatz von Magnetfeldern zur Körperstimulation, Verbesserung der Durchblutung und Regeneration. Hilft bei der Heilung von Verletzungen und chronischen Schmerzen.",
+      "name": "Magnetstimulation",
+      "shortDescription": "Magnetstimulation in entspannter Liegeposition.",
+      "fullDescription": "Das Gerät erzeugt ein pulsierendes Magnetfeld. Während der nicht-invasiven Anwendung liegen Sie bequem.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "mis",
       "name": "MIS (Magnetische Induktionsstimulation)",
-      "shortDescription": "Magnetische Induktionsstimulation - revolutionäre Therapie.",
-      "fullDescription": "Die magnetische Induktionsstimulation (MIS) ist eine revolutionäre Therapie, die mit einem innovativen Ansatz außergewöhnliche Ergebnisse liefert.",
+      "shortDescription": "Magnetische Induktionsstimulation der Muskulatur.",
+      "fullDescription": "Ein Applikator über dem ausgewählten Bereich erzeugt Impulse, die als rhythmische Muskelaktivierung wahrgenommen werden.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "laserska-terapija",
-      "name": "Lasertherapie",
-      "shortDescription": "Nicht-invasive Methode mit Laserlicht strahlen.",
-      "fullDescription": "Die Lasertherapie ist eine nicht-invasive Behandlungsmethode, die mit Laserlicht strahlen menschliches Gewebe stimuliert, um die Heilung zu beschleunigen.",
+      "name": "Laseranwendung",
+      "shortDescription": "Eine nicht-invasive Anwendung mit Laserlicht.",
+      "fullDescription": "Der ausgewählte Bereich wird mit einem Lasergerät beleuchtet. Der Vorgang ist kurz und in der Regel kaum spürbar.",
       "duration": 10,
       "price": 10
     },
     {
       "id": "media-taping",
-      "name": "Medical Taping",
-      "shortDescription": "Methode mit elastischen Bändern zur Schmerzlinderung und Schwellungsreduzierung.",
-      "fullDescription": "Medical Taping ist eine Behandlungsmethode, die durch das Aufbringen selbstklebender elastischer Bänder auf die Haut Schmerzen, Schwellungen und andere Verletzungssymptome beseitigt.",
+      "name": "Medi Taping",
+      "shortDescription": "Anbringen elastischer Tapes an einem ausgewählten Bereich.",
+      "fullDescription": "Elastische Tapes werden je nach gewünschter Unterstützung und Bewegung auf die Haut geklebt. Sie bleiben auch im Alltag flexibel.",
       "duration": 10,
       "price": 10
     },
     {
       "id": "cupping",
-      "name": "Schröpftherapie",
-      "shortDescription": "Schröpftherapie zur Entspannung und Regeneration.",
-      "fullDescription": "Die Schröpftherapie ist eine manuelle Technik, die mit kleinen Gläsern (Schröpfgläsern) die Heilung, Regeneration beschleunigt und Schmerzen lindert.",
-      "duration": 30,
-      "price": 30
-    },
-    {
-      "id": "dryneedeling",
-      "name": "Dry Needling",
-      "shortDescription": "Invasive physiotherapeutische Methode mit Trockennadeln.",
-      "fullDescription": "Dry Needling ist eine invasive physiotherapeutische Methode, die durch das Eindringen dünner Nadeln durch die Haut Gewebe stimuliert und den Heilungsprozess auslöst.",
+      "name": "Cupping",
+      "shortDescription": "Eine manuelle Schröpftechnik für ein entspannendes Gefühl.",
+      "fullDescription": "Die Schröpfgläser erzeugen einen sanften Unterdruck auf der Haut. Intensität und Dauer werden individuell angepasst.",
       "duration": 30,
       "price": 30
     },
     {
       "id": "iteracare",
-      "name": "Iteracare",
-      "shortDescription": "Therapie mit Iteracare-Technologie.",
-      "fullDescription": "Iteracare ist eine fortschrittliche therapeutische Methode zur Regeneration und Heilung.",
+      "name": "IteraCare-Entspannung",
+      "shortDescription": "Wärmeentspannung mit dem IteraCare-Gerät.",
+      "fullDescription": "Das Gerät richtet einen warmen Luftstrom auf ausgewählte Bereiche und erzeugt während der Anwendung ein angenehmes Wärmegefühl.",
       "duration": 20,
       "price": 20
     },
     {
       "id": "trakcijska-miza",
       "name": "Traktionstisch",
-      "shortDescription": "Therapie zur Wirbelsäulenentlastung.",
-      "fullDescription": "Der Traktionstisch ermöglicht sanftes Dehnen und Entlasten der Wirbelsäule.",
+      "shortDescription": "Sanfte Dehnung der Wirbelsäule auf einem Traktionstisch.",
+      "fullDescription": "Der Traktionstisch ermöglicht eine kontrollierte, individuell angepasste Dehnung in entspannter Liegeposition.",
       "duration": 30,
       "price": 40
     },
     {
       "id": "skalarni-valovi",
-      "name": "Skalarwellen (Chakren)",
-      "shortDescription": "Chakrenausgleich mit Skalarwellen.",
-      "fullDescription": "Skalarwellen helfen beim Ausgleich der Energiezentren - Chakren.",
+      "name": "Scalar-Wave-Entspannung",
+      "shortDescription": "Eine ruhige Entspannungseinheit neben dem Scalar-Wave-Gerät.",
+      "fullDescription": "Die Einheit findet in ruhiger Umgebung neben dem Scalar-Wave-Gerät statt und ist als Entspannungserlebnis gedacht.",
       "duration": 30,
       "price": 35
     },
     {
       "id": "vodeno-dihanje",
-      "name": "Geführte Atmung",
-      "shortDescription": "Therapie mit geführter Atmung.",
-      "fullDescription": "Individuell geführte Atmung zur Entspannung und Atemoptimierung.",
+      "name": "Individuell geführte Atmung",
+      "shortDescription": "Geführte Atemübungen für Ruhe und Entspannung.",
+      "fullDescription": "Eine Begleitperson führt Sie durch einen angepassten Atemrhythmus, den Sie später in den Alltag integrieren können.",
       "duration": 30,
       "price": 30
     }
@@ -125,7 +117,7 @@
     "intro_session": {
       "name": "Eingangsmessung + körperliche Analyse + persönliches Programm",
       "price": 96,
-      "description": "6 am Ende - perfekte Übereinstimmung von Energieanalyse und Prozessöffnung"
+      "description": "Erstmessung, Gespräch und Erstellung eines persönlichen Plans"
     },
     "packages": [
       {
@@ -135,8 +127,8 @@
         "total_price": 225,
         "price_per_session": 75,
         "vibration": 9,
-        "description": "2+2+5 = 9 → Vibration 9, beste für den Beginn",
-        "benefits": ["Tiefe Reinigung", "Energie-Harmonisierung", "Beginn des Transformationsprozesses"]
+        "description": "Drei Besuche für einen schrittweisen Einstieg in die ausgewählten Anwendungen",
+        "benefits": ["Persönlicher Ansatz", "Schrittweiser Einstieg", "Klarer Ablauf"]
       },
       {
         "id": "paket-6",
@@ -145,8 +137,8 @@
         "total_price": 444,
         "price_per_session": 74,
         "vibration": 3,
-        "description": "4+4+4 = 12 → 1+2 = 3 → Frequenz 3. Zahl 444 = Stabilität, Schutz, Unterstützung",
-        "benefits": ["Stabilität und Schutz", "Systemunterstützung", "Frequenz 3 für Balance"]
+        "description": "Sechs Besuche zur regelmäßigen Begleitung und Anpassung des persönlichen Plans",
+        "benefits": ["Regelmäßiger Rhythmus", "Angepasster Plan", "Begleitung des Wohlbefindens"]
       },
       {
         "id": "paket-9",
@@ -155,43 +147,43 @@
         "total_price": 585,
         "price_per_session": 65,
         "vibration": 9,
-        "description": "5+8+5 = 18 → 1+8 = 9 → reine Vibration 9. Transformativstes Paket",
-        "benefits": ["Reine Vibration 9", "Mächtigste Transformation", "Tiefe Energieerneuerung"]
+        "description": "Neun Besuche zur längeren Begleitung und schrittweisen Anpassung des Plans",
+        "benefits": ["Längere Begleitung", "Schrittweiser Ansatz", "Persönliche Anpassung"]
       }
     ],
     "explanation": {
-      "why_numbers_work": "Paket 3 → Endzahl 9, Preis pro Behandlung 75 (7+5=12 → 1+2=3). Paket 6 → 444 €, Vibration 3, übereinstimmend mit dem 6. Schritt des Prozesses. Paket 9 → 585 €, Vibration 9, mächtigste Transformationsenergie. Alle Pakete stimmen natürlich mit dem Namen ORI 369 überein.",
-      "why_ori369_works": "Bei ORI 369 kombinieren wir fortschrittliche Technologien, ganzheitliches Verständnis des Menschen und professionelle manuelle Techniken. Unser Ansatz übertrifft klassische Therapien erheblich und ermöglicht schnellere, tiefere und dauerhaftere Ergebnisse.",
-      "simple_comparison": "Der einfachste Vergleich: Schaufel oder Bagger? Mit einer Schaufel können wir ein Poolloch graben - langsam, mit viel Aufwand und begrenztem Effekt. Ein Bagger kann das gleiche Loch an einem Tag machen. Ähnlich bei Therapien: ohne Technologie ist der Fortschritt langsam, mit fortschrittlichen Geräten kann der Körper in einer Behandlung mehr erreichen als sonst in einer Woche. Deshalb verwendet ORI 369 Geräte, die einen echten Unterschied machen."
+      "why_numbers_work": "Die Pakete unterscheiden sich nach Anzahl der Besuche, Preis pro Besuch und Begleitzeitraum. Wählen Sie den Umfang, der zu Ihrem Zeitplan und Ihren Zielen passt.",
+      "why_ori369_works": "Bei ORI 369 verbinden wir Technologie, manuelle Techniken, Entspannung und Bewegung in einem persönlichen Plan.",
+      "simple_comparison": "Geräte und manuelle Techniken werden nach dem vereinbarten Ablauf ausgewählt. Vor Beginn erklären wir den Vorgang und das zu erwartende Gefühl."
     },
     "technologies": {
       "regeneration_and_biostimulation": [
-        "Tecar Therapie",
+        "TECAR-Anwendung",
         "Magnetische Induktion (MIS)",
         "Elektrostimulation (EMS)",
-        "Lasertherapie",
+        "Laseranwendung",
         "Ultraschall",
-        "Stoßwellentherapie"
+        "Stoßwellen"
       ],
       "spine_and_structure_support": [
         "Wirbelsäulentraktion",
         "Myofasziale Massage / Holos manuelle Behandlung"
       ],
       "frequency_and_energy_harmonization": [
-        "Frequenztherapie",
-        "Skalarwellen",
-        "IteraCare"
+        "Licht- und Klangentspannung",
+        "Scalar-Wave-Entspannung",
+        "IteraCare-Entspannung"
       ],
       "neuroreset_relaxation_and_integration": [
-        "Licht- und Schalltherapie",
+        "Licht- und Klangentspannung",
         "Meditape",
         "Somatik und korrektive Übungen",
         "Geführte Atemtechniken",
-        "Eistherapien und Kälteexposition"
+        "Kälteexposition"
       ]
     },
     "holistic_approach": {
-      "description": "Der therapeutische Prozess in unserer Klinik deckt nie nur Schmerzen oder Symptome ab. Wir schauen auf den größeren Kontext:",
+      "description": "Bei der Erstellung eines persönlichen Plans berücksichtigen wir verschiedene Aspekte des alltäglichen Wohlbefindens:",
       "aspects": [
         "wie sich die Person bewegt",
         "was Haltung und Ausrichtung ist",
@@ -202,15 +194,15 @@
         "welche Beziehung sie zu anderen hat",
         "welche Beziehung sie zur Natur und Erde hat"
       ],
-      "result": "Wenn sich alle diese Komponenten ausrichten, tritt der Körper in einen Zustand der Regeneration ein, der Geist erreicht Klarheit und Energie erreicht Balance. Deshalb erleben viele Menschen nach nur einer Behandlung bei uns größeren Fortschritt als anderswo nach mehreren aufeinanderfolgenden Therapien."
+      "result": "Ein persönlicher Plan verbindet Bewegung, Entspannung und Alltagsgewohnheiten zu einem verständlichen Ganzen."
     }
   },
   "packages": [
     {
       "id": "paket-3",
       "name": "Paket 3 Behandlungen",
-      "description": "Tiefe Reinigung und Energie-Harmonisierung mit Vibration 9",
-      "benefits": ["Tiefe Reinigung", "Energie-Harmonisierung", "Beginn des Transformationsprozesses"],
+      "description": "Drei Besuche für einen schrittweisen Einstieg",
+      "benefits": ["Persönlicher Ansatz", "Schrittweiser Einstieg", "Klarer Ablauf"],
       "sessions": 3,
       "price": 225,
       "regularPrice": null,
@@ -219,8 +211,8 @@
     {
       "id": "paket-6",
       "name": "Paket 6 Behandlungen",
-      "description": "Stabilität und Schutz mit Frequenz 3",
-      "benefits": ["Stabilität und Schutz", "Systemunterstützung", "Frequenz 3 für Balance"],
+      "description": "Sechs Besuche zur regelmäßigen Begleitung",
+      "benefits": ["Regelmäßiger Rhythmus", "Angepasster Plan", "Begleitung des Wohlbefindens"],
       "sessions": 6,
       "price": 444,
       "regularPrice": null,
@@ -229,8 +221,8 @@
     {
       "id": "paket-9",
       "name": "Paket 9 Behandlungen",
-      "description": "Reine Vibration 9 - mächtigste Transformationsenergie",
-      "benefits": ["Reine Vibration 9", "Mächtigste Transformation", "Tiefe Energieerneuerung"],
+      "description": "Neun Besuche zur längeren Begleitung",
+      "benefits": ["Längere Begleitung", "Schrittweiser Ansatz", "Persönliche Anpassung"],
       "sessions": 9,
       "price": 585,
       "regularPrice": null,

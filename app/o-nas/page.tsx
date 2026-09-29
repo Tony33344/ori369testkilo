@@ -35,8 +35,8 @@ export default function AboutPage() {
                 O nas – <span className="text-[#00B5AD]">ORI 369</span>
               </h1>
               <p className="text-lg md:text-xl text-gray-600 mb-6 md:mb-8 leading-relaxed">
-                V ORI 369 združujemo napredne tehnologije, celostno razumevanje človeka in strokovne manualne tehnike. 
-                Naš način dela bistveno preseže klasične terapije, saj omogoča hitrejše, globlje in trajnejše rezultate.
+                V ORI 369 tehnologijo, ročne tehnike, sprostitev in gibanje povežemo v oseben načrt.
+                Vsako obravnavo prilagodimo posamezniku in njegovim ciljem.
               </p>
               <div className="flex flex-wrap justify-center lg:justify-start gap-3 md:gap-4">
                 <div className="flex items-center gap-2 bg-white px-3 py-1.5 md:px-4 md:py-2 rounded-full shadow-sm border border-gray-100">
@@ -69,7 +69,7 @@ export default function AboutPage() {
               </div>
               <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl hidden md:block border border-gray-100">
                 <p className="text-3xl font-bold text-[#00B5AD]">3-6-9</p>
-                <p className="text-sm text-gray-500 font-medium uppercase tracking-wider">Frekvence ravnovesja</p>
+                <p className="text-sm text-gray-500 font-medium uppercase tracking-wider">Prostor ravnovesja</p>
               </div>
             </div>
           </div>
@@ -80,7 +80,7 @@ export default function AboutPage() {
       <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center mb-10 md:mb-16">
-            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4 md:mb-6">Zakaj ORI 369 deluje?</h2>
+            <h2 className="text-2xl md:text-4xl font-bold text-black mb-4 md:mb-6">Kako poteka naš pristop?</h2>
           </div>
           <VideoEmbed videoUrl="https://kbmclkpqjbdmnevnxmfa.supabase.co/storage/v1/object/public/media/video/ori.mp4" />
         </div>
@@ -92,15 +92,15 @@ export default function AboutPage() {
           <div className="text-center mb-10 md:mb-16">
             <h2 className="text-2xl md:text-4xl font-bold text-black mb-4">Tehnologije ORI 369</h2>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Vse obravnave vključujejo uporabo vrhunskih naprav in metod, ki skupaj delujejo kot integriran sistem regeneracije.
+              Glede na izbrano obravnavo uporabljamo različne naprave, ročne tehnike in vodeno gibanje.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                title: "Regeneracija",
-                items: ["Tecar terapija", "Magnetna indukcija (MIS)", "Elektrostimulacija (EMS)", "Laser terapija", "Ultrazvok"],
+                title: "Tehnološka podpora",
+                items: ["TECAR obravnava", "Magnetna indukcija (MIS)", "Elektrostimulacija (EMS)", "Laserska obravnava", "Ultrazvok"],
                 icon: <Zap className="text-[#00B5AD]" />
               },
               {
@@ -109,13 +109,13 @@ export default function AboutPage() {
                 icon: <Shield className="text-[#00B5AD]" />
               },
               {
-                title: "Energijska harmonizacija",
-                items: ["Frequency therapy", "Skalarni valovi", "IteraCare"],
+                title: "Sprostitev in dobro počutje",
+                items: ["Svetlobne in zvočne tehnike", "Scalar Wave sprostitev", "IteraCare sprostitev"],
                 icon: <Globe className="text-[#00B5AD]" />
               },
               {
-                title: "Nevroreset",
-                items: ["Light & Sound Therapy", "Meditape", "Somatika", "Vodeno dihanje", "Ledene terapije"],
+                title: "Umiritev in integracija",
+                items: ["Svetlobna in zvočna sprostitev", "Meditape", "Somatika", "Vodeno dihanje", "Izpostavljanje mrazu"],
                 icon: <Users className="text-[#00B5AD]" />
               }
             ].map((cat, i) => (
@@ -164,7 +164,7 @@ export default function AboutPage() {
             <div className="lg:w-1/2">
               <h2 className="text-2xl md:text-4xl font-bold text-black mb-6 md:mb-8">Celostni pristop</h2>
               <p className="text-lg text-gray-600 mb-6 md:mb-8 leading-relaxed">
-                Terapevtski proces pri nas nikoli ne zajema samo bolečine ali simptoma. Obravnavo pogledamo širše:
+                Pri pripravi osebnega načrta upoštevamo različne vidike vsakdanjega počutja:
               </p>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
                 {[
@@ -175,7 +175,7 @@ export default function AboutPage() {
                   "Način razmišljanja",
                   "Odnos do sebe in drugih",
                   "Odnos do narave",
-                  "Energijsko ravnovesje"
+                  "Čas za sprostitev"
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg border border-gray-100">
                     <CheckCircle2 className="text-[#00B5AD]" size={18} />
@@ -184,7 +184,7 @@ export default function AboutPage() {
                 ))}
               </div>
               <p className="mt-10 text-lg font-medium text-black italic">
-                "Ko se vse te komponente uskladijo, telo preide v stanje regeneracije, um v jasnost, energija pa v ravnovesje."
+                "Oseben načrt poveže gibanje, sprostitev in vsakdanje navade v razumljivo celoto."
               </p>
             </div>
           </div>

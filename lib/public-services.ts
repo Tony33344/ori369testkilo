@@ -1,5 +1,7 @@
 import { createClient } from '@/lib/supabase';
 
+const HIDDEN_PUBLIC_SERVICE_SLUGS = new Set(['dryneedeling-terapija']);
+
 export interface PublicServiceContent {
   id: string;
   slug: string;
@@ -79,10 +81,14 @@ export async function fetchPublicServices(isPackage: boolean): Promise<PublicSer
     return [];
   }
 
-  return (data as ServiceRow[]).map(mapRow);
+  return (data as ServiceRow[])
+    .filter((row) => !HIDDEN_PUBLIC_SERVICE_SLUGS.has(row.slug))
+    .map(mapRow);
 }
 
 export async function fetchPublicServiceBySlug(slug: string): Promise<PublicServiceContent | null> {
+  if (HIDDEN_PUBLIC_SERVICE_SLUGS.has(slug)) return null;
+
   const supabase = createClient();
   const { data, error } = await supabase
     .from('services')
@@ -111,5 +117,7 @@ export async function fetchPublicServiceSlugs(isPackage: boolean): Promise<{ slu
     return [];
   }
 
-  return data as { slug: string }[];
+  return (data as { slug: string }[]).filter(
+    ({ slug }) => !HIDDEN_PUBLIC_SERVICE_SLUGS.has(slug)
+  );
 }

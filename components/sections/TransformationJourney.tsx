@@ -7,8 +7,7 @@ export default function TransformationJourney() {
   const { t } = useLanguage();
 
   const symptoms = [
-    'burnout', 'stress', 'fear', 'anxiety', 'pain', 
-    'depression', 'distress', 'panic', 'insomnia'
+    'burnout', 'stress', 'fear', 'pain', 'distress', 'insomnia'
   ];
 
   const methods = [

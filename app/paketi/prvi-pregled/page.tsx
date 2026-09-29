@@ -18,7 +18,7 @@ export default function FirstConsultPage() {
 
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
               Če si pri nas prvič in želiš razumeti, kaj tvoje telo trenutno potrebuje, je ta uvodni termin najboljši prvi korak.
-              Skupaj pogledamo tvoje stanje, razjasnimo prioritete in postavimo usmeritev za nadaljnje terapije.
+              Skupaj ocenimo držo in gibanje, razjasnimo prioritete ter pripravimo usmeritev za naslednje korake.
             </p>
 
             <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
@@ -64,7 +64,7 @@ export default function FirstConsultPage() {
                   },
                   {
                     title: 'Jasen terapevtski načrt',
-                    desc: 'Po obravnavi veš, ali potrebuješ terapije, vaje, dodatno meritev ali kombinacijo pristopov.',
+                    desc: 'Po obravnavi poznate predlagane vaje, morebitne dodatne meritve in naslednje korake.',
                     icon: <ClipboardList className="h-5 w-5 text-[#00B5AD]" />,
                   },
                   {
@@ -89,9 +89,9 @@ export default function FirstConsultPage() {
                 <h3 className="text-2xl font-bold">Za koga je to najboljša izbira?</h3>
                 <div className="mt-6 space-y-4">
                   {[
-                    'za prve obiskovalce, ki še ne vedo, katera terapija je zanje prava',
+                    'za prve obiskovalce, ki želijo spoznati možnosti obravnave',
                     'za ljudi z več težavami hkrati, ki potrebujejo širšo sliko',
-                    'za tiste, ki želijo strokovno usmeritev pred nakupom paketa ali nadaljnjih terapij',
+                    'za tiste, ki želijo usmeritev pred izbiro paketa ali nadaljnjih obravnav',
                     'za vsakogar, ki si želi občutek jasnosti, reda in konkretnega načrta',
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3 rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm">
@@ -105,7 +105,7 @@ export default function FirstConsultPage() {
               <div className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-[0_18px_60px_rgba(0,0,0,0.06)]">
                 <h3 className="text-2xl font-bold">Če te zanima tudi poglobljena analiza</h3>
                 <p className="mt-4 leading-relaxed text-gray-600">
-                  Poglej še uvodni termin s Physio Motio meritvijo, kjer združimo prvi pregled, meritev in personaliziran plan terapij in vaj.
+                  Poglejte še uvodni termin s Physio Motio meritvijo, kjer združimo prvi pregled, meritev in oseben načrt gibanja.
                 </p>
                 <Link
                   href="/motioscan/uvodni-termin"

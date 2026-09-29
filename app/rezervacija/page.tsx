@@ -108,6 +108,7 @@ function BookingForm() {
       .from('services')
       .select('*')
       .eq('active', true)
+      .neq('slug', 'dryneedeling-terapija')
       .order('display_order', { ascending: true });
 
     if (data) {

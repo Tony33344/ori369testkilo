@@ -19,104 +19,96 @@
     {
       "id": "elektrostimulacija",
       "name": "Electrostimulation",
-      "shortDescription": "Electrostimulation activates muscle tissue, improves blood circulation, and relieves pain.",
-      "fullDescription": "Electrostimulation therapy is a type of physical therapy that uses electrical current and impulses to reduce pain, accelerate cellular metabolism, and speed up healing.",
+      "shortDescription": "Electrical impulses create controlled muscle activation.",
+      "fullDescription": "During the session, electrodes on the skin emit gentle electrical impulses. The intensity is adjusted individually and feels like rhythmic muscle activation.",
       "duration": 20,
       "price": 20
     },
     {
       "id": "manualna-terapija",
       "name": "Myofascial Massage",
-      "shortDescription": "With gentle manual techniques, the therapist releases tension and improves mobility.",
-      "fullDescription": "Manual therapy gets its name from the word manus=hand, indicating the use of the therapist's hands as the main treatment tool. It is one of the most popular forms of treatment.",
+      "shortDescription": "Gentle hands-on techniques for relaxing muscles and fascia.",
+      "fullDescription": "The session uses hands-on techniques adapted to the individual, with a focus on relaxing tense areas and comfortable movement.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "tecar-terapija",
-      "name": "Tecar Therapy",
-      "shortDescription": "Advanced therapy using radiofrequency energy.",
-      "fullDescription": "Advanced therapy that uses radiofrequency energy to accelerate tissue regeneration, relieve pain, and improve circulation and cellular metabolism.",
+      "name": "TECAR Session",
+      "shortDescription": "A session using radiofrequency energy.",
+      "fullDescription": "During the session, a pleasant deep warmth develops in the tissue while tense areas are addressed manually.",
       "duration": 30,
       "price": 40
     },
     {
       "id": "magnetna-terapija",
-      "name": "Magnetic Therapy",
-      "shortDescription": "Use of magnetic fields for body stimulation and regeneration.",
-      "fullDescription": "Use of magnetic fields to stimulate the body, improve blood circulation, and promote regeneration. Helps with injury healing and chronic pain.",
+      "name": "Magnetic Stimulation",
+      "shortDescription": "Magnetic stimulation in a relaxed lying position.",
+      "fullDescription": "The device creates a pulsed magnetic field. You lie comfortably during this non-invasive session.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "mis",
       "name": "MIS (Magnetic Induction Stimulation)",
-      "shortDescription": "Magnetic induction stimulation - revolutionary therapy.",
-      "fullDescription": "Magnetic Induction Stimulation (MIS) is a revolutionary therapy that provides exceptional results through an innovative approach.",
+      "shortDescription": "Magnetic induction stimulation of muscles.",
+      "fullDescription": "An applicator above the selected area creates pulses that feel like rhythmic muscle activation.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "laserska-terapija",
-      "name": "Laser Therapy",
-      "shortDescription": "Non-invasive method using laser light beams.",
-      "fullDescription": "Laser therapy is a non-invasive treatment method that uses laser light beams to stimulate human tissue to accelerate healing.",
+      "name": "Laser Session",
+      "shortDescription": "A non-invasive session using laser light.",
+      "fullDescription": "The selected area is exposed to a laser device. The process is brief and usually produces no pronounced sensation.",
       "duration": 10,
       "price": 10
     },
     {
       "id": "media-taping",
-      "name": "Medical Taping",
-      "shortDescription": "Method using elastic tapes to eliminate pain and swelling.",
-      "fullDescription": "Medical taping is a treatment method that applies self-adhesive elastic tapes to the skin to eliminate pain, swelling, and other injury symptoms.",
+      "name": "Medi Taping",
+      "shortDescription": "Application of elastic tape to a selected area.",
+      "fullDescription": "Elastic tape is applied to the skin according to the desired support and movement. It remains flexible during everyday activities.",
       "duration": 10,
       "price": 10
     },
     {
       "id": "cupping",
-      "name": "Cupping Therapy",
-      "shortDescription": "Cupping therapy for relaxation and regeneration.",
-      "fullDescription": "Cupping therapy is a manual technique that uses small cups to accelerate healing, regeneration, and pain relief.",
-      "duration": 30,
-      "price": 30
-    },
-    {
-      "id": "dryneedeling",
-      "name": "Dry Needling",
-      "shortDescription": "Invasive physiotherapy method using dry needling.",
-      "fullDescription": "Dry needling is an invasive physiotherapy method that penetrates thin needles through the skin to stimulate tissue and trigger the healing process.",
+      "name": "Cupping",
+      "shortDescription": "A hands-on cupping technique for a relaxing sensation.",
+      "fullDescription": "The cups create gentle suction on the skin. Intensity and duration are adjusted to the individual.",
       "duration": 30,
       "price": 30
     },
     {
       "id": "iteracare",
-      "name": "Iteracare",
-      "shortDescription": "Therapy using iteracare technology.",
-      "fullDescription": "Iteracare is an advanced therapeutic method for regeneration and healing.",
+      "name": "IteraCare Relaxation",
+      "shortDescription": "Warm relaxation using an IteraCare device.",
+      "fullDescription": "The device directs warm airflow at selected areas, creating a pleasant sensation of warmth during the session.",
       "duration": 20,
       "price": 20
     },
     {
       "id": "trakcijska-miza",
       "name": "Traction Table",
-      "shortDescription": "Therapy for spinal decompression.",
-      "fullDescription": "The traction table enables gentle stretching and spinal decompression.",
+      "shortDescription": "Gentle spinal stretching on a traction table.",
+      "fullDescription": "The traction table provides controlled stretching adapted to the individual in a relaxed lying position.",
       "duration": 30,
       "price": 40
     },
     {
       "id": "skalarni-valovi",
-      "name": "Scalar Waves (Chakras)",
-      "shortDescription": "Chakra balancing with scalar waves.",
-      "fullDescription": "Scalar waves help balance energy centers - chakras.",
+      "name": "Scalar Wave Relaxation",
+      "shortDescription": "A calm relaxation session alongside the Scalar Wave device.",
+      "fullDescription": "The session takes place in a calm setting alongside the Scalar Wave device and is intended as a relaxing experience.",
       "duration": 30,
       "price": 35
     },
     {
       "id": "vodeno-dihanje",
-      "name": "Guided Breathing",
-      "shortDescription": "Therapy with guided breathing.",
-      "fullDescription": "Individual guided breathing for relaxation and breathing optimization.",
+      "name": "Individual Guided Breathing",
+      "shortDescription": "Guided breathing exercises for calm and relaxation.",
+      "fullDescription": "A practitioner guides you through an adapted breathing rhythm, with exercises you can later include in everyday life.",
       "duration": 30,
       "price": 30
     }
@@ -125,7 +117,7 @@
     "intro_session": {
       "name": "Initial Measurement + Physical Analysis + Personal Program",
       "price": 96,
-      "description": "6 at the end - perfect match of energy analysis and process opening"
+      "description": "Initial measurement, conversation and preparation of a personal plan"
     },
     "packages": [
       {
@@ -135,8 +127,8 @@
         "total_price": 225,
         "price_per_session": 75,
         "vibration": 9,
-        "description": "2+2+5 = 9 → vibration 9, best for beginning",
-        "benefits": ["Deep cleansing", "Energy harmonization", "Start of transformation process"]
+        "description": "Three visits for a gradual introduction to the selected sessions",
+        "benefits": ["Personal approach", "Gradual start", "Clear process"]
       },
       {
         "id": "paket-6",
@@ -145,8 +137,8 @@
         "total_price": 444,
         "price_per_session": 74,
         "vibration": 3,
-        "description": "4+4+4 = 12 → 1+2 = 3 → frequency 3. Number 444 = stability, protection, support",
-        "benefits": ["Stability and protection", "System support", "Frequency 3 for balance"]
+        "description": "Six visits for regular follow-up and adjustment of the personal plan",
+        "benefits": ["Regular rhythm", "Adapted plan", "Well-being follow-up"]
       },
       {
         "id": "paket-9",
@@ -155,43 +147,43 @@
         "total_price": 585,
         "price_per_session": 65,
         "vibration": 9,
-        "description": "5+8+5 = 18 → 1+8 = 9 → pure vibration 9. Most transformative package",
-        "benefits": ["Pure vibration 9", "Most powerful transformation", "Deep energy renewal"]
+        "description": "Nine visits for longer follow-up and gradual adjustment of the plan",
+        "benefits": ["Longer follow-up", "Gradual approach", "Personal adjustment"]
       }
     ],
     "explanation": {
-      "why_numbers_work": "Package 3 → final number 9, price per treatment 75 (7+5=12 → 1+2=3). Package 6 → 444 €, vibration 3, aligned with the 6th step of the process. Package 9 → 585 €, vibration 9, most powerful transformational energy. All packages naturally align with the name ORI 369.",
-      "why_ori369_works": "At ORI 369, we combine advanced technologies, holistic understanding of humans, and professional manual techniques. Our approach significantly exceeds classic therapies, allowing faster, deeper, and more lasting results.",
-      "simple_comparison": "The simplest comparison: Shovel or excavator? With a shovel, we can dig a pool hole - slowly, with a lot of effort and limited effect. An excavator can make the same hole in one day. Similarly with therapies: without technology, progress is slow, with advanced devices the body can do more in one treatment than otherwise in a week. That's why ORI 369 uses equipment that makes a real difference."
+      "why_numbers_work": "Packages differ by the number of visits, price per visit and follow-up period. Choose the scope that best suits your schedule and goals.",
+      "why_ori369_works": "At ORI 369, we combine technology, hands-on techniques, relaxation and movement in a personal plan.",
+      "simple_comparison": "Devices and hands-on techniques are selected according to the agreed session plan. Before starting, we explain the process and the sensation you can expect."
     },
     "technologies": {
       "regeneration_and_biostimulation": [
-        "Tecar Therapy",
+        "TECAR Session",
         "Magnetic Induction (MIS)",
         "Electrical Stimulation (EMS)",
-        "Laser Therapy",
+        "Laser Session",
         "Ultrasound",
-        "Shockwave Therapy"
+        "Shockwaves"
       ],
       "spine_and_structure_support": [
         "Spinal Traction",
         "Myofascial Massage / Holos manual treatment"
       ],
       "frequency_and_energy_harmonization": [
-        "Frequency therapy",
-        "Scalar waves",
-        "IteraCare"
+        "Light and sound relaxation",
+        "Scalar Wave relaxation",
+        "IteraCare relaxation"
       ],
       "neuroreset_relaxation_and_integration": [
-        "Light & Sound Therapy",
+        "Light and sound relaxation",
         "Meditape",
         "Somatics and corrective exercises",
         "Guided breathing techniques",
-        "Ice therapies and cold exposure"
+        "Cold exposure"
       ]
     },
     "holistic_approach": {
-      "description": "The therapeutic process at our clinic never covers only pain or symptoms. We look at the broader context:",
+      "description": "When preparing a personal plan, we consider different aspects of everyday well-being:",
       "aspects": [
         "how the person moves",
         "what is posture and alignment",
@@ -202,15 +194,15 @@
         "what relationship they have with others",
         "what relationship they have with nature and earth"
       ],
-      "result": "When all these components align, the body enters a state of regeneration, the mind achieves clarity, and energy reaches balance. Therefore, many people experience greater progress after just one treatment at our clinic than elsewhere after multiple consecutive therapies."
+      "result": "A personal plan connects movement, relaxation and everyday habits into a clear whole."
     }
   },
   "packages": [
     {
       "id": "paket-3",
       "name": "Package 3 treatments",
-      "description": "Deep cleansing and energy harmonization with vibration 9",
-      "benefits": ["Deep cleansing", "Energy harmonization", "Start of transformation process"],
+      "description": "Three visits for a gradual start",
+      "benefits": ["Personal approach", "Gradual start", "Clear process"],
       "sessions": 3,
       "price": 225,
       "regularPrice": null,
@@ -219,8 +211,8 @@
     {
       "id": "paket-6",
       "name": "Package 6 treatments",
-      "description": "Stability and protection with frequency 3",
-      "benefits": ["Stability and protection", "System support", "Frequency 3 for balance"],
+      "description": "Six visits for regular follow-up",
+      "benefits": ["Regular rhythm", "Adapted plan", "Well-being follow-up"],
       "sessions": 6,
       "price": 444,
       "regularPrice": null,
@@ -229,8 +221,8 @@
     {
       "id": "paket-9",
       "name": "Package 9 treatments",
-      "description": "Pure vibration 9 - most powerful transformational energy",
-      "benefits": ["Pure vibration 9", "Most powerful transformation", "Deep energy renewal"],
+      "description": "Nine visits for longer follow-up",
+      "benefits": ["Longer follow-up", "Gradual approach", "Personal adjustment"],
       "sessions": 9,
       "price": 585,
       "regularPrice": null,

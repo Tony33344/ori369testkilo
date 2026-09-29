@@ -89,15 +89,13 @@ export async function GET(request: NextRequest) {
               </ul>
               <h2>Kaj pridobiš?</h2>
               <ul>
-                <li>jasno sliko telesa in skritih težav</li>
-                <li>preprečevanje poškodb</li>
-                <li>optimizacijo drže in gibanja</li>
-                <li>več energije, manj napetosti</li>
-                <li>hitrejšo regeneracijo in večjo stabilnost</li>
-                <li>individualni terapevtski protokol</li>
-                <li>merljiv napredek</li>
+                <li>jasen prikaz drže in gibanja</li>
+                <li>pregled asimetrij in obremenitev</li>
+                <li>osebni načrt gibanja in vaj</li>
+                <li>razlago rezultatov meritve</li>
+                <li>primerljive meritve skozi čas</li>
               </ul>
-              <p><strong>Slogan:</strong> NE UGIBAJ. IZMERI. MotioScan ti pokaže realno stanje tvojega telesa. Mi pa poskrbimo za pot nazaj v ravnovesje.</p>
+              <p><strong>Slogan:</strong> NE UGIBAJ. IZMERI. MotioScan prikaže držo in gibanje v 3D. Skupaj nato pripravimo oseben načrt vadbe.</p>
               <p><a href="/rezervacija?package=motioscan" style="display:inline-block;padding:12px 18px;background:#00B5AD;color:#fff;border-radius:8px;text-decoration:none">Naroči svoj termin</a></p>
             `;
 

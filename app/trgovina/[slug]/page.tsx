@@ -89,6 +89,12 @@ export default function ProductPage() {
 
   const loadProduct = async () => {
     setLoading(true);
+    if (slug === 'informirana-homeopatska-voda') {
+      setProduct(null);
+      setLoading(false);
+      return;
+    }
+
     try {
       const { data: prod, error } = await supabase
         .from('shop_products')

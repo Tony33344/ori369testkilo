@@ -15,11 +15,8 @@ export default function CategoryCards() {
         "categories.symptoms.burnout",
         "categories.symptoms.stress",
         "categories.symptoms.fear",
-        "categories.symptoms.anxiety",
         "categories.symptoms.pain",
-        "categories.symptoms.depression",
         "categories.symptoms.distress",
-        "categories.symptoms.panic",
         "categories.symptoms.insomnia"
       ]
     },

@@ -19,104 +19,96 @@
     {
       "id": "elektrostimulacija",
       "name": "Elektrostimuláció",
-      "shortDescription": "Az elektrostimuláció aktiválja az izomszövetet, javítja a vérkeringést és enyhíti a fájdalmat.",
-      "fullDescription": "Az elektrostimulációs terápia egyfajta fizikoterápia, amely elektromos áram és elektromos impulzusok segítségével csökkenti a fájdalmat, felgyorsítja a sejtanyagcserét és a gyorsabb gyógyulást.",
+      "shortDescription": "Az elektromos impulzusok szabályozott izomaktivációt hoznak létre.",
+      "fullDescription": "A foglalkozás során a bőrre helyezett elektródák enyhe elektromos impulzusokat adnak le. Az intenzitás egyénre szabott, az érzés ritmikus izomaktiváció.",
       "duration": 20,
       "price": 20
     },
     {
       "id": "manualna-terapija",
       "name": "Miofasciális masszázs",
-      "shortDescription": "Gyengéd manuális technikákkal a terapeuta oldja a feszültségeket és javítja a mozgékonyságot.",
-      "fullDescription": "A manuális terápia nevét a manus=kéz szóból kapta, ami a terapeuta kezének használatára utal, mint a kezelés fő eszközére. Ez az egyik legnépszerűbb kezelési forma.",
+      "shortDescription": "Gyengéd kézi technikák az izmok és a fascia ellazítására.",
+      "fullDescription": "A foglalkozás egyénre szabott kézi fogásokkal történik, a feszült területek ellazítására és a kellemes mozgásérzetre összpontosítva.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "tecar-terapija",
-      "name": "Tecar terápia",
-      "shortDescription": "Fejlett terápia rádiófrekvenciás energia segítségével.",
-      "fullDescription": "Fejlett terápia, amely rádiófrekvenciás energia segítségével felgyorsítja a szövetek regenerációját, enyhíti a fájdalmat és javítja a keringést, valamint a sejtek anyagcseréjét.",
+      "name": "TECAR foglalkozás",
+      "shortDescription": "Rádiófrekvenciás energiát alkalmazó foglalkozás.",
+      "fullDescription": "A foglalkozás során kellemes mélymeleg alakul ki, miközben a feszült területeket kézi technikákkal lazítják.",
       "duration": 30,
       "price": 40
     },
     {
       "id": "magnetna-terapija",
-      "name": "Mágnesterápia",
-      "shortDescription": "Mágneses mezők használata a test stimulálására és regenerációra.",
-      "fullDescription": "Mágneses mezők használata a test stimulálására, a vérkeringés javítására és a regenerációra. Segít a sérülések gyógyulásában és krónikus fájdalmak esetén.",
+      "name": "Mágneses stimuláció",
+      "shortDescription": "Mágneses stimuláció kényelmes fekvő helyzetben.",
+      "fullDescription": "A készülék pulzáló mágneses mezőt hoz létre. A nem invazív foglalkozás alatt kényelmesen fekszik.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "mis",
       "name": "MIS (Mágneses indukciós stimuláció)",
-      "shortDescription": "Mágneses indukciós stimuláció - forradalmi terápia.",
-      "fullDescription": "A mágneses indukciós stimuláció (MIS) egy forradalmi terápia, amely innovatív megközelítéssel kivételes eredményeket biztosít.",
+      "shortDescription": "Az izmok mágneses indukciós stimulációja.",
+      "fullDescription": "A kiválasztott terület fölötti applikátor impulzusokat hoz létre, amelyek ritmikus izomaktivációként érezhetők.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "laserska-terapija",
-      "name": "Lézerterápia",
-      "shortDescription": "Nem invazív módszer lézerfénysugarak használatával.",
-      "fullDescription": "A lézerterápia egy nem invazív kezelési módszer, amely lézerfénysugarak segítségével stimulálja az emberi szöveteket a gyógyulás felgyorsítása érdekében.",
+      "name": "Lézeres foglalkozás",
+      "shortDescription": "Nem invazív foglalkozás lézerfénnyel.",
+      "fullDescription": "A kiválasztott területet lézeres készülékkel világítjuk meg. A folyamat rövid, és általában nincs kifejezett érzete.",
       "duration": 10,
       "price": 10
     },
     {
       "id": "media-taping",
-      "name": "Orvosi taping",
-      "shortDescription": "Módszer rugalmas szalagokkal a fájdalom és duzzanat megszüntetésére.",
-      "fullDescription": "Az orvosi taping egy kezelési módszer, amely öntapadós rugalmas szalagok alkalmazásával a bőrre megszünteti a fájdalmat, duzzanatot és egyéb sérülési tüneteket.",
+      "name": "Medi Taping",
+      "shortDescription": "Rugalmas szalag felhelyezése egy kiválasztott területre.",
+      "fullDescription": "A rugalmas szalagot a kívánt támasz és mozgás szerint helyezzük fel a bőrre. A mindennapi tevékenységek során is rugalmas marad.",
       "duration": 10,
       "price": 10
     },
     {
       "id": "cupping",
-      "name": "Köpölyözés terápia",
-      "shortDescription": "Köpölyözés terápia a relaxációhoz és regenerációhoz.",
-      "fullDescription": "A köpölyözés terápia (cupping) egy manuális technika, amely kis csészék (köpölyök) segítségével felgyorsítja a gyógyulást, regenerációt és enyhíti a fájdalmakat.",
-      "duration": 30,
-      "price": 30
-    },
-    {
-      "id": "dryneedeling",
-      "name": "Száraz tűzés",
-      "shortDescription": "Invazív fizioterápiás módszer száraz tűzéssel.",
-      "fullDescription": "A száraz tűzés (dry needling) egy invazív fizioterápiás módszer, amely vékony tűk bőrön keresztül történő behatolásával stimulálja a szövetet és elindítja a gyógyulási folyamatot.",
+      "name": "Köpölyözés",
+      "shortDescription": "Kézi köpölyöző technika a kellemes ellazulásért.",
+      "fullDescription": "A köpölyök enyhe vákuumot hoznak létre a bőrön. Az intenzitás és az időtartam egyénre szabott.",
       "duration": 30,
       "price": 30
     },
     {
       "id": "iteracare",
-      "name": "Iteracare",
-      "shortDescription": "Terápia iteracare technológiával.",
-      "fullDescription": "Az Iteracare egy fejlett terápiás módszer a regenerációhoz és gyógyuláshoz.",
+      "name": "IteraCare relaxáció",
+      "shortDescription": "Meleg relaxáció IteraCare készülékkel.",
+      "fullDescription": "A készülék meleg légáramot irányít a kiválasztott területekre, kellemes melegérzetet keltve a foglalkozás során.",
       "duration": 20,
       "price": 20
     },
     {
       "id": "trakcijska-miza",
       "name": "Trakciós asztal",
-      "shortDescription": "Terápia a gerinc tehermentesítésére.",
-      "fullDescription": "A trakciós asztal lehetővé teszi a gerinc gyengéd nyújtását és tehermentesítését.",
+      "shortDescription": "A gerinc gyengéd nyújtása trakciós asztalon.",
+      "fullDescription": "A trakciós asztal egyénre szabott, kontrollált nyújtást tesz lehetővé kényelmes fekvő helyzetben.",
       "duration": 30,
       "price": 40
     },
     {
       "id": "skalarni-valovi",
-      "name": "Skaláris hullámok (csakrák)",
-      "shortDescription": "Csakrák kiegyensúlyozása skaláris hullámokkal.",
-      "fullDescription": "A skaláris hullámok segítenek az energiacentrumok - csakrák - kiegyensúlyozásában.",
+      "name": "Scalar Wave relaxáció",
+      "shortDescription": "Nyugodt relaxációs foglalkozás a Scalar Wave készülék mellett.",
+      "fullDescription": "A foglalkozás nyugodt környezetben, a Scalar Wave készülék mellett zajlik, és relaxációs élményt nyújt.",
       "duration": 30,
       "price": 35
     },
     {
       "id": "vodeno-dihanje",
-      "name": "Egyéni irányított légzés",
-      "shortDescription": "Terápia irányított légzéssel.",
-      "fullDescription": "Egyéni irányított légzés a relaxációhoz és a légzés optimalizálásához.",
+      "name": "Egyéni vezetett légzés",
+      "shortDescription": "Vezetett légzőgyakorlatok a megnyugvásért és ellazulásért.",
+      "fullDescription": "A foglalkozásvezető egyénre szabott légzésritmuson vezeti végig, a gyakorlatokat később a mindennapokba is beépítheti.",
       "duration": 30,
       "price": 30
     }
@@ -125,7 +117,7 @@
     "intro_session": {
       "name": "Kezdő mérés + fizikai elemzés + személyes program",
       "price": 96,
-      "description": "6 a végén - tökéletes egyezés az energiaelemzés és a folyamat megnyitása között"
+      "description": "Kezdeti mérés, beszélgetés és személyes terv készítése"
     },
     "packages": [
       {
@@ -135,8 +127,8 @@
         "total_price": 225,
         "price_per_session": 75,
         "vibration": 9,
-        "description": "2+2+5 = 9 → 9-es vibráció, legjobb kezdéshez",
-        "benefits": ["Mély tisztítás", "Energiaharmonizálás", "A transzformációs folyamat kezdete"]
+        "description": "Három látogatás a fokozatos kezdéshez és a kiválasztott foglalkozások megismeréséhez",
+        "benefits": ["Személyes megközelítés", "Fokozatos kezdés", "Világos folyamat"]
       },
       {
         "id": "paket-6",
@@ -145,8 +137,8 @@
         "total_price": 444,
         "price_per_session": 74,
         "vibration": 3,
-        "description": "4+4+4 = 12 → 1+2 = 3 → 3-as frekvencia. A 444 szám = stabilitás, védelem, támogatás",
-        "benefits": ["Stabilitás és védelem", "Rendszer támogatás", "3-as frekvencia az egyensúlyhoz"]
+        "description": "Hat látogatás rendszeres követéssel és a személyes terv igazításával",
+        "benefits": ["Rendszeres ritmus", "Igazított terv", "Közérzet követése"]
       },
       {
         "id": "paket-9",
@@ -155,43 +147,43 @@
         "total_price": 585,
         "price_per_session": 65,
         "vibration": 9,
-        "description": "5+8+5 = 18 → 1+8 = 9 → tiszta 9-es vibráció. Legátalakítóbb csomag",
-        "benefits": ["Tiszta 9-es vibráció", "Leghatalmasabb transzformáció", "Mély energetikai megújulás"]
+        "description": "Kilenc látogatás hosszabb követéssel és a terv fokozatos igazításával",
+        "benefits": ["Hosszabb követés", "Fokozatos megközelítés", "Személyes igazítás"]
       }
     ],
     "explanation": {
-      "why_numbers_work": "3-as csomag → végső szám 9, ár kezelésenként 75 (7+5=12 → 1+2=3). 6-os csomag → 444 €, 3-as vibráció, összhangban a folyamat 6. lépésével. 9-es csomag → 585 €, 9-es vibráció, legerőteljesebb transzformációs energia. Minden csomag természetesen illeszkedik az ORI 369 névhez.",
-      "why_ori369_works": "Az ORI 369-ben fejlett technológiákat, az ember holisztikus megértését és szakmai manuális technikákat kombinálunk. Munkamódszerünk jelentősen felülmúlja a klasszikus terápiákat, mivel gyorsabb, mélyebb és tartósabb eredményeket tesz lehetővé.",
-      "simple_comparison": "A legegyszerűbb összehasonlítás: Lapát vagy kotró? Lapáttalásszehehetünk egy medencet lyukat - lassan, sok erőfeszítéssel és korlátozott hatással. Egy kotró ugyanezt a lyukat egy nap alatt elkészítheti. Hasonlóan a terápiákkal: technológia nélkül a haladás lassú, fejlett eszközökkel a test egy kezelésben többet képes elvégezni, mint egyébként egy hét alatt. Ezért az ORI 369 olyan berendezéseket használ, amelyek valódi különbséget teremtenek."
+      "why_numbers_work": "A csomagok a látogatások számában, az egy látogatásra jutó árban és a követési időszakban különböznek. Válassza az időbeosztásához és céljaihoz illő keretet.",
+      "why_ori369_works": "Az ORI 369-ben a technológiát, kézi technikákat, relaxációt és mozgást személyes tervben kapcsoljuk össze.",
+      "simple_comparison": "A készülékeket és kézi technikákat a megbeszélt folyamat alapján választjuk ki. Kezdés előtt elmagyarázzuk a folyamatot és a várható érzetet."
     },
     "technologies": {
       "regeneration_and_biostimulation": [
-        "Tecar terápia",
+        "TECAR foglalkozás",
         "Mágneses indukció (MIS)",
         "Elektrostimuláció (EMS)",
-        "Lézerterápia",
+        "Lézeres foglalkozás",
         "Ultrahang",
-        "Ütőhullám terápia"
+        "Lökéshullám"
       ],
       "spine_and_structure_support": [
         "Gerinc trakció",
         "Miofasciális masszázs / Holos manuális kezelés"
       ],
       "frequency_and_energy_harmonization": [
-        "Frekvencia terápia",
-        "Skaláris hullámok",
-        "IteraCare"
+        "Fény- és hangrelaxáció",
+        "Scalar Wave relaxáció",
+        "IteraCare relaxáció"
       ],
       "neuroreset_relaxation_and_integration": [
-        "Fény és hang terápia",
+        "Fény- és hangrelaxáció",
         "Meditape",
         "Szomatika és korrektív gyakorlatok",
         "Irányított légzéstechnikák",
-        "Jégterápiák és hidegexpozíció"
+        "Hidegexpozíció"
       ]
     },
     "holistic_approach": {
-      "description": "A terápiás folyamat klinikánkon sosem fed csak fájdalom vagy tüneteket. Szélesebb kontextusban tekintünk:",
+      "description": "A személyes terv készítésekor a mindennapi közérzet különböző szempontjait vesszük figyelembe:",
       "aspects": [
         "hogyan mozog a személy",
         "milyen a testtartás és az igazítás",
@@ -202,15 +194,15 @@
         "milyen kapcsolata van másokkal",
         "milyen kapcsolata van a természettel és a földdel"
       ],
-      "result": "Ha ezek az összetevők összehangolódnak, a test regenerációs állapotba lép, az elme tisztaságot ér el, az energia pedig egyensúlyba kerül. Ezért sok ember nálunk nagyobb haladást érez már egyetlen kezelés után, mint máshol több egymást követő terápia után."
+      "result": "A személyes terv a mozgást, relaxációt és mindennapi szokásokat érthető egésszé kapcsolja össze."
     }
   },
   "packages": [
     {
       "id": "paket-3",
       "name": "Csomag 3 kezelés",
-      "description": "Mély tisztítás és energiaharmonizálás 9-es vibrációval",
-      "benefits": ["Mély tisztítás", "Energiaharmonizálás", "A transzformációs folyamat kezdete"],
+      "description": "Három látogatás a fokozatos kezdéshez",
+      "benefits": ["Személyes megközelítés", "Fokozatos kezdés", "Világos folyamat"],
       "sessions": 3,
       "price": 225,
       "regularPrice": null,
@@ -219,8 +211,8 @@
     {
       "id": "paket-6",
       "name": "Csomag 6 kezelés",
-      "description": "Stabilitás és védelem 3-as frekvenciával",
-      "benefits": ["Stabilitás és védelem", "Rendszer támogatás", "3-as frekvencia az egyensúlyhoz"],
+      "description": "Hat látogatás rendszeres követéssel",
+      "benefits": ["Rendszeres ritmus", "Igazított terv", "Közérzet követése"],
       "sessions": 6,
       "price": 444,
       "regularPrice": null,
@@ -229,8 +221,8 @@
     {
       "id": "paket-9",
       "name": "Csomag 9 kezelés",
-      "description": "Tiszta 9-es vibráció - legerőteljesebb transzformációs energia",
-      "benefits": ["Tiszta 9-es vibráció", "Leghatalmasabb transzformáció", "Mély energetikai megújulás"],
+      "description": "Kilenc látogatás hosszabb követéssel",
+      "benefits": ["Hosszabb követés", "Fokozatos megközelítés", "Személyes igazítás"],
       "sessions": 9,
       "price": 585,
       "regularPrice": null,

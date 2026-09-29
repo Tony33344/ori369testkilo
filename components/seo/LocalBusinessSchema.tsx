@@ -1,15 +1,15 @@
 export default function LocalBusinessSchema() {
   const schema = {
     "@context": "https://schema.org",
-    "@type": "Physiotherapy",
+    "@type": "HealthAndBeautyBusiness",
     "name": "ORI 369",
-    "description": "Vrhunska fizioterapija in wellness terapije v Mariboru. Pokrivamo Celje, Murska Soboto in regijo do Graza.",
+    "description": "Center za wellness, gibanje in regeneracijo v Mariboru.",
     "url": "https://ori369.com",
-    "telephone": "+386 41 123 4567",
-    "email": "info@ori369.com",
+    "telephone": "+386 51 302 206",
+    "email": "Info@ori369.com",
     "address": {
       "@type": "PostalAddress",
-      "streetAddress": "Ulica 1",
+      "streetAddress": "Ulica škofa Maksimilijana Držečnika 11",
       "addressLocality": "Maribor",
       "postalCode": "2000",
       "addressCountry": "SI",

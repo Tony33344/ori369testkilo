@@ -34,7 +34,7 @@ function buildAnalysis(score: number, total: number): AnalysisResult {
       recommendations: [
         'MotioScan – 3D analiza telesne drže za preventivni vpogled',
         'Posvet in predstavitev (15 min, 9 €) za usmerjeno svetovanje',
-        'Iteracare ali miofascialna masaža za sprostitev in regeneracijo',
+        'IteraCare sprostitev ali miofascialna masaža za občutek sproščenosti',
       ],
     };
   }
@@ -48,7 +48,7 @@ function buildAnalysis(score: number, total: number): AnalysisResult {
         'Vaši odgovori nakazujejo, da telo občuti nekaj kroničnega stresa ali napetosti. Pravočasna obravnava lahko prepreči poslabšanje in vrne ravnotežje.',
       recommendations: [
         'Prvi pregled + meritev s Physio Motio + celovit personaliziran plan',
-        'Paket 3 obravnave – usmerjena terapija za sprostitev napetosti',
+        'Paket 3 obravnav – postopen pristop k sprostitvi napetosti',
         'TECAR ali miofascialna masaža za ciljno sprostitev napetosti',
       ],
     };
@@ -62,7 +62,7 @@ function buildAnalysis(score: number, total: number): AnalysisResult {
       'Vaši odgovori kažejo na večje število kroničnih obremenitev. Priporočamo celostno obravnavo, ki naslovi vzrok in ne le simptome.',
     recommendations: [
       'Prva posvetovalna obravnava z meritvijo in osebnim planom',
-      'Paket 6 ali 9 obravnav za celostno regeneracijo',
+      'Paket 6 ali 9 obravnav za reden ritem in spremljanje',
       'Univerzum paket – kombinacija MIS, miofascialne masaže in skalarnih valov',
     ],
   };

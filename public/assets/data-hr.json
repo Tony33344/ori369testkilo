@@ -2,7 +2,7 @@
   "site": {
     "name": "ORI 369",
     "tagline": "Vaš most između znanosti i energije",
-    "description": "U ORI 369 kombiniramo vrhunske terapeutske pristupe, najnovije tehnologije i duboko razumijevanje frekvencija 3-6-9 kako bismo vam pomogli postići ravnotežu tijela, uma i duha.",
+    "description": "U ORI 369 tehnologiju, ručne tehnike, opuštanje i kretanje povezujemo u osobni plan.",
     "email": "Info@ori369.com",
     "phone": ["+386 51 302 206", "+386 41 458 931"],
     "address": "Ulica škofa Maksimilijana Držečnika 11, 2000 Maribor, Slovenija",
@@ -19,104 +19,96 @@
     {
       "id": "elektrostimulacija",
       "name": "Elektrostimulacija",
-      "shortDescription": "Elektrostimulacija aktivira mišićno tkivo, poboljšava krvnu cirkulaciju i ublažava bol.",
-      "fullDescription": "Elektrostimulacijska terapija je vrsta fizikalne terapije koja pomoću električne struje i električnih impulsa smanjuje bol, ubrzava stanični metabolizam i bržu ozdravljenje.",
+      "shortDescription": "Električni impulsi stvaraju kontroliranu aktivaciju mišića.",
+      "fullDescription": "Tijekom tretmana elektrode na koži odašilju blage električne impulse. Intenzitet se prilagođava pojedincu, a osjećaj je ritmička aktivacija mišića.",
       "duration": 20,
       "price": 20
     },
     {
       "id": "manualna-terapija",
       "name": "Miofascijalna masaža",
-      "shortDescription": "Nježnim ručnim tehnikama terapeut opušta napetosti i poboljšava pokretljivost.",
-      "fullDescription": "Manualna terapija dobila je ime od riječi manus=ruka, što ukazuje na uporabu terapeutovih ruku kao glavnog alata liječenja. Jedan je od najpopularnijih oblika liječenja.",
+      "shortDescription": "Nježne ručne tehnike za opuštanje mišića i fascija.",
+      "fullDescription": "Tretman se izvodi ručnim tehnikama prilagođenima pojedincu, s naglaskom na opuštanje napetih područja i ugodan osjećaj pokreta.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "tecar-terapija",
-      "name": "Tecar terapija",
-      "shortDescription": "Napredna terapija pomoću radiofrekventne energije.",
-      "fullDescription": "Napredna terapija koja pomoću radiofrekventne energije ubrzava regeneraciju tkiva, ublažava bolove i poboljšava cirkulaciju te metabolizam stanica.",
+      "name": "TECAR tretman",
+      "shortDescription": "Tretman radiofrekvencijskom energijom.",
+      "fullDescription": "Tijekom tretmana u tkivu se razvija ugodna dubinska toplina koja prati ručno opuštanje napetih područja.",
       "duration": 30,
       "price": 40
     },
     {
       "id": "magnetna-terapija",
-      "name": "Magnetna terapija",
-      "shortDescription": "Uporaba magnetnih polja za stimulaciju tijela i regeneraciju.",
-      "fullDescription": "Uporaba magnetnih polja za stimulaciju tijela, poboljšanje krvne cirkulacije i regeneraciju. Pomaže pri ozdravljenju ozljeda i kroničnih bolova.",
+      "name": "Magnetna stimulacija",
+      "shortDescription": "Magnetna stimulacija u opuštenom ležećem položaju.",
+      "fullDescription": "Uređaj stvara pulsirajuće magnetsko polje. Tijekom neinvazivnog tretmana udobno ležite.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "mis",
       "name": "MIS (Magnetna indukcijska stimulacija)",
-      "shortDescription": "Magnetna indukcijska stimulacija - revolucionarna terapija.",
-      "fullDescription": "Magnetna indukcijska stimulacija (MIS) je revolucionarna terapija koja inovativnim pristupom osigurava izvanredne rezultate.",
+      "shortDescription": "Magnetna indukcijska stimulacija mišića.",
+      "fullDescription": "Aplikator iznad odabranog područja stvara impulse koji se osjećaju kao ritmička aktivacija mišića.",
       "duration": 20,
       "price": 30
     },
     {
       "id": "laserska-terapija",
-      "name": "Laserska terapija",
-      "shortDescription": "Neinvazivna metoda laserskim svjetlosnim zrakama.",
-      "fullDescription": "Laserska terapija je neinvazivna metoda liječenja koja pomoću laserskih svjetlosnih zraka stimulira ljudsko tkivo kako bi ubrzala ozdravljenje.",
+      "name": "Laserski tretman",
+      "shortDescription": "Neinvazivni tretman laserskim svjetlom.",
+      "fullDescription": "Odabrano područje osvjetljava se laserskim uređajem. Postupak je kratak i obično bez izraženog osjeta.",
       "duration": 10,
       "price": 10
     },
     {
       "id": "media-taping",
-      "name": "Medicinski taping",
-      "shortDescription": "Metoda s elastičnim trakama za uklanjanje boli i oteklina.",
-      "fullDescription": "Medicinski taping je metoda liječenja koja primjenom samoljepljivih elastičnih traka na kožu uklanja bolove, otekline i druge simptome ozljeda.",
+      "name": "Medi Taping",
+      "shortDescription": "Postavljanje elastičnih traka na odabrano područje.",
+      "fullDescription": "Elastične trake postavljaju se na kožu prema željenoj potpori i načinu kretanja. Ostaju fleksibilne tijekom svakodnevnih aktivnosti.",
       "duration": 10,
       "price": 10
     },
     {
       "id": "cupping",
-      "name": "Cupping terapija",
-      "shortDescription": "Terapija ventuzama za opuštanje i regeneraciju.",
-      "fullDescription": "Terapija ventuzama (cupping) je manualna tehnika koja pomoću malih čašica (ventuza) ubrzava ozdravljenje, regeneraciju i ublažava bolove.",
-      "duration": 30,
-      "price": 30
-    },
-    {
-      "id": "dryneedeling",
-      "name": "Dry Needling",
-      "shortDescription": "Invazivna fizioterapeutska metoda suhim iglama.",
-      "fullDescription": "Dry needling (terapija suhim iglama) je invazivna fizioterapeutska metoda koja penetracijom tankih igala kroz kožu stimulira tkivo i pokreće proces ozdravljenja.",
+      "name": "Cupping (ventuze)",
+      "shortDescription": "Ručna tehnika s ventuzama za osjećaj opuštenosti.",
+      "fullDescription": "Ventuze stvaraju blag podtlak na koži. Intenzitet i trajanje prilagođavaju se pojedincu.",
       "duration": 30,
       "price": 30
     },
     {
       "id": "iteracare",
-      "name": "Iteracare",
-      "shortDescription": "Terapija s iteracare tehnologijom.",
-      "fullDescription": "Iteracare je napredna terapeutska metoda za regeneraciju i ozdravljenje.",
+      "name": "IteraCare opuštanje",
+      "shortDescription": "Toplinsko opuštanje uz uređaj IteraCare.",
+      "fullDescription": "Uređaj usmjerava topao zrak na odabrana područja, stvarajući ugodan osjećaj topline tijekom tretmana.",
       "duration": 20,
       "price": 20
     },
     {
       "id": "trakcijska-miza",
       "name": "Trakcijski stol",
-      "shortDescription": "Terapija za rasterećenje kralježnice.",
-      "fullDescription": "Trakcijski stol omogućava nježno istezanje i rasterećenje kralježnice.",
+      "shortDescription": "Nježno istezanje kralježnice na trakcijskom stolu.",
+      "fullDescription": "Trakcijski stol omogućuje kontrolirano istezanje prilagođeno pojedincu u opuštenom ležećem položaju.",
       "duration": 30,
       "price": 40
     },
     {
       "id": "skalarni-valovi",
-      "name": "Skalarni valovi (čakre)",
-      "shortDescription": "Uravnotežavanje čakri skalarnim valovima.",
-      "fullDescription": "Skalarni valovi pomažu pri uravnotežavanju energijskih centara - čakri.",
+      "name": "Scalar Wave opuštanje",
+      "shortDescription": "Mirna seansa opuštanja uz uređaj Scalar Wave.",
+      "fullDescription": "Seansa se odvija u mirnom okruženju uz uređaj Scalar Wave i namijenjena je iskustvu opuštanja.",
       "duration": 30,
       "price": 35
     },
     {
       "id": "vodeno-dihanje",
       "name": "Individualno vođeno disanje",
-      "shortDescription": "Terapija s vođenim disanjem.",
-      "fullDescription": "Individualno vođeno disanje za opuštanje i optimizaciju disanja.",
+      "shortDescription": "Vođene vježbe disanja za smirenje i opuštanje.",
+      "fullDescription": "Voditelj vas vodi kroz prilagođeni ritam disanja, a vježbe kasnije možete uključiti u svakodnevicu.",
       "duration": 30,
       "price": 30
     }
@@ -125,7 +117,7 @@
     "intro_session": {
       "name": "Uvodno mjerenje + fizička analiza + osobni program",
       "price": 96,
-      "description": "6 na kraju - savršeno podudaranje energije analize i otvaranja procesa"
+      "description": "Uvodno mjerenje, razgovor i priprema osobnog plana"
     },
     "packages": [
       {
@@ -135,8 +127,8 @@
         "total_price": 225,
         "price_per_session": 75,
         "vibration": 9,
-        "description": "2+2+5 = 9 → vibracija 9, najbolja za početak",
-        "benefits": ["Duboko čišćenje", "Energijska harmonizacija", "Početak procesa transformacije"]
+        "description": "Tri posjeta za postupan početak i upoznavanje odabranih tretmana",
+        "benefits": ["Osobni pristup", "Postupan početak", "Jasan tijek"]
       },
       {
         "id": "paket-6",
@@ -145,8 +137,8 @@
         "total_price": 444,
         "price_per_session": 74,
         "vibration": 3,
-        "description": "4+4+4 = 12 → 1+2 = 3 → frekvencija 3. Broj 444 = stabilnost, zaštita, podrška",
-        "benefits": ["Stabilnost i zaštita", "Podrška sustavu", "Frekvencija 3 za ravnotežu"]
+        "description": "Šest posjeta za redovito praćenje i prilagodbu osobnog plana",
+        "benefits": ["Redovit ritam", "Prilagođen plan", "Praćenje dobrobiti"]
       },
       {
         "id": "paket-9",
@@ -155,43 +147,43 @@
         "total_price": 585,
         "price_per_session": 65,
         "vibration": 9,
-        "description": "5+8+5 = 18 → 1+8 = 9 → čista vibracija 9. Najtransformativniji paket",
-        "benefits": ["Čista vibracija 9", "Najmoćnija transformacija", "Duboka energetska obnova"]
+        "description": "Devet posjeta za dulje praćenje i postupnu prilagodbu plana",
+        "benefits": ["Dulje praćenje", "Postupan pristup", "Osobna prilagodba"]
       }
     ],
     "explanation": {
-      "why_numbers_work": "Paket 3 → završni broj 9, cijena po tretmanu 75 (7+5=12 → 1+2=3). Paket 6 → 444 €, vibracija 3, u skladu s 6. korakom procesa. Paket 9 → 585 €, vibracija 9, najmoćnija transformacijska energija. Svi paketi se prirodno uklapaju s nazivom ORI 369.",
-      "why_ori369_works": "U ORI 369 kombiniramo napredne tehnologije, cjelovito razumijevanje čovjeka i stručne ručne tehnike. Način rada značajno nadmašuje klasične terapije jer omogućava brže, dublje i trajnije rezultate.",
-      "simple_comparison": "Najjednostavnija usporedba: Lopata ili bager? Lopatom možemo kopati rupu za bazen - sporo, s puno truda i ograničenim učinkom. Bager može napraviti istu rupu u jednom danu. Slično je s terapijama: bez tehnologije je napredak spor, s naprednim uređajima tijelo u jednom tretmanu može napraviti više nego inače u tjedan dana. Zato ORI 369 koristi opremu koja stvara stvarnu razliku."
+      "why_numbers_work": "Paketi se razlikuju prema broju posjeta, cijeni po posjetu i razdoblju praćenja. Odaberite opseg koji odgovara vašem rasporedu i ciljevima.",
+      "why_ori369_works": "U ORI 369 tehnologiju, ručne tehnike, opuštanje i kretanje povezujemo u osobni plan.",
+      "simple_comparison": "Uređaje i ručne tehnike biramo prema dogovorenom tijeku tretmana. Prije početka objašnjavamo postupak i osjećaj koji možete očekivati."
     },
     "technologies": {
       "regeneration_and_biostimulation": [
-        "Tecar terapija",
+        "TECAR tretman",
         "Magnetska indukcija (MIS)",
         "Elektrostimulacija (EMS)",
-        "Laserska terapija",
+        "Laserski tretman",
         "Ultrazvuk",
-        "Udarna terapija"
+        "Udarni valovi"
       ],
       "spine_and_structure_support": [
         "Trakcija kralježnice",
         "Miofascijalna masaža / Holos manualna obrada"
       ],
       "frequency_and_energy_harmonization": [
-        "Frekvencijska terapija",
-        "Skalarni valovi",
-        "IteraCare"
+        "Svjetlosno i zvučno opuštanje",
+        "Scalar Wave opuštanje",
+        "IteraCare opuštanje"
       ],
       "neuroreset_relaxation_and_integration": [
-        "Svjetlo i zvuk terapija",
+        "Svjetlosno i zvučno opuštanje",
         "Meditape",
         "Somatika i korektivne vježbe",
         "Vođene dišne tehnike",
-        "Ledene terapije i hladna izloženost"
+        "Izlaganje hladnoći"
       ]
     },
     "holistic_approach": {
-      "description": "Terapeutski proces u našoj klinici nikada ne pokriva samo bol ili simptome. Promatramo širi kontekst:",
+      "description": "Pri pripremi osobnog plana uzimamo u obzir različite aspekte svakodnevne dobrobiti:",
       "aspects": [
         "kako se osoba kreće",
         "kakav je stav i poravnanje",
@@ -202,15 +194,15 @@
         "kakav odnos ima prema drugima",
         "kakav odnos ima prema prirodi i zemlji"
       ],
-      "result": "Kada se sve ove komponente usklade, tijelo ulazi u stanje regeneracije, um postiže jasnoću, a energija postiže ravnotežu. Zato mnogi ljudi kod nas osjećaju veći napredak nakon samo jednog tretmana nego drugdje nakon više uzastopnih terapija."
+      "result": "Osobni plan povezuje kretanje, opuštanje i svakodnevne navike u razumljivu cjelinu."
     }
   },
   "packages": [
     {
       "id": "paket-3",
       "name": "Paket 3 tretmana",
-      "description": "Duboko čišćenje i energijska harmonizacija s vibracijom 9",
-      "benefits": ["Duboko čišćenje", "Energijska harmonizacija", "Početak procesa transformacije"],
+      "description": "Tri posjeta za postupan početak",
+      "benefits": ["Osobni pristup", "Postupan početak", "Jasan tijek"],
       "sessions": 3,
       "price": 225,
       "regularPrice": null,
@@ -219,8 +211,8 @@
     {
       "id": "paket-6",
       "name": "Paket 6 tretmana",
-      "description": "Stabilnost i zaštita s frekvencijom 3",
-      "benefits": ["Stabilnost i zaštita", "Podrška sustavu", "Frekvencija 3 za ravnotežu"],
+      "description": "Šest posjeta za redovito praćenje",
+      "benefits": ["Redovit ritam", "Prilagođen plan", "Praćenje dobrobiti"],
       "sessions": 6,
       "price": 444,
       "regularPrice": null,
@@ -229,8 +221,8 @@
     {
       "id": "paket-9",
       "name": "Paket 9 tretmana",
-      "description": "Čista vibracija 9 - najmoćnija transformacijska energija",
-      "benefits": ["Čista vibracija 9", "Najmoćnija transformacija", "Duboka energetska obnova"],
+      "description": "Devet posjeta za dulje praćenje",
+      "benefits": ["Dulje praćenje", "Postupan pristup", "Osobna prilagodba"],
       "sessions": 9,
       "price": 585,
       "regularPrice": null,

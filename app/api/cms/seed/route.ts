@@ -71,15 +71,13 @@ export async function POST(request: NextRequest) {
       </ul>
       <h2>Kaj pridobiš?</h2>
       <ul>
-        <li>jasno sliko telesa in skritih težav</li>
-        <li>preprečevanje poškodb</li>
-        <li>optimizacijo drže in gibanja</li>
-        <li>več energije, manj napetosti</li>
-        <li>hitrejšo regeneracijo in večjo stabilnost</li>
-        <li>individualni terapevtski protokol</li>
-        <li>merljiv napredek</li>
+        <li>jasen prikaz drže in gibanja</li>
+        <li>pregled asimetrij in obremenitev</li>
+        <li>osebni načrt gibanja in vaj</li>
+        <li>razlago rezultatov meritve</li>
+        <li>primerljive meritve skozi čas</li>
       </ul>
-      <p><strong>Slogan:</strong> NE UGIBAJ. IZMERI. MotioScan ti pokaže realno stanje tvojega telesa. Mi pa poskrbimo za pot nazaj v ravnovesje.</p>
+      <p><strong>Slogan:</strong> NE UGIBAJ. IZMERI. MotioScan prikaže držo in gibanje v 3D. Skupaj nato pripravimo oseben načrt vadbe.</p>
       <p><a href="/rezervacija?package=motioscan" style="display:inline-block;padding:12px 18px;background:#00B5AD;color:#fff;border-radius:8px;text-decoration:none">Naroči svoj termin</a></p>
     `;
 
@@ -134,19 +132,16 @@ export async function POST(request: NextRequest) {
   if (slug === 'o-nas') {
     const html = `
       <h1>O nas</h1>
-      <p>Spoznajte ORI 369 - Vaš most med znanostjo in energijo</p>
-      <p>V ORI 369 združujemo vrhunske terapevtske pristope, najnovejše tehnologije in globoko razumevanje frekvenc 3-6-9, da vam pomagamo doseči ravnovesje telesa, uma in duha. Naš cilj je izboljšati kakovost vašega življenja skozi celostni pristop k zdravljenju.</p>
-      <p>With compassion, expertise, and a focus on your unique needs, we're committed to helping you thrive—mind, body, and spirit.</p>
+      <p>Spoznajte ORI 369 – center za celostno počutje.</p>
+      <p>V ORI 369 tehnologijo, ročne tehnike, sprostitev in gibanje povežemo v oseben načrt.</p>
       <h2>Naša misija</h2>
-      <p>Pomagati vam doseči optimalno zdravje in dobro počutje z uporabo najnovejših tehnologij in holistične terapevtske pristope.</p>
+      <p>Ustvariti miren prostor za gibanje, sprostitev in skrb za vsakdanje počutje.</p>
       <h2>Naša vizija</h2>
-      <p>Postati vodilni center za celostno zdravje in wellness v regiji, kjer znanost sreča duhovno rast.</p>
+      <p>Razvijati pregleden in posamezniku prilagojen pristop k wellnessu.</p>
       <h2>Naše vrednote</h2>
-      <p>Sočutje, strokovnost, integriteta in predanost vašemu osebnem razvoju in zdravju.</p>
+      <p>Pozornost, strokovnost, integriteta in spoštovanje posameznika.</p>
       <h2>Naša ekipa</h2>
-      <p>Tim certificiranih terapevtov z bogatimi izkušnjami na področju fizioterapije, energijske medicine in holistične zdravilstva.</p>
-      <h2>Frekvence 3-6-9</h2>
-      <p>Naše delo temelji na razumevanju univerzalnih frekvenc 3-6-9, ki jih je raziskoval Nikola Tesla. Te frekvence predstavljajo ključ do razumevanja vesolja in naše lastne energije. V naših terapijah jih uporabljamo za harmonizacijo telesa in uma.</p>
+      <p>Izkušeni izvajalci vas vodijo skozi dogovorjene obravnave, gibanje in sprostitvene prakse.</p>
     `;
 
     // Create section

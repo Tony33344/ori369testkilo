@@ -18,10 +18,10 @@ export default async function TherapiesPage() {
     <div className="min-h-screen bg-white py-20">
       <div className="container mx-auto px-4 mb-12">
         <h1 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-4">
-          Terapije
+          Obravnave
         </h1>
         <p className="text-xl text-center text-gray-600 max-w-3xl mx-auto">
-          Odkrijte našo ponudbo vrhunskih terapevtskih storitev
+          Spoznajte našo ponudbo obravnav za gibanje, sprostitev in dobro počutje
         </p>
         <div className="mt-12 text-center">
           <Link 

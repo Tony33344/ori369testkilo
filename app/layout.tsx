@@ -15,12 +15,12 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "ORI 369 - Fizioterapija in Wellness Terapije | Maribor, Celje, Murska Sobota, Graz",
-  description: "Vrhunska fizioterapija in wellness terapije v Mariboru. Pokrivamo Celje, Murska Soboto in regijo do Graza. Tecar terapija, elektrostimulacija, MotioScan 3D analiza in več.",
-  keywords: "fizioterapija Maribor, wellness Celje, terapije Murska Sobota, wellness Graz, Tecar terapija, elektrostimulacija, MotioScan 3D, miofascialna masaža, magnetna terapija, laserska terapija, rehabilitacija, regeneracija, ORI 369, Slovenija, Avstrija",
+  title: "ORI 369 - Wellness, gibanje in regeneracija | Maribor",
+  description: "Center za wellness, gibanje in regeneracijo v Mariboru. Tehnologijo, ročne tehnike, sprostitev in gibanje povežemo v oseben načrt.",
+  keywords: "wellness Maribor, gibanje, regeneracija, sprostitev, elektrostimulacija, MotioScan 3D, miofascialna masaža, magnetna stimulacija, laserska obravnava, ORI 369, Slovenija",
   openGraph: {
-    title: "ORI 369 - Fizioterapija in Wellness Terapije | Maribor, Celje, Murska Sobota, Graz",
-    description: "Vrhunska fizioterapija in wellness terapije v Mariboru. Pokrivamo Celje, Murska Soboto in regijo do Graza.",
+    title: "ORI 369 - Wellness, gibanje in regeneracija | Maribor",
+    description: "Center za wellness, gibanje in regeneracijo v Mariboru. Tehnologijo, ročne tehnike, sprostitev in gibanje povežemo v oseben načrt.",
     type: "website",
     locale: "sl_SI",
     siteName: "ORI 369",

@@ -76,7 +76,7 @@ function ShopPageContent() {
         .order('name', { ascending: true });
 
       setCategories(cats || []);
-      setProducts(prods || []);
+      setProducts((prods || []).filter((product: any) => product.slug !== 'informirana-homeopatska-voda'));
     } catch (error) {
       console.error('Failed to load shop data:', error);
     }

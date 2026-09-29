@@ -71,10 +71,10 @@ export default function EducationPage() {
             <span>ORI EDUCATION PLATFORMA</span>
           </div>
           <h1 className="text-4xl md:text-6xl font-extrabold text-gray-900 mb-6">
-            Postanite mojster <span className="text-[#00B5AD]">energijskega</span> dela
+            Razvijajte znanje za <span className="text-[#00B5AD]">osebno prakso</span>
           </h1>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
-            Pridružite se našim strokovnim izobraževanjem, kjer združujemo starodavne modrosti z modernimi terapevtskimi pristopi.
+            Pridružite se praktičnim izobraževanjem s poudarkom na gibanju, sprostitvi in osebni praksi.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-4">
             <a href="#aktualni-tecaji" className="px-8 py-4 bg-[#00B5AD] text-white font-bold rounded-xl hover:bg-[#009891] transition-all shadow-lg shadow-[#00B5AD]/20">
@@ -235,7 +235,7 @@ export default function EducationPage() {
             <div className="max-w-3xl mb-16">
               <h2 className="text-3xl font-bold mb-4 italic">Začetni tečaji</h2>
               <p className="text-gray-400 text-lg">
-                Naši najbolj priljubljeni tečaji za tiste, ki šele vstopajo v svet energijskih terapij.
+                Naši začetni tečaji za tiste, ki želijo spoznati vodene sprostitvene in gibalne prakse.
               </p>
             </div>
 
@@ -330,14 +330,14 @@ export default function EducationPage() {
               <Shield className="w-8 h-8" />
             </div>
             <h3 className="text-xl font-bold">Certificirani mentorji</h3>
-            <p className="text-gray-500">Naša ekipa strokovnjakov z dolgoletnimi izkušnjami vas vodi skozi vsak korak procesa.</p>
+            <p className="text-gray-500">Izkušeni mentorji vas vodijo skozi vsak korak programa.</p>
           </div>
           <div className="space-y-4">
             <div className="w-16 h-16 bg-green-50 text-green-600 rounded-2xl flex items-center justify-center mx-auto mb-6">
               <Zap className="w-8 h-8" />
             </div>
-            <h3 className="text-xl font-bold">Praktično znanje</h3>
-            <p className="text-gray-500">Fokusiramo se na tehnike, ki jih lahko takoj uporabite v svojem življenju ali terapevtski praksi.</p>
+            <h3 className="text-xl font-bold">Praktične vsebine</h3>
+            <p className="text-gray-500">Osredotočamo se na tehnike, ki jih lahko vključite v vsakdanje življenje ali osebno prakso.</p>
           </div>
           <div className="space-y-4">
             <div className="w-16 h-16 bg-[#00B5AD]/10 text-[#00B5AD] rounded-2xl flex items-center justify-center mx-auto mb-6">

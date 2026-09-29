@@ -168,7 +168,7 @@ export default function PricingPage() {
               {data.pricing.technologies && (
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                   <div>
-                    <h5 className="font-bold text-black mb-3">Regeneracija in biostimulacija</h5>
+                    <h5 className="font-bold text-black mb-3">Tehnološka podpora</h5>
                     <ul className="text-sm text-gray-700 space-y-1">
                       {data.pricing.technologies.regeneration_and_biostimulation.map((tech, idx) => (
                         <li key={idx}>• {tech}</li>
@@ -184,7 +184,7 @@ export default function PricingPage() {
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-bold text-black mb-3">Frekvenčna harmonizacija</h5>
+                    <h5 className="font-bold text-black mb-3">Sprostitev in dobro počutje</h5>
                     <ul className="text-sm text-gray-700 space-y-1">
                       {data.pricing.technologies.frequency_and_energy_harmonization.map((tech, idx) => (
                         <li key={idx}>• {tech}</li>
@@ -192,7 +192,7 @@ export default function PricingPage() {
                     </ul>
                   </div>
                   <div>
-                    <h5 className="font-bold text-black mb-3">Nevroreset in integracija</h5>
+                    <h5 className="font-bold text-black mb-3">Umiritev in integracija</h5>
                     <ul className="text-sm text-gray-700 space-y-1">
                       {data.pricing.technologies.neuroreset_relaxation_and_integration.map((tech, idx) => (
                         <li key={idx}>• {tech}</li>
@@ -217,7 +217,7 @@ export default function PricingPage() {
             <div className="flex items-center space-x-3 mb-8">
               <Zap className="text-[#00B5AD]" size={32} />
               <h2 className="text-3xl md:text-4xl font-bold text-black">
-                Dodatne terapije
+                Dodatne obravnave
               </h2>
             </div>
 
@@ -371,10 +371,10 @@ export default function PricingPage() {
         >
           <div className="text-center mb-12">
             <h2 className="text-3xl md:text-4xl font-bold text-black mb-4">
-              {t('pricing.individualTherapies') || 'Posamezne terapije'}
+              {t('pricing.individualTherapies') || 'Posamezne obravnave'}
             </h2>
             <p className="text-xl text-gray-600">
-              {t('pricing.individualPrices') || 'Cene posameznih terapij in storitev'}
+              {t('pricing.individualPrices') || 'Cene posameznih obravnav in storitev'}
             </p>
           </div>
 

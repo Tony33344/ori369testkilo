@@ -862,13 +862,13 @@ Samo vi ste kreator vaših mislih in samo vi lahko igrate glavno vlogo v vašem 
 export const packagesData: TherapyPackage[] = [
   {
     slug: 'prvi-pregled',
-    name: 'Prvi pregled, analiza, osebni program (terapija)',
-    description: 'Celovit prvi pregled z analizo vašega stanja in pripravo personaliziranega programa terapij za vrnitev v ravnovesje.',
+    name: 'Prvi pregled, analiza in osebni program',
+    description: 'Uvodni pregled z oceno drže in gibanja ter pripravo osebnega programa.',
     sessions: 1,
     regularPrice: null,
     packagePrice: 96,
     pricePerSession: 96,
-    includedServices: ['Celovit prvi pregled', 'Analiza stanja', 'Osebni program terapij'],
+    includedServices: ['Uvodni pregled', 'Ocena drže in gibanja', 'Osebni program'],
     benefits: ['Celovita analiza stanja', 'Personaliziran pristop', 'Jasen osebni načrt']
   },
   {
@@ -880,46 +880,46 @@ export const packagesData: TherapyPackage[] = [
     packagePrice: 69,
     pricePerSession: 69,
     includedServices: ['Meritev Physio Motio', '3D analiza drže', 'Digitalni izpis rezultatov'],
-    benefits: ['Zgodnje odkrivanje asimetrij', 'Natančna analiza', 'Osnova za terapevtski plan']
+    benefits: ['Zgodnje odkrivanje asimetrij', 'Natančna analiza', 'Osnova za osebni načrt']
   },
   {
     slug: 'aktivacija-prebudi-telo',
     name: 'Aktivacija Prebudi telo – Paket 3 obravnave',
-    description: 'Uvodna meritev + fizična analiza + osebni program, 3x Elektrostimulacija, 3x Tacer terapija, 3x Iteracare in masaža, 3x Storm terapija – miofascialna masaža, 1x Končna obravnava',
+    description: 'Uvodna meritev + fizična analiza + osebni program, 3x Elektrostimulacija, 3x TECAR obravnava, 3x Iteracare in masaža, 3x Storm miofascialna masaža, 1x Končna obravnava',
     sessions: 13,
     regularPrice: 335,
     packagePrice: 196,
     pricePerSession: 15.08,
-    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '3x Elektrostimulacija', '3x Tacer terapija', '3x Iteracare in masaža', '3x Storm terapija – miofascialna masaža', '1x Končna obravnava'],
-    benefits: ['Aktivacija telesa', 'Regeneracija', 'Prihranek 139€']
+    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '3x Elektrostimulacija', '3x TECAR obravnava', '3x Iteracare in masaža', '3x Storm miofascialna masaža', '1x Končna obravnava'],
+    benefits: ['Postopen začetek', 'Osebni program', 'Prihranek 139€']
   },
   {
     slug: 'osvescanje-telesa',
     name: 'Osveščanje Telesa – Paket 6 obravnav',
-    description: 'Uvodna meritev + fizična analiza + osebni program, 6x Elektrostimulacija, 6x Iteracare in masaža, 6x Laser, 6x Tacer terapija, 6x Storm terapija – miofascialna masaža, 1x Končna obravnava',
+    description: 'Uvodna meritev + fizična analiza + osebni program, 6x Elektrostimulacija, 6x Iteracare in masaža, 6x Laser, 6x TECAR obravnava, 6x Storm miofascialna masaža, 1x Končna obravnava',
     sessions: 31,
     regularPrice: 690,
     packagePrice: 396,
     pricePerSession: 12.77,
-    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '6x Elektrostimulacija', '6x Iteracare in masaža', '6x Laser', '6x Tacer terapija', '6x Storm terapija – miofascialna masaža', '1x Končna obravnava'],
-    benefits: ['Globlja transformacija', 'Celovita regeneracija', 'Prihranek 294€']
+    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '6x Elektrostimulacija', '6x Iteracare in masaža', '6x Laser', '6x TECAR obravnava', '6x Storm miofascialna masaža', '1x Končna obravnava'],
+    benefits: ['Reden ritem', 'Prilagojen načrt', 'Prihranek 294€']
   },
   {
     slug: 'univerzum',
     name: 'Univerzum – Paket 9 obravnav',
-    description: 'Uvodna meritev + fizična analiza + osebni program, 9x Elektrostimulacija, 9x Tacer terapija in masaža, 9x Trakcijska miza, 9x Storm terapija – miofascialna masaža, 9x MIS Magnetna indukcijska stimulacija, 9x Skalarni valovi - uravnovešanje čaker, 1x Moti-physio Scan',
+    description: 'Uvodna meritev + fizična analiza + osebni program, 9x Elektrostimulacija, 9x TECAR obravnava in masaža, 9x Trakcijska miza, 9x Storm miofascialna masaža, 9x MIS Magnetna indukcijska stimulacija, 9x Scalar Wave sprostitev, 1x Moti-physio Scan',
     sessions: 58,
     regularPrice: 1835,
     packagePrice: 796,
     pricePerSession: 13.72,
-    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '9x Elektrostimulacija', '9x Tacer terapija in masaža', '9x Trakcijska miza', '9x Storm terapija – miofascialna masaža', '9x MIS Magnetna indukcijska stimulacija', '9x Skalarni valovi - uravnovešanje čaker', '1x Moti-physio Scan'],
-    benefits: ['Popolna transformacija', 'Vse tehnologije ORI 369', 'Prihranek 1039€']
+    includedServices: ['Uvodna meritev + fizična analiza + osebni program', '9x Elektrostimulacija', '9x TECAR obravnava in masaža', '9x Trakcijska miza', '9x Storm miofascialna masaža', '9x MIS Magnetna indukcijska stimulacija', '9x Scalar Wave sprostitev', '1x Moti-physio Scan'],
+    benefits: ['Daljše spremljanje', 'Osebno prilagajanje', 'Prihranek 1039€']
   },
 ];
 
 export const individualPrices = [
   { name: 'Motio-Physio Scan', price: 69, duration: 30 },
-  { name: 'Storm terapija – miofascialna masaža', price: 30, duration: 20 },
+  { name: 'Storm miofascialna masaža', price: 30, duration: 20 },
   { name: 'Dekompresijska miza – Platinium', price: 30, duration: 20 },
   { name: 'Tacer', price: 29, duration: 30 },
   { name: 'Cryoscreen', price: 9, duration: 15 },
@@ -928,11 +928,10 @@ export const individualPrices = [
   { name: 'Elektrostimulacija', price: 19, duration: 20 },
   { name: 'Media Tape', price: 9, duration: 10 },
   { name: 'Iteracare', price: 19, duration: 20 },
-  { name: 'Skalarni valovi – uravnovešanje čaker', price: 30, duration: 30 },
+  { name: 'Scalar Wave sprostitev', price: 30, duration: 30 },
   { name: 'Ultrazvok', price: 19, duration: 15 },
-  { name: 'Sprostitvena akupresura rok (su jok)', price: 29, duration: 30 },
-  { name: 'Dry needling', price: 30, duration: 30 },
+  { name: 'Sprostitvena akupresura rok', price: 29, duration: 30 },
   { name: 'Ventuze', price: 19, duration: 20 },
   { name: 'Individualno vodeno dihanje', price: 30, duration: 30 },
-  { name: 'Individualna protibolečinska ali antistresna vadba', price: 39, duration: 60 }
+  { name: 'Vadba za gibljivost in sprostitev', price: 39, duration: 60 }
 ];

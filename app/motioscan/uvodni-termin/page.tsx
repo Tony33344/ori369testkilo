@@ -28,7 +28,7 @@ export default function MotioScanStarterPage() {
               Prvi korak za nove obiskovalce
             </div>
             <h1 className="mt-6 max-w-4xl text-4xl font-bold leading-tight md:text-6xl">
-              Prvi pregled + meritev s Physio Motio + celovit personaliziran plan terapij in vaj
+              Prvi pregled + meritev s Physio Motio + oseben načrt gibanja
             </h1>
             <p className="mt-6 max-w-2xl text-lg leading-relaxed text-gray-200 md:text-xl">
               To ni samo meritev. To je uvodni obisk za ljudi, ki želijo bolje razumeti svoje telo,
@@ -61,7 +61,7 @@ export default function MotioScanStarterPage() {
               <h2 className="text-3xl font-bold md:text-4xl">Zakaj je ta uvodni termin drugačen?</h2>
               <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">
                 Primeren je za človeka, ki čuti, da nekaj ni v redu, vendar ne ve, kje začeti. Najprej izmerimo,
-                nato razložimo, nato pa postavimo jasen individualni načrt terapij in vaj.
+                nato razložimo ter pripravimo jasen oseben načrt gibanja in vaj.
               </p>
 
               <div className="mt-10 grid gap-5 md:grid-cols-2">
@@ -73,17 +73,17 @@ export default function MotioScanStarterPage() {
                   },
                   {
                     title: "Strokovna razlaga",
-                    desc: "Rezultatov ne dobiš brez konteksta. Skupaj pogledamo, kaj pomeni tvoje stanje in zakaj se določene težave ponavljajo.",
+                    desc: "Meritve pogledamo v kontekstu vsakdanjega gibanja in skupaj razložimo opažene vzorce.",
                     icon: <ClipboardList className="h-5 w-5 text-[#00B5AD]" />,
                   },
                   {
-                    title: "Osebni plan terapij in vaj",
+                    title: "Osebni načrt gibanja in vaj",
                     desc: "Namesto splošnih priporočil dobiš strukturiran predlog naslednjih korakov za tvoje telo, cilje in omejitve.",
                     icon: <CheckCircle className="h-5 w-5 text-[#00B5AD]" />,
                   },
                   {
                     title: "Več zaupanja pred začetkom",
-                    desc: "Če si prvič pri nas, ta obisk zmanjša negotovost in ti pomaga lažje sprejeti odločitev za nadaljevanje terapij.",
+                    desc: "Če ste prvič pri nas, obisk predstavi možne naslednje korake in potek nadaljnjih obravnav.",
                     icon: <ShieldCheck className="h-5 w-5 text-[#00B5AD]" />,
                   },
                 ].map((item) => (
@@ -106,7 +106,7 @@ export default function MotioScanStarterPage() {
                     "uvodni pogovor o težavah, ciljih in zgodovini telesa",
                     "meritev s sistemom Physio Motio",
                     "razlago ključnih ugotovitev in prioritet",
-                    "predlog terapij, vaj in nadaljnjih korakov",
+                    "predlog obravnav, vaj in nadaljnjih korakov",
                   ].map((item) => (
                     <div key={item} className="flex items-start gap-3 rounded-2xl bg-white/10 px-4 py-3 backdrop-blur-sm">
                       <CheckCircle className="mt-0.5 h-5 w-5 shrink-0 text-white" />

@@ -127,7 +127,7 @@ export default function ContactPage() {
                   Podatki o podjetju
                 </h3>
                 <div className="space-y-2 text-sm text-gray-600">
-                  <p><strong>Podjetje:</strong> {companyData.legalName}</p>
+                  <p><strong>Izvajalec in izdajatelj računov za storitve ORI 369:</strong> {companyData.legalName}</p>
                   <p><strong>Davčna št.:</strong> {companyData.taxNumber}</p>
                   <p><strong>Matična št.:</strong> {companyData.registrationNumber}</p>
                   <p><strong>IBAN:</strong> <span className="font-mono">{formatIBAN(companyData.bank.iban)}</span></p>
@@ -153,24 +153,24 @@ export default function ContactPage() {
           <div className="mt-12 bg-white rounded-2xl shadow-xl p-8">
             <h2 className="text-2xl font-bold text-gray-900 mb-6">Pokrivamo regijo</h2>
             <p className="text-gray-700 mb-6">
-              ORI 369 se nahaja v Mariboru in služimo stranke iz celotne Štajerske regije ter sosednjih območij.
+              ORI 369 se nahaja v Mariboru. Stranke prihajajo tudi iz širše Štajerske in sosednjih območij.
             </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
               <div className="bg-gray-50 p-4 rounded-lg text-center">
                 <h3 className="font-bold text-[#00B5AD] mb-2">Maribor</h3>
-                <p className="text-sm text-gray-600">Naše osrednje lokacije</p>
+                <p className="text-sm text-gray-600">Lokacija centra</p>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg text-center">
                 <h3 className="font-bold text-[#00B5AD] mb-2">Celje</h3>
-                <p className="text-sm text-gray-600">30 min vožnje</p>
+                <p className="text-sm text-gray-600">Stranke prihajajo tudi iz Celja</p>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg text-center">
                 <h3 className="font-bold text-[#00B5AD] mb-2">Murska Sobota</h3>
-                <p className="text-sm text-gray-600">Pomurska regija</p>
+                <p className="text-sm text-gray-600">Stranke prihajajo tudi iz Pomurja</p>
               </div>
               <div className="bg-gray-50 p-4 rounded-lg text-center">
                 <h3 className="font-bold text-[#00B5AD] mb-2">Graz</h3>
-                <p className="text-sm text-gray-600">Avstrija, 50 min</p>
+                <p className="text-sm text-gray-600">Stranke prihajajo tudi iz okolice Graza</p>
               </div>
             </div>
           </div>

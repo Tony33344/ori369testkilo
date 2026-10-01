@@ -19,6 +19,11 @@ const nextConfig: NextConfig = {
         destination: '/terapije/platinum-dekompresijska-miza',
         permanent: true,
       },
+      {
+        source: '/terapije/mis',
+        destination: '/terapije/magnetna-terapija',
+        permanent: true,
+      },
     ];
   },
   images: {

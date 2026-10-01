@@ -4,7 +4,10 @@
     "tagline": "Vaš most med znanostjo in energijo",
     "description": "V ORI 369 tehnologijo, ročne tehnike, sprostitev in gibanje povežemo v oseben načrt.",
     "email": "Info@ori369.com",
-    "phone": ["051 302 206", "041 458 931"],
+    "phone": [
+      "051 302 206",
+      "041 458 931"
+    ],
     "address": "Ulica škofa Maksimilijana Držečnika 11, 2000 Maribor, Slovenia",
     "hours": {
       "weekdays": "Pon–Pet: 07.00–14.00 in 16.00–21.00",
@@ -117,38 +120,44 @@
     "intro_session": {
       "name": "Preventivni gibalni in kondicijski pregled (meritev + osebni program)",
       "price": 96,
-      "description": "Uvodna meritev, pogovor in priprava osebnega programa"
+      "description": "Uvodna meritev, pogovor in priprava osebnega programa · 90 min"
     },
     "packages": [
       {
-        "id": "paket-3",
-        "name": "Paket 3 obravnave",
+        "id": "aktivacija",
+        "name": "Aktivacija - Paket 3 obravnave",
         "sessions": 3,
-        "total_price": 225,
-        "price_per_session": 75,
-        "vibration": 9,
-        "description": "Trije obiski za postopen začetek in spoznavanje izbranih obravnav",
-        "benefits": ["Osebni pristop", "Postopen začetek", "Jasen potek"]
+        "total_price": 196,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · IteraCare in masaža · TECAR · Miofascialna masaža · Končna obravnava",
+        "benefits": [
+          "Postopen začetek",
+          "Osebni program",
+          "Prihranek 139 €"
+        ]
       },
       {
-        "id": "paket-6",
-        "name": "Paket 6 obravnav",
+        "id": "osvescanje",
+        "name": "Osveščanje Telesa - Paket 6 obravnav",
         "sessions": 6,
-        "total_price": 444,
-        "price_per_session": 74,
-        "vibration": 3,
-        "description": "Šest obiskov za redno spremljanje in prilagajanje osebnega načrta",
-        "benefits": ["Reden ritem", "Prilagojen načrt", "Spremljanje počutja"]
+        "total_price": 396,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · IteraCare in masaža · Laser · TECAR · Miofascialna masaža · Končna obravnava",
+        "benefits": [
+          "Reden ritem",
+          "Prilagojen načrt",
+          "Prihranek 294 €"
+        ]
       },
       {
-        "id": "paket-9",
-        "name": "Paket 9 obravnav",
+        "id": "univerzum",
+        "name": "Univerzum - Paket 9 obravnav",
         "sessions": 9,
-        "total_price": 585,
-        "price_per_session": 65,
-        "vibration": 9,
-        "description": "Devet obiskov za daljše spremljanje in postopno prilagajanje programa",
-        "benefits": ["Daljše spremljanje", "Postopen pristop", "Osebno prilagajanje"]
+        "total_price": 796,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · TECAR in masaža · Dekompresijska miza · Miofascialna masaža · Magnetna stimulacija (MIS) · Scalar Wave · MotioScan",
+        "benefits": [
+          "Daljše spremljanje",
+          "Osebno prilagajanje",
+          "Prihranek 1039 €"
+        ]
       }
     ],
     "explanation": {
@@ -202,7 +211,11 @@
       "id": "paket-3",
       "name": "Paket 3 obravnave",
       "description": "Trije obiski za postopen začetek",
-      "benefits": ["Osebni pristop", "Postopen začetek", "Jasen potek"],
+      "benefits": [
+        "Osebni pristop",
+        "Postopen začetek",
+        "Jasen potek"
+      ],
       "sessions": 3,
       "price": 225,
       "regularPrice": null,
@@ -212,7 +225,11 @@
       "id": "paket-6",
       "name": "Paket 6 obravnav",
       "description": "Šest obiskov za redno spremljanje",
-      "benefits": ["Reden ritem", "Prilagojen načrt", "Spremljanje počutja"],
+      "benefits": [
+        "Reden ritem",
+        "Prilagojen načrt",
+        "Spremljanje počutja"
+      ],
       "sessions": 6,
       "price": 444,
       "regularPrice": null,
@@ -222,7 +239,11 @@
       "id": "paket-9",
       "name": "Paket 9 obravnav",
       "description": "Devet obiskov za daljše spremljanje",
-      "benefits": ["Daljše spremljanje", "Postopen pristop", "Osebno prilagajanje"],
+      "benefits": [
+        "Daljše spremljanje",
+        "Postopen pristop",
+        "Osebno prilagajanje"
+      ],
       "sessions": 9,
       "price": 585,
       "regularPrice": null,

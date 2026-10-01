@@ -4,7 +4,10 @@
     "tagline": "Ihre Brücke zwischen Wissenschaft und Energie",
     "description": "Bei ORI 369 kombinieren wir erstklassige therapeutische Ansätze, neueste Technologien und ein tiefes Verständnis der 3-6-9 Frequenzen, um Ihnen zu helfen, das Gleichgewicht von Körper, Geist und Seele zu erreichen.",
     "email": "Info@ori369.com",
-    "phone": ["+386 51 302 206", "+386 41 458 931"],
+    "phone": [
+      "+386 51 302 206",
+      "+386 41 458 931"
+    ],
     "address": "Ulica škofa Maksimilijana Držečnika 11, 2000 Maribor, Slowenien",
     "hours": {
       "weekdays": "Mo–Fr: 07:00–14:00 und 16:00–21:00",
@@ -117,38 +120,44 @@
     "intro_session": {
       "name": "Präventive Bewegungs- und Konditionsanalyse (Messung + persönliches Programm)",
       "price": 96,
-      "description": "Erstmessung, Gespräch und Erstellung eines persönlichen Plans"
+      "description": "Erstmessung, Gespräch und Erstellung eines persönlichen Plans · 90 Min."
     },
     "packages": [
       {
-        "id": "paket-3",
-        "name": "Paket 3 Behandlungen",
+        "id": "aktivacija",
+        "name": "Aktivacija - Paket 3 obravnave",
         "sessions": 3,
-        "total_price": 225,
-        "price_per_session": 75,
-        "vibration": 9,
-        "description": "Drei Besuche für einen schrittweisen Einstieg in die ausgewählten Anwendungen",
-        "benefits": ["Persönlicher Ansatz", "Schrittweiser Einstieg", "Klarer Ablauf"]
+        "total_price": 196,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · IteraCare in masaža · TECAR · Miofascialna masaža · Končna obravnava",
+        "benefits": [
+          "Schrittweiser Einstieg",
+          "Persönliches Programm",
+          "139 € gespart"
+        ]
       },
       {
-        "id": "paket-6",
-        "name": "Paket 6 Behandlungen",
+        "id": "osvescanje",
+        "name": "Osveščanje Telesa - Paket 6 obravnav",
         "sessions": 6,
-        "total_price": 444,
-        "price_per_session": 74,
-        "vibration": 3,
-        "description": "Sechs Besuche zur regelmäßigen Begleitung und Anpassung des persönlichen Plans",
-        "benefits": ["Regelmäßiger Rhythmus", "Angepasster Plan", "Begleitung des Wohlbefindens"]
+        "total_price": 396,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · IteraCare in masaža · Laser · TECAR · Miofascialna masaža · Končna obravnava",
+        "benefits": [
+          "Regelmäßiger Rhythmus",
+          "Angepasster Plan",
+          "294 € gespart"
+        ]
       },
       {
-        "id": "paket-9",
-        "name": "Paket 9 Behandlungen",
+        "id": "univerzum",
+        "name": "Univerzum - Paket 9 obravnav",
         "sessions": 9,
-        "total_price": 585,
-        "price_per_session": 65,
-        "vibration": 9,
-        "description": "Neun Besuche zur längeren Begleitung und schrittweisen Anpassung des Plans",
-        "benefits": ["Längere Begleitung", "Schrittweiser Ansatz", "Persönliche Anpassung"]
+        "total_price": 796,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · TECAR in masaža · Dekompresijska miza · Miofascialna masaža · Magnetna stimulacija (MIS) · Scalar Wave · MotioScan",
+        "benefits": [
+          "Längere Begleitung",
+          "Persönliche Anpassung",
+          "1039 € gespart"
+        ]
       }
     ],
     "explanation": {
@@ -202,7 +211,11 @@
       "id": "paket-3",
       "name": "Paket 3 Behandlungen",
       "description": "Drei Besuche für einen schrittweisen Einstieg",
-      "benefits": ["Persönlicher Ansatz", "Schrittweiser Einstieg", "Klarer Ablauf"],
+      "benefits": [
+        "Persönlicher Ansatz",
+        "Schrittweiser Einstieg",
+        "Klarer Ablauf"
+      ],
       "sessions": 3,
       "price": 225,
       "regularPrice": null,
@@ -212,7 +225,11 @@
       "id": "paket-6",
       "name": "Paket 6 Behandlungen",
       "description": "Sechs Besuche zur regelmäßigen Begleitung",
-      "benefits": ["Regelmäßiger Rhythmus", "Angepasster Plan", "Begleitung des Wohlbefindens"],
+      "benefits": [
+        "Regelmäßiger Rhythmus",
+        "Angepasster Plan",
+        "Begleitung des Wohlbefindens"
+      ],
       "sessions": 6,
       "price": 444,
       "regularPrice": null,
@@ -222,7 +239,11 @@
       "id": "paket-9",
       "name": "Paket 9 Behandlungen",
       "description": "Neun Besuche zur längeren Begleitung",
-      "benefits": ["Längere Begleitung", "Schrittweiser Ansatz", "Persönliche Anpassung"],
+      "benefits": [
+        "Längere Begleitung",
+        "Schrittweiser Ansatz",
+        "Persönliche Anpassung"
+      ],
       "sessions": 9,
       "price": 585,
       "regularPrice": null,

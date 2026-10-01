@@ -14,6 +14,11 @@ const nextConfig: NextConfig = {
         destination: '/terapije/vadba-za-gibljivost',
         permanent: true,
       },
+      {
+        source: '/terapije/platinium-dekompresijska-miza',
+        destination: '/terapije/platinum-dekompresijska-miza',
+        permanent: true,
+      },
     ];
   },
   images: {

@@ -4,7 +4,10 @@
     "tagline": "Your Bridge Between Science and Energy",
     "description": "At ORI 369, we combine cutting-edge therapeutic approaches, the latest technologies, and a deep understanding of 3-6-9 frequencies to help you achieve balance of body, mind, and spirit.",
     "email": "Info@ori369.com",
-    "phone": ["+386 51 302 206", "+386 41 458 931"],
+    "phone": [
+      "+386 51 302 206",
+      "+386 41 458 931"
+    ],
     "address": "Ulica škofa Maksimilijana Držečnika 11, 2000 Maribor, Slovenia",
     "hours": {
       "weekdays": "Mon–Fri: 07:00–14:00 and 16:00–21:00",
@@ -117,38 +120,44 @@
     "intro_session": {
       "name": "Preventive movement and fitness assessment (measurement + personal program)",
       "price": 96,
-      "description": "Initial measurement, conversation and preparation of a personal plan"
+      "description": "Initial measurement, conversation and preparation of a personal plan · 90 min"
     },
     "packages": [
       {
-        "id": "paket-3",
-        "name": "Package 3 treatments",
+        "id": "aktivacija",
+        "name": "Aktivacija - Paket 3 obravnave",
         "sessions": 3,
-        "total_price": 225,
-        "price_per_session": 75,
-        "vibration": 9,
-        "description": "Three visits for a gradual introduction to the selected sessions",
-        "benefits": ["Personal approach", "Gradual start", "Clear process"]
+        "total_price": 196,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · IteraCare in masaža · TECAR · Miofascialna masaža · Končna obravnava",
+        "benefits": [
+          "Gradual start",
+          "Personal program",
+          "Save €139"
+        ]
       },
       {
-        "id": "paket-6",
-        "name": "Package 6 treatments",
+        "id": "osvescanje",
+        "name": "Osveščanje Telesa - Paket 6 obravnav",
         "sessions": 6,
-        "total_price": 444,
-        "price_per_session": 74,
-        "vibration": 3,
-        "description": "Six visits for regular follow-up and adjustment of the personal plan",
-        "benefits": ["Regular rhythm", "Adapted plan", "Well-being follow-up"]
+        "total_price": 396,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · IteraCare in masaža · Laser · TECAR · Miofascialna masaža · Končna obravnava",
+        "benefits": [
+          "Regular rhythm",
+          "Tailored plan",
+          "Save €294"
+        ]
       },
       {
-        "id": "paket-9",
-        "name": "Package 9 treatments",
+        "id": "univerzum",
+        "name": "Univerzum - Paket 9 obravnav",
         "sessions": 9,
-        "total_price": 585,
-        "price_per_session": 65,
-        "vibration": 9,
-        "description": "Nine visits for longer follow-up and gradual adjustment of the plan",
-        "benefits": ["Longer follow-up", "Gradual approach", "Personal adjustment"]
+        "total_price": 796,
+        "description": "Uvodna meritev · Fizična analiza · Osebni program · Elektrostimulacija · TECAR in masaža · Dekompresijska miza · Miofascialna masaža · Magnetna stimulacija (MIS) · Scalar Wave · MotioScan",
+        "benefits": [
+          "Longer follow-up",
+          "Personal adjustment",
+          "Save €1039"
+        ]
       }
     ],
     "explanation": {
@@ -202,7 +211,11 @@
       "id": "paket-3",
       "name": "Package 3 treatments",
       "description": "Three visits for a gradual start",
-      "benefits": ["Personal approach", "Gradual start", "Clear process"],
+      "benefits": [
+        "Personal approach",
+        "Gradual start",
+        "Clear process"
+      ],
       "sessions": 3,
       "price": 225,
       "regularPrice": null,
@@ -212,7 +225,11 @@
       "id": "paket-6",
       "name": "Package 6 treatments",
       "description": "Six visits for regular follow-up",
-      "benefits": ["Regular rhythm", "Adapted plan", "Well-being follow-up"],
+      "benefits": [
+        "Regular rhythm",
+        "Adapted plan",
+        "Well-being follow-up"
+      ],
       "sessions": 6,
       "price": 444,
       "regularPrice": null,
@@ -222,7 +239,11 @@
       "id": "paket-9",
       "name": "Package 9 treatments",
       "description": "Nine visits for longer follow-up",
-      "benefits": ["Longer follow-up", "Gradual approach", "Personal adjustment"],
+      "benefits": [
+        "Longer follow-up",
+        "Gradual approach",
+        "Personal adjustment"
+      ],
       "sessions": 9,
       "price": 585,
       "regularPrice": null,

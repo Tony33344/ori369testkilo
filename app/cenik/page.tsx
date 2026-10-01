@@ -72,7 +72,7 @@ export default function PricingPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {data.pricing?.packages?.map((pkg, index) => (
+            {data.pricing?.packages?.map((pkg: { id: string; name: string; sessions: number; total_price: number; description: string; benefits: string[]; vibration?: string; price_per_session?: number }, index: number) => (
               <motion.div
                 key={pkg.id}
                 initial={{ opacity: 0, y: 20 }}
@@ -123,9 +123,11 @@ export default function PricingPage() {
                           {pkg.total_price}
                         </span>
                       </div>
-                      <p className="text-sm text-gray-600">
-                        Cena na obravnavo: €{pkg.price_per_session}
-                      </p>
+                      {pkg.price_per_session && (
+                        <p className="text-sm text-gray-600">
+                          Cena na obravnavo: €{pkg.price_per_session}
+                        </p>
+                      )}
                     </div>
                   </div>
 

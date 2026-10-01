@@ -263,12 +263,12 @@
   "categories": {
     "pathTitle": "HOLISTIC PATH TO HEALTH AND WELL-BEING",
     "symptoms": {
-      "burnout": "BURNOUT",
+      "burnout": "OVERLOAD",
       "stress": "STRESS",
-      "fear": "FEAR",
-      "pain": "PAIN",
-      "distress": "DISTRESS",
-      "insomnia": "INSOMNIA"
+      "fear": "TENSION",
+      "pain": "FATIGUE",
+      "distress": "RESTLESSNESS",
+      "insomnia": "DESIRE FOR RELAXATION"
     },
     "methods": {
       "breathing": "BREATHING",

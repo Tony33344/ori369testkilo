@@ -50,9 +50,9 @@ export const therapyContentData: Record<string, TherapyContent> = {
       ]
     }
   },
-  "manualna-terapija": {
-    id: "manualna-terapija",
-    name: "Manualna Terapija",
+  "miofascialna-masaza": {
+    id: "miofascialna-masaza",
+    name: "Miofascialna masaža",
     shortDescription: "Z nežnimi ročnimi tehnikami terapevt sprošča napetosti in izboljšuje gibljivost.",
     duration: 20,
     price: 30,

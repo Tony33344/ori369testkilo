@@ -105,7 +105,7 @@ export default function AboutPage() {
               },
               {
                 title: "Podpora strukturi",
-                items: ["Trakcija hrbtenice", "Miofascialna masaža", "Holos manual treatment"],
+                items: ["Trakcija hrbtenice", "Miofascialna masaža (tehnike po Daltonu)"],
                 icon: <Shield className="text-[#00B5AD]" />
               },
               {

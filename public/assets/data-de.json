@@ -25,7 +25,7 @@
       "price": 20
     },
     {
-      "id": "manualna-terapija",
+      "id": "miofascialna-masaza",
       "name": "Myofasziale Massage",
       "shortDescription": "Sanfte manuelle Techniken zur Entspannung von Muskeln und Faszien.",
       "fullDescription": "Die Anwendung erfolgt mit individuell angepassten Handgriffen. Im Mittelpunkt stehen die Entspannung verspannter Bereiche und ein angenehmes Bewegungsgefühl.",
@@ -115,7 +115,7 @@
   ],
   "pricing": {
     "intro_session": {
-      "name": "Eingangsmessung + körperliche Analyse + persönliches Programm",
+      "name": "Präventive Bewegungs- und Konditionsanalyse (Messung + persönliches Programm)",
       "price": 96,
       "description": "Erstmessung, Gespräch und Erstellung eines persönlichen Plans"
     },
@@ -167,7 +167,7 @@
       ],
       "spine_and_structure_support": [
         "Wirbelsäulentraktion",
-        "Myofasziale Massage / Holos manuelle Behandlung"
+        "Myofasziale Massage (Dalton-Techniken)"
       ],
       "frequency_and_energy_harmonization": [
         "Licht- und Klangentspannung",
@@ -232,17 +232,17 @@
   "testimonials": [
     {
       "name": "Ana M.",
-      "text": "Die Therapien bei ORI 369 haben mir bei chronischen Schmerzen geholfen. Jetzt fühle ich mich energisch und gesund!",
+      "text": "Freundlicher Empfang und professionelle Begleitung. Nach den Besuchen fühle ich mich entspannter und ausgeglichener.",
       "rating": 5
     },
     {
       "name": "Marko K.",
-      "text": "Professioneller Ansatz und außergewöhnliche Ergebnisse. Ich empfehle es jedem, der ganzheitliche Unterstützung sucht.",
+      "text": "Professioneller Ansatz und angenehme Atmosphäre. Ich empfehle es jedem, der ganzheitliche Unterstützung sucht.",
       "rating": 5
     },
     {
       "name": "Petra S.",
-      "text": "Das Gleichgewichtspaket hat mir geholfen, innere Harmonie zu finden. Das Team ist außergewöhnlich!",
+      "text": "Ein persönlicher Ansatz und ein klarer Plan. Das Team ist außergewöhnlich!",
       "rating": 5
     }
   ]

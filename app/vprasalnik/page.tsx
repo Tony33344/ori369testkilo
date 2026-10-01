@@ -342,9 +342,14 @@ export default function VprasalnikPage() {
               className="mt-1 h-5 w-5 accent-[#00B5AD]"
             />
             <span className="text-sm text-gray-700 leading-relaxed">
-              Strinjam se z obdelavo svojih osebnih podatkov za namene priprave brezplačne
-              analize in stika s strani ORI 369. Podatki so obravnavani v skladu z GDPR
-              in se ne posredujejo tretjim osebam.
+              Strinjam se z obdelavo svojih osebnih podatkov, vključno z odgovori o počutju
+              in navadah, za namene priprave brezplačne analize in stika s strani ORI 369.
+              Podatki so obravnavani v skladu z GDPR in se ne posredujejo tretjim osebam.
+              Več v{' '}
+              <Link href="/politika-zasebnosti" className="text-[#00B5AD] underline">
+                politiki zasebnosti
+              </Link>
+              .
             </span>
           </label>
 

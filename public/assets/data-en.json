@@ -25,7 +25,7 @@
       "price": 20
     },
     {
-      "id": "manualna-terapija",
+      "id": "miofascialna-masaza",
       "name": "Myofascial Massage",
       "shortDescription": "Gentle hands-on techniques for relaxing muscles and fascia.",
       "fullDescription": "The session uses hands-on techniques adapted to the individual, with a focus on relaxing tense areas and comfortable movement.",
@@ -115,7 +115,7 @@
   ],
   "pricing": {
     "intro_session": {
-      "name": "Initial Measurement + Physical Analysis + Personal Program",
+      "name": "Preventive movement and fitness assessment (measurement + personal program)",
       "price": 96,
       "description": "Initial measurement, conversation and preparation of a personal plan"
     },
@@ -167,7 +167,7 @@
       ],
       "spine_and_structure_support": [
         "Spinal Traction",
-        "Myofascial Massage / Holos manual treatment"
+        "Myofascial Massage (Dalton techniques)"
       ],
       "frequency_and_energy_harmonization": [
         "Light and sound relaxation",
@@ -232,17 +232,17 @@
   "testimonials": [
     {
       "name": "Ana M.",
-      "text": "Therapies at ORI 369 helped me with chronic pain. Now I feel energetic and healthy!",
+      "text": "A friendly welcome and professional guidance. After my visits I feel more relaxed and focused.",
       "rating": 5
     },
     {
       "name": "Marko K.",
-      "text": "Professional approach and exceptional results. I recommend it to everyone seeking holistic support.",
+      "text": "Professional approach and a pleasant environment. I recommend it to everyone seeking holistic support.",
       "rating": 5
     },
     {
       "name": "Petra S.",
-      "text": "The Balance package helped me find inner harmony. The team is exceptional!",
+      "text": "A personal approach and a clear plan. The team is exceptional!",
       "rating": 5
     }
   ]

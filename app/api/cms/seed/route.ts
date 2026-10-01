@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
     const html = `
       <h1>MotioScan – 3D Analiza Telesne Drže</h1>
       <p><strong>NE UGIBAJ. IZMERI.</strong></p>
-      <p>Odkrij natančno stanje svojega telesa z inovativno 3D tehnologijo, ki v nekaj sekundah razkrije tvoje skrite asimetrije, obremenitve in neravnovesja. MotioScan je prvi korak k optimizaciji tvojega telesa in povratku v naravno ravnovesje.</p>
+      <p>Odkrij natančno stanje svojega telesa z inovativno 3D tehnologijo, ki v nekaj sekundah razkrije vaše skrite asimetrije, obremenitve in neravnovesja. MotioScan je prvi korak k optimizaciji vašega telesa in povratku v naravno ravnovesje.</p>
       <h2>Kaj je MotioScan?</h2>
       <p>MotioScan (Moti Physio) je napredna 3D naprava za natančno oceno telesne drže, ki s pomočjo vizualnih markerjev in računalniške analitike zajame:</p>
       <ul>
@@ -56,7 +56,7 @@ export async function POST(request: NextRequest) {
       <h2>Kako poteka MotioScan analiza?</h2>
       <ol>
         <li><strong>Scan (30–60 sekund)</strong> – snemanje poteka stoje, naravno, brez posebne priprave.</li>
-        <li><strong>3D model</strong> – sistem izriše tvojo držo v digitalnem formatu.</li>
+        <li><strong>3D model</strong> – sistem izriše vašo držo v digitalnem formatu.</li>
         <li><strong>Analiza neravnovesij</strong> – višinske razlike, nagibi, rotacije, zamiki, obremenitve, stabilnost.</li>
         <li><strong>Razlaga rezultatov</strong> – terapevt predstavi stanje telesa.</li>
         <li><strong>Protokol povratka v ravnovesje</strong> – manualna korekcija, somatske vaje, stabilizacija, mobilnost, dihanje, terapija drže, terapije ORI.</li>

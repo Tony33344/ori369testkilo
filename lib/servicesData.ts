@@ -37,9 +37,9 @@ export interface TherapyPackage {
 }
 
 export const servicesData: Record<string, ServiceDetail> = {
-  'manualna-terapija': {
-    slug: 'manualna-terapija',
-    name: 'Manualna Terapija',
+  'miofascialna-masaza': {
+    slug: 'miofascialna-masaza',
+    name: 'Miofascialna masaža',
     shortDescription: 'Z nežnimi ročnimi tehnikami terapevt sprošča napetosti in izboljšuje gibljivost.',
     longDescription: `Manualna terapija je metoda zdravljenja pri kateri terapevt z lastnimi rokami deluje na telo posameznika z namenom obnove gibalne sposobnosti prizadetih območij, povečanja njene stabilnosti in odprave bolečine.
 
@@ -87,7 +87,7 @@ Trajanje zdravljenja je odvisno od vrste in resnosti poškodbe. Pri akutnih stan
   },
   'platinium-dekompresijska-miza': {
     slug: 'platinium-dekompresijska-miza',
-    name: 'Platinium - Dekompresijska Miza',
+    name: 'Platinum – Dekompresijska miza',
     shortDescription: 'Terapija za razbremenitev hrbtenice in dekompresijo.',
     longDescription: `Dekompresijska miza je napredna terapevtska naprava, ki z mehansko razbremenjenostjo hrbtenice zmanjšuje pritisk na medvretenčne diske in živce. Terapija je neinvazivna in neboleča, idealna za paciente s kroničnimi bolečinami v hrbtu.
 
@@ -776,9 +776,9 @@ FES (Funkcionalna električna stimulacija) s pomočjo električnih impulzov dra�
     price: 30,
     duration: 30
   },
-  'individualna-protibolecinska-antistresna-vadba': {
-    slug: 'individualna-protibolecinska-antistresna-vadba',
-    name: 'Individualna protibolečinska ali antistresna vadba',
+  'vadba-za-gibljivost': {
+    slug: 'vadba-za-gibljivost',
+    name: 'Vadba za gibljivost in sprostitev',
     shortDescription: 'Osebna vadba za zmanjšanje bolečine in stresa.',
     longDescription: 'Individualna protibolečinska ali antistresna vadba je osebno prilagojena vadba, ki je namenjena zmanjšanju bolečine in stresa. Vaje so zasnovane glede na vaše potrebe in trenutno stanje.',
     howItWorks: 'Terapevt vam pripravi osebni program vaj, ki so specifično namenjene vašim potrebam. Vaje kombinirajo gibanje, raztezanje in tehnike za sprostitev, ki zmanjšajo bolečino in stres.',
@@ -862,7 +862,7 @@ Samo vi ste kreator vaših mislih in samo vi lahko igrate glavno vlogo v vašem 
 export const packagesData: TherapyPackage[] = [
   {
     slug: 'prvi-pregled',
-    name: 'Prvi pregled, analiza in osebni program',
+    name: 'Preventivni gibalni in kondicijski pregled (meritev + osebni program)',
     description: 'Uvodni pregled z oceno drže in gibanja ter pripravo osebnega programa.',
     sessions: 1,
     regularPrice: null,
@@ -919,15 +919,17 @@ export const packagesData: TherapyPackage[] = [
 
 export const individualPrices = [
   { name: 'Motio-Physio Scan', price: 69, duration: 30 },
-  { name: 'Storm miofascialna masaža', price: 30, duration: 20 },
-  { name: 'Dekompresijska miza – Platinium', price: 30, duration: 20 },
-  { name: 'Tacer', price: 29, duration: 30 },
+  { name: 'Miofascialna masaža (tehnike po Daltonu)', price: 30, duration: 20 },
+  { name: 'Dekompresijska miza – Platinum', price: 30, duration: 20 },
+  { name: 'TECAR', price: 29, duration: 30 },
   { name: 'Cryoscreen', price: 9, duration: 15 },
   { name: 'Udarni valovi', price: 39, duration: 20 },
   { name: 'Laser', price: 9, duration: 10 },
   { name: 'Elektrostimulacija', price: 19, duration: 20 },
-  { name: 'Media Tape', price: 9, duration: 10 },
-  { name: 'Iteracare', price: 19, duration: 20 },
+  { name: 'Magnetna stimulacija', price: 30, duration: 20 },
+  { name: 'MIS (magnetna indukcijska stimulacija)', price: 30, duration: 20 },
+  { name: 'Medi Taping', price: 9, duration: 10 },
+  { name: 'IteraCare', price: 19, duration: 20 },
   { name: 'Scalar Wave sprostitev', price: 30, duration: 30 },
   { name: 'Ultrazvok', price: 19, duration: 15 },
   { name: 'Sprostitvena akupresura rok', price: 29, duration: 30 },

@@ -78,7 +78,7 @@ export default function MotioScanStarterPage() {
                   },
                   {
                     title: "Osebni načrt gibanja in vaj",
-                    desc: "Namesto splošnih priporočil dobiš strukturiran predlog naslednjih korakov za tvoje telo, cilje in omejitve.",
+                    desc: "Namesto splošnih priporočil prejmete strukturiran predlog naslednjih korakov za vaše telo, cilje in omejitve.",
                     icon: <CheckCircle className="h-5 w-5 text-[#00B5AD]" />,
                   },
                   {
@@ -100,7 +100,7 @@ export default function MotioScanStarterPage() {
 
             <div className="space-y-6">
               <div className="rounded-[2rem] bg-gradient-to-br from-[#00B5AD] to-[#009891] p-8 text-white shadow-[0_18px_60px_rgba(0,181,173,0.22)]">
-                <h3 className="text-2xl font-bold">Kaj dobiš na obisku</h3>
+                <h3 className="text-2xl font-bold">Kaj prejmete na obisku</h3>
                 <div className="mt-6 space-y-4">
                   {[
                     "uvodni pogovor o težavah, ciljih in zgodovini telesa",
@@ -117,9 +117,9 @@ export default function MotioScanStarterPage() {
               </div>
 
               <div className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-[0_18px_60px_rgba(0,0,0,0.06)]">
-                <h3 className="text-2xl font-bold text-gray-900">Želiš najprej samo analizo?</h3>
+                <h3 className="text-2xl font-bold text-gray-900">Želite najprej samo analizo?</h3>
                 <p className="mt-4 text-gray-600 leading-relaxed">
-                  Če te zanima predvsem 3D meritev in želiš najprej spoznati tehnologijo MotioScan, si poglej tudi osnovno predstavitev analize.
+                  Če vas zanima predvsem 3D meritev in želite najprej spoznati tehnologijo MotioScan, si oglejte tudi osnovno predstavitev analize.
                 </p>
                 <Link
                   href="/motioscan"

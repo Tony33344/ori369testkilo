@@ -128,8 +128,11 @@ export default function ContactPage() {
                 </h3>
                 <div className="space-y-2 text-sm text-gray-600">
                   <p><strong>Izvajalec in izdajatelj računov za storitve ORI 369:</strong> {companyData.legalName}</p>
+                  <p><strong>Sedež podjetja:</strong> {companyData.legalAddress}</p>
+                  <p><strong>Lokacija centra:</strong> {companyData.businessAddress}</p>
                   <p><strong>Davčna št.:</strong> {companyData.taxNumber}</p>
                   <p><strong>Matična št.:</strong> {companyData.registrationNumber}</p>
+                  <p><strong>E-pošta:</strong> {companyData.email}</p>
                   <p><strong>IBAN:</strong> <span className="font-mono">{formatIBAN(companyData.bank.iban)}</span></p>
                   <p><strong>Banka:</strong> {companyData.bank.name}</p>
                 </div>

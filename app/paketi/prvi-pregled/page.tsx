@@ -9,15 +9,15 @@ export default function FirstConsultPage() {
           <div className="mx-auto max-w-5xl text-center">
             <div className="inline-flex items-center gap-2 rounded-full border border-[#00B5AD]/20 bg-[#00B5AD]/8 px-4 py-2 text-sm font-semibold text-[#00B5AD]">
               <Sparkles className="h-4 w-4" />
-              Ne veš, kje začeti? Začni tukaj.
+              Ne veste, kje začeti? Začnite tukaj.
             </div>
 
             <h1 className="mt-6 text-4xl font-bold leading-tight md:text-6xl">
-              Prva posvetovalna obravnava za jasen začetek tvoje poti
+              Prva posvetovalna obravnava za jasen začetek vaše poti
             </h1>
 
             <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-gray-600 md:text-xl">
-              Če si pri nas prvič in želiš razumeti, kaj tvoje telo trenutno potrebuje, je ta uvodni termin najboljši prvi korak.
+              Če ste pri nas prvič in želite razumeti, kaj vaše telo trenutno potrebuje, je ta uvodni termin najboljši prvi korak.
               Skupaj ocenimo držo in gibanje, razjasnimo prioritete ter pripravimo usmeritev za naslednje korake.
             </p>
 
@@ -46,15 +46,15 @@ export default function FirstConsultPage() {
             <div className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-[0_18px_60px_rgba(0,0,0,0.06)] md:p-10">
               <h2 className="text-3xl font-bold md:text-4xl">Kaj je namen te prve obravnave?</h2>
               <p className="mt-4 max-w-3xl text-lg leading-relaxed text-gray-600">
-                Namen ni, da dobiš samo termin. Namen je, da dobiš občutek varnosti, razumevanje svojega stanja
-                in konkreten naslednji korak, ki ima smisel zate.
+                Namen ni, da prejmete samo termin. Namen je, da prejmete občutek varnosti, razumevanje svojega stanja
+                in konkreten naslednji korak, ki ima smisel za vas.
               </p>
 
               <div className="mt-10 grid gap-5 md:grid-cols-2">
                 {[
                   {
                     title: 'Pogovor in usmeritev',
-                    desc: 'Najprej razumemo, kaj te pripelje k nam, kako dolgo težava traja in kaj želiš doseči.',
+                    desc: 'Najprej razumemo, kaj vas pripelje k nam, kako dolgo težava traja in kaj želite doseči.',
                     icon: <HeartHandshake className="h-5 w-5 text-[#00B5AD]" />,
                   },
                   {
@@ -103,7 +103,7 @@ export default function FirstConsultPage() {
               </div>
 
               <div className="rounded-[2rem] border border-gray-100 bg-white p-8 shadow-[0_18px_60px_rgba(0,0,0,0.06)]">
-                <h3 className="text-2xl font-bold">Če te zanima tudi poglobljena analiza</h3>
+                <h3 className="text-2xl font-bold">Če vas zanima tudi poglobljena analiza</h3>
                 <p className="mt-4 leading-relaxed text-gray-600">
                   Poglejte še uvodni termin s Physio Motio meritvijo, kjer združimo prvi pregled, meritev in oseben načrt gibanja.
                 </p>

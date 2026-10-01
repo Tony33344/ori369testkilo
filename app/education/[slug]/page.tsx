@@ -128,7 +128,7 @@ export default function EducationCoursePage() {
       <section className="relative h-[50vh] min-h-[400px] overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src={course.cover_image_url || 'https://images.unsplash.com/photo-1544367563-12123d8965cd?auto=format&fit=crop&w=1600&q=80'}
+            src={course.cover_image_url || '/images/therapies/IMG_5947-768x513.webp'}
             alt={course.title}
             className="w-full h-full object-cover"
           />

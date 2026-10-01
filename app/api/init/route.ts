@@ -53,7 +53,7 @@ export async function GET(request: NextRequest) {
             const html = `
               <h1>MotioScan – 3D Analiza Telesne Drže</h1>
               <p><strong>NE UGIBAJ. IZMERI.</strong></p>
-              <p>Odkrij natančno stanje svojega telesa z inovativno 3D tehnologijo, ki v nekaj sekundah razkrije tvoje skrite asimetrije, obremenitve in neravnovesja. MotioScan je prvi korak k optimizaciji tvojega telesa in povratku v naravno ravnovesje.</p>
+              <p>Odkrij natančno stanje svojega telesa z inovativno 3D tehnologijo, ki v nekaj sekundah razkrije vaše skrite asimetrije, obremenitve in neravnovesja. MotioScan je prvi korak k optimizaciji vašega telesa in povratku v naravno ravnovesje.</p>
               <h2>Kaj je MotioScan?</h2>
               <p>MotioScan (Moti Physio) je napredna 3D naprava za natančno oceno telesne drže, ki s pomočjo vizualnih markerjev in računalniške analitike zajame:</p>
               <ul>
@@ -74,7 +74,7 @@ export async function GET(request: NextRequest) {
               <h2>Kako poteka MotioScan analiza?</h2>
               <ol>
                 <li><strong>Scan (30–60 sekund)</strong> – snemanje poteka stoje, naravno, brez posebne priprave.</li>
-                <li><strong>3D model</strong> – sistem izriše tvojo držo v digitalnem formatu.</li>
+                <li><strong>3D model</strong> – sistem izriše vašo držo v digitalnem formatu.</li>
                 <li><strong>Analiza neravnovesij</strong> – višinske razlike, nagibi, rotacije, zamiki, obremenitve, stabilnost.</li>
                 <li><strong>Razlaga rezultatov</strong> – terapevt predstavi stanje telesa.</li>
                 <li><strong>Protokol povratka v ravnovesje</strong> – manualna korekcija, somatske vaje, stabilizacija, mobilnost, dihanje, terapija drže, terapije ORI.</li>
@@ -136,8 +136,7 @@ export async function GET(request: NextRequest) {
     // 2. Seed Shop categories and products
     const categories = [
       { slug: '4endurance-nduranz-pro', name: '4Endurance / Nduranz Pro', order: 0 },
-      { slug: 'medicinske-gobe', name: 'Medicinske gobe', order: 1 },
-      { slug: 'homeopatija', name: 'Homeopatija', order: 2 },
+      { slug: 'funkcionalne-gobe', name: 'Funkcionalne gobe', order: 1 },
       { slug: 'zeliscni-pripravki', name: 'Zeliščni pripravki slovenskih zeliščarjev', order: 3 },
       { slug: 'green-spirit', name: 'Green Spirit – Premium CBD linija', order: 4 },
       { slug: 'svetovanje', name: 'Individualno svetovanje & Personalizirani protokoli', order: 5 },
@@ -150,8 +149,7 @@ export async function GET(request: NextRequest) {
         'Vitamin B kompleks', 'Multivitamini (klasični/liposomalni)', 'Elektroliti', 'Kolagen (tip I & III)',
         'Selen', 'Probiotiki', 'Kalcij+Magnezij+Cink'
       ],
-      'medicinske-gobe': ['Reishi', "Lion's Mane", 'Cordyceps', 'Chaga', 'Šiitake', 'Maitake'],
-      'homeopatija': ['Homeopatske kapljice', 'Homeopatske pilule', 'Informirana homeopatska voda'],
+      'funkcionalne-gobe': ['Reishi', "Lion's Mane", 'Cordyceps', 'Chaga', 'Šiitake', 'Maitake'],
       'zeliscni-pripravki': ['Zeliščni macerati', 'Tinkture', 'Mazila in terapevtski balzami', 'Oljni ekstrakti', 'Adaptogeni iz slovenskih zelišč'],
       'green-spirit': ['CBD olja (brez THC)', 'CBD izolat (99%)', 'CBD premium praline', 'CBD topikali'],
       'svetovanje': ['Osebno svetovanje'],

@@ -208,12 +208,12 @@
   "categories": {
     "pathTitle": "HOLISTIČKI PUT DO ZDRAVLJA I DOBROBITI",
     "symptoms": {
-      "burnout": "IZGARANJE",
+      "burnout": "OPTEREĆENOST",
       "stress": "STRES",
-      "fear": "STRAH",
-      "pain": "BOL",
-      "distress": "TJESKOBA",
-      "insomnia": "NESANICA"
+      "fear": "NAPETOST",
+      "pain": "UMOR",
+      "distress": "NEMIR",
+      "insomnia": "ŽELJA ZA OPUŠTANJEM"
     },
     "methods": {
       "breathing": "DISANJE",

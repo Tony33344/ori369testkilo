@@ -233,12 +233,12 @@
   "categories": {
     "pathTitle": "CELOSTNA POT DO ZDRAVJA IN DOBREGA POČUTJA",
     "symptoms": {
-      "burnout": "IZGORELOST",
+      "burnout": "OBREMENJENOST",
       "stress": "STRES",
-      "fear": "STRAH",
-      "pain": "BOLEČINA",
-      "distress": "TESNOBA",
-      "insomnia": "NESPEČNOST"
+      "fear": "NAPETOST",
+      "pain": "UTRUJENOST",
+      "distress": "NEMIR",
+      "insomnia": "ŽELJA PO SPROSTITVI"
     },
     "methods": {
       "breathing": "DIHANJE",

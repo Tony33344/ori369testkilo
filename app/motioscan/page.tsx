@@ -42,7 +42,7 @@ export default function MotioScanPage() {
               NE UGIBAJ. IZMERI.
             </p>
             <p className="text-base md:text-lg mb-8 md:mb-10 opacity-90 leading-relaxed">
-              Odkrij natančno stanje svojega telesa z inovativno 3D tehnologijo, ki v nekaj sekundah razkrije tvoje skrite asimetrije, obremenitve in neravnovesja.
+              Odkrijte natančno stanje svojega telesa z inovativno 3D tehnologijo, ki v nekaj sekundah razkrije vaše skrite asimetrije, obremenitve in neravnovesja.
             </p>
             <Link
               href="/rezervacija?package=motioscan"

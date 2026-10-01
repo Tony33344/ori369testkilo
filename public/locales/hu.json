@@ -208,12 +208,12 @@
   "categories": {
     "pathTitle": "HOLISZTIKUS ÚT AZ EGÉSZSÉG ÉS JÓLÉT FELÉ",
     "symptoms": {
-      "burnout": "KIÉGÉS",
+      "burnout": "TERHELTSÉG",
       "stress": "STRESSZ",
-      "fear": "FÉLELEM",
-      "pain": "FÁJDALOM",
-      "distress": "FESZÜLTSÉG",
-      "insomnia": "ÁLMATLANSÁG"
+      "fear": "FESZÜLTSÉG",
+      "pain": "FÁRADTSÁG",
+      "distress": "NYUGTALANSÁG",
+      "insomnia": "VÁGY A PIHENÉSRE"
     },
     "methods": {
       "breathing": "LÉGZÉS",

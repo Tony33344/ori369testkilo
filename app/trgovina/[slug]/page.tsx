@@ -89,7 +89,7 @@ export default function ProductPage() {
 
   const loadProduct = async () => {
     setLoading(true);
-    if (slug === 'informirana-homeopatska-voda') {
+    if (['informirana-homeopatska-voda', 'homeopatske-kapljice', 'homeopatske-pilule'].includes(slug)) {
       setProduct(null);
       setLoading(false);
       return;
@@ -277,7 +277,7 @@ export default function ProductPage() {
             </div>
 
             {/* Quantity & Add to Cart */}
-            {product.stock > 0 && (
+            {product.stock > 0 && Number(product.price) > 0 && (
               <div className="space-y-4 bg-white rounded-2xl p-6 border border-gray-100">
                 <div>
                   <label className="block text-sm font-semibold text-gray-900 mb-3">Izberite količino</label>
@@ -315,12 +315,12 @@ export default function ProductPage() {
               </div>
             )}
 
-            {product.stock === 0 && (
+            {(product.stock === 0 || Number(product.price) <= 0) && (
               <button
                 disabled
                 className="w-full bg-gray-400 text-white py-4 rounded-xl font-bold cursor-not-allowed text-lg"
               >
-                Razprodano
+                {product.stock === 0 ? 'Razprodano' : 'Trenutno ni na voljo'}
               </button>
             )}
           </div>

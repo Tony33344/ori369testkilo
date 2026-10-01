@@ -75,8 +75,9 @@ function ShopPageContent() {
         .eq('active', true)
         .order('name', { ascending: true });
 
+      const hiddenSlugs = new Set(['informirana-homeopatska-voda', 'homeopatske-kapljice', 'homeopatske-pilule']);
       setCategories(cats || []);
-      setProducts((prods || []).filter((product: any) => product.slug !== 'informirana-homeopatska-voda'));
+      setProducts((prods || []).filter((product: any) => !hiddenSlugs.has(product.slug)));
     } catch (error) {
       console.error('Failed to load shop data:', error);
     }
@@ -121,7 +122,7 @@ function ShopPageContent() {
             Trgovina
           </h1>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Prehranska dopolnila, funkcionalne gobe, homeopatija, zeliščni pripravki in premium CBD izdelki za vašo zdravje in počutje.
+            Prehranska dopolnila, funkcionalne gobe, zeliščni pripravki in premium CBD izdelki za vaše počutje.
           </p>
         </div>
 
@@ -278,11 +279,11 @@ function ShopPageContent() {
                           </div>
                           <button
                             onClick={() => handleAddToCart(p)}
-                            disabled={p.stock === 0 || addedProducts.has(p.id)}
+                            disabled={p.stock === 0 || Number(p.price) <= 0 || addedProducts.has(p.id)}
                             className={`px-3 py-2 rounded-lg font-semibold transition-all text-sm flex items-center gap-1 ${
                               addedProducts.has(p.id)
                                 ? 'bg-green-500 text-white'
-                                : p.stock === 0
+                                : p.stock === 0 || Number(p.price) <= 0
                                 ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
                                 : 'bg-teal-600 text-white hover:bg-teal-700'
                             }`}

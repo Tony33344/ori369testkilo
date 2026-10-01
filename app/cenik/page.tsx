@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { Check, Zap, Package, Clock, Euro, ChevronDown, ChevronUp } from 'lucide-react';
+import { Check, Package, Euro } from 'lucide-react';
 import { useState } from 'react';
 import { useLanguage } from '@/lib/i18n';
 import { getDataForLanguage } from '@/lib/data-loader';
@@ -204,64 +204,6 @@ export default function PricingPage() {
             </motion.div>
           )}
         </motion.div>
-
-        {/* Legacy Individual Therapies Section */}
-        {data.therapies && data.therapies.length > 0 && (
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="mb-16"
-          >
-            <div className="flex items-center space-x-3 mb-8">
-              <Zap className="text-[#00B5AD]" size={32} />
-              <h2 className="text-3xl md:text-4xl font-bold text-black">
-                Dodatne obravnave
-              </h2>
-            </div>
-
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {data.therapies.map((therapy, index) => (
-                <motion.div
-                  key={therapy.id}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: index * 0.05 }}
-                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 border border-gray-100"
-                >
-                  <h3 className="text-xl font-bold text-black mb-2">
-                    {therapy.name}
-                  </h3>
-                  <p className="text-gray-600 text-sm mb-4 line-clamp-2">
-                    {therapy.shortDescription}
-                  </p>
-                  
-                  <div className="flex items-center justify-between mb-4 pt-4 border-t border-gray-200">
-                    <div className="flex items-center space-x-2 text-gray-600">
-                      <Clock size={16} />
-                      <span className="text-sm">{therapy.duration} min</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <Euro className="text-[#00B5AD]" size={20} />
-                      <span className="text-2xl font-bold text-[#00B5AD]">
-                        {therapy.price}
-                      </span>
-                    </div>
-                  </div>
-
-                  <Link
-                    href={`/terapije/${therapy.id}`}
-                    className="block w-full py-2 text-center bg-gray-100 hover:bg-[#00B5AD] hover:text-white text-gray-700 rounded-lg transition-all duration-200 text-sm font-semibold"
-                  >
-                    Več informacij
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-          </motion.div>
-        )}
 
         {/* Legacy Packages Section (if any) */}
         {data.packages && data.packages.length > 0 && data.pricing?.packages?.length === 0 && (

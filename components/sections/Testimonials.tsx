@@ -12,6 +12,7 @@ interface Testimonial {
 
 export default function Testimonials({ testimonials }: { testimonials: Testimonial[] }) {
   const { t } = useLanguage();
+  if (!testimonials || testimonials.length === 0) return null;
   return (
     <section className="py-20 bg-white">
       <div className="container mx-auto px-4">

@@ -155,6 +155,20 @@ export default function Footer() {
             <p className="text-xs text-gray-400 max-w-3xl mx-auto mb-4 leading-relaxed">
               {t('footer.disclaimer')}
             </p>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-4 text-xs text-gray-500">
+              <Link href="/politika-zasebnosti" className="hover:text-[#00B5AD] transition-colors">
+                Politika zasebnosti
+              </Link>
+              <Link href="/politika-piskotkov" className="hover:text-[#00B5AD] transition-colors">
+                Politika piškotkov
+              </Link>
+              <Link href="/splosni-pogoji" className="hover:text-[#00B5AD] transition-colors">
+                Splošni pogoji poslovanja
+              </Link>
+              <Link href="/obvestilo-o-odstopu" className="hover:text-[#00B5AD] transition-colors">
+                Obvestilo o pravici do odstopa
+              </Link>
+            </div>
             <p className="text-sm text-gray-500">
               &copy; {new Date().getFullYear()} ORI 369. {t('footer.rights')}.
             </p>

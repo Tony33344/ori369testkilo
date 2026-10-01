@@ -1,7 +1,8 @@
 'use client';
 
 import { useState, useEffect, Suspense } from 'react';
-import { useRouter, useSearchParams } from 'next/navigation';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 import { getCurrentUser } from '@/lib/auth';
 import { useLanguage } from '@/lib/i18n';
@@ -48,10 +49,10 @@ const resolveServiceByPackageParam = (items: any[], packageParam: string) => {
 function BookingForm() {
   const { t } = useLanguage();
   const searchParams = useSearchParams();
-  const router = useRouter();
   const packageId = searchParams.get('package');
   
   const [user, setUser] = useState<any>(null);
+  const [authChecked, setAuthChecked] = useState(false);
   const [services, setServices] = useState<any[]>([]);
   const [selectedService, setSelectedService] = useState('');
   const [selectedDate, setSelectedDate] = useState('');
@@ -94,12 +95,7 @@ function BookingForm() {
   const loadUser = async () => {
     const currentUser = await getCurrentUser();
     setUser(currentUser);
-
-    if (!currentUser) {
-      const search = typeof window !== 'undefined' ? window.location.search : '';
-      const redirectPath = `/rezervacija${search || ''}`;
-      router.replace(`/prijava?redirect=${encodeURIComponent(redirectPath)}`);
-    }
+    setAuthChecked(true);
   };
 
   const loadServices = async () => {
@@ -366,10 +362,27 @@ function BookingForm() {
           </div>
 
           <div className="bg-white rounded-2xl shadow-xl p-4 md:p-8">
-            {!user && (
-              <div className="mb-6 p-4 bg-blue-50 border border-blue-200 rounded-lg">
-                <p className="text-blue-800">
-                  {t('booking.loginRequired')}
+            {authChecked && !user && (
+              <div className="mb-6 p-5 bg-blue-50 border border-blue-200 rounded-lg">
+                <p className="text-blue-800 mb-3">
+                  Za rezervacijo termina je potreben brezplačen uporabniški račun. Račun omogoča pregled, spremembo ali odpoved vaših rezervacij in varno shranjevanje vaših podatkov.
+                </p>
+                <div className="flex flex-col sm:flex-row gap-3">
+                  <Link
+                    href={`/prijava?redirect=${encodeURIComponent(`/rezervacija${packageId ? `?package=${packageId}` : ''}`)}`}
+                    className="px-6 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-center transition-colors"
+                  >
+                    Prijava
+                  </Link>
+                  <Link
+                    href={`/registracija?redirect=${encodeURIComponent(`/rezervacija${packageId ? `?package=${packageId}` : ''}`)}`}
+                    className="px-6 py-2.5 bg-white border border-blue-300 text-blue-700 font-semibold rounded-lg text-center hover:border-blue-500 transition-colors"
+                  >
+                    Ustvari račun
+                  </Link>
+                </div>
+                <p className="text-xs text-blue-700 mt-3">
+                  Ob oddaji podatkov velja <Link href="/politika-zasebnosti" className="underline">politika zasebnosti</Link>.
                 </p>
               </div>
             )}

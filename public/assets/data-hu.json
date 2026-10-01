@@ -25,7 +25,7 @@
       "price": 20
     },
     {
-      "id": "manualna-terapija",
+      "id": "miofascialna-masaza",
       "name": "Miofasciális masszázs",
       "shortDescription": "Gyengéd kézi technikák az izmok és a fascia ellazítására.",
       "fullDescription": "A foglalkozás egyénre szabott kézi fogásokkal történik, a feszült területek ellazítására és a kellemes mozgásérzetre összpontosítva.",
@@ -115,7 +115,7 @@
   ],
   "pricing": {
     "intro_session": {
-      "name": "Kezdő mérés + fizikai elemzés + személyes program",
+      "name": "Megelőző mozgás- és kondíciófelmérés (mérés + személyes program)",
       "price": 96,
       "description": "Kezdeti mérés, beszélgetés és személyes terv készítése"
     },
@@ -167,7 +167,7 @@
       ],
       "spine_and_structure_support": [
         "Gerinc trakció",
-        "Miofasciális masszázs / Holos manuális kezelés"
+        "Miofasciális masszázs (Dalton-féle technikák)"
       ],
       "frequency_and_energy_harmonization": [
         "Fény- és hangrelaxáció",
@@ -232,17 +232,17 @@
   "testimonials": [
     {
       "name": "Ana M.",
-      "text": "Az ORI 369 terápiái segítettek a krónikus fájdalmaimban. Most energikusnak és egészségesnek érzem magam!",
+      "text": "Barátságos fogadtatás és szakszerű kíséret. A látogatások után nyugodtabbnak és kiegyensúlyozottabbnak érzem magam.",
       "rating": 5
     },
     {
       "name": "Marko K.",
-      "text": "Professzionális megközelítés és kivételes eredmények. Mindenkinek ajánlom, aki holisztikus támogatást keres.",
+      "text": "Professzionális megközelítés és kellemes környezet. Mindenkinek ajánlom, aki holisztikus támogatást keres.",
       "rating": 5
     },
     {
       "name": "Petra S.",
-      "text": "Az Egyensúly csomag segített megtalálni a belső harmóniát. A csapat kivételes!",
+      "text": "Személyes megközelítés és világos terv. A csapat kivételes!",
       "rating": 5
     }
   ]

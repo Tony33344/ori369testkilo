@@ -208,12 +208,12 @@
   "categories": {
     "pathTitle": "GANZHEITLICHER WEG ZU GESUNDHEIT UND WOHLBEFINDEN",
     "symptoms": {
-      "burnout": "BURNOUT",
+      "burnout": "BELASTUNG",
       "stress": "STRESS",
-      "fear": "ANGST",
-      "pain": "SCHMERZ",
-      "distress": "BEKLEMMUNG",
-      "insomnia": "SCHLAFLOSIGKEIT"
+      "fear": "ANSPANNUNG",
+      "pain": "MÜDIGKEIT",
+      "distress": "UNRUHE",
+      "insomnia": "WUNSCH NACH ENTSPANNUNG"
     },
     "methods": {
       "breathing": "ATMUNG",

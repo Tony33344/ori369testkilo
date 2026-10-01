@@ -113,11 +113,11 @@ export default function EducationPage() {
               <div key={course.id} className="group bg-white border border-gray-100 rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-md">
                 <div className="relative h-64 overflow-hidden bg-gray-100">
                   <img 
-                    src={course.cover_image_url || 'https://images.unsplash.com/photo-1544367563-12123d8965cd?auto=format&fit=crop&w=800&q=80'} 
+                    src={course.cover_image_url || '/images/therapies/IMG_5947-768x513.webp'} 
                     alt={course.title}
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                     onError={(e) => {
-                      (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1544367563-12123d8965cd?auto=format&fit=crop&w=800&q=80';
+                      (e.target as HTMLImageElement).src = '/images/therapies/IMG_5947-768x513.webp';
                     }}
                   />
                   <div className="absolute top-4 left-4">
@@ -252,11 +252,11 @@ export default function EducationPage() {
                     <div className={`relative ${idx % 2 === 1 ? 'md:order-2' : ''}`}>
                       <div className="absolute -top-10 -left-10 w-40 h-40 bg-[#00B5AD]/20 rounded-full blur-2xl"></div>
                       <img 
-                        src={course.cover_image_url || "https://images.unsplash.com/photo-1598553165195-06cb1be4de8d?auto=format&fit=crop&w=800&q=80"} 
+                        src={course.cover_image_url || "/images/therapies/IMG_5931-768x513.webp"} 
                         alt={course.title}
                         className="rounded-3xl shadow-2xl relative z-10 w-full h-80 object-cover"
                         onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1598553165195-06cb1be4de8d?auto=format&fit=crop&w=800&q=80';
+                          (e.target as HTMLImageElement).src = '/images/therapies/IMG_5931-768x513.webp';
                         }}
                       />
                     </div>

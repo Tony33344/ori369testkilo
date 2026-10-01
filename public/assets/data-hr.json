@@ -25,7 +25,7 @@
       "price": 20
     },
     {
-      "id": "manualna-terapija",
+      "id": "miofascialna-masaza",
       "name": "Miofascijalna masaža",
       "shortDescription": "Nježne ručne tehnike za opuštanje mišića i fascija.",
       "fullDescription": "Tretman se izvodi ručnim tehnikama prilagođenima pojedincu, s naglaskom na opuštanje napetih područja i ugodan osjećaj pokreta.",
@@ -115,7 +115,7 @@
   ],
   "pricing": {
     "intro_session": {
-      "name": "Uvodno mjerenje + fizička analiza + osobni program",
+      "name": "Preventivni gibalni i kondicijski pregled (mjerenje + osobni program)",
       "price": 96,
       "description": "Uvodno mjerenje, razgovor i priprema osobnog plana"
     },
@@ -167,7 +167,7 @@
       ],
       "spine_and_structure_support": [
         "Trakcija kralježnice",
-        "Miofascijalna masaža / Holos manualna obrada"
+        "Miofascijalna masaža (tehnike po Daltonu)"
       ],
       "frequency_and_energy_harmonization": [
         "Svjetlosno i zvučno opuštanje",
@@ -232,17 +232,17 @@
   "testimonials": [
     {
       "name": "Ana M.",
-      "text": "Terapije u ORI 369 pomogle su mi kod kroničnih bolova. Sada se osjećam energično i zdravo!",
+      "text": "Ljubazan doček i stručno vodstvo. Nakon posjeta osjećam se opuštenije i sabranije.",
       "rating": 5
     },
     {
       "name": "Marko K.",
-      "text": "Profesionalan pristup i izvanredni rezultati. Preporučujem svima koji traže holističku podršku.",
+      "text": "Profesionalan pristup i ugodna atmosfera. Preporučujem svima koji traže holističku podršku.",
       "rating": 5
     },
     {
       "name": "Petra S.",
-      "text": "Paket Ravnoteža pomogao mi je pronaći unutarnju harmoniju. Tim je izvanredan!",
+      "text": "Osoban pristup i jasan plan. Tim je izvanredan!",
       "rating": 5
     }
   ]
